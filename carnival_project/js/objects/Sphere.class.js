@@ -1,11 +1,11 @@
 /**
  * Example class representing a super cool sphere.
- * @extends ENGINE.OBJECTS.RootObject
+ * @extends ENGINE.OBJECTS.ClassicObject
  * @author Andrew Alford
  * @date 06/02/2019
  * @version 1.0 - 06/02/2019
  */
- class Sphere extends ENGINE.OBJECTS.RootObject
+ class Sphere extends ENGINE.OBJECTS.ClassicObject
  {
      /**
       * Constructor for a sphere.
