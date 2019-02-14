@@ -3,7 +3,7 @@
 //[engineDriver] Used to manage all major engine components.
 let engineDriver = ENGINE.Driver(
     new THREE.Scene(),
-    ENGINE.Camera(new THREE.Vector3(0, 100, 500), false),
+    ENGINE.Camera(new THREE.Vector3(0, 500, 750), false),
     ENGINE.ObjectManager(),
     true
 );
@@ -14,6 +14,7 @@ light.position.set(0, 20, 0);
 engineDriver.getScene().add(light);
 
 //ADD OBJECTS...
+engineDriver.getObjectManager().addObject(new BasicFloor());
 engineDriver.getObjectManager().addObject(
     new Sphere(new THREE.Vector3(0, 0, 0))
 );

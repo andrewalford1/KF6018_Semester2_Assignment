@@ -24,6 +24,8 @@
               })
           );
 
+          sphere.position.y = 250;
+
           //Add the sphere to the object group.
           this.addObjectToGroup(sphere);
 
