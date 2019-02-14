@@ -14,7 +14,9 @@ light.position.set(0, 20, 0);
 engineDriver.getScene().add(light);
 
 //ADD OBJECTS...
-engineDriver.getObjectManager().addObject(new BasicFloor());
+engineDriver.getObjectManager().addObject(
+    new BasicFloor(engineDriver.getCamera().getInstance().far)
+);
 engineDriver.getObjectManager().addObject(
     new Sphere(new THREE.Vector3(0, 0, 0))
 );

@@ -6,25 +6,24 @@
  */
  class BasicFloor extends ENGINE.OBJECTS.ClassicObject
  {
-     constructor()
+     constructor(width)
      {
          //Construct the superclass.
          super(new THREE.Vector3(0, 0, 0))
 
          let floorMesh = new THREE.Mesh(
-             new THREE.PlaneBufferGeometry(8000, 8000),
+             new THREE.PlaneBufferGeometry(width, width),
              new THREE.MeshPhongMaterial({
                  color: 0xEEEEEE,
                  depthWrite: false
              })
          )
          floorMesh.rotation.x = -Math.PI / 2;
-         floorMesh.position.y -= 100;
 
-         let grid = new THREE.GridHelper(8000, 80, 0xCCCCCC, 0xCCCCCC);
+         let grid = new THREE.GridHelper(width, width / 100, 0xFF0000, 0xCCCCCC);
          grid.material.opacity = 0.2;
-         grid.material.transparent = true;
-         grid.position.y -= 100;
+         grid.material.transparent = true
+
          //Add objects to the group.
          this.addObjectToGroup(floorMesh);
          this.addObjectToGroup(grid);
