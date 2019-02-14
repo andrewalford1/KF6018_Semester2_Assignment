@@ -18,7 +18,7 @@ engineDriver.getObjectManager().addObject(
     new BasicFloor(engineDriver.getCamera().getInstance().far)
 );
 engineDriver.getObjectManager().addObject(
-    new Sphere(new THREE.Vector3(0, 0, 0))
+    new WhackAMole(new THREE.Vector3(0, 100, 0))
 );
 engineDriver.getObjectManager().addAllToScene(engineDriver.getScene());
 engineDriver.getObjectManager().setAllActive(true);
