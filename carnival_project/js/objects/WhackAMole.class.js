@@ -293,7 +293,9 @@
            this.update = function(frameTime)
            {
                let speed = frameTime / 5000;
-
+               this.getInstance().scale.x = 30;
+               this.getInstance().scale.y = 30;
+               this.getInstance().scale.z = 30;
                //this.getInstance().rotation.x += speed * Math.PI;
               // this.getInstance().rotation.y += speed * Math.PI;
               // this.getInstance().position.z += 1;
