@@ -20,6 +20,9 @@ engineDriver.getObjectManager().addObject(
 engineDriver.getObjectManager().addAllToScene(engineDriver.getScene());
 engineDriver.getObjectManager().setAllActive(true);
 
+//Skybox.
+ENGINE.TextureLoader().loadSkybox('skybox', '.bmp', engineDriver.getScene());
+
 /**
  * Animates the project.
  */
