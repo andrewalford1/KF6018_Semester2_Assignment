@@ -31,6 +31,7 @@
 
          /**
           * Updates the object. (Overridden from the superclass).
+          * Note: The floor does not need updating.
           * @param {number} frameTime - The time taken to compute the previous
           *                             frame of animation.
           */
