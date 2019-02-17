@@ -3,7 +3,7 @@
 //[engineDriver] Used to manage all major engine components.
 let engineDriver = ENGINE.Driver(
     new THREE.Scene(),
-    ENGINE.Camera(new THREE.Vector3(0, 500, 750), false),
+    ENGINE.Camera(new THREE.Vector3(0, 25, 50), false),
     ENGINE.ObjectManager(),
     true
 );
@@ -21,7 +21,7 @@ engineDriver.getObjectManager().addObject(
     new WhackAMole(new THREE.Vector3(0, 0, 0))
 );
 engineDriver.getObjectManager().addObject(
-    new BasicCharacter(new THREE.Vector3(50, 0, 0))
+    new BasicCharacter(new THREE.Vector3(25, 0, 0))
 );
 engineDriver.getObjectManager().addAllToScene(engineDriver.getScene());
 engineDriver.getObjectManager().setAllActive(true);
@@ -46,11 +46,11 @@ animate();
 
 let meshes = [];
 
-let boneRadius = 1;
+let boneRadius = 0.05;
 for(let i = 0; i <= 24; i++)
 {
 	let newMesh = new THREE.Mesh(
-		new THREE.SphereGeometry(0.05, 9, 9),
+		new THREE.SphereGeometry(boneRadius, 9, 9),
 		new THREE.MeshPhongMaterial( { color: 0xFF0000 } )
 	);;
 	meshes.push(newMesh);

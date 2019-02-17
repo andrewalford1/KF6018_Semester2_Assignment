@@ -21,8 +21,11 @@ class BasicCharacter extends ENGINE.OBJECTS.ClassicObject
         //Load the character.
         const CHARACTER = ENGINE.ObjectLoader().loadModel(
             'basic_character',
-            '.glb'
+            'glb'
         );
+
+        //Scale the character.
+        CHARACTER.model.scale.set(10, 10, 10);
 
         this.addObjectToGroup(CHARACTER.model);
 

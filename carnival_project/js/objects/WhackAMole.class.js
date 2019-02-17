@@ -22,12 +22,12 @@
             //let tableBase2 = new THREE.MeshBasicMaterial( { map: grassTexture } );
             let tableBase2= new THREE.MeshPhongMaterial( { color: 0x2f8341 } );
             let tableBase = new THREE.Mesh(tableBase1, tableBase2);
-            
+
            //[Table Base Outline].
             let tableBaseOutline1= new THREE.BoxGeometry(15, 10, 20);
             let tableBaseOutline2 = new THREE.EdgesGeometry( tableBaseOutline1 );
             let tableBaseOutline = new THREE.LineSegments( tableBaseOutline2, new THREE.LineBasicMaterial( { color: 0x14401d} ) );
-           
+
            //[Table Back].
             let tableBack1= new THREE.PlaneGeometry(15, 11, 1);
             let moleTexture  = new THREE.TextureLoader().load( 'res/textures/whackAMole/mole.jpg' );
@@ -36,15 +36,15 @@
             let tableBack2 = new THREE.MeshBasicMaterial( { map: moleTexture, side: THREE.FrontSide } );
             let tableBack = new THREE.Mesh(tableBack1, tableBack2);
                 tableBack.position.z = -9.55;
-                tableBack.position.y = 9.8;    
+                tableBack.position.y = 9.8;
 
            //[Table MoleBack].
             let tableMoleBack1= new THREE.BoxGeometry(15, 11, 0.1);
             let tableMoleBack2= new THREE.MeshPhongMaterial( { color: 0x2f8341 } );
             let tableMoleBack = new THREE.Mesh(tableMoleBack1, tableMoleBack2);
                 tableMoleBack.position.z = -9.95;
-                tableMoleBack.position.y = 9.8;   
-                 
+                tableMoleBack.position.y = 9.8;
+
            //[Table border].
             let tableBorder1= new THREE.BoxGeometry(15, 1, 1);
             let tableBorder2= new THREE.MeshPhongMaterial( { color: 0xa54f20 } );
@@ -59,7 +59,7 @@
                 tableBorderRightBack.position.z = -9.55;
                 tableBorderRightBack.position.y = 10.65;
                 tableBorderRightBack.position.x = 7.95;
-      
+
            //[Table border LeftBack].
             let tableBorderLeftBack1= new THREE.BoxGeometry(1, 11.2, 1);
             let tableBorderLeftBack2= new THREE.MeshPhongMaterial( { color: 0xa54f20 } );
@@ -74,7 +74,7 @@
             let tableBorderRight = new THREE.Mesh(tableBorderRight1, tableBorderRight2);
                 tableBorderRight.position.x = 7.95;
                 tableBorderRight.position.y = 5;
-      
+
            //[Table border Left].
             let tableBorderLeft1= new THREE.BoxGeometry(1, 1, 20.05);
             let tableBordreLeft2= new THREE.MeshPhongMaterial( { color: 0xa54f20 } );
@@ -89,7 +89,7 @@
                 tableBorderRightFront.position.z = 9.5;
                 tableBorderRightFront.position.y = 0;
                 tableBorderRightFront.position.x = 7.95;
-      
+
            //[Table border LeftFront].
             let tableBorderLeftFront1= new THREE.BoxGeometry(1, 10, 1);
             let tableBorderLeftFront2= new THREE.MeshPhongMaterial( { color: 0xa54f20 } );
@@ -97,14 +97,14 @@
                 tableBorderLeftFront.position.z = 9.5;
                 tableBorderLeftFront.position.y = 0;
                 tableBorderLeftFront.position.x = -7.95;
-          
+
            //[Score].
             let score1= new THREE.BoxGeometry(4, 2, 0.1);
             let score2= new THREE.MeshPhongMaterial( { color: 0x000000 } );
             let score = new THREE.Mesh(score1, score2);
                 score.position.z = -9.5;
                 score.position.y = 9.5;
-          
+
            //[BlackSquare].
             let blackSquare1= new THREE.BoxGeometry(7, 7, 0.1);
             let blackSquare2= new THREE.MeshPhongMaterial( { color: 0x000000 } );
@@ -135,15 +135,15 @@
                 go.position.z = 10.1;
                 go.position.y = 2;
                 go.position.x = -2;
- 
+
            //[goArea].
             let goArea1= new THREE.TorusBufferGeometry(0.5, 0.1, 16, 100);
             let goArea2= new THREE.MeshPhongMaterial( { color: 0x000000 } );
             let goArea = new THREE.Mesh(goArea1, goArea2);
                 goArea.position.z = 10.2;
                 goArea.position.y = 2;
-                goArea.position.x = -2;  
-                        
+                goArea.position.x = -2;
+
            //[eject].
             let eject1= new THREE.BoxGeometry(0.5, 0.5, 0.01);
             let eject2= new THREE.MeshPhongMaterial( { color: 0xff0000 } );
@@ -169,7 +169,7 @@
                 holeFrontLeft.position.z = 6;
                 holeFrontLeft.position.y = 5;
                 holeFrontLeft.position.x = -3.5;
-                          
+
            //[Mud Ring front Left].
             let mudRingFrontLeft1= new THREE.TorusBufferGeometry( 1.5, 0.3, 10, 100 );
             let mudRingFrontLeft2= new THREE.MeshBasicMaterial( { map: mudTexture } );
@@ -178,7 +178,7 @@
                 mudRingFrontLeft.position.y = 5;
                 mudRingFrontLeft.position.x = -3.5;
                 mudRingFrontLeft.rotation.x = Math.PI/2;
-           
+
 
            //[hole front right].
             let holeFrontRight1= new THREE.CylinderGeometry( 1.5, 1.5, 0.1, 32 );
@@ -211,7 +211,7 @@
                 mudRingCentre.position.z = 0.7;
                 mudRingCentre.position.y = 5;
                 mudRingCentre.rotation.x = Math.PI/2;
-         
+
            //[hole back left].
             let holeBackLeft1= new THREE.CylinderGeometry( 1.5, 1.5, 0.1, 32 );
             let holeBackLeft2= new THREE.MeshPhongMaterial( { color: 0x000000 } );
@@ -219,8 +219,8 @@
                 holeBackLeft.position.z = -4;
                 holeBackLeft.position.y = 5;
                 holeBackLeft.position.x = -3.5;
-        
-           
+
+
            //[Mud Ring back Left].
             let mudRingBackLeft1= new THREE.TorusBufferGeometry( 1.5, 0.3, 10, 100 );
             let mudRingBackLeft2= new THREE.MeshBasicMaterial( { map: mudTexture } );
@@ -229,7 +229,7 @@
                 mudRingBackLeft.position.y = 5;
                 mudRingBackLeft.position.x = -3.5;
                 mudRingBackLeft.rotation.x = Math.PI/2;
-           
+
            //[hole back right].
             let holeBackRight1= new THREE.CylinderGeometry( 1.5, 1.5, 0.1, 32 );
             let holeBackRight2= new THREE.MeshPhongMaterial( { color: 0x000000 } );
@@ -247,7 +247,7 @@
                 mudRingBackRight.position.x = 3.5;
                 mudRingBackRight.rotation.x = Math.PI/2;
 
-             
+
 
           //Add to the object group.
            this.addObjectToGroup(tableBase);
@@ -280,6 +280,10 @@
            this.addObjectToGroup(mudRingBackRight);
            this.addObjectToGroup(holeBackRight);
 
+           //Scale and position the game.
+           this.getInstance().scale.set(0.75, 0.75, 0.75);
+           this.getInstance().position.set(0, 3, 0);
+
 
           /**
            * Updates once every frame.
@@ -293,9 +297,9 @@
            this.update = function(frameTime)
            {
                let speed = frameTime / 5000;
-               this.getInstance().scale.x = 30;
-               this.getInstance().scale.y = 30;
-               this.getInstance().scale.z = 30;
+               // this.getInstance().scale.x = 30;
+               // this.getInstance().scale.y = 30;
+               // this.getInstance().scale.z = 30;
                //this.getInstance().rotation.x += speed * Math.PI;
               // this.getInstance().rotation.y += speed * Math.PI;
               // this.getInstance().position.z += 1;
