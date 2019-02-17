@@ -3,3 +3,8 @@ Skybox:
     Uploaded on: 19/10/2015
     Downloaded on: 14/02/2019
     Available at: https://opengameart.org/content/sky-box-sunny-day
+
+Basic Character:
+    Created by: Mixamo
+    Downloaded on: 17/02/2019
+    Available at: https://www.mixamo.com/
