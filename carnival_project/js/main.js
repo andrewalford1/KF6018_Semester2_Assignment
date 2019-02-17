@@ -45,7 +45,7 @@ animate();
 ///////////////////////////////////////////////////////////////////////////////
 
 let meshes = [];
-
+let player = new THREE.Group();
 let boneRadius = 0.05;
 for(let i = 0; i <= 24; i++)
 {
@@ -54,8 +54,11 @@ for(let i = 0; i <= 24; i++)
 		new THREE.MeshPhongMaterial( { color: 0xFF0000 } )
 	);;
 	meshes.push(newMesh);
-	engineDriver.getScene().add(newMesh);
+	player.add(meshes[i]);
 }
+player.scale.set(15, 15, 15);
+engineDriver.getScene().add(player);
+
 
 // Initialize kinectron
 const IP = '192.168.60.56';
