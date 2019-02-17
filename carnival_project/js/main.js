@@ -44,21 +44,10 @@ animate();
 // Kinectron codes starting from here//////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-let meshes = [];
-let player = new THREE.Group();
-let boneRadius = 0.05;
-for(let i = 0; i <= 24; i++)
-{
-	let newMesh = new THREE.Mesh(
-		new THREE.SphereGeometry(boneRadius, 9, 9),
-		new THREE.MeshPhongMaterial( { color: 0xFF0000 } )
-	);;
-	meshes.push(newMesh);
-	player.add(meshes[i]);
-}
-player.scale.set(15, 15, 15);
-engineDriver.getScene().add(player);
-
+//This is the player in the scene.
+let player = new Player();
+player.setActive(true);
+player.addToScene(engineDriver.getScene());
 
 // Initialize kinectron
 const IP = '192.168.60.56';
@@ -69,15 +58,17 @@ kinectron.makeConnection();
 // Start tracked bodies and set callback
 kinectron.startTrackedBodies(getBodies);
 
-// The getBodiescallbackfunction: called once every time kinectobtain a frame
+// The getBodiescallbackfunction: called once every time kinect obtains a frame
 function getBodies(skeleton)
 {
 	for(let i = 0; i <= 24; i++)
 	{
-		meshes[i].position.set(
-			skeleton.joints[i].cameraX,
-			skeleton.joints[i].cameraY,
-			skeleton.joints[i].cameraZ
-		);
+        let position = new THREE.Vector3(
+            skeleton.joints[i].cameraX,
+            skeleton.joints[i].cameraY,
+            skeleton.joints[i].cameraZ
+        );
+
+        player.updateJoint(position, i);
     }
 }
