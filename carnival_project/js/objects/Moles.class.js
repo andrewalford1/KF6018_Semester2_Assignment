@@ -14,7 +14,7 @@
       {
           //Construct the superclass.
           super(position);
-          
+
           //Colors for the model
           const DARK_BLUE = 0x110A31;
           const LIGHT_BROWN = 0xB46E3A;
@@ -24,7 +24,7 @@
           let moleJumpingSpeed;
           //Varible for the frequency of apperance of the mole
           let moleJumpingFrequency;
-            
+
           //Holds the position of the mole's head
           let moleHeadPositionY = 0.12;
           //Holds the width of the head and upper body of the mole
@@ -37,11 +37,11 @@
           let widthSegments = 18;
           //Holds the number of height segments for the geometry
           let heightSegments = 18;
-      
+
           // Variables/arrays for the head of the mole
           let moleHeadGeometry = new THREE.SphereGeometry(moleHeadWidth, widthSegments, heightSegments);
           //Create material for the mole
-          let moleMaterial = new THREE.MeshPhysicalMaterial({ color: DARK_BLUE, metalness: 0.0, 
+          let moleMaterial = new THREE.MeshPhysicalMaterial({ color: DARK_BLUE, metalness: 0.0,
                                                           roughness: 0.8, reflectivity: 0.2, side: THREE.DoubleSide });
           let moleHeadMesh = new THREE.Mesh(moleHeadGeometry, moleMaterial);
           moleHeadMesh.castShadow = true;
@@ -49,7 +49,7 @@
           moleHeadMesh.position.set(0.0, moleHeadPositionY, 0.0);
 
           // Variables/arrays for the body of the mole
-          let moleBodyGeometry = new THREE.CylinderGeometry(moleHeadWidth, moleBodyWidth, 
+          let moleBodyGeometry = new THREE.CylinderGeometry(moleHeadWidth, moleBodyWidth,
                                                             moleHeight, widthSegments);
           let moleBodyMesh = new THREE.Mesh(moleBodyGeometry, moleMaterial);
           moleBodyMesh.castShadow = true;
@@ -97,17 +97,17 @@
            let moleFingerNumber = 10;
            for (let i=0; i<moleFingerNumber; i++){
                    moleFingerGeometry.push(new THREE.CylinderGeometry(0.012, 0.006, 0.05, 18, 18, false, 0, 6.3));//3.0
-                   moleFingerMaterial.push(new THREE.MeshPhysicalMaterial({ color: 0xF5C8AA, metalness: 0.5, 
+                   moleFingerMaterial.push(new THREE.MeshPhysicalMaterial({ color: 0xF5C8AA, metalness: 0.5,
                                                              roughness: 0.6, reflectivity: 0.2, side: THREE.DoubleSide }));
                    moleFingerMesh.push(new THREE.Mesh(moleFingerGeometry[i], moleFingerMaterial[i]));
                    moleFingerMesh[i].castShadow = true;
                    moleFingerMesh[i].receiveShadow = true;
 
                    if(i <= 4){
-                       moleLeftPawGroup.add(moleFingerMesh[i]);    
+                       moleLeftPawGroup.add(moleFingerMesh[i]);
                    }
                    else if( i=>5){
-                        moleRightPawGroup.add(moleFingerMesh[i]);  
+                        moleRightPawGroup.add(moleFingerMesh[i]);
                    }
            }
           //Position each finger of the paws
@@ -135,7 +135,7 @@
           moleFingerMesh[9].position.set(-0.101, 0.045, 0.050);
           moleFingerMesh[9].rotation.set(-0.03, 0.0, 0.02);
 
-          //Create a group for the whole body of the mole 
+          //Create a group for the whole body of the mole
           let moleBodyPartsGroup = new THREE.Group();
           moleBodyPartsGroup.add(moleHeadMesh);
           moleBodyPartsGroup.add(moleBodyMesh);
@@ -147,8 +147,8 @@
           this.addObjectToGroup(moleBodyPartsGroup);
 
           /**
-           * 
-           * @param {number} jumpingSpeed - 
+           *
+           * @param {number} jumpingSpeed -
            *
           */
           this.setMoleSpeed = function(jumpingSpeed){
@@ -156,12 +156,12 @@
           }
 
           /**
-           * 
+           *
            * @param {number} jumpingFrequency -
            *
           */
           this.setMoleFrequency = function(jumpingFrequency){
-                
+
           }
 
           /**
@@ -181,4 +181,4 @@
                }
            }//end of this.update
       }//end of constructor
- }//end of class Mole 
+ }//end of class Mole
