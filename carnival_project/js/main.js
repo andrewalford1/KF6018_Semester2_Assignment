@@ -36,3 +36,42 @@ function animate()
 
 //Run the animation loop.
 animate();
+
+///////////////////////////////////////////////////////////////////////////////
+// Kinectron codes starting from here//////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+let meshes = [];
+
+let boneRadius = 1;
+for(let i = 0; i <= 24; i++)
+{
+	let newMesh = new THREE.Mesh(
+		new THREE.SphereGeometry(0.05, 9, 9),
+		new THREE.MeshPhongMaterial( { color: 0xFF0000 } )
+	);;
+	meshes.push(newMesh);
+	engineDriver.getScene().add(newMesh);
+}
+
+// Initialize kinectron
+const IP = '192.168.60.56';
+// Define and create an instance of kinectron, you must
+let kinectron= new Kinectron(IP);
+// Create connection between remote and application
+kinectron.makeConnection();
+// Start tracked bodies and set callback
+kinectron.startTrackedBodies(getBodies);
+
+// The getBodiescallbackfunction: called once every time kinectobtain a frame
+function getBodies(skeleton)
+{
+	for(let i = 0; i <= 24; i++)
+	{
+		meshes[i].position.set(
+			skeleton.joints[i].cameraX,
+			skeleton.joints[i].cameraY,
+			skeleton.joints[i].cameraZ
+		);
+    }
+}
