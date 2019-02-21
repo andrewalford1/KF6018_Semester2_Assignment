@@ -23,6 +23,10 @@ engineDriver.getObjectManager().addObject(
 engineDriver.getObjectManager().addObject(
     new BasicCharacter(new THREE.Vector3(25, 0, 0))
 );
+
+engineDriver.getObjectManager().addObject(
+    new Goal(new THREE.Vector3(25, 0, 0))
+);
 engineDriver.getObjectManager().addAllToScene(engineDriver.getScene());
 engineDriver.getObjectManager().setAllActive(true);
 
