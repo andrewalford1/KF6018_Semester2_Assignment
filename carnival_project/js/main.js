@@ -20,6 +20,10 @@ engineDriver.getObjectManager().addObject(
 engineDriver.getObjectManager().addObject(
     new WhackAMole(new THREE.Vector3(0, 0, 0))
 );
+//Center mole
+engineDriver.getObjectManager().addObject(
+    new Mole(new THREE.Vector3(0, 6.9, 0.5))
+);
 engineDriver.getObjectManager().addObject(
     new StrengthOMetre(new THREE.Vector3(0, 0, 0))
 );
