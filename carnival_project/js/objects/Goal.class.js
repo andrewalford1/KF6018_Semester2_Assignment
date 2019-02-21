@@ -13,10 +13,10 @@ class Goal extends ENGINE.OBJECTS.ClassicObject
      * @param {THREE.Vector3} initialPosition - The initial position of the
      *                                          character.
      */
-    constructor(goalPosition)
+    constructor(position)
     {
         //Construct the superclass.
-        super(goalPosition);
+        super(position);
 
         //Left goal post
         let leftPost1 = new THREE.CylinderGeometry( 2.5, 2.5, 35, 32 );
