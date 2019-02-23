@@ -248,7 +248,7 @@
                 mudRingBackRight.rotation.x = Math.PI/2;
 
             let moles = [];
-            for(let i = 0; i < 20; i++)
+            for(let i = 0; i < 5; i++)
             {
                 moles.push(new Mole(new THREE.Vector3(0, 6.9, 0.5 * (i * 5))));
                 moles[i].setActive(true);
@@ -285,7 +285,7 @@
            this.addObjectToGroup(mudRingBackRight);
            this.addObjectToGroup(holeBackRight);
 
-           for(let i = 0; i < 20; i++)
+           for(let i = 0; i < 5; i++)
            {
                if(moles[i])
                {
