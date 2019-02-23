@@ -247,7 +247,12 @@
                 mudRingBackRight.position.x = 3.5;
                 mudRingBackRight.rotation.x = Math.PI/2;
 
-
+            let moles = [];
+            for(let i = 0; i < 3; i++)
+            {
+                moles.push(new Mole(new THREE.Vector3(0, 6.9, 0.5 * (i * 5))));
+                moles[i].setActive(true);
+            }
 
           //Add to the object group.
            this.addObjectToGroup(tableBase);
@@ -280,6 +285,14 @@
            this.addObjectToGroup(mudRingBackRight);
            this.addObjectToGroup(holeBackRight);
 
+           for(let i = 0; i < 3; i++)
+           {
+               if(moles[i])
+               {
+                   this.addObjectToGroup(moles[i].getInstance());
+               }
+           }
+
            //Scale and position the game.
            this.getInstance().scale.set(0.75, 0.75, 0.75);
            this.getInstance().position.set(0, 3, 0);
@@ -303,6 +316,11 @@
                //this.getInstance().rotation.x += speed * Math.PI;
               // this.getInstance().rotation.y += speed * Math.PI;
               // this.getInstance().position.z += 1;
+
+              moles.forEach(function(mole)
+              {
+                  mole.update(frameTime);
+              });
 
            }
       }
