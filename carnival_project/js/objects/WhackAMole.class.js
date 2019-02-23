@@ -247,12 +247,17 @@
                 mudRingBackRight.position.x = 3.5;
                 mudRingBackRight.rotation.x = Math.PI/2;
 
-            let moles = [];
-            for(let i = 0; i < 5; i++)
-            {
-                moles.push(new Mole(new THREE.Vector3(0, 6.9, 0.5 * (i * 5))));
-                moles[i].setActive(true);
-            }
+            //Position of the moles
+            let moleCenter = new Mole(new THREE.Vector3(0, 5.0, 0.7));
+            moleCenter.setActive(true);
+            let moleUpperLeft = new Mole(new THREE.Vector3(-3.5, 5.0, -4));
+            moleUpperLeft.setActive(true);
+            let moleUpperRight = new Mole(new THREE.Vector3(3.5, 5.0, -4));
+            moleUpperRight.setActive(true);
+            let moleLowerRight = new Mole(new THREE.Vector3(3.5, 5.0, 6));
+            moleUpperRight.setActive(true);
+            let moleLowerLeft = new Mole(new THREE.Vector3(-3.5, 5.0, 6));
+            moleUpperRight.setActive(true);
 
           //Add to the object group.
            this.addObjectToGroup(tableBase);
@@ -285,13 +290,12 @@
            this.addObjectToGroup(mudRingBackRight);
            this.addObjectToGroup(holeBackRight);
 
-           for(let i = 0; i < 5; i++)
-           {
-               if(moles[i])
-               {
-                   this.addObjectToGroup(moles[i].getInstance());
-               }
-           }
+           //Adds the moles to the addObjectToGroup
+           this.addObjectToGroup(moleCenter.getInstance());
+           this.addObjectToGroup(moleUpperLeft.getInstance());
+           this.addObjectToGroup(moleUpperRight.getInstance());
+           this.addObjectToGroup(moleLowerRight.getInstance());
+           this.addObjectToGroup(moleLowerLeft.getInstance());
 
            //Scale and position the game.
            this.getInstance().scale.set(0.75, 0.75, 0.75);
@@ -317,10 +321,12 @@
               // this.getInstance().rotation.y += speed * Math.PI;
               // this.getInstance().position.z += 1;
 
-              moles.forEach(function(mole)
-              {
-                  mole.update(frameTime);
-              });
+              //Updates the position of the moles  
+                  moleCenter.update(frameTime);
+                  moleUpperLeft.update(frameTime);
+                  moleUpperRight.update(frameTime);
+                  moleLowerRight.update(frameTime);
+                  moleLowerLeft.update(frameTime);
 
            }
       }
