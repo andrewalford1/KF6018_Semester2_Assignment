@@ -24,6 +24,9 @@ engineDriver.getObjectManager().addObject(
     new StrengthOMetre(new THREE.Vector3(0, 0, 0))
 );
 engineDriver.getObjectManager().addObject(
+    new DartsGame(new THREE.Vector3(0, 0, 0))
+);
+engineDriver.getObjectManager().addObject(
     new BasicCharacter(new THREE.Vector3(25, 0, 0))
 );
 engineDriver.getObjectManager().addObject(
