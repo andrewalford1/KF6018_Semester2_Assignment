@@ -69,13 +69,28 @@
             let poleBackground = new THREE.Mesh(poleBackground1, poleBackground2);
             poleBackground.position.y = 18;
             poleBackground.position.z = -7;
-
+            
             //[ pole].
-            let pole1= new THREE.PlaneGeometry(6, 34);
+            let pole1= new THREE.PlaneGeometry(4.5, 34);
             let pole2= new THREE.MeshPhongMaterial( { color: 0xff0000 } );
             let pole = new THREE.Mesh(pole1, pole2);
             pole.position.y = 17;
-            pole.position.z = -4.9;
+            pole.position.z = -4.94;
+
+             //[blackLine].
+            let blackLine1= new THREE.PlaneGeometry(0.5, 34,);
+            let blackLine2= new THREE.MeshPhongMaterial( { color: 0x000000 } );
+            let blackLine = new THREE.Mesh(blackLine1, blackLine2);
+            blackLine.position.y = 17;
+            blackLine.position.z = -4.87;
+
+
+            //[ score].
+            let score1= new THREE.PlaneGeometry(0.5, 4);
+            let score2= new THREE.MeshPhongMaterial( { color: 0xffffff } );
+            let score = new THREE.Mesh(score1, score2);
+            score.position.y = 2;
+            score.position.z = -4.83;
 
              //[ circleBack].
             let circleBack1= new THREE.CircleBufferGeometry( 5, 32, );
@@ -84,14 +99,8 @@
             let circleBack2= new THREE.MeshBasicMaterial( { map: clownTexture } );
             let circleBack = new THREE.Mesh(circleBack1, circleBack2);
             circleBack.position.y = 35;
-            circleBack.position.z = -4.8;
+            circleBack.position.z = -4.92;
 
-             //[blackLine].
-            let blackLine1= new THREE.PlaneGeometry(0.5, 34,);
-            let blackLine2= new THREE.MeshPhongMaterial( { color: 0x000000 } );
-            let blackLine = new THREE.Mesh(blackLine1, blackLine2);
-            blackLine.position.y = 17;
-            blackLine.position.z = -4.7;
 
             //[nose].
             let nose1= new THREE.TorusBufferGeometry(0.1, 0.6, 20, 100);
@@ -99,6 +108,8 @@
             let nose = new THREE.Mesh(nose1, nose2);
             nose.position.y = 34.5;
             nose.position.z = -4.8;
+
+
 
 
           //Add to the object group.
@@ -110,6 +121,7 @@
            this.addObjectToGroup(hitArea);
            this.addObjectToGroup(poleBackground);
            this.addObjectToGroup(pole);
+           this.addObjectToGroup(score);
            this.addObjectToGroup(circleBack);
            this.addObjectToGroup(blackLine);
            this.addObjectToGroup(nose);
