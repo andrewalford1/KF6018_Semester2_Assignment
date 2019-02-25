@@ -1,5 +1,14 @@
+body {
+    background-color: #A0DBED;
+
+}
+
 .screen {
-  background-color: #000000;
+  background: url("../res/loading_screen_image_5.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
   width: 100%;
   height: 100%;
   position: absolute;
@@ -12,37 +21,36 @@
     text-align: center;
     position: absolute;
     width: 100%;
-    top: 75%;
-
+    top: 5%;
 }
 
 .loading_screen {
     visibility: hidden;
 }
 
-.loader {
-    border: 16px solid #f3f3f3;
-    border-radius: 50%;
-    border-top: 16px solid #3498db;
+#loading_area {
+    border-style: solid;
+    border-width: medium 0px 0px 0px;
+    background-color: #555555;
     position: absolute;
-    width: 125px;
-    height: 125px;
+    width: 100%;
+    height: 10%;
+    top: 90%;
+    left: 0%;
+}
+
+#loading_bar {
+    border-style: solid;
+    background-color: #FFFFFF;
+    position: absolute;
+    width: 60%;
+    height: 20%;
     top: 50%;
-    left: 50%;
-    margin-top: -125px;
-    margin-left: -125px;
-
-    -webkit-animation: spin 2s linear infinite; /* Safari */
-    animation: spin 2s linear infinite;
+    left: 20%;
 }
 
-/* Safari */
-@-webkit-keyframes spin {
-    0% { -webkit-transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(360deg); }
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+#loading_progress {
+    width: 0%;
+    height: 100%;
+    background-color: #FF0000;
 }
