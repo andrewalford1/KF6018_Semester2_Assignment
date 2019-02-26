@@ -30,6 +30,15 @@ engineDriver.getObjectManager().addObject(
     new BasicCharacter(new THREE.Vector3(25, 0, 0))
 );
 engineDriver.getObjectManager().addObject(
+    new Football(new THREE.Vector3(0, 0, 0))
+);
+engineDriver.getObjectManager().addObject(
+    new Boy(new THREE.Vector3(25, 0, 0))
+);
+engineDriver.getObjectManager().addObject(
+    new Teacup(new THREE.Vector3(25, 0, 0))
+);
+engineDriver.getObjectManager().addObject(
     new Dart(new THREE.Vector3(0, 0, 0))
 );
 engineDriver.getObjectManager().addObject(
