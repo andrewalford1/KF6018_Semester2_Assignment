@@ -16,7 +16,7 @@ body {
 
 #loading_info {
     font-family: "Comic Sans MS", cursive, sans-serif;
-    font-size: x-large;
+    font-size: fit-width | fit-height | fit-height-precise;
     color: #FFFF00;
     text-align: center;
     position: absolute;
