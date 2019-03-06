@@ -14,8 +14,35 @@ light.position.set(0, 20, 0);
 engineDriver.getScene().add(light);
 
 //ADD OBJECTS...
+//engineDriver.getObjectManager().addObject(
+//    new BasicFloor(engineDriver.getCamera().getInstance().far)
+//);
 engineDriver.getObjectManager().addObject(
-    new BasicFloor(engineDriver.getCamera().getInstance().far)
+   new Terrain(new THREE.Vector3(0, 0, 0))
+);
+engineDriver.getObjectManager().addObject(
+    new HotAirBalloon(new THREE.Vector3(0, 0, 0))
+);
+engineDriver.getObjectManager().addObject(
+    new Helicopter(new THREE.Vector3(0, 0, 0))
+);
+engineDriver.getObjectManager().addObject(
+    new Welcome(new THREE.Vector3(0, 0, 0))
+);
+engineDriver.getObjectManager().addObject(
+    new Jack(new THREE.Vector3(0, 0, 0))
+);
+engineDriver.getObjectManager().addObject(
+    new BalloonArch(new THREE.Vector3(0, 0, 0))
+);
+engineDriver.getObjectManager().addObject(
+    new MoreBalloons(new THREE.Vector3(0, 0, 0))
+);
+engineDriver.getObjectManager().addObject(
+    new Bear(new THREE.Vector3(0, 0, 0))
+);
+engineDriver.getObjectManager().addObject(
+    new Boy(new THREE.Vector3(25, 0, 0))
 );
 engineDriver.getObjectManager().addObject(
     new WhackAMole(new THREE.Vector3(0, 0, 0))
