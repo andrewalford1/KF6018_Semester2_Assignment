@@ -21,10 +21,11 @@ class CircusTent extends ENGINE.OBJECTS.ClassicObject
             'circus_tent',
             'glb'
         );
+        
         //Scale and position the tent
         TENT.model.scale.set(0.1, 0.1, 0.1);
         TENT.model.rotation.set(-Math.PI / 2, 0, 0);
-        TENT.model.position.set(0, 0, -200);
+        TENT.model.position.set(-250, 0, -500);
         this.addObjectToGroup(TENT.model);
 
         /**

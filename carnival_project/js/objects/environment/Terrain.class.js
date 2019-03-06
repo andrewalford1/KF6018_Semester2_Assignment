@@ -1,11 +1,11 @@
 /**
- * A class representing a teacup object.
+ * A class representing a football object.
  * @extends ENGINE.OBJECTS.ClassicObject
  * @author Andrew Alford & Zoë Irwin
  * @date 26/02/2019
  * @version 1.0 - 26/02/2019
  */
-class Teacup extends ENGINE.OBJECTS.ClassicObject
+class Terrain extends ENGINE.OBJECTS.ClassicObject
 {
     /**
      * Constructor for the dart.
@@ -16,17 +16,17 @@ class Teacup extends ENGINE.OBJECTS.ClassicObject
         //Construct the superclass.
         super(position);
 
-        //Add the teacup model.
-        const TEACUP = ENGINE.ObjectLoader().loadModel(
-            'teacup_obj',
+        //Add the dart model.
+        const TERRAIN = ENGINE.ObjectLoader().loadModel(
+            'terrain_obj',
             'glb'
         );
-        console.log(TEACUP);
-        //Scale and position the teacup
-        TEACUP.model.scale.set(0.1, 0.1, 0.1);
-        TEACUP.model.rotation.set(0, 0, 0);
-        TEACUP.model.position.set(-150, 0, -70);
-        this.addObjectToGroup(TEACUP.model);
+        console.log(TERRAIN);
+        //Scale and position the dart
+        TERRAIN.model.scale.set(30.5, 20.5, 30.5);
+        TERRAIN.model.rotation.set(0, 0, 0);
+        TERRAIN.model.position.set(0, -4, 0);
+        this.addObjectToGroup(TERRAIN.model);
 
         /**
          * Updates the dart. (Overridden from the superclass).
@@ -35,7 +35,7 @@ class Teacup extends ENGINE.OBJECTS.ClassicObject
          */
         this.update = function(frameTime)
         {
-            //teacups does not need to update.
+            //Circus dart does not need to update.
         }
     }
 }
