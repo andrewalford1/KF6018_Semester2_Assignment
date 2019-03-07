@@ -1,8 +1,7 @@
 Skybox:
-    Created by: The Chayed
-    Uploaded on: 19/10/2015
-    Downloaded on: 14/02/2019
-    Available at: https://opengameart.org/content/sky-box-sunny-day
+    Uploaded on: Unknown
+    Downloaded on: 07/03/2019
+    Available at: http://www.custommapmakers.org/skyboxes.php
 
 Basic Character:
     Created by: Mixamo
