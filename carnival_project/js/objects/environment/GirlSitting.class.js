@@ -1,14 +1,14 @@
 /**
- * A class representing a Helicopter.
+ * A class representing a GirlSitting.
  * @extends ENGINE.OBJECTS.ClassicObject
  * @author Zoë Irwin
  * @date 06/03/2019
  * @version 1.0 - 06/03/2019
  */
-class Helicopter extends ENGINE.OBJECTS.ClassicObject
+class GirlSitting extends ENGINE.OBJECTS.ClassicObject
 {
     /**
-     * Constructor for the Helicopter.
+     * Constructor for the GirlSitting.
      * @param {THREE.Vector3} position - Where the tent is located.
      */
     constructor(position)
@@ -16,26 +16,26 @@ class Helicopter extends ENGINE.OBJECTS.ClassicObject
         //Construct the superclass.
         super(position);
 
-        //Add the Helicopter model.
-        const HELICOPTER = ENGINE.ObjectLoader().loadModel(
-            'Helicopter',
+        //Add the GirlSitting model.
+        const GIRL = ENGINE.ObjectLoader().loadModel(
+            'girlSitting',
             'glb'
         );
         
-        //Scale and position the Helicopter
-        HELICOPTER.model.scale.set(8,8,8);
-        HELICOPTER.model.rotation.set(0, 0, 0);
-        HELICOPTER.model.position.set(-150, 100, -750);
-        this.addObjectToGroup(HELICOPTER.model);
+        //Scale and position the GirlSitting
+        GIRL.model.scale.set(0.2,0.2,0.2);
+        GIRL.model.rotation.set(0,Math.PI/-2, 0);
+        GIRL.model.position.set(160, 0, 30);
+        this.addObjectToGroup(GIRL.model);
 
         //[onStart] Checks if this is the very first frame of animation.
         let onStart = true;
 
         //[mixer] Will manage the different animations of the  model.
-        let mixer = new THREE.AnimationMixer(HELICOPTER.model);
+        let mixer = new THREE.AnimationMixer(GIRL.model);
 
         /**
-         * Updates the Helicopter. (Overridden from the superclass).
+         * Updates the GirlSitting. (Overridden from the superclass).
          * @param {number} frameTime - The time taken to compute the
          *                             previous frame of animation.
          */
@@ -44,14 +44,14 @@ class Helicopter extends ENGINE.OBJECTS.ClassicObject
             //Initialise the object on the fist frame.
             if(onStart)
             {
-                //If the Helicopter has animations, animate it.
-                if(HELICOPTER.animations)
+                //If the GirlSitting has animations, animate it.
+                if(GIRL.animations)
                 {
                     //Initialise the animation.
                     mixer.clipAction(
                         THREE.AnimationClip.findByName(
-                            HELICOPTER.animations,
-                            HELICOPTER.animations[0].name
+                            GIRL.animations,
+                            GIRL.animations[0].name
                         )).play();
                 }
                 //Prevent further access to this code.

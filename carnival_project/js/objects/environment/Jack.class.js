@@ -24,7 +24,7 @@ class Jack extends ENGINE.OBJECTS.ClassicObject
         
         //Scale and position the Jack
         JACK.model.scale.set(2, 2, 2);
-        JACK.model.rotation.set(-Math.PI / 2, 0, 0);
+        JACK.model.rotation.set(-Math.PI / 2,0, 0);
         JACK.model.position.set(-100, 0, 0);
         this.addObjectToGroup(JACK.model);
 
