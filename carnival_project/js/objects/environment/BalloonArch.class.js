@@ -18,7 +18,7 @@ class BalloonArch extends ENGINE.OBJECTS.ClassicObject
 
         //Add the BallonArch model.
         const BALLOONARCH = ENGINE.ObjectLoader().loadModel(
-            'BalloonArch',
+            'balloonArch',
             'glb'
         );
         

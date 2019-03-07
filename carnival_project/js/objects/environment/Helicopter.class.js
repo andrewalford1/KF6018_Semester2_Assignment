@@ -18,7 +18,7 @@ class Helicopter extends ENGINE.OBJECTS.ClassicObject
 
         //Add the Helicopter model.
         const HELICOPTER = ENGINE.ObjectLoader().loadModel(
-            'Helicopter',
+            'helicopter',
             'glb'
         );
         

@@ -18,7 +18,7 @@ class Jack extends ENGINE.OBJECTS.ClassicObject
 
         //Add the Jack model.
         const JACK = ENGINE.ObjectLoader().loadModel(
-            'Jack',
+            'jack',
             'glb'
         );
         

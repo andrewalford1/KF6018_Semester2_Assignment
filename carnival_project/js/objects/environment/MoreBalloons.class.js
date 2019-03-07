@@ -18,7 +18,7 @@ class MoreBalloons extends ENGINE.OBJECTS.ClassicObject
 
         //Add the MoreBalloons model.
         const MOREBALLOONS = ENGINE.ObjectLoader().loadModel(
-            'MoreBalloons',
+            'moreBalloons',
             'glb'
         );
         
