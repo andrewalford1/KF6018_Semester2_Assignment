@@ -63,6 +63,21 @@ engineDriver.getObjectManager().addObject(
     new Boy(new THREE.Vector3(25, 0, 0))
 );
 engineDriver.getObjectManager().addObject(
+    new Carousel(new THREE.Vector3(0, 0, 0))
+);
+engineDriver.getObjectManager().addObject(
+    new GirlSitting(new THREE.Vector3(0, 0, 0))
+);
+engineDriver.getObjectManager().addObject(
+    new StreetLamp(new THREE.Vector3(0, 0, 0))
+);
+engineDriver.getObjectManager().addObject(
+    new RollerCoaster(new THREE.Vector3(0, 0, 0))
+);
+engineDriver.getObjectManager().addObject(
+    new SmallTent(new THREE.Vector3(0, 0, 0))
+);
+engineDriver.getObjectManager().addObject(
     new Teacup(new THREE.Vector3(25, 0, 0))
 );
 engineDriver.getObjectManager().addObject(
