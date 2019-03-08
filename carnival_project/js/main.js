@@ -21,7 +21,7 @@ engineDriver.getObjectManager().addObject(
    new Terrain(new THREE.Vector3(0, 0, 0))
 );
 engineDriver.getObjectManager().addObject(
-    new HotAirBalloon(new THREE.Vector3(0, 0, 0))
+    new HotAirBalloon(new THREE.Vector3(0, 250, 0))
 );
 engineDriver.getObjectManager().addObject(
     new Helicopter(new THREE.Vector3(0, 0, 0))

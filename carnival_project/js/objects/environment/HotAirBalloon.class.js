@@ -28,6 +28,14 @@ class HotAirBalloon extends ENGINE.OBJECTS.ClassicObject
         AIRBALLOON.model.position.set(-50, 100, -750);
         this.addObjectToGroup(AIRBALLOON.model);
 
+        //[updateCount] Counts how many times this class has
+        //been updated.
+        let updateCount = 0;
+        //[M_SPEED] How fast the balloon travels.
+        const M_SPEED = 300;
+        //[M_HEIGHT] How height the balloon rises.
+        const M_HEIGHT = 100;
+
         /**
          * Updates the HotAirBalloon. (Overridden from the superclass).
          * @param {number} frameTime - The time taken to compute the
@@ -35,7 +43,8 @@ class HotAirBalloon extends ENGINE.OBJECTS.ClassicObject
          */
         this.update = function(frameTime)
         {
-            //HotAirBalloon does not need to update.
+            //Make the hot air balloon bob up and down.
+            AIRBALLOON.model.position.y = Math.sin(++updateCount / M_SPEED) * M_HEIGHT;
         }
     }
 }
