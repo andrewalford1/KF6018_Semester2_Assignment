@@ -1,8 +1,19 @@
 <?php
 
+//[CSS] Contains all the links to the projects CSS files.
+$CSS = '
+<link rel="stylesheet" content="text/css" href="style/fullscreen.css">
+<link rel="stylesheet" content="text/css" href="style/loading_screen.css">
+';
+
+//[favicon] The location of the favicon being used in this project.
+$favicon = '
+<link href="res/icons/circus_tent.ico" rel="icon" type="image/x-icon"/>
+';
+
 //[loadingScreen] Contains all the tags for 
 //the loading screen.
-private $loadingScreen = '
+$loadingScreen = '
 <div class="screen loading_screen">
 <div class="loader loading_screen"></div>
 <!--What is being loaded...-->
@@ -16,7 +27,7 @@ private $loadingScreen = '
 ';
 
 //[scripts] Contains all the JavaScript script tags for the project.
-private $scripts = '
+$scripts = '
 <!--KINECT-->
 <script src="https://itp.nyu.edu/kinectron/kinectron.bundle.js" type="text/javascript"></script>
 
@@ -64,14 +75,20 @@ private $scripts = '
 <script src="js/main.js">                                         </script>
 ';
 
-//[html] Contains the HTML for this page.
-private $html = '
+//OUTPUT HTML...
+echo '
+<!doctype html>
+<html lang="en">
+<head>
+    <title>KF6018 Semester 2 Assignment</title>
+    <meta charset="utf-8"/>
+    '.$CSS.'
+    '.$favicon.'
+</head>
 <body>
     '.$loadingScreen.'
     '.$scripts. '
     <embed src="res/audio/carnival.mp3">
-</body>'
-
-//Output the HTML for this page.
-echo $html;
+</body>
+</html>';
 ?>
