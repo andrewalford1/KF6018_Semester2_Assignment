@@ -21,7 +21,6 @@ class Football extends ENGINE.OBJECTS.ClassicObject
             'football_obj',
             'glb'
         );
-        console.log(FOOTBALL);
         //Scale and position the dart
         FOOTBALL.model.scale.set(0.005, 0.005, 0.005);
         FOOTBALL.model.rotation.set(0, 0, 0);

@@ -21,7 +21,7 @@ class Boy extends ENGINE.OBJECTS.ClassicObject
             'boy_obj',
             'glb'
         );
-        console.log(BOY);
+
         //Scale and position the dart
         BOY.model.scale.set(0.05, 0.05, 0.05);
         BOY.model.rotation.set(0, 0, 0);

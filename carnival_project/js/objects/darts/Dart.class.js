@@ -21,7 +21,7 @@ class Dart extends ENGINE.OBJECTS.ClassicObject
             'darts_obj',
             'glb'
         );
-        console.log(DART);
+
         //Scale and position the dart
         DART.model.scale.set(0.02, 0.02, 0.02);
         DART.model.rotation.set(0, 0, 0);

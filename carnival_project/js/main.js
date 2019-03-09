@@ -14,83 +14,32 @@ light.position.set(0, 20, 0);
 engineDriver.getScene().add(light);
 
 //ADD OBJECTS...
-//engineDriver.getObjectManager().addObject(
-//    new BasicFloor(engineDriver.getCamera().getInstance().far)
-//);
-engineDriver.getObjectManager().addObject(
-   new Terrain(new THREE.Vector3(0, 0, 0))
-);
-engineDriver.getObjectManager().addObject(
-    new HotAirBalloon(new THREE.Vector3(0, 250, 0))
-);
-engineDriver.getObjectManager().addObject(
-    new Helicopter(new THREE.Vector3(0, 0, 0))
-);
-engineDriver.getObjectManager().addObject(
-    new Welcome(new THREE.Vector3(0, 0, 0))
-);
-engineDriver.getObjectManager().addObject(
-    new Jack(new THREE.Vector3(0, 0, 0))
-);
-engineDriver.getObjectManager().addObject(
-    new BalloonArch(new THREE.Vector3(0, 0, 0))
-);
-engineDriver.getObjectManager().addObject(
-    new MoreBalloons(new THREE.Vector3(0, 0, 0))
-);
-engineDriver.getObjectManager().addObject(
-    new Bear(new THREE.Vector3(0, 0, 0))
-);
-engineDriver.getObjectManager().addObject(
-    new Boy(new THREE.Vector3(25, 0, 0))
-);
-engineDriver.getObjectManager().addObject(
-    new WhackAMole(new THREE.Vector3(0, 0, 0))
-);
-engineDriver.getObjectManager().addObject(
-    new StrengthOMetre(new THREE.Vector3(0, 0, 0))
-);
-engineDriver.getObjectManager().addObject(
-    new DartsGame(new THREE.Vector3(0, 0, 0))
-);
-engineDriver.getObjectManager().addObject(
-    new BasicCharacter(new THREE.Vector3(25, 0, 0))
-);
-engineDriver.getObjectManager().addObject(
-    new Football(new THREE.Vector3(0, 0, 0))
-);
-engineDriver.getObjectManager().addObject(
-    new Boy(new THREE.Vector3(25, 0, 0))
-);
-engineDriver.getObjectManager().addObject(
-    new Carousel(new THREE.Vector3(0, 0, 0))
-);
-engineDriver.getObjectManager().addObject(
-    new GirlSitting(new THREE.Vector3(0, 0, 0))
-);
-engineDriver.getObjectManager().addObject(
-    new StreetLamp(new THREE.Vector3(0, 0, 0))
-);
-engineDriver.getObjectManager().addObject(
-    new RollerCoaster(new THREE.Vector3(0, 0, 0))
-);
-engineDriver.getObjectManager().addObject(
-    new SmallTent(new THREE.Vector3(0, 0, 0))
-);
-engineDriver.getObjectManager().addObject(
-    new Teacup(new THREE.Vector3(25, 0, 0))
-);
-engineDriver.getObjectManager().addObject(
-    new Dart(new THREE.Vector3(0, 0, 0))
-);
-engineDriver.getObjectManager().addObject(
-    new Goal(new THREE.Vector3(25, 0, 0))
-);
-engineDriver.getObjectManager().addObject(
-    new CircusTent(new THREE.Vector3(50, 0, 0))
-);
-engineDriver.getObjectManager().addObject(
-    new FerrisWheel(new THREE.Vector3(0, 0, 0))
+engineDriver.getObjectManager().addObjects(
+    [new Terrain(new THREE.Vector3(0, 0, 0)),
+    new HotAirBalloon(new THREE.Vector3(0, 250, 0)),
+    new Helicopter(new THREE.Vector3(0, 0, 0)),
+    new Welcome(new THREE.Vector3(0, 0, 0)),
+    new Jack(new THREE.Vector3(0, 0, 0)),
+    new BalloonArch(new THREE.Vector3(0, 0, 0)),
+    new MoreBalloons(new THREE.Vector3(0, 0, 0)),
+    new Bear(new THREE.Vector3(0, 0, 0)),
+    new Boy(new THREE.Vector3(25, 0, 0)),
+    new WhackAMole(new THREE.Vector3(0, 0, 0)),
+    new StrengthOMetre(new THREE.Vector3(0, 0, 0)),
+    new DartsGame(new THREE.Vector3(0, 0, 0)),
+    new BasicCharacter(new THREE.Vector3(25, 0, 0)),
+    new Football(new THREE.Vector3(0, 0, 0)),
+    new Boy(new THREE.Vector3(25, 0, 0)),
+    new Carousel(new THREE.Vector3(0, 0, 0)),
+    new GirlSitting(new THREE.Vector3(0, 0, 0)),
+    new StreetLamp(new THREE.Vector3(0, 0, 0)),
+    new RollerCoaster(new THREE.Vector3(0, 0, 0)),
+    new SmallTent(new THREE.Vector3(0, 0, 0)),
+    new Teacup(new THREE.Vector3(25, 0, 0)),
+    new Dart(new THREE.Vector3(0, 0, 0)),
+    new Goal(new THREE.Vector3(25, 0, 0)),
+    new CircusTent(new THREE.Vector3(50, 0, 0)),
+    new FerrisWheel(new THREE.Vector3(0, 0, 0))]
 );
 engineDriver.getObjectManager().addAllToScene(engineDriver.getScene());
 engineDriver.getObjectManager().setAllActive(true);

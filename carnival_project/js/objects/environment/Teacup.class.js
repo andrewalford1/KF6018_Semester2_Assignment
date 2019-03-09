@@ -21,7 +21,6 @@ class Teacup extends ENGINE.OBJECTS.ClassicObject
             'teacup_obj',
             'glb'
         );
-        console.log(TEACUP);
         //Scale and position the teacup
         TEACUP.model.scale.set(0.1, 0.1, 0.1);
         TEACUP.model.rotation.set(0, 0, 0);

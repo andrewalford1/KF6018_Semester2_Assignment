@@ -21,7 +21,6 @@ class Terrain extends ENGINE.OBJECTS.ClassicObject
             'terrain_obj',
             'glb'
         );
-        console.log(TERRAIN);
         //Scale and position the dart
         TERRAIN.model.scale.set(30.5, 20.5, 30.5);
         TERRAIN.model.rotation.set(0, 0, 0);
