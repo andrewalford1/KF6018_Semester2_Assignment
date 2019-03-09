@@ -40,33 +40,32 @@ $scripts = '
 <!-- PROJECT CODE -->
 <!--Objects: Characters--------------------------------------------------->
 <script src="js/objects/characters/BasicCharacter.class.js">      </script>
-<script src="js/objects/characters/Player.class.js">              </script>
-<script src="js/objects/characters/Boy.class.js">                 </script>
-<!--Objects: Darts Game--------------------------------------------------->
-<script src="js/objects/darts/DartsGame.class.js">                </script>
-<script src="js/objects/darts/Dart.class.js">                    </script>
-<!--Objects: Environment-------------------------------------------------->
-<script src="js/objects/environment/BasicFloor.class.js">         </script>
-<script src="js/objects/environment/Terrain.class.js">            </script>
-<script src="js/objects/environment/FerrisWheel.class.js">        </script>
-<script src="js/objects/environment/CircusTent.class.js">         </script>
-<script src="js/objects/environment/Teacup.class.js">             </script>
-<script src="js/objects/environment/HotAirBalloon.class.js">      </script>
-<script src="js/objects/environment/Helicopter.class.js">         </script>
-<script src="js/objects/environment/Jack.class.js">               </script>
 <script src="js/objects/environment/Bear.class.js">               </script>
-<script src="js/objects/environment/BalloonArch.class.js">        </script>
-<script src="js/objects/environment/MoreBalloons.class.js">       </script>
-<script src="js/objects/environment/Welcome.class.js">            </script>
+<script src="js/objects/characters/Boy.class.js">                 </script>
 <script src="js/objects/environment/GirlSitting.class.js">        </script>
-<script src="js/objects/environment/StreetLamp.class.js">         </script>
+<script src="js/objects/environment/Jack.class.js">               </script>
+<script src="js/objects/characters/Player.class.js">              </script>
+<!--Objects: Darts Game--------------------------------------------------->
+<script src="js/objects/darts/Dart.class.js">                    </script>
+<script src="js/objects/darts/DartsGame.class.js">                </script>
+<!--Objects: Environment-------------------------------------------------->
+<script src="js/objects/environment/BalloonArch.class.js">        </script>
+<script src="js/objects/environment/Carousel.class.js">           </script>
+<script src="js/objects/environment/CircusTent.class.js">         </script>
+<script src="js/objects/environment/FerrisWheel.class.js">        </script>
+<script src="js/objects/environment/Helicopter.class.js">         </script>
+<script src="js/objects/environment/HotAirBalloon.class.js">      </script>
+<script src="js/objects/environment/MoreBalloons.class.js">       </script>
 <script src="js/objects/environment/RollerCoaster.class.js">      </script>
 <script src="js/objects/environment/SmallTent.class.js">          </script>
-<script src="js/objects/environment/Carousel.class.js">           </script>
+<script src="js/objects/environment/StreetLamp.class.js">         </script>
+<script src="js/objects/environment/Teacup.class.js">             </script>
+<script src="js/objects/environment/Terrain.class.js">            </script>
+<script src="js/objects/environment/Welcome.class.js">            </script>
 <!--Objects: Football Game------------------------------------------------>
-<script src="js/objects/football/Goal.class.js">                  </script>
 <script src="js/objects/football/Football.class.js">              </script>
-<!--Objects: Strenght-o-meter Game---------------------------------------->
+<script src="js/objects/football/Goal.class.js">                  </script>
+<!--Objects: Strength-o-Meter Game---------------------------------------->
 <script src="js/objects/strength_o_meter/StrengthOMetre.class.js"></script>
 <!--Objects: Whack-a-mole Game-------------------------------------------->
 <script src="js/objects/whack_a_mole/Mole.class.js">              </script>
