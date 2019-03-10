@@ -1,9 +1,10 @@
 "use strict"
+//First person perspective
 
 //[engineDriver] Used to manage all major engine components.
 let engineDriver = ENGINE.Driver(
     new THREE.Scene(),
-    ENGINE.Camera(new THREE.Vector3(0, 25, 50), false),
+    ENGINE.Camera(new THREE.Vector3(0,0, -0.1), false),
     ENGINE.ObjectManager(),
     true
 );
@@ -78,7 +79,7 @@ kinectron.makeConnection();
 //This is the player in the scene.
 let player = new Player();
 player.setActive(true);
-//player.attachCamera(kinectron.HEAD, engineDriver.getCamera().getInstance());
+player.attachCamera(kinectron.HEAD, engineDriver.getCamera().getInstance());
 player.addToScene(engineDriver.getScene());
 
 // Start tracked bodies and set callback
