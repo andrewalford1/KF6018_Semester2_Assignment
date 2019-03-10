@@ -1,0 +1,21 @@
+{
+    "enviroment": [{
+        "fileName":     "darts_obj", 
+        "extension" :   "glb", 
+        "position"  :   [ -40, 18, 0 ],
+        "scale"     :   [ 0.02, 0.02, 0.02  ],
+        "rotation"  :   [ 0, 0, 0 ]
+    }, { 
+        "fileName"  :   "Welcome", 
+        "extension" :   "glb", 
+        "position"  :   [ -4, 0, -30 ],
+        "scale"     :   [ 3, 3, 3 ],
+        "rotation"  :   [ 0, 0, 0 ]
+    }, { 
+        "fileName"  :   "bear", 
+        "extension" :   "glb", 
+        "position"  :   [ -20, 0, -100 ],
+        "scale"     :   [ 0.25, 0.25, 0.25 ],
+        "rotation"  :   [ 90, 0, 0 ]
+    }]
+}
