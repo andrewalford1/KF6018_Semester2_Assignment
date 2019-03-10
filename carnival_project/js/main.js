@@ -3,7 +3,7 @@
 //[engineDriver] Used to manage all major engine components.
 let engineDriver = ENGINE.Driver(
     new THREE.Scene(),
-    ENGINE.Camera(new THREE.Vector3(0, 25, 50), false),
+    ENGINE.Camera(new THREE.Vector3(0,0, -0.1), false),
     ENGINE.ObjectManager(),
     true
 );
@@ -52,6 +52,7 @@ engineDriver.getObjectManager().setAllActive(true);
 //Skybox.
 ENGINE.TextureLoader().loadSkybox('skybox', '.bmp', engineDriver.getScene());
 
+
 /**
  * Animates the project.
  */
@@ -67,24 +68,26 @@ animate();
 // Kinectron codes starting from here//////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-//This is the player in the scene.
-let player = new Player();
-player.setActive(true);
-player.addToScene(engineDriver.getScene());
-
 // Initialize kinectron
 const IP = '192.168.60.56';
 // Define and create an instance of kinectron, you must
 let kinectron= new Kinectron(IP);
 // Create connection between remote and application
 kinectron.makeConnection();
+
+//This is the player in the scene.
+let player = new Player();
+player.setActive(true);
+player.attachCamera(kinectron.HEAD, engineDriver.getCamera().getInstance());
+player.addToScene(engineDriver.getScene());
+
 // Start tracked bodies and set callback
 kinectron.startTrackedBodies(getBodies);
 
 // The getBodiescallbackfunction: called once every time kinect obtains a frame
 function getBodies(skeleton)
 {
-	for(let i = 0; i <= 24; i++)
+    for(let i = 0; i <= 24; i++)
 	{
         let position = new THREE.Vector3(
             skeleton.joints[i].cameraX,
@@ -92,6 +95,13 @@ function getBodies(skeleton)
             skeleton.joints[i].cameraZ
         );
 
-        player.updateJoint(position, i);
+        let orientation = new THREE.Quaternion(
+            skeleton.joints[i].orientationX,
+            skeleton.joints[i].orientationX,
+            skeleton.joints[i].orientationZ,
+            skeleton.joints[i].orientationW 
+        );
+
+        player.updateJoint(position, orientation, i);
     }
 }
