@@ -21,7 +21,7 @@ class Player extends ENGINE.OBJECTS.KinectObject
         for(let i = 0; i <= 24; i++)
         {
             let joint = new THREE.Mesh(
-                new THREE.BoxGeometry( BONE_RADIUS,BONE_RADIUS,BONE_RADIUS ),
+                new THREE.SphereGeometry(BONE_RADIUS, 9, 9),
                 new THREE.MeshPhongMaterial( { color: 0xFF0000 } )
             );
 

@@ -87,21 +87,24 @@ kinectron.startTrackedBodies(getBodies);
 // The getBodiescallbackfunction: called once every time kinect obtains a frame
 function getBodies(skeleton)
 {
-    for(let i = 0; i <= 24; i++)
-	{
-        let position = new THREE.Vector3(
-            skeleton.joints[i].cameraX,
-            skeleton.joints[i].cameraY,
-            skeleton.joints[i].cameraZ
-        );
-
-        let orientation = new THREE.Quaternion(
-            skeleton.joints[i].orientationX,
-            skeleton.joints[i].orientationX,
-            skeleton.joints[i].orientationZ,
-            skeleton.joints[i].orientationW 
-        );
-
-        player.updateJoint(position, orientation, i);
+    if(ENGINE.isLoaded())
+    {
+        for(let i = 0; i <= 24; i++)
+        {
+            let position = new THREE.Vector3(
+                skeleton.joints[i].cameraX,
+                skeleton.joints[i].cameraY,
+                skeleton.joints[i].cameraZ
+            );
+                
+            let orientation = new THREE.Quaternion(
+                skeleton.joints[i].orientationX,
+                skeleton.joints[i].orientationX,
+                skeleton.joints[i].orientationZ,
+                skeleton.joints[i].orientationW 
+            );
+                    
+            player.updateJoint(position, orientation, i);
+        }
     }
 }
