@@ -5,7 +5,7 @@ let engineDriver = ENGINE.Driver(
     new THREE.Scene(),
     ENGINE.Camera(new THREE.Vector3(0, 25, 50), false),
     ENGINE.ObjectManager(),
-    true
+    false
 );
 
 //ADD LIGHTING... (I have not figured out a good way to do lighting yet).
