@@ -3,7 +3,7 @@
  * @extends ENGINE.OBJECTS.ClassicObject
  * @author Andrew Alford & Zoë Irwin
  * @date 26/02/2019
- * @version 1.0 - 26/02/2019
+ * @version 1.1 - 11/03/2019
  */
 class Terrain extends ENGINE.OBJECTS.ClassicObject
 {
@@ -26,7 +26,8 @@ class Terrain extends ENGINE.OBJECTS.ClassicObject
         TERRAIN.model.rotation.set(0, 0, 0);
         TERRAIN.model.position.set(0, -4, 0);
         this.addObjectToGroup(TERRAIN.model);
-
+        
+        let once = true;
         /**
          * Updates the dart. (Overridden from the superclass).
          * @param {number} frameTime - The time taken to compute the
@@ -34,6 +35,32 @@ class Terrain extends ENGINE.OBJECTS.ClassicObject
          */
         this.update = function(frameTime)
         {
+            if(once)
+            {
+                once = false;
+
+                let scene = TERRAIN.model.children[0];
+
+                if(scene)
+                {
+                    let object = scene.children[0];
+                    if(object)
+                    {
+                        let meshes = object.children;
+                        console.table(meshes[0].material);
+
+                        meshes.forEach(mesh => {
+                            let originalColour = mesh.material.color;
+                            mesh.material = new THREE.MeshPhysicalMaterial({
+                                color: originalColour,
+                                roughness: 0.8,
+                                metalness: 0.6,
+                                reflectivity: 0.5
+                            });
+                        });
+                    }
+                }
+            }
             //Circus dart does not need to update.
         }
     }
