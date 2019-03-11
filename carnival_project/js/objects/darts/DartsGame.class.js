@@ -17,8 +17,9 @@
 
            //[ Base].
             let Base1= new THREE.BoxGeometry(35, 10, 10);
-            let stripeTexture = new THREE.TextureLoader().load( 'res/textures/dartsGame/stripes.jpeg' );
-            let Base2 = new THREE.MeshBasicMaterial( { map: stripeTexture } );
+            let Base2 = new THREE.MeshBasicMaterial({ 
+                map: ENGINE.TextureLoader().loadTexture( 'dartsGame/stripes.jpeg' ) 
+            });
             //let Base2= new THREE.MeshPhongMaterial( { color: 0x000000 } );
             let Base = new THREE.Mesh(Base1, Base2);
            
@@ -31,12 +32,16 @@
            
            //back pane
             let backPane1 = new THREE.PlaneGeometry( 35, 18 );
-            let backPaneTexture = new THREE.TextureLoader().load( 'res/textures/dartsGame/sign.jpg' );
-            let backPane2= new THREE.MeshBasicMaterial( { map: backPaneTexture } );
+            let backPane2= new THREE.MeshBasicMaterial({ 
+                map: ENGINE.TextureLoader().loadTexture( 'dartsGame/sign.jpg' ),
+                side: THREE.BackSide,
+                flatShading: THREE.FlatShading
+            });
             //let backPane2 = new THREE.MeshPhongMaterial( { color: 0xffffff } );
             let backPane = new THREE.Mesh(backPane1, backPane2);
             backPane.position.z = -4.8;
             backPane.position.y = 15;
+            backPane.rotation.x = 180 * (Math.PI / 180);
 
             //backBorder
             let backBorder1 = new THREE.BoxGeometry( 38, 30, 0.5 );
