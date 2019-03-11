@@ -38,6 +38,7 @@ $scripts = '
 <script src="http://unn-w16006135.newnumyspace.co.uk/ThreeJS_Engine/src/engine_build.js"></script>
 
 <!-- PROJECT CODE -->
+<script src="json/models.js">                                   </script>
 <!--Objects: Characters--------------------------------------------------->
 <script src="js/objects/characters/BasicCharacter.class.js">      </script>
 <script src="js/objects/environment/Bear.class.js">               </script>
