@@ -24,7 +24,6 @@ xmlhttp.onreadystatechange = function() {
     .enviroment.forEach(model => {
         engineDriver.getObjectManager().addObject(
             new ENGINE.OBJECTS.Model(model));
-        console.table(model);    
     });
 
     //ADD OBJECTS USING JS CLASSES...
@@ -40,7 +39,6 @@ xmlhttp.onreadystatechange = function() {
         new BalloonArch(new THREE.Vector3(0, 0, 0)),
         new Carousel(new THREE.Vector3(0, 0, 0)),
         new CircusTent(new THREE.Vector3(50, 0, 0)),
-        new FerrisWheel(new THREE.Vector3(0, 0, 0)),
         new Helicopter(new THREE.Vector3(0, 0, 0)),
         new HotAirBalloon(new THREE.Vector3(0, 250, 0)),
         new MoreBalloons(new THREE.Vector3(0, 0, 0)),
