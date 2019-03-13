@@ -25,5 +25,31 @@
         "rotation"      :   [ 0, 315, 0 ],
         "animated"      :   true,
         "animationSpeed":   2000
+    }, { 
+        "fileName"      :   "boy_obj", 
+        "extension"     :   "glb", 
+        "position"      :   [ 35, 0, 0 ],
+        "scale"         :   [ 0.05, 0.05, 0.05 ],
+        "rotation"      :   [ 0, 0, 0 ]
+    }, { 
+        "fileName"      :   "balloonArch", 
+        "extension"     :   "glb", 
+        "position"      :   [ 45, 0, -100 ],
+        "scale"         :   [ 0.3, 0.4, 0.4 ],
+        "rotation"      :   [ 180, 0, 0 ]
+    }, { 
+        "fileName"      :   "carousel", 
+        "extension"     :   "glb", 
+        "position"      :   [ 220, 0, -40 ],
+        "scale"         :   [ 0.01, 0.01, 0.01 ],
+        "rotation"      :   [ 0, 0, 0 ],
+        "animated"      :   true,
+        "animationSpeed":   2000
+    }, { 
+        "fileName"      :   "circus_tent", 
+        "extension"     :   "glb", 
+        "position"      :   [ -250, 0, -500 ],
+        "scale"         :   [ 0.1, 0.1, 0.1 ],
+        "rotation"      :   [ 180, 0, 0 ]
     }]
 }
