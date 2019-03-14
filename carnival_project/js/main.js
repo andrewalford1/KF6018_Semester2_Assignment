@@ -26,19 +26,12 @@ function getObjectsLocal()
 
     //ADD OBJECTS USING JS CLASSES...
     engineDriver.getObjectManager().addObjects([
-        //Characters
-        new GirlSitting(new THREE.Vector3(0, 0, 0)),
-        new Jack(new THREE.Vector3(0, 0, 0)),
         //Darts Game
         new DartsGame(new THREE.Vector3(0, 0, 0)),
         //Enviroment
         new Helicopter(new THREE.Vector3(0, 0, 0)),
         new HotAirBalloon(new THREE.Vector3(0, 250, 0)),
-        new MoreBalloons(new THREE.Vector3(0, 0, 0)),
-        new RollerCoaster(new THREE.Vector3(0, 0, 0)),
-        new SmallTent(new THREE.Vector3(0, 0, 0)),
         new StreetLamp(new THREE.Vector3(0, 0, 0)),
-        new Teacup(new THREE.Vector3(25, 0, 0)),
         new Terrain(new THREE.Vector3(0, 0, 0)),
         //Football Game
         new Football(new THREE.Vector3(0, 0, 0)),
@@ -85,7 +78,6 @@ function getObjectsServer()
             new RollerCoaster(new THREE.Vector3(0, 0, 0)),
             new SmallTent(new THREE.Vector3(0, 0, 0)),
             new StreetLamp(new THREE.Vector3(0, 0, 0)),
-            new Teacup(new THREE.Vector3(25, 0, 0)),
             new Terrain(new THREE.Vector3(0, 0, 0)),
             //Football Game
             new Football(new THREE.Vector3(0, 0, 0)),

@@ -7664,9 +7664,17 @@ class Model extends ClassicObject
         {
             M_RESOURCE.model.position.fromArray(model.position);
         }
+        else
+        {
+            M_RESOURCE.model.position.set(0, 0, 0);
+        }
         if(model.scale)
         {
-            M_RESOURCE.model.scale.fromArray(model.scale);
+            M_RESOURCE.model.scale.multiplyScalar(model.scale);
+        }
+        else
+        {
+            M_RESOURCE.model.scale.multiplyScalar(1);
         }
         if(model.rotation)
         {
@@ -7675,6 +7683,10 @@ class Model extends ClassicObject
                 model.rotation[1] * (-Math.PI / 180),
                 model.rotation[2] * (-Math.PI / 180)
             );
+        }
+        else
+        {
+            M_RESOURCE.model.rotation.set(0, 0, 0);
         }
 
         this.addObjectToGroup(M_RESOURCE.model);
