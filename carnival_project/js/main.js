@@ -79,6 +79,9 @@ function getObjectsServer()
             new SmallTent(new THREE.Vector3(0, 0, 0)),
             new StreetLamp(new THREE.Vector3(0, 0, 0)),
             new Terrain(new THREE.Vector3(0, 0, 0)),
+            new MoreTents(new THREE.Vector3(0, 0, 0)),
+            new WackCover(new THREE.Vector3(0, 0, 0)),
+            new BalloonCover(new THREE.Vector3(0, 0, 0)),
             //Football Game
             new Football(new THREE.Vector3(0, 0, 0)),
             new Goal(new THREE.Vector3(25, 0, 0)),
