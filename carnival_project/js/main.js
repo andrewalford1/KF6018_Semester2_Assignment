@@ -16,6 +16,9 @@ let light = new THREE.HemisphereLight(0xFFFFFF, 0x444444);
 light.position.set(0, 20, 0);
 engineDriver.getScene().add(light);
 
+/**
+ * Use me for local testing.
+ */
 function getObjectsLocal()
 {
     ENGINE.DEBUGGER.extractJSON(MODELS)
@@ -33,6 +36,9 @@ function getObjectsLocal()
         new HotAirBalloon(new THREE.Vector3(0, 250, 0)),
         new StreetLamp(new THREE.Vector3(0, 0, 0)),
         new Terrain(new THREE.Vector3(0, 0, 0)),
+        new MoreTents(new THREE.Vector3(0, 0, 0)),
+        new WackCover(new THREE.Vector3(0, 0, 0)),
+        new BalloonCover(new THREE.Vector3(0, 0, 0)),
         //Football Game
         new Football(new THREE.Vector3(0, 0, 0)),
         new Goal(new THREE.Vector3(25, 0, 0)),
@@ -45,6 +51,9 @@ function getObjectsLocal()
     engineDriver.getObjectManager().setAllActive(true);
 }
 
+/**
+ * Don't use me if you're testing the project locally.
+ */
 function getObjectsServer()
 {
     //Load models from JSON file
