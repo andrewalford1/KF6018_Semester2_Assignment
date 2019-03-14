@@ -7704,7 +7704,7 @@ class Model extends ClassicObject
             if(onStart)
             {
                 //If the resource has animations, animate it.
-                if(M_RESOURCE.animations.length != 0)
+                if(model.animated && M_RESOURCE.animations.length != 0)
                 {
                     //Initialise the animation.
                     mixer.clipAction(
@@ -7718,15 +7718,18 @@ class Model extends ClassicObject
             }
 
             //Update the animation.
-            if(M_RESOURCE.animations.length != 0 && mixer)
+            if(model.animated)
             {
-                if(model.animationSpeed)
+                if(M_RESOURCE.animations.length != 0 && mixer)
                 {
-                    mixer.update(frameTime / model.animationSpeed);
-                }
-                else
-                {
-                    mixer.update(frameTime / 1000);
+                    if(model.animationSpeed)
+                    {
+                        mixer.update(frameTime / model.animationSpeed);
+                    }
+                    else
+                    {
+                        mixer.update(frameTime / 1000);
+                    }
                 }
             }
         }
