@@ -3,7 +3,7 @@
  * @extends ENGINE.OBJECTS.ClassicObject
  * @author Ana-Sabina Irimia
  * @date 13/02/2019
- * @version 1.5 - 14/03/2019
+ * @version 1.6 - 15/03/2019
  */
 class Mole extends ENGINE.OBJECTS.ClassicObject
 {
@@ -147,37 +147,83 @@ class Mole extends ENGINE.OBJECTS.ClassicObject
         moleBodyPartsGroup.add(moleNoseMesh);
         moleBodyPartsGroup.add(moleLeftPawGroup);
         moleBodyPartsGroup.add(moleRightPawGroup);
-
-        //Set up the moles collision.
-        let collisionBox = new THREE.Box3();
-        setUpCollision(moleBodyPartsGroup);
-
         //Add the sphere to the object group.
         this.addObjectToGroup(moleBodyPartsGroup);
 
+        //Test collision cube for testing
+        let collisionCube = new THREE.Mesh(
+            new THREE.BoxGeometry(1, 1, 1),
+            new THREE.MeshPhysicalMaterial({
+                color: 0xFF0000, 
+            })
+        );
+        let offset = new THREE.Vector3(0, 2, 0);
+        collisionCube.position.add(offset);
+        this.addObjectToGroup(collisionCube);
+
+        //[colliders] An array to store all the 
+        //colliders of this object.
+        let colliders = [];
+        colliders.push({
+            object : moleHeadMesh,
+            box : setUpCollider(
+                moleHeadMesh, 
+                new THREE.Matrix4().setPosition(
+                    new THREE.Vector3(0, -1.25, 0)
+                ), 
+                true
+            ),
+        });
+        colliders.push({
+            object : collisionCube,
+            box : setUpCollider(
+                collisionCube,
+                new THREE.Matrix4().setPosition(
+                    offset.multiplyScalar(-1)
+                ),
+                true
+            )
+        })
+        
         //Private Methods...
 
         /**
-         * Sets up the collision for an object.
-         * @param {THREE.Object3D} mole - The mole having its 
-         *                                collision set up.
+         * Sets up a collider
+         * @param {THREE.Object3D} object - The object the collider tracks.
+         * @param {THREE.Matrix4} offset - Relative to the object.
+         * @param {boolean} visible - Show a pink outline of the box.
          */
-        function setUpCollision(mole)
+        function setUpCollider(object, offset, visible)
         {
-            collisionBox.setFromObject(mole);
-            let visual = new THREE.Box3Helper(collisionBox, 0xFF00FF);
-            mole.add(visual);
-            console.table(mole);
+            let collisionBox = new THREE.Box3();
+            if(object)
+            {
+                collisionBox.setFromObject(object);
+            }
+            if(offset)
+            {
+                collisionBox.applyMatrix4(offset);
+            }
+            if(visible)
+            {
+                let visual = new THREE.Box3Helper(collisionBox, 0xFF00FF);
+                visual.updateMatrixWorld(true);
+                object.add(visual);
+            }
+
+            return collisionBox;
         }
 
         /**
-         * Updates the position of the collision box.
-         * @param {THREE.Object3D} mole - The mole being tracked.
+         * Updates an array of colliders.
+         * @param {array} colliders The colliders to be updated.
          */
-        function updateCollision(mole)
+        function updateCollisions(colliders)
         {
-            collisionBox = new THREE.Box3();
-            collisionBox.setFromObject(mole);
+            colliders.forEach(collider => {
+                collider.box = new THREE.Box3();
+                collider.box.setFromObject(collider.object);            
+            });
         }
     
         //Public Methods...
@@ -220,8 +266,12 @@ class Mole extends ENGINE.OBJECTS.ClassicObject
                 iFrame++;
             // }
 
-            //Update the moles collision box.
-            updateCollision(moleBodyPartsGroup);
+            updateCollisions(colliders);
+            if(colliders[0].box.intersectsBox(colliders[1].box))
+            {
+                //console.log(`ouch! ${iFrame}`);
+            }
+
         }//end of this.update
       }//end of constructor
  }//end of class Mole
