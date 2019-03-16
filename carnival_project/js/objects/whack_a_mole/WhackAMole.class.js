@@ -154,7 +154,7 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject
 
         //[Mud Ring back].
         let mudRingBack1= new THREE.TorusBufferGeometry( 10, 3, 16, 100 );
-        let mudTexture = new THREE.TextureLoader().load( 'res/textures/whackAMole/mud.jpg' );
+        let mudTexture = ENGINE.TextureLoader().loadTexture('whackAMole/mud.jpg')
         let mudRingBack2 = new THREE.MeshPhongMaterial( { color: 0x40261d } );
         // immediately use the texture for material creation
         // let mudRingBack2 = new THREE.MeshBasicMaterial( { map: mudTexture } );
@@ -298,9 +298,10 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject
         this.addObjectToGroup(moleLowerLeft.getInstance());
 
         //Adds the mallet to the group.
+
         let mallet = createMallet();
-        mallet.position.y += 10;
-        this.addObjectToGroup(mallet);
+        mallet.object.position.y += 9;
+        this.addObjectToGroup(mallet.object);
 
         //Scale and position the game.
         this.getInstance().scale.set(0.75, 0.75, 0.75);
@@ -329,7 +330,7 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject
             mallet.add(head);
             mallet.add(handle);
 
-            return mallet;
+            return collisionFactory(mallet, null, false);
         }
 
         //Public Methods...
@@ -357,6 +358,19 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject
             moleLowerRight.update(frameTime);
             moleLowerLeft.update(frameTime);
 
+            mallet.object.rotation.y += speed;
+            mallet.update();
+            mallet.checkCollisions([
+                moleCenter.getCollider(),
+                moleUpperLeft.getCollider(),
+                moleUpperRight.getCollider(),
+                moleLowerRight.getCollider(),
+                moleLowerLeft.getCollider()
+            ]);
+            if(mallet.collided)
+            {
+                console.log('mallet hit mole');
+            }
         }
     }
 }

@@ -30,7 +30,10 @@ let collisionFactory = (function(){
                 if(!(this === collider)) {
                     if(this.box.intersectsBox(collider.box)) {
                         hasCollided = true;
-                        collider.collided = hasCollided;
+                        collider.collided = true;
+                    }
+                    else {
+                        collider.collided = false;
                     }
                 }
             });

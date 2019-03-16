@@ -40,6 +40,7 @@ class Mole extends ENGINE.OBJECTS.ClassicObject
         moleHeadMesh.castShadow = true;
         moleHeadMesh.receiveShadow = true;
         moleHeadMesh.position.set(0.0, 1.22, 0.0);
+        console.log(moleHeadMesh);
 
         // Variables/arrays for the body of the mole
         let moleBodyGeometry = new THREE.CylinderGeometry(1.0,1.2, 2.5, 18);
@@ -150,61 +151,40 @@ class Mole extends ENGINE.OBJECTS.ClassicObject
         //Add the sphere to the object group.
         this.addObjectToGroup(moleBodyPartsGroup);
 
-        //Test collision cube for testing
-        let collisionCube = new THREE.Mesh(
-            new THREE.BoxGeometry(1, 1, 1),
-            new THREE.MeshPhysicalMaterial({
-                color: 0xFF0000, 
-            })
-        );
-        let offset = new THREE.Vector3(0, 2, 0);
-        collisionCube.position.add(offset);
-        this.addObjectToGroup(collisionCube);
-
-        //[colliders] An array to store all the colliders of this object.
-        let colliders = setUpColliders();
+        //[collider] Tracks collision.
+        let collider = setUpCollider();
 
         //Private Methods...
 
         /**
-         * Sets up all colliders.
-         * @returns An array of all colliders created.
+         * @returns a collider created from the head mesh.
          */
-        function setUpColliders()
+        function setUpCollider()
         {
-            let colliders = [];
-            colliders.push(collisionFactory(
+            return collisionFactory(
                 moleHeadMesh, 
                 new THREE.Matrix4().setPosition(
                     new THREE.Vector3(0, -1.25, 0)
                 ), 
                 true,
                 0x0000FF
-            ));
-            colliders.push(collisionFactory(
-                collisionCube,
-                new THREE.Matrix4().setPosition(
-                    offset.multiplyScalar(-1)
-                ),
-                true,
-                0xFFFF00
-            ));
-
-            return colliders;
+            );
         }
 
         /**
          * Updates all colliders.
          */
-        function updateColliders()
+        function updateCollider()
         {
-            colliders.forEach(collider => {
-                collider.update();
-            });
-            colliders[0].checkCollisions(colliders);
-            if(colliders[0].collided)
+            collider.update();
+            
+            if(collider.collided)
             {
-                console.log(`ouch! ${iFrame}`);
+                moleHeadMesh.material.color.setHex(0xFF0000);
+            }
+            else
+            {
+                moleBodyMesh.material.color.setHex(DARK_BLUE);
             }
         }
 
@@ -235,7 +215,7 @@ class Mole extends ENGINE.OBJECTS.ClassicObject
          */
         this.getCollider = function()
         {
-            return colliders[0];
+            return collider;
         }
 
         /**
@@ -256,7 +236,7 @@ class Mole extends ENGINE.OBJECTS.ClassicObject
                 iFrame++;
             // }
 
-            updateColliders();
+            updateCollider();
         }//end of this.update
       }//end of constructor
  }//end of class Mole
