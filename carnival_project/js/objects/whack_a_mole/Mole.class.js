@@ -161,71 +161,53 @@ class Mole extends ENGINE.OBJECTS.ClassicObject
         collisionCube.position.add(offset);
         this.addObjectToGroup(collisionCube);
 
-        //[colliders] An array to store all the 
-        //colliders of this object.
-        let colliders = [];
-        colliders.push({
-            object : moleHeadMesh,
-            box : setUpCollider(
+        //[colliders] An array to store all the colliders of this object.
+        let colliders = setUpColliders();
+
+        //Private Methods...
+
+        /**
+         * Sets up all colliders.
+         * @returns An array of all colliders created.
+         */
+        function setUpColliders()
+        {
+            let colliders = [];
+            colliders.push(collisionFactory(
                 moleHeadMesh, 
                 new THREE.Matrix4().setPosition(
                     new THREE.Vector3(0, -1.25, 0)
                 ), 
-                true
-            ),
-        });
-        colliders.push({
-            object : collisionCube,
-            box : setUpCollider(
+                true,
+                0x0000FF
+            ));
+            colliders.push(collisionFactory(
                 collisionCube,
                 new THREE.Matrix4().setPosition(
                     offset.multiplyScalar(-1)
                 ),
-                true
-            )
-        })
-        
-        //Private Methods...
+                true,
+                0xFFFF00
+            ));
 
-        /**
-         * Sets up a collider
-         * @param {THREE.Object3D} object - The object the collider tracks.
-         * @param {THREE.Matrix4} offset - Relative to the object.
-         * @param {boolean} visible - Show a pink outline of the box.
-         */
-        function setUpCollider(object, offset, visible)
-        {
-            let collisionBox = new THREE.Box3();
-            if(object)
-            {
-                collisionBox.setFromObject(object);
-            }
-            if(offset)
-            {
-                collisionBox.applyMatrix4(offset);
-            }
-            if(visible)
-            {
-                let visual = new THREE.Box3Helper(collisionBox, 0xFF00FF);
-                visual.updateMatrixWorld(true);
-                object.add(visual);
-            }
-
-            return collisionBox;
+            return colliders;
         }
 
         /**
-         * Updates an array of colliders.
-         * @param {array} colliders The colliders to be updated.
+         * Updates all colliders.
          */
-        function updateCollisions(colliders)
+        function updateColliders()
         {
             colliders.forEach(collider => {
-                collider.box = new THREE.Box3();
-                collider.box.setFromObject(collider.object);            
+                collider.update();
             });
+            colliders[0].checkCollisions(colliders);
+            if(colliders[0].collided)
+            {
+                console.log(`ouch! ${iFrame}`);
+            }
         }
-    
+
         //Public Methods...
 
         /**
@@ -249,6 +231,14 @@ class Mole extends ENGINE.OBJECTS.ClassicObject
         }
 
         /**
+         * @returns The Mole's collison box.
+         */
+        this.getCollider = function()
+        {
+            return colliders[0];
+        }
+
+        /**
          * Updates the mole once every frame.
          * (Abstract class which must be overridden from the superclass.)
          * @param {number} frameTime - The time taken to compute the previous
@@ -266,12 +256,7 @@ class Mole extends ENGINE.OBJECTS.ClassicObject
                 iFrame++;
             // }
 
-            updateCollisions(colliders);
-            if(colliders[0].box.intersectsBox(colliders[1].box))
-            {
-                //console.log(`ouch! ${iFrame}`);
-            }
-
+            updateColliders();
         }//end of this.update
       }//end of constructor
  }//end of class Mole
