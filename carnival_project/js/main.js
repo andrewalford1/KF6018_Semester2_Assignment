@@ -9,12 +9,14 @@ let engineDriver = ENGINE.Driver(
 );
 
 //[firstPerson] 'true' if the camera is in first-person view.
-let firstPerson = false;
+let firstPerson = true;
 
 //ADD LIGHTING... (I have not figured out a good way to do lighting yet).
 let light = new THREE.HemisphereLight(0xFFFFFF, 0x444444);
 light.position.set(0, 20, 0);
 engineDriver.getScene().add(light);
+
+let whackAMoleGame = new WhackAMole(new THREE.Vector3(100, 0, 0));
 
 /**
  * Use me for local testing.
@@ -45,7 +47,7 @@ function getObjectsLocal()
         //Strength-o-Meter Game
         new StrengthOMetre(new THREE.Vector3(0, 0, 0)),
         //Whack-a-Mole Game
-        new WhackAMole(new THREE.Vector3(0, 0, 0))
+        whackAMoleGame
     ]);
     engineDriver.getObjectManager().addAllToScene(engineDriver.getScene());
     engineDriver.getObjectManager().setAllActive(true);
@@ -145,8 +147,10 @@ if(firstPerson)
     camera.position.set(0, 0, 0);
     player.attachCamera(kinectron.HEAD, engineDriver.getCamera().getInstance());
 }
+player.attachCollider(kinectron.HANDLEFT);
+player.attachCollider(kinectron.HANDRIGHT);
 player.addToScene(engineDriver.getScene());
-
+whackAMoleGame.allocatePlayer(player);
 // Start tracked bodies and set callback
 kinectron.startTrackedBodies(getBodies);
 

@@ -305,7 +305,7 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject
 
         //Scale and position the game.
         this.getInstance().scale.set(0.75, 0.75, 0.75);
-        this.getInstance().position.set(0, 3, 0);
+        this.getInstance().position.set(0, 3, 15);
 
         //Private Methods...
         
@@ -335,6 +335,18 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject
 
         //Public Methods...
 
+        let player = null;
+        let hands = null;
+
+        this.allocatePlayer = function(player)
+        {
+            console.log("Allocating player");
+            this.player = player;
+            console.log(player);
+            hands = player.getColliders();
+            console.log(hands);
+        }
+
         /**
          * Updates once every frame.
          * (Abstract class which must be overridden from the superclass.)
@@ -358,19 +370,37 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject
             moleLowerRight.update(frameTime);
             moleLowerLeft.update(frameTime);
 
-            mallet.object.rotation.y += speed;
-            mallet.update();
-            mallet.checkCollisions([
+
+            let moles = [
                 moleCenter.getCollider(),
                 moleUpperLeft.getCollider(),
                 moleUpperRight.getCollider(),
                 moleLowerRight.getCollider(),
                 moleLowerLeft.getCollider()
-            ]);
-            if(mallet.collided)
-            {
-                console.log('mallet hit mole');
-            }
+            ];
+
+            hands.forEach(hand => {
+                hand.update();
+            })
+
+            moles.forEach(mole => {
+                mole.update();
+                mole.checkCollisions(hands);
+                if(mole.collided)
+                {
+                    console.log("Hit mole");
+                }
+            });
+            
+            // mallet.object.rotation.y += speed;
+            // mallet.update();
+            // mallet.checkCollisions([
+
+            // ]);
+            // if(mallet.collided)
+            // {
+            //     console.log('mallet hit mole');
+            // }
         }
     }
 }

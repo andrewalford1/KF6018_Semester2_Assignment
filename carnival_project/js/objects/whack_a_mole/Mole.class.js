@@ -179,13 +179,9 @@ class Mole extends ENGINE.OBJECTS.ClassicObject
             collider.update();
             
             if(collider.collided)
-            {
                 moleHeadMesh.material.color.setHex(0xFF0000);
-            }
             else
-            {
                 moleBodyMesh.material.color.setHex(DARK_BLUE);
-            }
         }
 
         //Public Methods...

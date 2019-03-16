@@ -30,7 +30,7 @@ class Player extends ENGINE.OBJECTS.KinectObject
             {
                 joint = new THREE.Object3D();
             }
-
+            
             this.addJoint(joint, i);
         }
 
@@ -59,6 +59,28 @@ class Player extends ENGINE.OBJECTS.KinectObject
                     joint.add(camera);
                 }
             }
+        }
+
+        const M_COLLIDERS = [];
+
+        this.attachCollider = function(jointIndex)
+        {
+            let joint = this.getJoint(jointIndex);
+            if(joint) {
+                let collision = collisionFactory(
+                    joint,
+                    null,
+                    true,
+                    0x00FFFF
+                );
+                M_COLLIDERS.push(collision);
+                joint = collision.object;
+            }
+        }
+
+        this.getColliders = function()
+        {
+            return M_COLLIDERS;
         }
 
         /**
