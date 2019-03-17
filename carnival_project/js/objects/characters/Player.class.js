@@ -18,6 +18,21 @@ class Player extends ENGINE.OBJECTS.KinectObject
         //Add the players joints.
         const BONE_RADIUS = 0.05;
 
+        //[leftHand] Tracks the state of the left hand.
+        let leftHand = {
+            open: {writeable: true, value: null},
+            lasso: {writeable: true, value: null}
+        };
+        //[rightHand] Tracks the state of the right hand.
+        let rightHand = {
+            open: {writeable: true, value: null},
+            lasso: {writeable: true, value: null}
+        }; 
+
+        let closedColour    = 0xFF0000;
+        let openColour      = 0x00FF00;
+        let lassoColour     = 0x0000FF;
+
         for(let i = 0; i <= 24; i++)
         {
             let joint = new THREE.Mesh(
@@ -37,6 +52,28 @@ class Player extends ENGINE.OBJECTS.KinectObject
         //Scale and position the player.
         this.getInstance().scale.set(11, 11, 11);
         this.getInstance().position.set(0, 11, 0);
+
+        //Private Methods...
+
+        this. updateHandColours = function() {
+            if(leftHand.open) {
+                this.getJoint(7).material.color.setHex(openColour);
+            } else {
+                this.getJoint(7).material.color.setHex(closedColour);
+            }
+            if(rightHand.open) {
+                this.getJoint(11).material.color.setHex(openColour);
+            } else {
+                this.getJoint(11).material.color.setHex(closedColour);
+            }
+
+            if(leftHand.lasso) {
+                this.getJoint(7).material.color.setHex(lassoColour);
+            }
+            if(rightHand.lasso) {
+                this.getJoint(11).material.color.setHex(lassoColour);
+            }
+        }
 
         //Public Methods...
 
@@ -81,6 +118,40 @@ class Player extends ENGINE.OBJECTS.KinectObject
         this.getColliders = function()
         {
             return M_COLLIDERS;
+        }
+
+        /**
+         * Checks the state of the players hands.
+         * @param {number} state - The state of the hand.
+         * @param {left} left - 'true' if the left hand is being updated.
+         *                      'false' if the right hand is being updated.
+         */
+        this.updateHand = function(state, left)
+        {
+            let open = false;
+            let lasso = false;
+            //Check the state of the hand.
+            switch(state) {
+                case(0 | 1): //Not tracked or unknown.
+                    break;
+                case(2): //Open
+                    open = true;
+                    break;
+                case(4): //Lasso
+                    lasso = true;
+                    break;
+            };
+
+            //Update hands.
+            if(left) {
+                leftHand.open = open;
+                leftHand.lasso = lasso;
+            } else {
+                rightHand.open = open;
+                rightHand.lasso = lasso;
+            }
+
+            this.updateHandColours();
         }
 
         /**
