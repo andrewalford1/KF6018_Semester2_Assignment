@@ -15,6 +15,11 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject
         //Construct the superclass.
         super(position);
 
+        //Tracks the user playing the game.
+        let m_player = null;
+        //[m_moles] Tracks all the moles in the game.
+        let m_moles = [];
+
         //[Table Base].
         let tableBase1= new THREE.BoxGeometry(15, 10, 20);
         // immediately use the texture for material creation
@@ -249,15 +254,19 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject
 
         //Position of the moles
         let moleCenter = new Mole(new THREE.Vector3(0, 5.0, 0.7));
-        moleCenter.setActive(true);
         let moleUpperLeft = new Mole(new THREE.Vector3(-3.5, 5.0, -4));
-        moleUpperLeft.setActive(true);
         let moleUpperRight = new Mole(new THREE.Vector3(3.5, 5.0, -4));
-        moleUpperRight.setActive(true);
         let moleLowerRight = new Mole(new THREE.Vector3(3.5, 5.0, 6));
-        moleUpperRight.setActive(true);
         let moleLowerLeft = new Mole(new THREE.Vector3(-3.5, 5.0, 6));
-        moleUpperRight.setActive(true);
+        //Instansiate the moles.
+        m_moles.push(moleCenter, 
+            moleUpperLeft, moleUpperRight, 
+            moleLowerLeft, moleLowerRight
+        );
+        m_moles.forEach(mole => {
+            mole.setActive(true);
+            this.addObjectToGroup(mole.getInstance());
+        });
 
         //Add to the object group.
         this.addObjectToGroup(tableBase);
@@ -290,61 +299,19 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject
         this.addObjectToGroup(mudRingBackRight);
         this.addObjectToGroup(holeBackRight);
 
-        //Adds the moles to the addObjectToGroup
-        this.addObjectToGroup(moleCenter.getInstance());
-        this.addObjectToGroup(moleUpperLeft.getInstance());
-        this.addObjectToGroup(moleUpperRight.getInstance());
-        this.addObjectToGroup(moleLowerRight.getInstance());
-        this.addObjectToGroup(moleLowerLeft.getInstance());
-
-        //Adds the mallet to the group.
-
-        let mallet = createMallet();
-        mallet.object.position.y += 9;
-        this.addObjectToGroup(mallet.object);
-
         //Scale and position the game.
         this.getInstance().scale.set(0.75, 0.75, 0.75);
         this.getInstance().position.set(0, 3, 15);
 
-        //Private Methods...
-        
-        function createMallet()
-        {
-            let mallet = new THREE.Group();
-            let material = new THREE.MeshPhongMaterial({
-                color: 0xFF0000
-            });
-
-            let head = new THREE.Mesh(
-                new THREE.BoxGeometry(2, 1, 1),
-                material
-            );
-            let handle = new THREE.Mesh(
-                new THREE.BoxGeometry(1, 5, 1),
-                material
-            );
-
-            head.position.y += 2.5;
-
-            mallet.add(head);
-            mallet.add(handle);
-
-            return collisionFactory(mallet, null, false);
-        }
-
         //Public Methods...
 
-        let player = null;
-        let hands = null;
-
+        /**
+         * @brief Assigned a player to the game.
+         * @param {Player} player - Who is playing the game?
+         */
         this.allocatePlayer = function(player)
         {
-            console.log("Allocating player");
-            this.player = player;
-            console.log(player);
-            hands = player.getColliders();
-            console.log(hands);
+            m_player = player.getColliders();
         }
 
         /**
@@ -356,51 +323,15 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject
         this.update = function(frameTime)
         {
             let speed = frameTime / 5000;
-            // this.getInstance().scale.x = 30;
-            // this.getInstance().scale.y = 30;
-            // this.getInstance().scale.z = 30;
-            //this.getInstance().rotation.x += speed * Math.PI;
-            // this.getInstance().rotation.y += speed * Math.PI;
-            // this.getInstance().position.z += 1;
 
-            //Updates the position of the moles  
-            moleCenter.update(frameTime);
-            moleUpperLeft.update(frameTime);
-            moleUpperRight.update(frameTime);
-            moleLowerRight.update(frameTime);
-            moleLowerLeft.update(frameTime);
-
-
-            let moles = [
-                moleCenter.getCollider(),
-                moleUpperLeft.getCollider(),
-                moleUpperRight.getCollider(),
-                moleLowerRight.getCollider(),
-                moleLowerLeft.getCollider()
-            ];
-
-            hands.forEach(hand => {
-                hand.update();
-            })
-
-            moles.forEach(mole => {
-                mole.update();
-                mole.checkCollisions(hands);
-                if(mole.collided)
-                {
-                    console.log("Hit mole");
+            //Update all the games moles.
+            m_moles.forEach(mole => {
+                mole.update(frameTime);
+                mole.getCollider().update();
+                if(m_player) {
+                    mole.getCollider().checkCollisions(m_player);
                 }
             });
-            
-            // mallet.object.rotation.y += speed;
-            // mallet.update();
-            // mallet.checkCollisions([
-
-            // ]);
-            // if(mallet.collided)
-            // {
-            //     console.log('mallet hit mole');
-            // }
         }
     }
 }

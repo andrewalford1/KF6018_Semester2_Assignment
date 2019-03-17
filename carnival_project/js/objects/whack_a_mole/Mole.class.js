@@ -19,6 +19,7 @@ class Mole extends ENGINE.OBJECTS.ClassicObject
         const DARK_BLUE = 0x180E44;
         //const LIGHT_BROWN = 0xB46E3A;
         const LIGHT_SKIN_COLOR = 0xF5C8AA;
+        const HIT_COLOUR = 0xFF0000;
 
         //Variable for the jumping speed of the mole
         let moleJumpingSpeed;
@@ -40,7 +41,6 @@ class Mole extends ENGINE.OBJECTS.ClassicObject
         moleHeadMesh.castShadow = true;
         moleHeadMesh.receiveShadow = true;
         moleHeadMesh.position.set(0.0, 1.22, 0.0);
-        console.log(moleHeadMesh);
 
         // Variables/arrays for the body of the mole
         let moleBodyGeometry = new THREE.CylinderGeometry(1.0,1.2, 2.5, 18);
@@ -177,11 +177,11 @@ class Mole extends ENGINE.OBJECTS.ClassicObject
         function updateCollider()
         {
             collider.update();
-            
-            if(collider.collided)
-                moleHeadMesh.material.color.setHex(0xFF0000);
-            else
+            if(collider.collided) {
+                moleHeadMesh.material.color.setHex(HIT_COLOUR);
+            } else {
                 moleBodyMesh.material.color.setHex(DARK_BLUE);
+            }
         }
 
         //Public Methods...

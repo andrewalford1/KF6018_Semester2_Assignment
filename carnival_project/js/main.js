@@ -9,7 +9,7 @@ let engineDriver = ENGINE.Driver(
 );
 
 //[firstPerson] 'true' if the camera is in first-person view.
-let firstPerson = true;
+let firstPerson = false;
 
 //ADD LIGHTING... (I have not figured out a good way to do lighting yet).
 let light = new THREE.HemisphereLight(0xFFFFFF, 0x444444);
@@ -141,6 +141,7 @@ kinectron.makeConnection();
 //This is the player in the scene.
 let player = new Player();
 player.setActive(true);
+engineDriver.getObjectManager().addObject(player);
 if(firstPerson)
 {
     let camera = engineDriver.getCamera().getInstance();

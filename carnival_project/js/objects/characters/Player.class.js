@@ -85,10 +85,13 @@ class Player extends ENGINE.OBJECTS.KinectObject
 
         /**
          * Updates the object. (Overridden from the superclass).
-         * Note: players do not need updating (yet).
          * @param {number} frameTime - The time taken to compute the previous
          *                             frame of animation.
          */
-        this.update = function(frameTime) { }
+        this.update = function(frameTime) { 
+            M_COLLIDERS.forEach(collider => {
+                collider.update();
+            });
+        }
     }
 }
