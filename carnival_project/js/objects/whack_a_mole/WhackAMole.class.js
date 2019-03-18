@@ -327,7 +327,6 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject
             //Update all the games moles.
             m_moles.forEach(mole => {
                 mole.update(frameTime);
-                mole.getCollider().update();
                 if(m_player) {
                     mole.getCollider().checkCollisions(m_player);
                 }

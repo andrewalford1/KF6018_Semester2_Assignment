@@ -214,6 +214,9 @@ class Mole extends ENGINE.OBJECTS.ClassicObject
             return collider;
         }
 
+        const M_SPEED = 15;
+        const M_HEIGHT = -0.1;
+
         /**
          * Updates the mole once every frame.
          * (Abstract class which must be overridden from the superclass.)
