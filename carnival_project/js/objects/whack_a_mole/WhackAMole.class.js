@@ -19,6 +19,12 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject
         let m_player = null;
         //[m_moles] Tracks all the moles in the game.
         let m_moles = [];
+        //The number of moles in the game
+        let numberOfMoles = 5;
+        //Variable that will hold the mole that changes its position
+        let mole;
+        //Variable that holds the last mole that changed its position
+        let lastMole;
 
         //[Table Base].
         let tableBase1= new THREE.BoxGeometry(15, 10, 20);
@@ -314,6 +320,32 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject
             m_player = player.getColliders();
         }
 
+        this.updateMolePosition = function(){
+            
+           const maxRandomNumber = Math.round(Math.random()* (numberOfMoles-1));
+           const moleArrayIndex = Math.round(Math.random()* 4);
+           const moleIndex  = Math.floor(Math.random()*numberOfMoles);
+           mole = m_moles[moleArrayIndex];
+
+           let moleIsUp = true;
+           if(moleArrayIndex == moleIndex){
+                   if(mole == lastMole){
+                              console.log("This mole jumped before.")
+                              const secondMoleIndex  = Math.floor(Math.random()*numberOfMoles);
+                              mole = m_moles[secondMoleIndex];
+                              //console.log(mole);
+                   }
+                   else if(mole != lastMole){
+                          if(moleIsUp){
+                             mole.molePosition();
+                             if(mole.molePosition()){
+                                 moleIsUp = false;
+                             }
+                          }
+                  }
+           }
+        }//end of updateMolePosition()
+        
         /**
          * Updates once every frame.
          * (Abstract class which must be overridden from the superclass.)
@@ -331,6 +363,7 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject
                     mole.getCollider().checkCollisions(m_player);
                 }
             });
+            this.updateMolePosition();
         }
     }
 }
