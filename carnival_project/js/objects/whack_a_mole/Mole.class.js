@@ -21,10 +21,7 @@ class Mole extends ENGINE.OBJECTS.ClassicObject
         const LIGHT_SKIN_COLOR = 0xF5C8AA;
         const HIT_COLOUR = 0xFF0000;
 
-        //Variable for the jumping speed of the mole
-        let moleJumpingSpeed;
-        //Varible for the frequency of apperance of the mole
-        let moleJumpingFrequency;
+        //Varible that calculates the window frames
         let iFrame = 0;
 
         // Variables for the head of the mole
@@ -184,28 +181,6 @@ class Mole extends ENGINE.OBJECTS.ClassicObject
             }
         }
 
-        //Public Methods...
-
-        /**
-         *
-         * @param {number} jumpingSpeed -
-         *
-         */
-        this.setMoleSpeed = function(jumpingSpeed)
-        {
-
-        }
-
-        /**
-         *
-         * @param {number} jumpingFrequency -
-         *
-         */
-        this.setMoleFrequency = function(jumpingFrequency)
-        {
-
-        }
-
         /**
          * @returns The Mole's collison box.
          */
@@ -216,7 +191,19 @@ class Mole extends ENGINE.OBJECTS.ClassicObject
 
         const M_SPEED = 15;
         const M_HEIGHT = -0.1;
-
+        
+        /**
+         * Updates the mole's position
+         */
+        this.molePosition = function(){
+                let randomTime = Math.round(Math.random()*(1000 + 200) + 200);
+                moleBodyPartsGroup.position.y = Math.sin(iFrame/10 - randomTime) * 1.2 -1.3;
+                if(moleBodyPartsGroup.position.y >= 1.3)
+                {
+                        return true;
+                }
+        }
+        
         /**
          * Updates the mole once every frame.
          * (Abstract class which must be overridden from the superclass.)
@@ -228,13 +215,7 @@ class Mole extends ENGINE.OBJECTS.ClassicObject
          */
         this.update = function(frameTime)
         {
-            // if(moleJumpingFrequency%frameTime ===0 )
-            // {
-                // change frameTime/10 to change the speed
-                moleBodyPartsGroup.position.y = Math.cos(iFrame/20 - 5) * 1.2 -1.3;
-                iFrame++;
-            // }
-
+            iFrame++;
             updateCollider();
         }//end of this.update
       }//end of constructor
