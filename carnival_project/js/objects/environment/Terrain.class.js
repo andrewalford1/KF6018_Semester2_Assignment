@@ -66,7 +66,6 @@ class Terrain extends ENGINE.OBJECTS.ClassicObject
                     }
                 }
             }
-            //Circus dart does not need to update.
         }
     }
 }

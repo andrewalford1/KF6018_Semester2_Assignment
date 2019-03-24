@@ -4,35 +4,34 @@
  * engine variables.
  * @author Andrew Alford
  * @date 09/01/2019
- * @version 2.0 - 14/01/2019
+ * @version 2.5 - 23/03/2019
  */
 module.exports = class Driver
 {
-    /**
-     * Gets the name of this class.
-     * @return Returns the name of the class.
-     */
-    static getClassName()
-    {
-        return 'Driver';
-    }
     /**
      * Constructs the engine driver.
      * @param {THREE.Scene} scene - The scene being animated.
      * @param {ENGINE.CAMERA} camera - The camera used to film the scene.
      * @param {ENGINE.OBJECT_MANAGER} objectManager - Manages all objects
      *                                                in a scene.
+     * @param {ENGINE.PHYSICS} physics - Manages the scenes physics.
      * @param {booolean} debugMode - If 'true' then debugging information will
      *                               become available.
      */
-    constructor(scene, camera, objectManager, debugMode)
+    constructor(scene, camera, objectManager, physics, debugMode)
     {
         //Error check parameters.
-        ENGINE.DEBUGGER.isThreeScene(scene, Driver.getClassName());
-        ENGINE.DEBUGGER.isEngineCamera(camera, Driver.getClassName());
+        ENGINE.DEBUGGER.isThreeScene(scene, 'Driver');
+        ENGINE.DEBUGGER.isEngineCamera(camera, 'Driver');
         ENGINE.DEBUGGER.isEngineObjectManager(
-            objectManager, Driver.getClassName());
-        ENGINE.DEBUGGER.isBoolean(debugMode, Driver.getClassName());
+            objectManager, 'Driver');
+        if(physics) {
+            ENGINE.DEBUGGER.isPhysicsDriver(physics, 'Driver');
+        }
+        ENGINE.DEBUGGER.isBoolean(debugMode, 'Driver');
+
+        const M_PHYSICS = physics;
+        console.log(M_PHYSICS);
 
         //Initialise member variables.
         //[M_SCENE] The scene being animated.
@@ -47,18 +46,12 @@ module.exports = class Driver
         //[m_frameTime] Holds the amount of time taken to render and compute
         //the previous frame of animation.
         let m_frameTime = M_TIMER.getFrameTime();
-
-        //[debugTool] Used to debug the engine.
-        let debugTool;
-        if(debugMode)
-        {
-            debugTool = ENGINE.Debugger();
-        }
+        //[initialise] 'true' whilst on the first frame of animation.
+        let initialise = true;
 
         //EVENT LISTENERS...
         //Event listener to allow the scene to resize when the window is resized.
-        window.addEventListener('resize', function()
-        {
+        window.addEventListener('resize', function() {
             M_CAMERA.setViewPort(window.innerWidth, window.innerHeight);
         });
 
@@ -67,8 +60,7 @@ module.exports = class Driver
         /**
          * Updates all key components of the engine.
          */
-        this.update = function()
-        {
+        this.update = function() {
             //Update timing variables.
             M_TIMER.update();
             m_frameTime = M_TIMER.getFrameTime();
@@ -77,8 +69,18 @@ module.exports = class Driver
             M_CAMERA.update(M_SCENE, m_frameTime);
 
             //Only update objects if all assets are loaded.
-            if(ENGINE.isLoaded())
-            {
+            if(ENGINE.isLoaded()) {
+                //On the first frame of animation.
+                if(initialise) {
+                    //Initalise physics
+                    M_OBJECT_MANAGER.getObjects().forEach(object => {
+                        object.initPhysics(M_PHYSICS.getWorld());
+                    });
+                    initialise = false;
+                }
+                if(M_PHYSICS) {
+                    M_PHYSICS.update();
+                }
                 //Update all the objects in the scene.
                 M_OBJECT_MANAGER.updateObjects(m_frameTime);
             }
@@ -86,29 +88,31 @@ module.exports = class Driver
 
         /**
          * Retrieves the scene being animated.
-         * @return Returns the scene.
+         * @returns The scene.
          */
-        this.getScene = function()
-        {
+        this.getScene = function() {
             return M_SCENE;
         }
 
         /**
-         * Retrieves the camera used to film the scene.
-         * @return Returns the camera.
+         * @returns The camera.
          */
-        this.getCamera = function()
-        {
+        this.getCamera = function() {
             return M_CAMERA;
         }
 
         /**
-         * Retrieves the object manager managing all objects in the scene.
-         * @return Returns the object manager.
+         * @returns The object manager.
          */
-        this.getObjectManager = function()
-        {
+        this.getObjectManager = function() {
             return M_OBJECT_MANAGER;
+        }
+
+        /**
+         * @returns The physics driver.
+         */
+        this.getPhysics = function() {
+            return M_PHYSICS;
         }
     }
 }
@@ -139,16 +143,14 @@ let EngineSingleton = (function() {
      * Class combining all the engine componentents.
      * @author Andrew Alford
      * @date 11/01/2019
-     * @version 1.6 - 27/01/2019
+     * @version 2.0 - 23/03/2019
      */
-    class Engine
-    {
+    class Engine {
         /**
          * Constructor for the engine.
          * Defines all the components.
          */
-        constructor()
-        {
+        constructor() {
             //Define engine components.
             this.DEBUGGER = require('./utility/Debugger.class');
 
@@ -163,6 +165,7 @@ let EngineSingleton = (function() {
             this.OBJECTS = require('./objects/objects');
             this.OBJECT_MANAGER = require('./objects/ObjectManager.class');
 
+            this.PHYSICS = require('./PhysicsDriver.class');
             this.DRIVER = require('./Driver.class');
 
             //DEFINE INSTANCES...
@@ -185,19 +188,17 @@ let EngineSingleton = (function() {
 
             /**
              * Creates a debugger.
-             * @return Returns the newly created Debugger.
+             * @return The newly created Debugger.
              */
-            this.Debugger = function()
-            {
+            this.Debugger = function() {
                 return new this.DEBUGGER();
             }
 
             /**
              * Creates a Camera.
-             * @return Returns the newly created Camera.
+             * @return The newly created Camera.
              */
-            this.Camera = function(initialPosition, vrEnabled)
-            {
+            this.Camera = function(initialPosition, vrEnabled) {
                 //Error check parameters.
                 this.DEBUGGER.isThreeVector3(
                     initialPosition, this.CAMERA.getClassName());
@@ -208,36 +209,30 @@ let EngineSingleton = (function() {
 
             /**
              * Creates a Timer.
-             * @return Returns the newly created Timer.
+             * @returns The newly created Timer.
              */
-            this.Timer = function()
-            {
+            this.Timer = function() {
                 return new this.TIMER();
             }
 
             /**
              * Retrieves the instance of the Keyboard Input component to
              * enable the tracking of user input through the keyboard.
-             * @return Returns the Keyboard Input component.
+             * @returns The Keyboard Input component.
              */
-            this.KeyboardInput = function()
-            {
+            this.KeyboardInput = function() {
                 return keyboardInputInstance;
             }
 
             /**
              * Checks if the engine is fully loaded.
-             * @return Returns 'true' if everything has loaded.
+             * @returns 'true' if everything has loaded.
              */
-            this.isLoaded = function()
-            {
+            this.isLoaded = function() {
                 //If loading has/is taking place, check its progress.
-                if(loadingManagerInstance)
-                {
+                if(loadingManagerInstance) {
                     return loadingManagerInstance.isLoaded();
-                }
-                else
-                {
+                } else {
                     //If no loading has taken place then simply return 'true'.
                     return true
                 }
@@ -246,20 +241,17 @@ let EngineSingleton = (function() {
             /**
              * Retrieves the instance of the Object Loader to enable the
              * loading of models into the project.
-             * @return Returns the Object Loader.
+             * @returns The Object Loader.
              */
-            this.ObjectLoader = function()
-            {
+            this.ObjectLoader = function() {
                 //Since loading is occurring, a loading manager is required.
                 //If the loading manager does not exist, create one.
-                if(!loadingManagerInstance)
-                {
+                if(!loadingManagerInstance) {
                     loadingManagerInstance = new this.LOADING_MANAGER();
                 }
 
                 //If the object loader does not exist, create one.
-                if(!objectLoaderInstance)
-                {
+                if(!objectLoaderInstance) {
                     objectLoaderInstance = new this.LOADERS.ObjectLoader(
                         loadingManagerInstance.getLoadingManager()
                     );
@@ -270,20 +262,17 @@ let EngineSingleton = (function() {
             /**
              * Retrieves the instance of the Texture Loader to enable the
              * loading of textures into the project.
-             * @return Returns the Texture Loader.
+             * @returns The Texture Loader.
              */
-            this.TextureLoader = function()
-            {
+            this.TextureLoader = function() {
                 //Since loading is occurring, a loading manager is required.
                 //If the loading manager does not exist, create one.
-                if(!loadingManagerInstance)
-                {
+                if(!loadingManagerInstance) {
                     loadingManagerInstance = new this.LOADING_MANAGER();
                 }
 
                 //If the texture loader does not exist, create one.
-                if(!textureLoaderInstance)
-                {
+                if(!textureLoaderInstance) {
                     textureLoaderInstance = new this.LOADERS.TextureLoader(
                         loadingManagerInstance.getLoadingManager()
                     );
@@ -296,8 +285,7 @@ let EngineSingleton = (function() {
              * @param {string} character - The name of the character.
              *                             (Must correspond with the filename).
              */
-            this.MixamoCharacter = function(character)
-            {
+            this.MixamoCharacter = function(character) {
                 return new this.OBJECTS.MixamoCharacter(character);
             }
 
@@ -305,38 +293,37 @@ let EngineSingleton = (function() {
              * Creates an Object Manager
              * @return Returns the newly created ObjectManager.
              */
-             this.ObjectManager = function()
-             {
-                 return new this.OBJECT_MANAGER();
-             }
+            this.ObjectManager = function() {
+                return new this.OBJECT_MANAGER();
+            }
 
-             /**
-              * Creates a Driver for the engine.
-              * @param {THREE.Scene} scene - The scene being animated.
-              * @param {Engine.Camera} camera - The camera used to
-              *                                 film the scene.
-              * @param {ENGINE.ObjectManager} - Manages all objects in a scene.
-              * @return Returns the newly created Driver.
-              */
-             this.Driver = function(scene, camera, objectManager, debugMode)
-             {
-                 this.DEBUGGER.isThreeScene(
-                     scene, this.DRIVER.getClassName());
-                 this.DEBUGGER.isEngineCamera(
-                     camera, this.DRIVER.getClassName());
-                 this.DEBUGGER.isEngineObjectManager(
-                     objectManager, this.DRIVER.getClassName());
-                 this.DEBUGGER.isBoolean(
-                     debugMode, this.DRIVER.getClassName());
+            /**
+             * Creates a driver for engine physics.
+             * @param {THREE.Vector3} gravity - The scene's gravity.
+             * @param {number} step - How many frequently physics is
+             *                        updated.
+             */
+            this.Physics = function(gravity, step) {
+                return new this.PHYSICS(gravity, step);
+            }
 
-                 return new this.DRIVER(
-                     scene, camera, objectManager, debugMode);
-             }
+            /**
+             * Creates a Driver for the engine.
+             * @param {THREE.Scene} scene - The scene being animated.
+             * @param {Engine.Camera} camera - The camera used to
+             *                                 film the scene.
+             * @param {ENGINE.ObjectManager} - Manages all objects in a scene.
+             * @return Returns the newly created Driver.
+             */
+            this.Driver = function(
+                scene, camera, objectManager, physics, debugMode) {
+                return new this.DRIVER(
+                    scene, camera, objectManager, physics, debugMode);
+            }
         }
     }
 
-    function createInstance()
-    {
+    function createInstance() {
         engine = new Engine();
         return engine;
     }
@@ -351,11 +338,56 @@ let EngineSingleton = (function() {
     };
 })();
 
-
 //Add the engine to the window.
 window.ENGINE = EngineSingleton.getInstance();
+},{"./Driver.class":1,"./PhysicsDriver.class":3,"./input/KeyboardInput.class":4,"./lib/DRACOLoader":5,"./lib/DeviceOrientationControls":6,"./lib/GLTFLoader":7,"./lib/MTLLoader":8,"./lib/OBJLoader":9,"./lib/OrbitControls":10,"./lib/StereoEffect":11,"./loaders/LoadingManager.class":12,"./loaders/loaders":13,"./objects/ObjectManager.class":14,"./objects/objects":15,"./utility/Camera.class":16,"./utility/Debugger.class":17,"./utility/Timer.class":18}],3:[function(require,module,exports){
+/**
+ * A class to drive a scene's physics. 
+ * (To be used in conjunction with ENGINE.Driver).
+ * @author Andrew Alford
+ * @date 23/03/2019
+ * @version 1.0 - 23/03/2019
+ */
+module.exports = class PhysicsDriver {
+    
+    
+    constructor(gravity, step) {
+        //Error check parameters.
+        ENGINE.DEBUGGER.isThreeVector3(gravity, 'PhysicsDriver');
+        ENGINE.DEBUGGER.isNumber(step, 'PhysicsDriver');
 
-},{"./Driver.class":1,"./input/KeyboardInput.class":3,"./lib/DRACOLoader":4,"./lib/DeviceOrientationControls":5,"./lib/GLTFLoader":6,"./lib/MTLLoader":7,"./lib/OBJLoader":8,"./lib/OrbitControls":9,"./lib/StereoEffect":10,"./loaders/LoadingManager.class":11,"./loaders/loaders":12,"./objects/ObjectManager.class":13,"./objects/objects":14,"./utility/Camera.class":15,"./utility/Debugger.class":16,"./utility/Timer.class":17}],3:[function(require,module,exports){
+        //Initialise member variables.
+        //[M_WORLD] CannonJS's version of a scene.
+        const M_WORLD = new CANNON.World();
+        //[M_STEP] How frequently to update the world.
+        const M_STEP = step;
+
+        M_WORLD.gravity.set(
+            gravity.x,
+            gravity.y,
+            gravity.z
+        );
+        M_WORLD.broadphase = new CANNON.NaiveBroadphase();
+        M_WORLD.solver.iterations = 10;
+
+        //Public Methods...
+
+        /**
+         * Updates the scene's physics.
+         */
+        this.update = function() {
+            M_WORLD.step(M_STEP);
+        }
+
+        /**
+         * @returns An instance of the world.
+         */
+        this.getWorld = function() {
+            return M_WORLD;
+        }
+    }
+}
+},{}],4:[function(require,module,exports){
 /**
  * Input class which tracks keyboard input from the user.
  * @author Andrew Alford
@@ -451,7 +483,7 @@ module.exports = class KeyboardInput
     }
 }
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 // Copyright 2016 The Draco Authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -974,7 +1006,7 @@ THREE.DRACOLoader._loadArrayBuffer = function ( src ) {
   });
 };
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 /**
  * @author richt / http://richt.me
  * @author WestLangley / http://github.com/WestLangley
@@ -1086,7 +1118,7 @@ THREE.DeviceOrientationControls = function ( object ) {
 	this.connect();
 
 };
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 /**
  * @author Rich Tibbett / https://github.com/richtr
  * @author mrdoob / http://mrdoob.com/
@@ -4482,7 +4514,7 @@ THREE.GLTFLoader = ( function () {
 
 } )();
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 /**
  * Loads a Wavefront .mtl file specifying materials
  *
@@ -5051,7 +5083,7 @@ THREE.MTLLoader.MaterialCreator.prototype = {
 	}
 
 };
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 /**
  * @author mrdoob / http://mrdoob.com/
  */
@@ -5845,7 +5877,7 @@ THREE.OBJLoader = ( function () {
 	return OBJLoader;
 
 } )();
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 /**
  * @author qiao / https://github.com/qiao
  * @author mrdoob / http://mrdoob.com
@@ -6898,7 +6930,7 @@ Object.defineProperties( THREE.OrbitControls.prototype, {
 
 } );
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 THREE.StereoEffect = function ( renderer ) {
 
 	var _stereo = new THREE.StereoCamera();
@@ -6942,7 +6974,7 @@ THREE.StereoEffect = function ( renderer ) {
 	};
 
 };
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 /**
  * A loading class to manage the loading of files into the project.
  * @author Andrew Alford
@@ -7082,7 +7114,7 @@ module.exports = class LoadingManager
     }
 }
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 /**
  * A loading class to manage the loading of objects into the project.
  * @author Andrew Alford
@@ -7296,29 +7328,18 @@ class TextureLoader
      TextureLoader: TextureLoader
  }
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 /**
  * A class to manage all the objects in a project.
  * @author Andrew Alford
  * @date 14/12/2018
- * @version 2.0 - 12/01/2019
+ * @version 2.5 - 23/03/2019
  */
-module.exports = class ObjectManager
-{
-    /**
-     * Gets the name of this class.
-     * @return Returns the name of the class.
-     */
-    static getClassName()
-    {
-        return 'ObjectManager';
-    }
-
+module.exports = class ObjectManager {
     /**
      * Constructor for the Object Manager.
      */
-    constructor()
-    {
+    constructor() {
         //INITIALISE MEMBER VARIABLES...
         //[m_updateableObjects] Array to hold all the objects being managed.
         let m_updateableObjects = [];
@@ -7329,11 +7350,9 @@ module.exports = class ObjectManager
          * Adds an object to the list of objects being managed.
          * @param {Object} object - The object to be added.
          */
-        this.addObject = function(object)
-        {
+        this.addObject = function(object) {
             if(ENGINE.DEBUGGER.isEngineObject(
-                object, ObjectManager.getClassName() + '.addObject()'))
-            {
+                object, 'ObjectManager.addObject()')) {
                 //Add the object to the array.
                 m_updateableObjects.push(object);
 
@@ -7348,18 +7367,15 @@ module.exports = class ObjectManager
          * @returns A collection of indexes which corrolate to the object's 
          *          positions in the object manager.
          */
-        this.addObjects = function(objects)
-        {
+        this.addObjects = function(objects) {
             //[indexes] Keeps an array of object indexes in the object manager.
             let indexes = [];
 
             //Loop through all objects and add them to the array.
-            if(ENGINE.DEBUGGER.isArray(objects))
-            {
+            if(ENGINE.DEBUGGER.isArray(objects)) {
                 objects.forEach(object => {
                     if(ENGINE.DEBUGGER.isEngineObject(
-                        object, ObjectManager.getClassName() + '.addObject()'))
-                    {
+                        object, 'ObjectManager.addObject()')) {
                         //Add the object to the array.
                         m_updateableObjects.push(object);
         
@@ -7376,22 +7392,26 @@ module.exports = class ObjectManager
          * Retrieves an object from the list of objects.
          * @param {number} objectIndex - Points to the objects location
          *                               in the array.
+         * @returns A the requested object from the list of objects.
          */
-        this.getObject = function(objectIndex)
-        {
+        this.getObject = function(objectIndex) {
             if(ENGINE.DEBUGGER.isNumber(
-                objectIndex, ObjectManager.getClassName() + '.getObject()'))
-            {
+                objectIndex, 'ObjectManager.getObject()')) {
                 return m_updateableObjects[objectIndex];
             }
         }
 
         /**
-         * Retrieves the number of objects being managed.
-         * @return Returns the number of objects being managed.
+         * @returns All objects being managed.
          */
-        this.getSize = function()
-        {
+        this.getObjects = function() {
+            return m_updateableObjects;
+        }
+
+        /**
+         * @returns The number of objects being managed.
+         */
+        this.getSize = function() {
             return m_updateableObjects.length;
         }
 
@@ -7400,16 +7420,13 @@ module.exports = class ObjectManager
          * @param {boolean} active - If 'true' all objects will become active.
          *                           (Otherwise they become inactive).
          */
-        this.setAllActive = function(active)
-        {
+        this.setAllActive = function(active) {
             if(ENGINE.DEBUGGER.isBoolean(active,
-                ObjectManager.getClassName() + '.getObject()'))
-            {
+                'ObjectManager.getObject()')) {
                 //Loop through all objects.
-                for(let i = 0; i < m_updateableObjects.length; i++)
-                {
-                    m_updateableObjects[i].setActive(active);
-                }
+                m_updateableObjects.forEach(object => {
+                    object.setActive(active);
+                });
             }
         }
 
@@ -7419,13 +7436,11 @@ module.exports = class ObjectManager
          * @param {boolean} active - If 'true' the object will become active.
          *                           (Otherwise it becomes inactive).
          */
-        this.setActive = function(objectIndex, active)
-        {
+        this.setActive = function(objectIndex, active) {
             if(ENGINE.DEBUGGER.isNumber(
-                objectIndex, ObjectManager.getClassName() + '.setActive()') &&
+                objectIndex, 'ObjectManager.setActive()') &&
             ENGINE.DEBUGGER.isBoolean(
-                active, ObjectManager.getClassName() + '.setActive()'))
-            {
+                active, 'ObjectManager.setActive()')) {
                 m_updateableObjects[objectIndex].setActive(active);
             }
         }
@@ -7434,16 +7449,13 @@ module.exports = class ObjectManager
          * Adds all the objects being managed to the scene.
          * @param {THREE.Scene} scene - The scene to add the objects to.
          */
-        this.addAllToScene = function(scene)
-        {
+        this.addAllToScene = function(scene) {
             if(ENGINE.DEBUGGER.isThreeScene(
-                scene, ObjectManager.getClassName() + '.addAllToScene()'))
-            {
+                scene, 'ObjectManager.addAllToScene()')) {
                 //Loop through all objects and add them to the scene.
-                for(let i = 0; i < m_updateableObjects.length; i++)
-                {
-                    m_updateableObjects[i].addToScene(scene);
-                }
+                m_updateableObjects.forEach(object => {
+                    object.addToScene(scene);
+                });
             }
         }
 
@@ -7452,22 +7464,20 @@ module.exports = class ObjectManager
          * @param {number} frameTime - The time taken to compute the
          *                             previous frame of animation.
          */
-        this.updateObjects = function(frameTime)
-        {
+        this.updateObjects = function(frameTime) {
             if(ENGINE.DEBUGGER.isNumber(
-                frameTime, ObjectManager.getClassName() + '.updateObjects()'))
-            {
+                frameTime,'ObjectManager.updateObjects()')) {
                 //Loop through all objects and update them.
-                for(let i = 0; i < m_updateableObjects.length; i++)
-                {
-                    m_updateableObjects[i].update(frameTime);
-                }
+                m_updateableObjects.forEach(object => {
+                    object.updatePhysics();
+                    object.update(frameTime);
+                });
             }
         }
     }
 }
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 
 /**
  * This class is the top of the heiriacrchy
@@ -7495,6 +7505,10 @@ class RootObject
         //project. (False by default).
         let m_active = false;
 
+        //[m_physics] Stores any CANNON JS related physics properties 
+        //an object may have.
+        let m_physics = null;
+
         //Abstract Methods...
 
         /**
@@ -7518,7 +7532,7 @@ class RootObject
         }
 
         //Public Methods...
-
+        
         /**
          * Checks if the object is active.
          * @return Returns 'true' if the object is active.
@@ -7540,6 +7554,38 @@ class RootObject
             ENGINE.DEBUGGER.isBoolean(active, 'RootObject.setActive()');
 
             m_active = active;
+        }
+
+        /**
+         * Sets the object's physical properties.
+         * @param {CANNON.Body} physicsBody - The body to be applied.
+         */
+        this.addPhysics = function(physicsBody) {
+            m_physics = physicsBody;
+        }
+
+        /**
+         * Updates the object's physics.
+         */
+        this.updatePhysics = function() {
+            if(m_physics) {
+                this.getInstance().position.copy(
+                    m_physics.position
+                );
+                this.getInstance().quaternion.copy(
+                    m_physics.quaternion
+                );
+            }
+        }
+
+        /**
+         * Initialises the object's physics.
+         */
+        this.initPhysics = function(world) {
+            if(m_physics)
+            {
+                world.add(m_physics);
+            }
         }
     }
 }
@@ -7936,7 +7982,7 @@ module.exports = {
     KinectObject: KinectObject
 }
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 /**
  * Utility class to control a THREEJS Camera.
  * @author Andrew Alford
@@ -8109,7 +8155,7 @@ module.exports = class Camera
     }
 }
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 /**
  * A class to help debug the engine.
  * @author Andrew Alford
@@ -8363,7 +8409,7 @@ module.exports = class Debugger
     }
 
     /**
-     * Checks if a given object is a ENGINE.Camera.
+     * Checks if a given object is a ENGINE.OBJECT_MANAGER.
      * @param {ENGINE.OBJECT_MANAGER} objectManger - The objectManager
      *                                               being checked.
      * @param {string} caller - Who is calling this method?
@@ -8374,6 +8420,18 @@ module.exports = class Debugger
         if(!(objectManager instanceof ENGINE.OBJECT_MANAGER))
         {
             throw new Error(`${caller}: requires a ENGINE.OBJECT_MANAGER.`);
+        }
+        return true;
+    }
+
+    /**
+     * Checks if a given object is an ENGINE.PHYSICS object.
+     * @param {ENGINE.PHYSICS} physicsDriver - The Physics Driver being checked.
+     * @param {string} caller - Who is calling this method?
+     */
+    static isPhysicsDriver(physicsDriver, caller) {
+        if(!(physicsDriver instanceof ENGINE.PHYSICS)) {
+            throw new Error(`${caller}: requires a ENGINE.PHYSICS object.`);
         }
         return true;
     }
@@ -8403,7 +8461,7 @@ module.exports = class Debugger
     }
 }
 
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 /**
  * Utility class to time events in the project.
  * @author Andrew Alford

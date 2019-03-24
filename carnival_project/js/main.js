@@ -5,7 +5,8 @@ let engineDriver = ENGINE.Driver(
     new THREE.Scene(),
     ENGINE.Camera(new THREE.Vector3(0, 25, 50), false),
     ENGINE.ObjectManager(),
-    false //Debug Mode
+    ENGINE.Physics(new THREE.Vector3(0, -9.8, 0), 1 / 60),
+    true //Debug Mode
 );
 
 //ADD LIGHTING... (I have not figured out a good way to do lighting yet).
@@ -44,7 +45,10 @@ function getObjectsLocal()
         //Strength-o-Meter Game
         new StrengthOMetre(new THREE.Vector3(0, 0, 0)),
         //Whack-a-Mole Game
-        whackAMoleGame
+        whackAMoleGame,
+        //Experimental
+        new Cube(new THREE.Vector3(0, 150, 0)),
+        new Floor()
     ]);
     engineDriver.getObjectManager().addAllToScene(engineDriver.getScene());
     engineDriver.getObjectManager().setAllActive(true);
