@@ -14,7 +14,12 @@ let light = new THREE.HemisphereLight(0xFFFFFF, 0x444444);
 light.position.set(0, 20, 0);
 engineDriver.getScene().add(light);
 
-let whackAMoleGame = new WhackAMole(new THREE.Vector3(100, 0, 0));
+//[games] Holds all of our games.
+let games = {
+    darts : new DartsGame(new THREE.Vector3(0, 0, 0)),
+    whackAMole : new WhackAMole(new THREE.Vector3(100, 0, 0)),
+    strengthOMetre : new StrengthOMetre(new THREE.Vector3(0, 0, 0))
+};
 
 /**
  * Use me for local testing.
@@ -30,7 +35,7 @@ function getObjectsLocal()
     //ADD OBJECTS USING JS CLASSES...
     engineDriver.getObjectManager().addObjects([
         //Darts Game
-        new DartsGame(new THREE.Vector3(0, 0, 0)),
+        games.darts,
         //Enviroment
         new Helicopter(new THREE.Vector3(0, 0, 0)),
         new HotAirBalloon(new THREE.Vector3(0, 250, 0)),
@@ -43,9 +48,9 @@ function getObjectsLocal()
         new Football(new THREE.Vector3(0, 0, 0)),
         new Goal(new THREE.Vector3(25, 0, 0)),
         //Strength-o-Meter Game
-        new StrengthOMetre(new THREE.Vector3(0, 0, 0)),
+        games.strengthOMetre,
         //Whack-a-Mole Game
-        whackAMoleGame,
+        games.whackAMole,
         //Experimental
         new Cube(new THREE.Vector3(0, 150, 0)),
         new Floor()
@@ -134,7 +139,7 @@ engineDriver.getObjectManager().addObject(player);
 player.addToScene(engineDriver.getScene());
 player.setActive(true);
 
-whackAMoleGame.allocatePlayer(player);
+games.whackAMole.allocatePlayer(player);
 
 //Kinectron code
 kinectFactory('192.168.60.56').startTrackedBodies(
