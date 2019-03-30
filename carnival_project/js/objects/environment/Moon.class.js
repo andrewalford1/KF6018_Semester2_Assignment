@@ -18,7 +18,8 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
 
         //ADD LIGHTING... (I have not figured out a good way to do lighting yet).
         let moonLight = new THREE.HemisphereLight(0x375D9C, 0x444444, 1);//0xFFFFFF, 0x444444
-
+        //moonLight.position.set(0.0, 20.0, 0.0);
+        //moonLight.castShadow = true;
         this.addObjectToGroup(moonLight);
         /** */
 
