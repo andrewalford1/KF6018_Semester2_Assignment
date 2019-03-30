@@ -15,7 +15,7 @@ light.position.set(0, 20, 0);
 engineDriver.getScene().add(light);
 
 //Fog
-engineDriver.getScene().fog = new THREE.Fog( 0x0000DD, 25, 2000 );
+engineDriver.getScene().fog = new THREE.Fog( 0xC8C8C8, 1200, 1300 );
 
 //[games] Holds all of our games.
 let games = {
