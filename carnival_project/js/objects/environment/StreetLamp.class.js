@@ -56,7 +56,7 @@ class StreetLamp extends ENGINE.OBJECTS.ClassicObject
         let spotLight = [];
         //For loop to create the point lights to eluminate the scene
         for(let p = 0; p < pointLightNumber; p++){
-                pointLight.push(new THREE.PointLight( 0xffffff, 0.7, 0, 2 ));
+                pointLight.push(new THREE.PointLight( 0xffffff, 0.6, 0, 2 ));
                 pointLight[p].castShadow = true;
                 pointLight[p].shadow.mapSize.width = 1024;
                 pointLight[p].shadow.mapSize.height = 1024;
