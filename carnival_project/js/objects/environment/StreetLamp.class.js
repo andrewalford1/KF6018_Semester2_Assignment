@@ -1,9 +1,9 @@
 /**
  * A class representing a StreetLamp.
  * @extends ENGINE.OBJECTS.ClassicObject
- * @author Zoë Irwin
- * @date 05/03/2019
- * @version 1.0 - 05/03/2019
+ * @author Zoë Irwin and Ana-Sabina Irimia
+ * @date 30/03/2019
+ * @version 5.0 - 30/03/2019
  */
 class StreetLamp extends ENGINE.OBJECTS.ClassicObject
 {
@@ -65,7 +65,7 @@ class StreetLamp extends ENGINE.OBJECTS.ClassicObject
         streetLight.position.set( 98, 57, -65 );
         streetLight.target.position.set(98, 0, -65 );
         streetLight.castShadow = true;
-        
+        //Adjusting the shadows casted by the spot light
         streetLight.shadow.mapSize.width = 1024;
         streetLight.shadow.mapSize.height = 1024;
         streetLight.shadow.camera.near = 500;
@@ -88,7 +88,7 @@ class StreetLamp extends ENGINE.OBJECTS.ClassicObject
         streetLight2.position.set(-8, 57, -200);
         streetLight2.target.position.set(-8, 0, -200);
         streetLight2.castShadow = true;
-        
+        //Adjusting the shadows casted by the spot light
         streetLight2.shadow.mapSize.width = 1024;
         streetLight2.shadow.mapSize.height = 1024;
         streetLight2.shadow.camera.near = 500;
@@ -107,7 +107,7 @@ class StreetLamp extends ENGINE.OBJECTS.ClassicObject
         streetLight3.position.set( 78, 57, -280 );
         streetLight3.target.position.set( 78, 0, -280 );
         streetLight3.castShadow = true;
-        
+        //Adjusting the shadows casted by the spot light
         streetLight3.shadow.mapSize.width = 1024;
         streetLight3.shadow.mapSize.height = 1024;
         streetLight3.shadow.camera.near = 500;
@@ -126,7 +126,7 @@ class StreetLamp extends ENGINE.OBJECTS.ClassicObject
         streetLight4.position.set( -18, 57, -400 );
         streetLight4.target.position.set( -18, 0, -400 );
         streetLight4.castShadow = true;
-        
+        //Adjusting the shadows casted by the spot light
         streetLight4.shadow.mapSize.width = 1024;
         streetLight4.shadow.mapSize.height = 1024;
         streetLight4.shadow.camera.near = 500;
@@ -149,7 +149,7 @@ class StreetLamp extends ENGINE.OBJECTS.ClassicObject
         streetLight5.position.set( 68, 57, -460 );
         streetLight5.target.position.set( 68, 0, -460 );
         streetLight5.castShadow = true;
-        
+        //Adjusting the shadows casted by the spot light
         streetLight5.shadow.mapSize.width = 1024;
         streetLight5.shadow.mapSize.height = 1024;
         streetLight5.shadow.camera.near = 500;
@@ -168,7 +168,7 @@ class StreetLamp extends ENGINE.OBJECTS.ClassicObject
         streetLight6.position.set( -18, 57, -600 );
         streetLight6.target.position.set( -18, 0, -600 );
         streetLight6.castShadow = true;
-        
+        //Adjusting the shadows casted by the spot light
         streetLight6.shadow.mapSize.width = 1024;
         streetLight6.shadow.mapSize.height = 1024;
         streetLight6.shadow.camera.near = 500;
@@ -187,7 +187,7 @@ class StreetLamp extends ENGINE.OBJECTS.ClassicObject
         streetLight7.position.set( 98, 57, -700 );
         streetLight7.target.position.set( 98, 0, -700 );
         streetLight7.castShadow = true;
-        
+        //Adjusting the shadows casted by the spot light
         streetLight7.shadow.mapSize.width = 1024;
         streetLight7.shadow.mapSize.height = 1024;
         streetLight7.shadow.camera.near = 500;
@@ -210,7 +210,7 @@ class StreetLamp extends ENGINE.OBJECTS.ClassicObject
         streetLight8.position.set( -58, 57, -800 );
         streetLight8.target.position.set( -58,  0, -800 );
         streetLight8.castShadow = true;
-        
+        //Adjusting the shadows casted by the spot light
         streetLight8.shadow.mapSize.width = 1024;
         streetLight8.shadow.mapSize.height = 1024;
         streetLight8.shadow.camera.near = 500;
@@ -219,30 +219,31 @@ class StreetLamp extends ENGINE.OBJECTS.ClassicObject
         
         
         //Add point light, spot light and the target of the spot light to the scene
+        //Add light for Street Lamp 1
         this.addObjectToGroup( pointLight );
         this.addObjectToGroup( streetLight );
         this.addObjectToGroup( streetLight.target );
-
+        //Add light for Street Lamp 2
         this.addObjectToGroup( pointLight2 );
         this.addObjectToGroup( streetLight2 );
         this.addObjectToGroup( streetLight2.target );
-
+        //Add light for Street Lamp 3
         this.addObjectToGroup( streetLight3 );
         this.addObjectToGroup( streetLight3.target );
-
+        //Add light for Street Lamp 4
         this.addObjectToGroup( streetLight4 );
         this.addObjectToGroup( streetLight4.target );
-
+        //Add light for Street Lamp 5
         this.addObjectToGroup( pointLight5 );
         this.addObjectToGroup( streetLight5 );
         this.addObjectToGroup( streetLight5.target );
-
+        //Add light for Street Lamp 6
         this.addObjectToGroup( streetLight6 );
         this.addObjectToGroup( streetLight6.target );
-
+        //Add light for Street Lamp 7
         this.addObjectToGroup( streetLight7 );
         this.addObjectToGroup( streetLight7.target );
-        
+        //Add light for Street Lamp 8
         this.addObjectToGroup( pointLight8 );
         this.addObjectToGroup( streetLight8 );
         this.addObjectToGroup( streetLight8.target );
