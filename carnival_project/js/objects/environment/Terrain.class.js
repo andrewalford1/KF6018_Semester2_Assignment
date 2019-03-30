@@ -25,6 +25,7 @@ class Terrain extends ENGINE.OBJECTS.ClassicObject
         TERRAIN.model.scale.set(30.5, 20.5, 30.5);
         TERRAIN.model.rotation.set(0, 0, 0);
         TERRAIN.model.position.set(0, -4, 0);
+        TERRAIN.model.receiveShadow = true;
         this.addObjectToGroup(TERRAIN.model);
         
         //[once] Boolean to check if the first 

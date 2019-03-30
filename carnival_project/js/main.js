@@ -9,13 +9,6 @@ let engineDriver = ENGINE.Driver(
     true //Debug Mode
 );
 
-//ADD LIGHTING... (I have not figured out a good way to do lighting yet).
-let light = new THREE.HemisphereLight(0xFFFFFF, 0x444444);
-light.position.set(0, 20, 0);
-engineDriver.getScene().add(light);
-
-//Fog
-engineDriver.getScene().fog = new THREE.Fog( 0xC8C8C8, 1200, 1300 );
 
 //[games] Holds all of our games.
 let games = {
@@ -40,6 +33,7 @@ function getObjectsLocal()
         //Darts Game
         games.darts,
         //Enviroment
+        new Moon(new THREE.Vector3(0, 20, 0)),
         new Helicopter(new THREE.Vector3(0, 0, 0)),
         new HotAirBalloon(new THREE.Vector3(0, 250, 0)),
         new StreetLamp(new THREE.Vector3(0, 0, 0)),
