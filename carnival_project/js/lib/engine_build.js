@@ -1,13 +1,12 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 /**
- * A class to drive the engine. It is responisble for updating all major
- * engine variables.
- * @author Andrew Alford
- * @date 09/01/2019
- * @version 2.5 - 23/03/2019
+ * A class to drive the engine. It is responisble for 
+ * updating all major engine variables.
+ * @author  Andrew Alford
+ * @date    09/01/2019
+ * @version 2.6 - 29/03/2019
  */
-module.exports = class Driver
-{
+module.exports = class Driver {
     /**
      * Constructs the engine driver.
      * @param {THREE.Scene} scene - The scene being animated.
@@ -18,8 +17,7 @@ module.exports = class Driver
      * @param {booolean} debugMode - If 'true' then debugging information will
      *                               become available.
      */
-    constructor(scene, camera, objectManager, physics, debugMode)
-    {
+    constructor(scene, camera, objectManager, physics, debugMode) {
         //Error check parameters.
         ENGINE.DEBUGGER.isThreeScene(scene, 'Driver');
         ENGINE.DEBUGGER.isEngineCamera(camera, 'Driver');
@@ -30,9 +28,11 @@ module.exports = class Driver
         }
         ENGINE.DEBUGGER.isBoolean(debugMode, 'Driver');
 
-        const M_PHYSICS = physics;
-        console.log(M_PHYSICS);
-
+        //Turn on stats tracking.
+        if(debugMode) {
+            new ENGINE.DEBUGGER();
+        }
+        
         //Initialise member variables.
         //[M_SCENE] The scene being animated.
         const M_SCENE = scene;
@@ -40,7 +40,9 @@ module.exports = class Driver
         const M_CAMERA = camera;
         //[M_OBJECT_MANAGER] Manages all objects in a scene.
         const M_OBJECT_MANAGER = objectManager;
-
+        //[M_PHYSICS] Manages the projects physics.
+        const M_PHYSICS = physics;
+        
         //[M_TIMER] Keeps track of time for performing updates.
         const M_TIMER = ENGINE.Timer();
         //[m_frameTime] Holds the amount of time taken to render and compute
@@ -8158,23 +8160,23 @@ module.exports = class Camera
 },{}],17:[function(require,module,exports){
 /**
  * A class to help debug the engine.
- * @author Andrew Alford
- * @date 12/01/2019
- * @version 2.1 - 09/03/2019
+ * @author  Andrew Alford
+ * @date    12/01/2019
+ * @version 2.4 - 30/03/2019
  */
-module.exports = class Debugger
-{
-    constructor()
-    {
+module.exports = class Debugger {
+
+    /**
+     * Turns on stats to track the state of the program.
+     */
+    constructor() {
         //Set up stats and add it to the document.
         //(Code modified from https://github.com/mrdoob/stats.js/).
         let statsScript = document.createElement('script');
-        statsScript.onload = function()
-        {
+        statsScript.onload = function() {
             let stats = new Stats();
             document.body.appendChild(stats.dom);
-            requestAnimationFrame(function loop()
-            {
+            requestAnimationFrame(function loop() {
                 stats.update();
                 requestAnimationFrame(loop);
             });
@@ -8188,14 +8190,10 @@ module.exports = class Debugger
      * @param {*} json - This is the JSON to be parsed.
      * @returns the object parsed from the JSON.
      */
-    static extractJSON(json)
-    {
-        try 
-        {
+    static extractJSON(json) {
+        try {
             return JSON.parse(json);
-        } 
-        catch(exception)
-        {
+        } catch(exception) {
             throw new Error(`Given string is not JSON.`);
         }
     }
@@ -8210,10 +8208,8 @@ module.exports = class Debugger
      * @param {*} caller - Who is calling this method?
      * @returns 'true' if the array is valid.
      */
-    static isArray(array, caller)
-    {
-        if(!Array.isArray(array))
-        {
+    static isArray(array, caller) {
+        if(!Array.isArray(array)) {
             throw new Error(`${caller}: requires an array`);
         }
         return true;
@@ -8225,10 +8221,8 @@ module.exports = class Debugger
      * @param {string} caller - Who is calling this method?
      * @returns 'true' if the boolean scene is valid.
      */
-    static isBoolean(bool, caller)
-    {
-        if(!(typeof bool === typeof true))
-        {
+    static isBoolean(bool, caller) {
+        if(!(typeof bool === typeof true)) {
             throw new Error(`${caller}: requires a boolean.`);
         }
         return true;
@@ -8240,10 +8234,8 @@ module.exports = class Debugger
      * @param {string} caller - Who is calling this method?
      * @returns 'true' if the number scene is valid.
      */
-    static isNumber(number, caller)
-    {
-        if(!(typeof number === 'number'))
-        {
+    static isNumber(number, caller) {
+        if(!(typeof number === 'number')) {
             throw new Error(`${caller}: requires a number.`);
         }
         return true;
@@ -8255,10 +8247,8 @@ module.exports = class Debugger
      * @param {string} caller - Who is calling this method?
      * @returns 'true' if the string is valid.
      */
-    static isString(string, caller)
-    {
-        if(!(typeof string === 'string') || string instanceof String)
-        {
+    static isString(string, caller) {
+        if(!(typeof string === 'string') || string instanceof String) {
             throw new Error(`${caller}: requires a string.`);
         }
         return true;
@@ -8274,10 +8264,8 @@ module.exports = class Debugger
      * @param {string} caller - Who is calling this method?
      * @returns 'true' if the given scene is valid.
      */
-    static isThreeScene(scene, caller)
-    {
-        if(!(scene instanceof THREE.Scene))
-        {
+    static isThreeScene(scene, caller) {
+        if(!(scene instanceof THREE.Scene)) {
             throw new Error(`${caller}: requires a THREE.Scene.`);
         }
         return true;
@@ -8289,10 +8277,8 @@ module.exports = class Debugger
      * @param {string} caller - Who is calling this method?
      * @returns 'true' if the given 3D vector is valid.
      */
-    static isThreeVector3(vector, caller)
-    {
-        if(!(vector instanceof THREE.Vector3))
-        {
+    static isThreeVector3(vector, caller) {
+        if(!(vector instanceof THREE.Vector3)) {
             throw new Error(`${caller}: requires a THREE.Vector3.`);
         }
         return true;
@@ -8304,10 +8290,8 @@ module.exports = class Debugger
      * @param {string} caller - Who is calling this method?
      * @returns 'true' if the given material is valid.
      */
-    static isThreeMaterial(material, caller)
-    {
-        if(!(material instanceof THREE.Material))
-        {
+    static isThreeMaterial(material, caller) {
+        if(!(material instanceof THREE.Material)) {
             throw new Error(`${caller}: requires a Three.Material.`);
         }
         return true;
@@ -8319,10 +8303,8 @@ module.exports = class Debugger
      * @param {string} caller - Who is calling this method?
      * @returns 'true' if the given object is valid.
      */
-    static isThreeObject3D(object, caller)
-    {
-        if(!(object instanceof THREE.Object3D))
-        {
+    static isThreeObject3D(object, caller) {
+        if(!(object instanceof THREE.Object3D)) {
             throw new Error(`${caller}: requires a THREE.Object3D.`);
         }
         return true;
@@ -8335,10 +8317,8 @@ module.exports = class Debugger
      * @param {string} caller - Who is calling this method?
      * @returns 'true' if the given loading manager is valid.
      */
-    static isThreeLoadingManager(loadingManager, caller)
-    {
-        if(!(loadingManager instanceof THREE.LoadingManager))
-        {
+    static isThreeLoadingManager(loadingManager, caller) {
+        if(!(loadingManager instanceof THREE.LoadingManager)) {
             throw new Error(`${caller}: requires a THREE.LoadingManager.`);
         }
         return true;
@@ -8350,10 +8330,8 @@ module.exports = class Debugger
      * @param {string} caller - Who is calling this method?
      * @returns 'true' if the given camera is valid.
      */
-    static isThreeCamera(camera, caller)
-    {
-        if(!(camera instanceof THREE.Camera))
-        {
+    static isThreeCamera(camera, caller) {
+        if(!(camera instanceof THREE.Camera)) {
             throw new Error(`${caller}: requries a THREE.Camera.`);
         }
         return true;
@@ -8361,14 +8339,12 @@ module.exports = class Debugger
 
     /**
      * Checks if a given euler is a THREE.Euler.
-     * @param {*} euler - The euler being checked.
-     * @param {*} caller - Who is calling this method?
+     * @param {THREE.Euler} euler - The euler being checked.
+     * @param {string} caller - Who is calling this method?
      * @returns 'true' if the given euler is valid.
      */
-    static isEuler(euler, caller)
-    {
-        if(!(euler instanceof THREE.Euler))
-        {
+    static isEuler(euler, caller) {
+        if(!(euler instanceof THREE.Euler)) {
             throw new Error(`${caller}: requires a THREE.Euler.`);
         }
         return true;
@@ -8384,10 +8360,8 @@ module.exports = class Debugger
      * @param {string} caller - Who is calling this method?
      * @returns 'true' if the given object is valid.
      */
-    static isEngineObject(object, caller)
-    {
-        if(!(object instanceof ENGINE.OBJECTS.RootObject))
-        {
+    static isEngineObject(object, caller) {
+        if(!(object instanceof ENGINE.OBJECTS.RootObject)) {
             throw new Error(`${caller}: requires a ENGINE.OBJECT.`);
         }
         return true;
@@ -8399,10 +8373,8 @@ module.exports = class Debugger
      * @param {string} caller - Who is calling this method?
      * @returns 'true' if the given camera is valid.
      */
-    static isEngineCamera(camera, caller)
-    {
-        if(!(camera instanceof ENGINE.CAMERA))
-        {
+    static isEngineCamera(camera, caller) {
+        if(!(camera instanceof ENGINE.CAMERA)) {
             throw new Error(`${caller}: requires a ENGINE.CAMERA.`);
         }
         return true;
@@ -8415,10 +8387,8 @@ module.exports = class Debugger
      * @param {string} caller - Who is calling this method?
      * @returns 'true' if the given objectManager is valid.
      */
-    static isEngineObjectManager(objectManager, caller)
-    {
-        if(!(objectManager instanceof ENGINE.OBJECT_MANAGER))
-        {
+    static isEngineObjectManager(objectManager, caller) {
+        if(!(objectManager instanceof ENGINE.OBJECT_MANAGER)) {
             throw new Error(`${caller}: requires a ENGINE.OBJECT_MANAGER.`);
         }
         return true;
@@ -8445,8 +8415,7 @@ module.exports = class Debugger
      * called and hasn't been overridden.
      * @param {string} caller - Who is calling this method?
      */
-    static abstractException(caller)
-    {
+    static abstractException(caller) {
         throw new Error(`${caller} is abstract and needs to be overridden.`);
     }
 
@@ -8455,8 +8424,7 @@ module.exports = class Debugger
      * instanciate an abstract class.
      * @param {string} caller - Who is calling this method?
      */
-    static abstractInstanciationException(caller)
-    {
+    static abstractInstanciationException(caller) {
         throw new Error(`${caller}: Cannot instanciate abstract class!`);
     }
 }

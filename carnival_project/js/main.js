@@ -14,6 +14,9 @@ let light = new THREE.HemisphereLight(0xFFFFFF, 0x444444);
 light.position.set(0, 20, 0);
 engineDriver.getScene().add(light);
 
+//Fog
+engineDriver.getScene().fog = new THREE.Fog( 0x0000DD, 25, 2000 );
+
 //[games] Holds all of our games.
 let games = {
     darts : new DartsGame(new THREE.Vector3(0, 0, 0)),
