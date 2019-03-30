@@ -26,6 +26,8 @@ class WackCover extends ENGINE.OBJECTS.ClassicObject
         WACKCOVER.model.scale.set(12, 12, 12);
         WACKCOVER.model.rotation.set(0, Math.PI/ 2, 0);
         WACKCOVER.model.position.set(-20, 0, -220);
+        WACKCOVER.model.castShadow = true;
+        WACKCOVER.model.receiveShadow = true;
         this.addObjectToGroup(WACKCOVER.model);
 
         /**

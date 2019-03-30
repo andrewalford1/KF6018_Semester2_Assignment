@@ -26,6 +26,8 @@ class BalloonCover extends ENGINE.OBJECTS.ClassicObject
         BALLOONCOVER.model.scale.set(16, 12, 12);
         BALLOONCOVER.model.rotation.set(0, Math.PI/ 2, 0);
         BALLOONCOVER.model.position.set(-20, 0, -270);
+        BALLOONCOVER.model.castShadow = true;
+        BALLOONCOVER.model.receiveShadow = true;
         this.addObjectToGroup(BALLOONCOVER.model);
 
         /**

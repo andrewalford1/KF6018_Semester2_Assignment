@@ -81,6 +81,7 @@ class StreetLamp extends ENGINE.OBJECTS.ClassicObject
         STREETLAMP.model.rotation.set(0, 1.5+ Math.PI/2, 0);
         STREETLAMP.model.position.set(100, 0, -65);
         STREETLAMP.model.castShadow = true;
+        STREETLAMP.model.receiveShadow = true;
         this.addObjectToGroup(STREETLAMP.model);
         
         //Position of the point light for the street lamp 1
@@ -94,6 +95,7 @@ class StreetLamp extends ENGINE.OBJECTS.ClassicObject
         STREETLAMP2.model.rotation.set(0, 0, 0);
         STREETLAMP2.model.position.set(-10, 0, -200);
         STREETLAMP2.model.castShadow = true;
+        STREETLAMP2.model.receiveShadow = true;
         this.addObjectToGroup(STREETLAMP2.model);
 
         //Position of the point light for the street lamp 2
@@ -108,6 +110,7 @@ class StreetLamp extends ENGINE.OBJECTS.ClassicObject
         STREETLAMP3.model.rotation.set(0,  1.5+ Math.PI/2, 0);
         STREETLAMP3.model.position.set(80, 0, -280);
         STREETLAMP3.model.castShadow = true;
+        STREETLAMP3.model.receiveShadow = true;
         this.addObjectToGroup(STREETLAMP3.model);
 
         //Position of the spot light for the street lamp 3
@@ -119,6 +122,7 @@ class StreetLamp extends ENGINE.OBJECTS.ClassicObject
         STREETLAMP4.model.rotation.set(0, 0, 0);
         STREETLAMP4.model.position.set(-20, 0, -400);
         STREETLAMP4.model.castShadow = true;
+        STREETLAMP4.model.receiveShadow = true;
         this.addObjectToGroup(STREETLAMP4.model);
 
         //Position of the spot light for the street lamp 4
@@ -130,6 +134,7 @@ class StreetLamp extends ENGINE.OBJECTS.ClassicObject
         STREETLAMP5.model.rotation.set(0, 1.5+ Math.PI/2, 0);
         STREETLAMP5.model.position.set(70, 0, -460);
         STREETLAMP5.model.castShadow = true;
+        STREETLAMP5.model.receiveShadow = true;
         this.addObjectToGroup(STREETLAMP5.model);
         
         //Position of the point light for the street lamp 5
@@ -143,6 +148,7 @@ class StreetLamp extends ENGINE.OBJECTS.ClassicObject
         STREETLAMP6.model.rotation.set(0, 0, 0);
         STREETLAMP6.model.position.set(-20, 0, -600);
         STREETLAMP6.model.castShadow = true;
+        STREETLAMP6.model.receiveShadow = true;
         this.addObjectToGroup(STREETLAMP6.model);
 
         //Position of the spot light for the street lamp 6
@@ -154,6 +160,7 @@ class StreetLamp extends ENGINE.OBJECTS.ClassicObject
         STREETLAMP7.model.rotation.set(0,  1.5+ Math.PI/2, 0);
         STREETLAMP7.model.position.set(100, 0, -700);
         STREETLAMP7.model.castShadow = true;
+        STREETLAMP7.model.receiveShadow = true;
         this.addObjectToGroup(STREETLAMP7.model);
 
         //Position of the spot light for the street lamp 7
@@ -165,6 +172,7 @@ class StreetLamp extends ENGINE.OBJECTS.ClassicObject
         STREETLAMP8.model.rotation.set(0, Math.PI/3, 0);
         STREETLAMP8.model.position.set(-60, 0, -800);
         STREETLAMP8.model.castShadow = true;
+        STREETLAMP8.model.receiveShadow = true;
         this.addObjectToGroup(STREETLAMP8.model);
         
         //Position of the point light for the street lamp 8
@@ -173,8 +181,8 @@ class StreetLamp extends ENGINE.OBJECTS.ClassicObject
         spotLight[7].position.set( -58, 57, -800 );
         spotLight[7].target.position.set( -58,  0, -800 );
 
-        let shadowMaterial = new THREE.ShadowMaterial( { color: 0xeeeeee } );
-        shadowMaterial.opacity = 0.5;
+        //let shadowMaterial = new THREE.ShadowMaterial( { color: 0xeeeeee } );
+        //shadowMaterial.opacity = 0.5;
         
         //Add point light, spot light and the target of the spot light to the scene
         //Add target light for Street Lamp 1

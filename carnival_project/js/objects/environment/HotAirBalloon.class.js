@@ -26,6 +26,8 @@ class HotAirBalloon extends ENGINE.OBJECTS.ClassicObject
         AIRBALLOON.model.scale.set(5, 5, 5);
         AIRBALLOON.model.rotation.set(0, 0, 0);
         AIRBALLOON.model.position.set(-50, 100, -750);
+        AIRBALLOON.model.castShadow = true;
+        AIRBALLOON.model.receiveShadow = true;
         this.addObjectToGroup(AIRBALLOON.model);
 
         //[updateCount] Counts how many times this class has

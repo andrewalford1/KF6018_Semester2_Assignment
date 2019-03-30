@@ -26,6 +26,8 @@ class ClownBalloons extends ENGINE.OBJECTS.ClassicObject
         CLOWNBALLOONS.model.scale.set(3, 3, 3);
         CLOWNBALLOONS.model.rotation.set(0, 1.6+ Math.PI/2, 0);
         CLOWNBALLOONS.model.position.set(-4, 3, -30);
+        CLOWNBALLOONS.model.castShadow = true;
+        CLOWNBALLOONS.model.receiveShadow = true;
         this.addObjectToGroup(CLOWNBALLOONS.model);
 
         /**

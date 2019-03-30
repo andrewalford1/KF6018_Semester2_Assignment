@@ -31,7 +31,7 @@ class Cube extends ENGINE.OBJECTS.ClassicObject
         physicsProperties.angularVelocity.set(0, 50, 0);
         physicsProperties.angularDamping = 0.5;
         physicsProperties.position.copy(initialPosition);
-        this.addPhysics(physicsProperties);
+        //this.addPhysics(physicsProperties);
 
         /**
          * Updates the object. (Overridden from the superclass).

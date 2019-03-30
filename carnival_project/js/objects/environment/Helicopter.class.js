@@ -26,6 +26,8 @@ class Helicopter extends ENGINE.OBJECTS.ClassicObject
         HELICOPTER.model.scale.set(8,8,8);
         HELICOPTER.model.rotation.set(0, 0, 0);
         HELICOPTER.model.position.set(-150, 100, -750);
+        HELICOPTER.model.castShadow = true;
+        HELICOPTER.model.receiveShadow = true;
         this.addObjectToGroup(HELICOPTER.model);
 
         //[onStart] Checks if this is the very first frame of animation.
