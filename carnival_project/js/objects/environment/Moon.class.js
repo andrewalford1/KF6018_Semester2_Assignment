@@ -23,7 +23,7 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
         this.addObjectToGroup(moonLight);
         /** */
 
-        //Add the HotAirBalloon model.
+        //Add the Moon model.
         const MOON = ENGINE.ObjectLoader().loadModel(
             'moon',
             'gltf'
@@ -31,7 +31,6 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
         
         //Scale and position the HotAirBalloon
         MOON.model.scale.multiplyScalar(20);
-        //MOON.model.rotation.set(2, 3, 0);
         MOON.model.position.copy(position);
         MOON.model.castShadow = true;
         MOON.model.receiveShadow = true;
@@ -47,8 +46,6 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
          */
         this.update = function(frameTime)
         {
-            //Moon does not need to update.
-            console.log(MOON.model);
             MOON.model.rotation.y += 0.005;
             //Execute this code once on the first frame of animation.
             if(once)
