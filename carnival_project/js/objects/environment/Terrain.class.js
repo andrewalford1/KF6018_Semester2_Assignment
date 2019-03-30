@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * A class representing a football object.
  * @extends ENGINE.OBJECTS.ClassicObject

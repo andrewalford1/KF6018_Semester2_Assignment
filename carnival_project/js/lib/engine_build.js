@@ -6419,31 +6419,43 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 	function handleKeyDown( event ) {
 
-		//console.log( 'handleKeyDown' );
+		// console.log( 'handleKeyDown' );
+
+		var needsUpdate = false;
 
 		switch ( event.keyCode ) {
 
 			case scope.keys.UP:
 				pan( 0, scope.keyPanSpeed );
-				scope.update();
+				needsUpdate = true;
 				break;
 
 			case scope.keys.BOTTOM:
 				pan( 0, - scope.keyPanSpeed );
-				scope.update();
+				needsUpdate = true;
 				break;
 
 			case scope.keys.LEFT:
 				pan( scope.keyPanSpeed, 0 );
-				scope.update();
+				needsUpdate = true;
 				break;
 
 			case scope.keys.RIGHT:
 				pan( - scope.keyPanSpeed, 0 );
-				scope.update();
+				needsUpdate = true;
 				break;
 
 		}
+
+		if ( needsUpdate ) {
+
+			// prevent the browser from scrolling on cursor keys
+			event.preventDefault();
+
+			scope.update();
+
+		}
+
 
 	}
 
@@ -6555,7 +6567,14 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 		if ( scope.enabled === false ) return;
 
+		// Prevent the browser from scrolling.
+
 		event.preventDefault();
+
+		// Manually set the focus since calling preventDefault above
+		// prevents the browser from setting it automatically.
+
+		scope.domElement.focus ? scope.domElement.focus() : window.focus();
 
 		switch ( event.button ) {
 
@@ -7610,7 +7629,7 @@ class ClassicObject extends RootObject
      * @param {THREE.Vector3} initialPosition - The initial position
      *                                          of the object.
      */
-    constructor(initialPosition)
+    constructor(initialPosition = new THREE.Vector3(0, 0, 0))
     {
         //Construct the super class.
         super();
@@ -7670,6 +7689,18 @@ class ClassicObject extends RootObject
             );
 
             M_OBJECT.add(object);
+        }
+
+        /**
+         * Allows multiple THREE JS objects to be added to this object.
+         * @param {array} objects - The list of objects to be added.
+         */
+        this.addObjectsToGroup = function(objects) {
+            //Check the appropriate parameter has been given.
+            ENGINE.DEBUGGER.isArray(objects, 'ClassicObject.addObjectsToGroup()');
+            objects.forEach(object => {
+                this.addObjectToGroup(object);
+            });
         }
     }
 }
