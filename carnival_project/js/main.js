@@ -33,7 +33,7 @@ function getObjectsLocal()
         //Darts Game
         games.darts,
         //Enviroment
-        new Moon(new THREE.Vector3(0, 20, 0)),
+        new Moon(new THREE.Vector3(-600, 280, -400)),
         new Helicopter(new THREE.Vector3(0, 0, 0)),
         new HotAirBalloon(new THREE.Vector3(0, 250, 0)),
         new StreetLamp(new THREE.Vector3(0, 0, 0)),
@@ -83,6 +83,7 @@ function getObjectsServer()
             //Darts Game
             new DartsGame(new THREE.Vector3(0, 0, 0)),
             //Enviroment
+            new Moon(new THREE.Vector3(0, 20, 0)),
             new BalloonArch(new THREE.Vector3(0, 0, 0)),
             new Carousel(new THREE.Vector3(0, 0, 0)),
             new CircusTent(new THREE.Vector3(50, 0, 0)),
