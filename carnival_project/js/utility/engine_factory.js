@@ -35,7 +35,7 @@ let engineFactory = (function() {
         }
     };
 
-    return function(debugMode) {
+    return function(camera, debugMode) {
         let engine = Object.create(enginePrototype, {
             
             scene : {
@@ -43,11 +43,11 @@ let engineFactory = (function() {
                 value: new THREE.Scene()
             },
 
-            camera : {
+            CameraController : {
                 writeable: false, 
-                value: ENGINE.Camera(
-                    new THREE.Vector3(0, 25, 20), 
-                    false
+                value: ENGINE.CameraController(
+                    camera, 
+                    new THREE.OrbitControls(camera)
                 )
             },
 
@@ -78,7 +78,7 @@ let engineFactory = (function() {
         //Initalise the engine driver.
         engine.driver = ENGINE.Driver(
             engine.scene, 
-            engine.camera, 
+            engine.CameraController, 
             engine.objectManager,
             engine.physicsManager,
             debugMode
