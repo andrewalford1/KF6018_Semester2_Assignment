@@ -2,11 +2,19 @@
 
 /**
  * Creates quick and easy THREE JS scenes with integrated physics.
- * @param {boolean} debugMode - when 'true' the project 
- *                              is in debug mode.
+ * @param   {boolean} debugMode - when 'true' the project 
+ *                                is in debug mode.
+ * @author  Andrew Alford
+ * @date    31/03/2019
  */
 let engineFactory = (function() {
+    //[enginePrototype] Defines all the methods for the object.
     let enginePrototype = {
+        /**
+         * Adds objects to the engine.
+         * @param {string} json     - Any objects to be added via JSON.
+         * @param {array} objects   - A list of all objects to be added.
+         */
         addObjects: function(json, objects) {
             //Add objects using JSON.
             if(json) {
