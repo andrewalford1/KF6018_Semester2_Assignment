@@ -52,8 +52,10 @@ let kinectFactory = (function(){
                          * To make the gesctures work, first you have to create them 
                          * in UserGestures class then call them in here
                         */
-                        userGestures.handAboveSholder();
-                        userGestures.kameHameHa();
+                        //userGestures.handAboveSholder();
+                        //userGestures.kameHameHa();
+                        //userGestures.handOnHead();
+                        //userGestures.leftHandCollideRightHand();
                     }
                 }
             });
