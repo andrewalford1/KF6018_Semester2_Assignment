@@ -20,6 +20,7 @@ let games = {
 //Add all objects to the scene.
 engine.addObjects(MODELS, [
     //Enviroment
+    new Fireworks(),
     new BalloonCover(),
     new Floor(),
     new Helicopter(),
