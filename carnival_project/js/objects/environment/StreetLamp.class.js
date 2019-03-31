@@ -49,7 +49,7 @@ class StreetLamp extends ENGINE.OBJECTS.ClassicObject
             'streetLamp',
             'glb'
         );
-
+        let once = true;
         let pointLightNumber = 4;
         let spotLightNumber = 8;
         let pointLight = [];
@@ -209,7 +209,25 @@ class StreetLamp extends ENGINE.OBJECTS.ClassicObject
          */
         this.update = function(frameTime)
         {
-            //STREETLAMP does not need to update.
+            if(once) {
+                once = false;
+                let scene = STREETLAMP.model.children[0];
+                //Make the Terrain be able to receive and cast shadows 
+                //from the other models in the environment.
+                //Search though the object tree and change the material of every mesh.
+                if(scene) {
+                    let object = scene.children[0];
+                    if(object) {
+                        let meshes = object.children;
+
+                        //Change the material of every mesh.
+                        meshes.forEach(mesh => {
+                            mesh.castShadow = true;
+                            mesh.receiveShadow = true;
+                        });
+                    }
+                }
+            }//end of if(once)
         }
     }
 }

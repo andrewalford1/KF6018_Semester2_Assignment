@@ -21,7 +21,8 @@ class HotAirBalloon extends ENGINE.OBJECTS.ClassicObject
             'airballoon',
             'glb'
         );
-        
+        let once = true;
+
         //Scale and position the HotAirBalloon
         AIRBALLOON.model.scale.set(5, 5, 5);
         AIRBALLOON.model.rotation.set(0, 0, 0);
@@ -47,6 +48,25 @@ class HotAirBalloon extends ENGINE.OBJECTS.ClassicObject
         {
             //Make the hot air balloon bob up and down.
             AIRBALLOON.model.position.y = Math.sin(++updateCount / M_SPEED) * M_HEIGHT;
+            if(once) {
+                once = false;
+                let scene = AIRBALLOON.model.children[0];
+                //Make the Terrain be able to receive and cast shadows 
+                //from the other models in the environment.
+                //Search though the object tree and change the material of every mesh.
+                if(scene) {
+                    let object = scene.children[0];
+                    if(object) {
+                        let meshes = object.children;
+
+                        //Change the material of every mesh.
+                        meshes.forEach(mesh => {
+                            mesh.castShadow = true;
+                            mesh.receiveShadow = true;
+                        });
+                    }
+                }
+            }//end of if(once)
         }
     }
 }
