@@ -13,13 +13,14 @@ class UserGestures
      */
     constructor(player)
         {
+            let leftSholderMesh = player.getJoint(4);
             let leftHandMesh = player.getJoint(7);
+            let rightSholderMesh = player.getJoint(8);
             let rightHandMesh = player.getJoint(11);
-            let rightSholderMesh;
 
             this.handAboveSholder = function() {
-                if(leftHandMesh.position.y > rightHandMesh.position.y) {
-                    console.log("I am blue.");
+                if(leftHandMesh.position.y > leftSholderMesh.position.y ||  rightHandMesh.position.y > rightSholderMesh.position.y ) {
+                    console.log("I want to touch the sky.");
                     return true;
                 }
                 return false
