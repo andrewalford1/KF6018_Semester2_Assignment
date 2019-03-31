@@ -36,6 +36,8 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject {
             new THREE.BoxGeometry(15, 10, 20), 
             new THREE.MeshPhongMaterial({ color: 0x2f8341 })
         );
+        tableBase.castShadow = true;
+        tableBase.receiveShadow = true;
 
         //[Table Base Outline]. 
         let tableBaseOutline = new THREE.LineSegments(
@@ -54,6 +56,8 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject {
             })
         );
         tableBack.position.set(0, 9.8, -9.55);
+        tableBack.castShadow = true;
+        tableBack.receiveShadow = true;
 
         //[Table MoleBack].
         let tableMoleBack = new THREE.Mesh(
@@ -62,6 +66,8 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject {
         );
         tableMoleBack.position.z = -9.95;
         tableMoleBack.position.y = 9.8;
+        tableMoleBack.castShadow = true;
+        tableMoleBack.receiveShadow = true;
 
         //[Table border].
         let tableBorder = new THREE.Mesh(
@@ -70,6 +76,8 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject {
         );
         tableBorder.position.z = -9.55;
         tableBorder.position.y = 15.75;
+        tableBorder.castShadow = true;
+        tableBorder.receiveShadow = true;
 
         //[Table border RightBack].
         let tableBorderRightBack = new THREE.Mesh(
@@ -77,6 +85,8 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject {
             TABLE_MAT
         );
         tableBorderRightBack.position.set(7.95, 10.65, -9.55);
+        tableBorderRightBack.castShadow = true;
+        tableBorderRightBack.receiveShadow = true;
 
         //[Table border LeftBack].
         let tableBorderLeftBack = new THREE.Mesh(
@@ -84,6 +94,8 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject {
             TABLE_MAT
         );
         tableBorderLeftBack.position.set(-7.95, 10.65, -9.55);
+        tableBorderLeftBack.castShadow = true;
+        tableBorderLeftBack.receiveShadow = true;
 
         //[Table border Right].
         let tableBorderRight = new THREE.Mesh(
@@ -92,6 +104,8 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject {
         );
         tableBorderRight.position.x = 7.95;
         tableBorderRight.position.y = 5;
+        tableBorderRight.castShadow = true;
+        tableBorderRight.receiveShadow = true;
 
         //[Table border Left].
         let tableBorderLeft = new THREE.Mesh(
@@ -100,6 +114,8 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject {
         );
         tableBorderLeft.position.x = -7.95;
         tableBorderLeft.position.y = 5;
+        tableBorderLeft.castShadow = true;
+        tableBorderLeft.receiveShadow = true;
 
         //[Table border RightFront].
         let tableBorderRightFront = new THREE.Mesh(
@@ -107,6 +123,8 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject {
             TABLE_MAT
         );
         tableBorderRightFront.position.set(7.95, 0, 9.5);
+        tableBorderRightFront.castShadow = true;
+        tableBorderRightFront.receiveShadow = true;
         
         //[Table border LeftFront].
         let tableBorderLeftFront = new THREE.Mesh(
@@ -114,6 +132,8 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject {
             TABLE_MAT
         );
         tableBorderLeftFront.position.set(-7.95, 0, 9.5);
+        tableBorderLeftFront.castShadow = true;
+        tableBorderLeftFront.receiveShadow = true;
 
         //[Score].
         let score = new THREE.Mesh(
@@ -122,6 +142,7 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject {
         );
         score.position.z = -9.5;
         score.position.y = 9.5;
+        score.receiveShadow = true;
 
         //[BlackSquare].
         let blackSquare = new THREE.Mesh(
@@ -130,6 +151,7 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject {
         );
         blackSquare.position.z = 10;
         blackSquare.position.y = 0.0;
+        blackSquare.receiveShadow = true;
 
         //[insertMoneyArea].
         let insertMoneyArea = new THREE.Mesh(
@@ -137,6 +159,7 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject {
             new THREE.MeshPhongMaterial({ color: 0x242121 })
         );
         insertMoneyArea.position.set(-1.4, 0.9, 10.1);
+        insertMoneyArea.receiveShadow = true;
 
         //[insertMoney].
         let insertMoney = new THREE.Mesh(
@@ -144,6 +167,7 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject {
             BLACK_MAT
         );
         insertMoney.position.set(-0.7, 1.3, 10.3);
+        insertMoney.receiveShadow = true;
 
         //[go].
         let go = new THREE.Mesh(
@@ -151,6 +175,7 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject {
             new THREE.MeshPhongMaterial({ color: 0x00f034 })
         );
         go.position.set(-2, 2, 10.1);
+        go.receiveShadow = true;
 
         //[goArea].
         let goArea = new THREE.Mesh(
@@ -158,6 +183,7 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject {
             BLACK_MAT
         );
         goArea.position.set(-2, 2, 10.2);
+        goArea.receiveShadow = true;
 
         //[eject].
         let eject = new THREE.Mesh(
@@ -165,6 +191,7 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject {
             new THREE.MeshPhongMaterial({ color: 0xff0000 })
         );
         eject.position.set(-1.7, 0.7, 10.3);
+        eject.receiveShadow = true;
 
         //immediately use the texture for material creation.
         let mudTexture = ENGINE.TextureLoader().loadTexture('whackAMole/mud.jpg');
@@ -176,6 +203,8 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject {
         );
         mudRingBack.position.z = -10;
         mudRingBack.position.y = 8.0;
+        mudRingBack.castShadow = true;
+        mudRingBack.receiveShadow = true;
 
         //[hole front left].
         let holeFrontLeft = new THREE.Mesh(
@@ -191,6 +220,8 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject {
         );
         mudRingFrontLeft.position.set(-3.5, 5, 6);
         mudRingFrontLeft.rotation.x = Math.PI/2;
+        mudRingFrontLeft.castShadow = true;
+        mudRingFrontLeft.receiveShadow = true;
 
 
         //[hole front right].
@@ -207,6 +238,8 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject {
         );
         mudRingFrontRight.position.set(3.5, 5, 6);
         mudRingFrontRight.rotation.x = Math.PI/2;
+        mudRingFrontRight.castShadow = true;
+        mudRingFrontRight.receiveShadow = true;
 
         //[hole centre].
         let holeCentre = new THREE.Mesh(
@@ -224,6 +257,8 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject {
         mudRingCentre.position.z = 0.7;
         mudRingCentre.position.y = 5;
         mudRingCentre.rotation.x = Math.PI/2;
+        mudRingCentre.castShadow = true;
+        mudRingCentre.receiveShadow = true;
 
         //[hole back left].
         let holeBackLeft = new THREE.Mesh(
@@ -239,6 +274,8 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject {
         );
         mudRingBackLeft.position.set(-3.5, 5, -4);
         mudRingBackLeft.rotation.x = Math.PI/2;
+        mudRingBackLeft.castShadow = true;
+        mudRingBackLeft.receiveShadow = true;
 
         //[hole back right].
         let holeBackRight = new THREE.Mesh(
@@ -254,6 +291,8 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject {
         );
         mudRingBackRight.position.set(3.5, 5, -4);
         mudRingBackRight.rotation.x = Math.PI/2;
+        mudRingBackRight.castShadow = true;
+        mudRingBackRight.receiveShadow = true;
 
         //Position of the moles
         let moleCenter      = new Mole(new THREE.Vector3( 0.0, 5.0,  0.7));
@@ -271,6 +310,7 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject {
             mole.setActive(true);
             this.addObjectToGroup(mole.getInstance());
         });
+        
 
         //Add to the object group.
         this.addObjectsToGroup([
