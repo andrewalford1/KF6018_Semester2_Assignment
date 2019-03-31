@@ -1,29 +1,28 @@
 /**
  * A kinect object to track the player.
  * @extends ENGINE.OBJECTS.KinectObject
- * @author  Andrew Alford
- * @date    17/02/2019
+ * @author Andrew Alford
+ * @date 17/02/2019
  * @version 2.0 - 10/03/2019
  */
-class Player extends ENGINE.OBJECTS.KinectObject {
-
+class Player extends ENGINE.OBJECTS.KinectObject
+{
     /**
      * Constructor for the player.
      */
-    constructor() {
+    constructor()
+    {
         //Construct the superclass.
         super();
 
         //Add the players joints.
         const BONE_RADIUS = 0.05;
-        const M_COLLIDERS = [];
 
         //[leftHand] Tracks the state of the left hand.
         let leftHand = {
             open: {writeable: true, value: null},
             lasso: {writeable: true, value: null}
         };
-
         //[rightHand] Tracks the state of the right hand.
         let rightHand = {
             open: {writeable: true, value: null},
@@ -34,7 +33,21 @@ class Player extends ENGINE.OBJECTS.KinectObject {
         let openColour      = 0x00FF00;
         let lassoColour     = 0x0000FF;
 
-        initJoints();
+        for(let i = 0; i <= 24; i++)
+        {
+            let joint = new THREE.Mesh(
+                new THREE.SphereGeometry(BONE_RADIUS, 9, 9),
+                new THREE.MeshPhongMaterial( { color: 0xFF0000 } )
+            );
+
+            //Do not render anything for the head.
+            if(i == 3)
+            {
+                joint = new THREE.Object3D();
+            }
+            
+            this.addJoint(joint, i);
+        }
 
         //Scale and position the player.
         this.getInstance().scale.set(11, 11, 11);
@@ -42,28 +55,7 @@ class Player extends ENGINE.OBJECTS.KinectObject {
 
         //Private Methods...
 
-        /**
-         * Initialises all the players joints.
-         */
-        function initJoints() {
-            //Loop through every possible joint.
-            for(let i = 0; i <= 24; i++) {
-                let joint = new THREE.Mesh(
-                    new THREE.SphereGeometry(BONE_RADIUS, 9, 9),
-                    new THREE.MeshPhongMaterial( { color: 0xFF0000 } )
-                );
-    
-                //Do not render anything for the head.
-                if(i == 3)
-                {
-                    joint = new THREE.Object3D();
-                }
-                
-                this.addJoint(joint, i);
-            }
-        }
-
-        this.updateHandColours = function() {
+        this. updateHandColours = function() {
             if(leftHand.open) {
                 this.getJoint(7).material.color.setHex(openColour);
             } else {
@@ -91,16 +83,25 @@ class Player extends ENGINE.OBJECTS.KinectObject {
          *                              camera is being attached to.
          * @param {THREE.Camera} - The camera being attached.
          */
-        this.attachCamera = function(jointIndex, camera) {
-            ENGINE.DEBUGGER.isThreeCamera(camera))
-            
-            //[joint] Stores the joint being allocated
-            //to the camera.
-            let joint = this.getJoint(jointIndex);
-            if(joint) { joint.add(camera); }
+        this.attachCamera = function(jointIndex, camera)
+        {
+            if(ENGINE.DEBUGGER.isThreeCamera(camera))
+            {
+                //[joint] Stores the joint being allocated
+                //to the camera.
+                let joint = this.getJoint(jointIndex);
+
+                if(joint)
+                {
+                    joint.add(camera);
+                }
+            }
         }
 
-        this.attachCollider = function(jointIndex) {
+        const M_COLLIDERS = [];
+
+        this.attachCollider = function(jointIndex)
+        {
             let joint = this.getJoint(jointIndex);
             if(joint) {
                 let collision = collisionFactory(
@@ -114,7 +115,10 @@ class Player extends ENGINE.OBJECTS.KinectObject {
             }
         }
 
-        this.getColliders = function() { return M_COLLIDERS; }
+        this.getColliders = function()
+        {
+            return M_COLLIDERS;
+        }
 
         /**
          * Checks the state of the players hands.
@@ -122,7 +126,8 @@ class Player extends ENGINE.OBJECTS.KinectObject {
          * @param {left} left - 'true' if the left hand is being updated.
          *                      'false' if the right hand is being updated.
          */
-        this.updateHand = function(state, left) {
+        this.updateHand = function(state, left)
+        {
             let open = false;
             let lasso = false;
             //Check the state of the hand.

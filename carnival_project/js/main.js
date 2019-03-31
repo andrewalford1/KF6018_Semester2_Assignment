@@ -25,6 +25,9 @@ const ENGINE_MANAGER = (function initEngine() {
     }
 })();
 
+//let engine = engineFactory(true);
+//console.log(engine);
+
 
 
 //[games] Holds all of our games.
