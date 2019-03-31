@@ -21,6 +21,10 @@ let kinectFactory = (function(){
             player.attachCollider(this.instance.HANDLEFT);
             player.attachCollider(this.instance.HANDRIGHT);
 
+            let userGestures = new UserGestures(player);
+
+            console.log(userGestures);
+
             console.log(this.instance);
             //Start tracking the player.
             this.instance.startTrackedBodies(function(skeleton) {
@@ -44,6 +48,8 @@ let kinectFactory = (function(){
                         );
 
                         player.updateJoint(position, orientation, i);
+
+                        userGestures.handAboveSholder();
                     }
                 }
             });

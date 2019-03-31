@@ -5,31 +5,24 @@
  * @date 30/03/2019
  * @version 1.0 - 30/03/2019
  */
-class UserGestures extends ENGINE.OBJECTS.ClassicObject
+class UserGestures 
 { 
     /**
      * Constructor for the tent.
      * @param {THREE.Vector3} position - 
      */
-    constructor(position)
+    constructor(player)
         {
+            let leftHandMesh = player.getJoint(7);
+            let rightHandMesh = player.getJoint(11);
+            let rightSholderMesh;
 
-            //Construct the superclass.
-            super(position);
-
-
-
-
-
-            
-            /**
-         * Updates the gesture. (Overridden from the superclass).
-         * @param {number} frameTime - The time taken to compute the
-         *                             previous frame of animation.
-         */
-            this.update = function(frameTime)
-            {
-                //STREETLAMP does not need to update.
+            this.handAboveSholder = function() {
+                if(leftHandMesh.position.y > rightHandMesh.position.y) {
+                    console.log("I am blue.");
+                    return true;
+                }
+                return false
             }
         }
 }

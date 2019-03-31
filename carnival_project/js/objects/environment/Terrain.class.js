@@ -22,6 +22,7 @@ class Terrain extends ENGINE.OBJECTS.ClassicObject {
         //Scale and position the dart
         TERRAIN.model.scale.set(30.5, 20.5, 30.5);
         TERRAIN.model.position.y = -4;
+        TERRAIN.model.receiveShadow = true;
         this.addObjectToGroup(TERRAIN.model);
         
         //[once] Boolean to check if the first frame of animation is being 
@@ -36,7 +37,6 @@ class Terrain extends ENGINE.OBJECTS.ClassicObject {
         function editMaterial() {
             let scene = TERRAIN.model.children[0];
             //Make the Terrain be able to receive shadows from the other models in the environment
-            scene.receiveShadow = true;
             //Search though the object tree and change the material of every 
             //mesh.
             if(scene) {
@@ -53,6 +53,7 @@ class Terrain extends ENGINE.OBJECTS.ClassicObject {
                             metalness: 0.6,
                             reflectivity: 0.5
                         });
+                        mesh.receiveShadow = true;
                     });
                 }
             }
@@ -67,7 +68,7 @@ class Terrain extends ENGINE.OBJECTS.ClassicObject {
          */
         this.update = function(frameTime) {
             //Execute this code once on the first frame of animation.
-            console.log(TERRAIN.model);
+            //console.log(TERRAIN.model);
             if(once) {
                 once = false;
                 editMaterial();

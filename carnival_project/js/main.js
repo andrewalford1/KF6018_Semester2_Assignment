@@ -43,6 +43,7 @@ animate();
 
 //Create player.
 let player = new Player();
+
 engine.objectManager.addObject(player);
 player.addToScene(engine.scene);
 player.setActive(true);
