@@ -92,7 +92,7 @@ class Player extends ENGINE.OBJECTS.KinectObject {
          * @param {THREE.Camera} - The camera being attached.
          */
         this.attachCamera = function(jointIndex, camera) {
-            ENGINE.DEBUGGER.isThreeCamera(camera))
+            ENGINE.DEBUGGER.isThreeCamera(camera)
             
             //[joint] Stores the joint being allocated
             //to the camera.
