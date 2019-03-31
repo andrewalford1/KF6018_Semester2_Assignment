@@ -1,6 +1,14 @@
 "use strict"
 
-let engine = engineFactory(true);
+let camera = new THREE.PerspectiveCamera(
+    75,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    2000
+);
+camera.position.set(0, 25, 20);
+
+let engine = engineFactory(camera, true);
 
 //[games] Holds all of our games.
 let games = {
@@ -43,4 +51,4 @@ games.whackAMole.allocatePlayer(player);
 
 //Kinectron code
 kinectFactory('192.168.60.56').startTrackedBodies(
-    player, engine.camera, false);
+    player, engine.CameraController, false);
