@@ -2,8 +2,8 @@
  * The class creates the moles for the Whack-A-Mole game.
  * @extends ENGINE.OBJECTS.ClassicObject
  * @author Ana-Sabina Irimia
- * @date 13/02/2019
- * @version 1.6 - 15/03/2019
+ * @date 15/02/2019
+ * @version 3.0 - 31/03/2019
  */
 class Mole extends ENGINE.OBJECTS.ClassicObject
 {
@@ -145,6 +145,9 @@ class Mole extends ENGINE.OBJECTS.ClassicObject
         moleBodyPartsGroup.add(moleNoseMesh);
         moleBodyPartsGroup.add(moleLeftPawGroup);
         moleBodyPartsGroup.add(moleRightPawGroup);
+        //Make moleBodyPartsGroup be able to cast or receive shadows.
+        moleBodyPartsGroup.castShadow = true;
+        moleBodyPartsGroup.receiveShadow = true;
         //Add the sphere to the object group.
         this.addObjectToGroup(moleBodyPartsGroup);
 

@@ -83,6 +83,7 @@ class Player extends ENGINE.OBJECTS.KinectObject
          *                              camera is being attached to.
          * @param {THREE.Camera} - The camera being attached.
          */
+<<<<<<< HEAD
         this.attachCamera = function(jointIndex, camera)
         {
             if(ENGINE.DEBUGGER.isThreeCamera(camera))
@@ -96,6 +97,15 @@ class Player extends ENGINE.OBJECTS.KinectObject
                     joint.add(camera);
                 }
             }
+=======
+        this.attachCamera = function(jointIndex, camera) {
+            ENGINE.DEBUGGER.isThreeCamera(camera)
+            
+            //[joint] Stores the joint being allocated
+            //to the camera.
+            let joint = this.getJoint(jointIndex);
+            if(joint) { joint.add(camera); }
+>>>>>>> d9e084e1a44fe82be84762acb412244e8d811be9
         }
 
         const M_COLLIDERS = [];
