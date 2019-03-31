@@ -48,8 +48,12 @@ let kinectFactory = (function(){
                         );
 
                         player.updateJoint(position, orientation, i);
-
+                        /**Adds the functions from the UserGestures class
+                         * To make the gesctures work, first you have to create them 
+                         * in UserGestures class then call them in here
+                        */
                         userGestures.handAboveSholder();
+                        userGestures.kameHameHa();
                     }
                 }
             });
