@@ -84,6 +84,9 @@ let engineFactory = (function() {
             debugMode
         );
 
+        //Load the engines skybox.
+        ENGINE.TextureLoader().loadSkybox('skybox', '.bmp', engine.scene);
+
         return engine;
     }
 })();
