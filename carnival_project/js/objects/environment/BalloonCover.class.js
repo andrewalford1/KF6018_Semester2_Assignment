@@ -1,8 +1,8 @@
 /**
  * A class representing a BalloonCover.
  * @extends ENGINE.OBJECTS.ClassicObject
- * @author Zoë Irwin
- * @date 05/03/2019
+ * @author  Zoë Irwin
+ * @date    05/03/2019
  * @version 1.0 - 05/03/2019
  */
 class BalloonCover extends ENGINE.OBJECTS.ClassicObject

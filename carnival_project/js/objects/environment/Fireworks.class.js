@@ -1,88 +1,71 @@
 /**
  * A class representing the Fireworks.
  * @extends ENGINE.OBJECTS.ClassicObject
- * @author Zoe Irwin
- * @date 30/03/2019
- * @version 5.0 - 30/03/2019
+ * @author  Zoe Irwin
+ * @date    30/03/2019
+ * @version 5.1 - 04/04/2019
  */
-class Fireworks extends ENGINE.OBJECTS.ClassicObject
-{
+class Fireworks extends ENGINE.OBJECTS.ClassicObject {
+    
     /**
      * Constructor for the Fireworks.
      * @param {THREE.Vector3} position - Where the Fireworks is located.
      */
-    constructor(position)
-    {
+    constructor(position) {
         //Construct the superclass.
         super(position);
 
         // An array of particles
-    var geoArray = [];
-    var matArray = [];
-    var meshArray = [];
-    var iNumber = 100;
+        let meshArray = [];
+        let iNumber = 100;
 
-    var posInititalArray = [];
+        let posInititalArray = [];
 
-    var dirArray = [];
+        let dirArray = [];
 
-    // Create the particles
-    for (var i=0; i<iNumber; i++)
-    {
-    geoArray.push(new THREE.SphereGeometry(0.5, 6, 6));
-    matArray.push(new THREE.MeshPhongMaterial( {color: Math.random() * 0xffffff, opacity: 0.3} ));
-    meshArray.push(new THREE.Mesh(geoArray[i], matArray) );
+        // Create the particles
+        for (let i = 0; i < iNumber; i++) {
+            meshArray.push(new THREE.Mesh(
+                new THREE.SphereGeometry(0.5, 6, 6), 
+                new THREE.MeshPhongMaterial({
+                    color: Math.random() * 0xffffff, 
+                    opacity: 0.3
+                })
+            ));
+
+            // For explosion
+            meshArray[i].position.set(-300, 250, -700); 
+
+            dirArray.push(new THREE.Vector3(
+                Math.random() * 2 - 0.25,
+                Math.random() * 2 - 0.25,
+                Math.random() * 2 - 0.25
+            ));
     
-
-    // For explosion
-    meshArray[i].position.x = -300;
-    meshArray[i].position.y = 250;
-    meshArray[i].position.z = -700;
-    dirArray.push(new THREE.Vector3() );
-    dirArray[i].x = Math.random() * 2 - 0.25;
-    dirArray[i].y = Math.random() * 2 - 0.25;
-    dirArray[i].z = Math.random() * 2 - 0.25;
-    
-
-    // Backup initial position
-    posInititalArray.push(new THREE.Vector3() );
-    posInititalArray[i].x = meshArray[i].position.x;
-    posInititalArray[i].y = meshArray[i].position.y;
-    posInititalArray[i].z = meshArray[i].position.z;
-    
-    this.addObjectToGroup(meshArray[i]);
-
-    };
+            // Backup initial position
+            posInititalArray.push(new THREE.Vector3() );
+            posInititalArray[i].copy(meshArray[i]);
+            this.addObjectToGroup(meshArray[i])
+        };
         
 
+        let iFrame = 0;
 
         /**
          * Updates the Fireworks. (Overridden from the superclass).
          * @param {number} frameTime - The time taken to compute the
          *                             previous frame of animation.
          */
-        var iFrame = 0;
-        this.update = function(frameTime)
-        {
+        this.update = function(frameTime) {
             // Move the particles
-        for (var i=0; i<iNumber; i++)
-          {
-        
-          // Explosion
-          meshArray[i].position.x = meshArray[i].position.x + dirArray[i].x;
-             meshArray[i].position.y = meshArray[i].position.y + dirArray[i].y;
-           meshArray[i].position.z = meshArray[i].position.z + dirArray[i].z;
-
-            if (iFrame%100 == 0) 
-            {
-            meshArray[i].position.x = -300;
-            meshArray[i].position.y = 250;
-            meshArray[i].position.z = -700;
-            }
-    }    
-
-
-    iFrame++;
+            for (let i=0; i<iNumber; i++) {
+                // Explosion
+                meshArray[i].position.add(dirArray[i]);
+                if (iFrame % 100 == 0) { 
+                    meshArray[i].position.set(-300, 250, -700); 
+                }
+            }    
+            iFrame++;
         }
     }
 }
