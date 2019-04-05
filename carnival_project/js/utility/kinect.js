@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 /**
  * Used to manage the programs connection to the connect.
