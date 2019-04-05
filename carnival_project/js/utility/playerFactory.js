@@ -3,9 +3,10 @@
 let playerFactory = (function() {
     let playerPrototype = {
         initPlayer : function() {
-            //Initalisepositions.
-            for(let i = 0; i < this.jointIndexes.Length; i++) {
+            for(let i = 0; i < this.joints.length; i++) {
+
                 this.previousPositions.push([]);
+
                 for(let j = 0; j < this.numPreviousPositions; j++) {
                     this.previousPositions[i].push([]);
                 }
@@ -18,17 +19,22 @@ let playerFactory = (function() {
                 //[group] Groups together all of the players joints.
                 let group = new THREE.Group();
 
-                this.joints.foreach(joint => {
-                    group.add(joint.mesh);
+                this.joints.forEach(joint => {
+                    group.add(joint.mesh.value);
                 });
+
+                group.scale.set(11, 11, 11);
+                group.position.set(0, 11, 0);
 
                 scene.add(group);
             }
         },
         attachCamera : function(camera) {
             if(camera) {
-                ENGINE.DEBUGGER.isThreeCamera(camera, 'playerFactor');
-                this.joints[this.jointIndexes.HEAD].mesh.add(camera);
+                ENGINE.DEBUGGER.isThreeCamera(camera, 'playerFactory');
+                camera.position.set(0, 0, 0);
+                console.log(`head ${this.jointIndexes.HEAD}`);
+                this.joints[this.jointIndexes.HEAD].mesh.value.add(camera);
             }
         },
         getLeftHandState : function() {
@@ -71,21 +77,21 @@ let playerFactory = (function() {
 
         },
         update : function(skeleton) {
-
-            this.joints[this.jointIndexes.HAND_LEFT].open = false;
-            this.joints[this.jointIndexes.HAND_RIGHT].open = false;
-            this.joints[this.jointIndexes.HAND_LEFT].lasso = false;
-            this.joints[this.jointIndexes.HAND_RIGHT].lasso = false;
+            
+            this.joints[7].open = false;
+            this.joints[11].open = false;
+            this.joints[7].lasso = false;
+            this.joints[11].lasso = false;
 
             switch(skeleton.leftHandState) {
                 case(0 | 1) : break;
                 case(2) : 
                     this.joints[this.jointIndexes.HAND_LEFT].open = true;
-                    this.joints[this.jointIndexes.HAND_LEFT].mesh
+                    this.joints[this.jointIndexes.HAND_LEFT].mesh.value
                     .material.color.setHex(0x00FF00);
                 case(4) :
                     this.joints[this.jointIndexes.HAND_LEFT].lasso = true;
-                    this.joints[this.jointIndexes.HAND_LEFT].mesh
+                    this.joints[this.jointIndexes.HAND_LEFT].mesh.value
                     .material.color.setHex(0x0000FF);
             }
 
@@ -93,54 +99,56 @@ let playerFactory = (function() {
                 case(0 | 1) : break;
                 case(2) : 
                     this.joints[this.jointIndexes.HAND_RIGHT].open = true;
-                    this.joints[this.jointIndexes.HAND_RIGHT].mesh
+                    this.joints[this.jointIndexes.HAND_RIGHT].mesh.value
                     .material.color.setHex(0x00FF00);
                 case(4) :
                     this.joints[this.jointIndexes.HAND_RIGHT].lasso = true;
-                    this.joints[this.jointIndexes.HAND_RIGHT].mesh
+                    this.joints[this.jointIndexes.HAND_RIGHT].mesh.value
                     .material.color.setHex(0x0000FF);
             }
 
-            if(!this.joints[this.jointIndexes.HAND_LEFT].open) {
-                this.joints[this.jointIndexes.HAND_LEFT].mesh
+            if(!this.joints[7].open) {
+                this.joints[11].mesh.value
                 .material.color.setHex(0xFF0000);
             } 
-            if(!this.joints[this.jointIndexes.HAND_RIGHT].open) {
-                this.joints[this.jointIndexes.HAND_RIGHT].mesh
+            if(!this.joints[7].open) {
+                this.joints[11].mesh.value
                 .material.color.setHex(0xFF0000);
             } 
 
-            skeleton.joints.forEach(function(joint, index) {
+            for(let i = 0; i < skeleton.joints.length; i++) {
                 let position = new THREE.Vector3(
-                    joint.cameraX,
-                    joint.cameraY,
-                    joint.cameraZ
+                    skeleton.joints[i].cameraX,
+                    skeleton.joints[i].cameraY,
+                    skeleton.joints[i].cameraZ
                 );
                 let orientation = new THREE.Quaternion(
-                    joint.orientationX,
-                    joint.orientationY,
-                    joint.orientationZ,
-                    joint.orientationW
+                    skeleton.joints[i].orientationX,
+                    skeleton.joints[i].orientationY,
+                    skeleton.joints[i].orientationZ,
+                    skeleton.joints[i].orientationW
                 );
 
+                //[averageFilter] A filter to smooth out kinect movement.
                 let averageFilter = new THREE.Vector3(0, 0, 0);
 
                 //Update previous positions.
-                this.previousPositions[index].unshift(position);
-                this.previousPositions[index].pop();
-                this.previousPositions[index].forEach(position => {
-                    averageFilter.add(position);
-                })
+                this.previousPositions[i].unshift(position);
+                this.previousPositions[i].pop();
+                this.previousPositions[i].forEach(pos => {
+                     averageFilter.add(pos);
+                });
                 averageFilter.divideScalar(
-                    this.previousPositions[index].Length
+                     this.previousPositions[i].length
                 );
 
                 //Update the joint's position & rotation.
-                this.joints[index].mesh.position.copy(averageFilter);
-                this.joints[index].rotation.setFromQuaternion(
+                this.joints[i].mesh.value.position.copy(averageFilter);
+                this.joints[i].mesh.value.rotation.setFromQuaternion(
                     orientation
                 );
-            });
+
+            }
         }
     };
 
@@ -149,30 +157,30 @@ let playerFactory = (function() {
         
         let player = Object.create(playerPrototype, {
             jointIndexes : {writeable: false, value : {
-                SPINE_BASE      : {writeable: false, value : 1},
-                SPINE_MID       : {writeable: false, value : 2},
-                NECK            : {writeable: false, value : 3},
-                HEAD            : {writeable: false, value : 4},
-                SHOULDER_LEFT   : {writeable: false, value : 5},
-                ELBOW_LEFT      : {writeable: false, value : 6},
-                WRIST_LEFT      : {writeable: false, value : 7},
-                HAND_LEFT       : {writeable: false, value : 8},
-                SHOULDER_RIGHT  : {writeable: false, value : 9},
-                WRIST_RIGHT     : {writeable: false, value : 10},
-                HAND_RIGHT      : {writeable: false, value : 11},
-                HIP_LEFT        : {writeable: false, value : 12},
-                KNEE_LEFT       : {writeable: false, value : 13},
-                ANKLE_LEFT      : {writeable: false, value : 14},
-                FOOT_LEFT       : {writeable: false, value : 15},
-                HIP_RIGHT       : {writeable: false, value : 16},
-                KNEE_RIGHT      : {writeable: false, value : 17},
-                ANKLE_RIGHT     : {writeable: false, value : 18},
-                FOOT_RIGHT      : {writeable: false, value : 19},
-                SPINE_SHOULDER  : {writeable: false, value : 20},
-                HAND_TIP_LEFT   : {writeable: false, value : 21},
-                THUMB_LEFT      : {writeable: false, value : 22},
-                HAND_TIP_RIGHT  : {writeable: false, value : 23},
-                THUMB_RIGHT     : {writeable: false, value : 24},
+                SPINE_BASE      : 1,
+                SPINE_MID       : 2,
+                NECK            : 3,
+                HEAD            : 4,
+                SHOULDER_LEFT   : 5,
+                ELBOW_LEFT      : 6,
+                WRIST_LEFT      : 7,
+                HAND_LEFT       : 8,
+                SHOULDER_RIGHT  : 9,
+                WRIST_RIGHT     : 10,
+                HAND_RIGHT      : 11,
+                HIP_LEFT        : 12,
+                KNEE_LEFT       : 13,
+                ANKLE_LEFT      : 14,
+                FOOT_LEFT       : 15,
+                HIP_RIGHT       : 16,
+                KNEE_RIGHT      : 17,
+                ANKLE_RIGHT     : 18,
+                FOOT_RIGHT      : 19,
+                SPINE_SHOULDER  : 20,
+                HAND_TIP_LEFT   : 21,
+                THUMB_LEFT      : 22,
+                HAND_TIP_RIGHT  : 23,
+                THUMB_RIGHT     : 24,
             }},
             joints : {writeable: false, value : [
                 {
@@ -356,8 +364,9 @@ let playerFactory = (function() {
             previousPositions : {writeable: true, value : []}
         });
 
-        this.attachCamera(camera);
-        this.addToScene(scene);
+        player.initPlayer();
+        player.attachCamera(camera);
+        player.addToScene(scene);
 
         return player;
     }

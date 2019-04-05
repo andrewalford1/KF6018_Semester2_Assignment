@@ -23,8 +23,6 @@ let kinectFactory = (function(){
 
             let userGestures = new UserGestures(player);
 
-            console.log(userGestures);
-
             console.log(this.instance);
             //Start tracking the player.
             this.instance.startTrackedBodies(function(skeleton) {

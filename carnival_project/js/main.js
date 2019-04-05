@@ -28,7 +28,7 @@ engine.addObjects(MODELS, [
     new Moon(new THREE.Vector3(-600, 280, -400)),
     new MoreTents(),
     new Terrain(),
-    new StreetLamp(),
+    // new StreetLamp(),
     new WackCover(),
     //Games
     games.darts,
@@ -43,14 +43,17 @@ function animate() { engine.driver.update(); }
 animate();
 
 //Create player.
-let player = new Player();
+// let player = new Player();
 
-engine.objectManager.addObject(player);
-player.addToScene(engine.scene);
-player.setActive(true);
+// engine.objectManager.addObject(player);
+// player.addToScene(engine.scene);
+// player.setActive(true);
 
-games.whackAMole.allocatePlayer(player);
+// games.whackAMole.allocatePlayer(player);
 
 //Kinectron code
-kinectFactory('192.168.60.56').startTrackedBodies(
-    player, engine.CameraController, false);
+// kinectFactory('192.168.60.56').startTrackedBodies(
+//     player, engine.CameraController.getInstance(), false);
+
+let player = playerFactory(null, engine.scene);
+kinectFactory('192.168.60.56').startTrackedBodies(player);
