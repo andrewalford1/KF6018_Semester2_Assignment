@@ -28,7 +28,7 @@ engine.addObjects(MODELS, [
     new Moon(new THREE.Vector3(-600, 280, -400)),
     new MoreTents(),
     new Terrain(),
-    // new StreetLamp(),
+    //new StreetLamp(),
     new WackCover(),
     //Games
     games.darts,
