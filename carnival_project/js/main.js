@@ -25,10 +25,10 @@ engine.addObjects(MODELS, [
     new Floor(),
     new Helicopter(),
     new HotAirBalloon(new THREE.Vector3(0, 250, 0)),
-    new Moon(new THREE.Vector3(-600, 280, -400)),
+    new Moon(new THREE.Vector3(-600, 280, -200)),
     new MoreTents(),
     new Terrain(),
-    //new StreetLamp(),
+    new StreetLamp(),
     new WackCover(),
     //Games
     games.darts,
