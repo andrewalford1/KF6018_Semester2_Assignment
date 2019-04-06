@@ -17,12 +17,38 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
         super(position);
 
         //ADD LIGHTING... (I have not figured out a good way to do lighting yet).
-        //let moonLight = new THREE.HemisphereLight(0x375D9C, 0x444444, 1);//0xFFFFFF, 0x444444
-        let moonLight = new THREE.HemisphereLight(0xFFFFFF, 0xFFFFFF, 1);//0xFFFFFF, 0x444444
+        //let exmoonLight = new THREE.HemisphereLight(0x375D9C, 0x444444, 4);//0xFFFFFF, 0x444444
+        //let moonLight = new THREE.HemisphereLight(0xFFFFFF, 0xFFFFFF, 1);//0xFFFFFF, 0x444444
         //moonLight.position.set(0.0, 20.0, 0.0);
         //moonLight.castShadow = true;
+        //this.addObjectToGroup(moonLight);
+        /** 
+        let exmoonLight = new THREE.HemisphereLight(0x375D9C, 0x444444, 4);//0xFFFFFF, 0x444444
+        let moonLight = new THREE.PointLight(0xFFFFFF, 1, 100);//0xFFFFFF, 0x444444
+        moonLight.position.set(600.0, 100, 300.0);
+        moonLight.castShadow = true;
+        let pointerLightHelper = new THREE.PointLightHelper(moonLight,50);
         this.addObjectToGroup(moonLight);
-        /** */
+        this.addObjectToGroup(pointerLightHelper);
+        this.addObjectToGroup(exmoonLight);
+*/
+        let renderer = new THREE.WebGLRenderer();
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+        let moonLight = new THREE.DirectionalLight( 0x4F8AD9, 1.8);
+        moonLight.position.set(-400.0, 900, 200.0);
+        moonLight.castShadow = true;
+        this.addObjectToGroup( moonLight );
+        
+        moonLight.shadow.mapSize.width = 1024;  
+        moonLight.shadow.mapSize.height = 1024;
+        moonLight.shadow.camera.near = 500;    
+        moonLight.shadow.camera.far = 1000;     
+        moonLight.shadow.camera.fov = 30;
+
+        let helper = new THREE.CameraHelper( moonLight.shadow.camera );
+        this.addObjectToGroup( helper );
 
         //Add the Moon model.
         const MOON = ENGINE.ObjectLoader().loadModel(
@@ -33,8 +59,6 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
         //Scale and position the HotAirBalloon
         MOON.model.scale.multiplyScalar(20);
         MOON.model.position.copy(position);
-        MOON.model.castShadow = true;
-        MOON.model.receiveShadow = true;
         this.addObjectToGroup(MOON.model);
         
 

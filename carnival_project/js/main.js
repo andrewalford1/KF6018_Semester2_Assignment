@@ -8,7 +8,7 @@ let camera = new THREE.PerspectiveCamera(
 );
 camera.position.set(0, 25, 20);
 
-let engine = engineFactory(camera, true);
+let engine = engineFactory(camera, false);
 
 //[games] Holds all of our games.
 let games = {
@@ -38,7 +38,7 @@ engine.addObjects(MODELS, [
     games.whackAMole
 ]);
 
-let player = playerFactory(camera, engine.scene);
+let player = playerFactory(null, engine.scene);//camera,engine.scene
 let guestures = new UserGestures(player);
 
 //Allocate the player to the games.
