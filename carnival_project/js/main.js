@@ -42,18 +42,7 @@ engine.addObjects(MODELS, [
 function animate() { engine.driver.update(); }
 animate();
 
-//Create player.
-// let player = new Player();
-
-// engine.objectManager.addObject(player);
-// player.addToScene(engine.scene);
-// player.setActive(true);
-
-// games.whackAMole.allocatePlayer(player);
-
-//Kinectron code
-// kinectFactory('192.168.60.56').startTrackedBodies(
-//     player, engine.CameraController.getInstance(), false);
-
-let player = playerFactory(null, engine.scene);
+//Kinect code.
+let player = playerFactory(camera, engine.scene);
+games.whackAMole.allocatePlayer(player);
 kinectFactory('192.168.60.56').startTrackedBodies(player);

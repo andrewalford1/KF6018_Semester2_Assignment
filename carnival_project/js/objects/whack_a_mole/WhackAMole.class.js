@@ -17,7 +17,12 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject {
         super(position);
 
         //Tracks the user playing the game.
-        let m_player = null;
+        let m_player = {
+            leftHand  : null,
+            rightHand : null
+            
+        };
+
         //[m_moles] Tracks all the moles in the game.
         let m_moles = [];
         //The number of moles in the game
@@ -340,7 +345,9 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject {
          * @param {Player} player - Who is playing the game?
          */
         this.allocatePlayer = function(player) {
-            m_player = player.getColliders();
+            m_player.leftHand = player.joints[player.jointIndexes.HAND_LEFT].collider;
+            m_player.rightHand = player.joints[player.jointIndexes.HAND_RIGHT].collider;
+            console.table(m_player);
         }
 
         this.updateMolePosition = function(){
@@ -382,8 +389,11 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject {
             //Update all the games moles.
             m_moles.forEach(mole => {
                 mole.update(frameTime);
-                if(m_player) {
-                    mole.getCollider().checkCollisions(m_player);
+                if(m_player.leftHand && m_player.rightHand) {
+                    mole.getCollider().checkCollisions([
+                        m_player.leftHand,
+                        m_player.rightHand
+                    ]);
                 }
             });
             this.updateMolePosition();
