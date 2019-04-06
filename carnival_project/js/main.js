@@ -38,11 +38,15 @@ engine.addObjects(MODELS, [
     games.whackAMole
 ]);
 
+let player = playerFactory(camera, engine.scene);
+let guestures = new UserGestures(player);
+
+//Allocate the player to the games.
+games.whackAMole.allocatePlayer(player);
+
 //Run the animation loop.
-function animate() { engine.driver.update(); }
+function animate() { engine.driver.update(); guestures.update();}
 animate();
 
 //Kinect code.
-let player = playerFactory(camera, engine.scene);
-games.whackAMole.allocatePlayer(player);
 kinectFactory('192.168.60.56').startTrackedBodies(player);

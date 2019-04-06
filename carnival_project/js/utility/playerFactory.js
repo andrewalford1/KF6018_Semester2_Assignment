@@ -11,6 +11,7 @@ let playerFactory = (function() {
                     this.previousPositions[i].push([]);
                 }
             }
+            console.log(this);
         },
         addToScene : function(scene) {
             if(scene) {
@@ -38,13 +39,23 @@ let playerFactory = (function() {
             }
         },
         getLeftHandState : function() {
-
+            return this.joints[this.jointIndexes.HAND_LEFT].state;
         },
         getRightHandState : function() {
-
+            return this.joints[this.jointIndexes.HAND_RIGHT].state;
         },
         handsTogether : function() {
+            let leftHandPos = new THREE.Vector3();
+            leftHandPos.copy(this.joints[this.jointIndexes.HAND_LEFT].mesh.value.position);
+            let rightHandPos = new THREE.Vector3();
+            rightHandPos.copy(this.joints[this.jointIndexes.HAND_RIGHT].mesh.value.position);
 
+            leftHandPos.multiplyScalar(5);
+            rightHandPos.multiplyScalar(5);
+
+            let distance = leftHandPos.distanceTo(rightHandPos).toFixed(2);
+
+            return distance < 1;
         },
         armsSpread : function() {
 
@@ -88,32 +99,32 @@ let playerFactory = (function() {
         },
         update : function(skeleton) {
             
-            this.joints[this.jointIndexes.HAND_LEFT].open = false;
-            this.joints[this.jointIndexes.HAND_RIGHT].open = false;
-            this.joints[this.jointIndexes.HAND_LEFT].lasso = false;
-            this.joints[this.jointIndexes.HAND_RIGHT].lasso = false;
+            this.joints[this.jointIndexes.HAND_LEFT].state.open = false;
+            this.joints[this.jointIndexes.HAND_RIGHT].state.open = false;
+            this.joints[this.jointIndexes.HAND_LEFT].state.lasso = false;
+            this.joints[this.jointIndexes.HAND_RIGHT].state.lasso = false;
 
             switch(skeleton.leftHandState) {
                 case(0 | 1) : break;
                 case(2) : 
-                    this.joints[this.jointIndexes.HAND_LEFT].open = true;
+                    this.joints[this.jointIndexes.HAND_LEFT].state.open = true;
                     break;
                 case(4) :
-                    this.joints[this.jointIndexes.HAND_LEFT].lasso = true;
+                    this.joints[this.jointIndexes.HAND_LEFT].state.lasso = true;
                     break;
             }
 
             switch(skeleton.rightHandState) {
                 case(0 | 1) : break;
                 case(2) : 
-                    this.joints[this.jointIndexes.HAND_RIGHT].open = true;
+                    this.joints[this.jointIndexes.HAND_RIGHT].state.open = true;
                     break;
                 case(4) :
-                    this.joints[this.jointIndexes.HAND_RIGHT].lasso = true;
+                    this.joints[this.jointIndexes.HAND_RIGHT].state.lasso = true;
                     break;
             }
 
-            if(this.joints[this.jointIndexes.HAND_LEFT].open) {
+            if(this.joints[this.jointIndexes.HAND_LEFT].state.open) {
                 this.joints[this.jointIndexes.HAND_LEFT].mesh.value
                 .material.color.setHex(0x00FF00);
             } 
@@ -121,7 +132,7 @@ let playerFactory = (function() {
                 this.joints[this.jointIndexes.HAND_LEFT].mesh.value
                 .material.color.setHex(0xFF0000);
             }
-            if(this.joints[this.jointIndexes.HAND_RIGHT].open) {
+            if(this.joints[this.jointIndexes.HAND_RIGHT].state.open) {
                 this.joints[this.jointIndexes.HAND_RIGHT].mesh.value
                 .material.color.setHex(0x00FF00);
             } 
@@ -130,12 +141,12 @@ let playerFactory = (function() {
                 .material.color.setHex(0xFF0000);
             }
 
-            if(this.joints[this.jointIndexes.HAND_LEFT].lasso) {
+            if(this.joints[this.jointIndexes.HAND_LEFT].state.lasso) {
                 this.joints[this.jointIndexes.HAND_LEFT].mesh.value
                 .material.color.setHex(0x0000FF);
             }
 
-            if(this.joints[this.jointIndexes.HAND_RIGHT].lasso) {
+            if(this.joints[this.jointIndexes.HAND_RIGHT].state.lasso) {
                 this.joints[this.jointIndexes.HAND_RIGHT].mesh.value
                 .material.color.setHex(0x0000FF);
             }
@@ -264,8 +275,10 @@ let playerFactory = (function() {
                         new THREE.SphereGeometry(BASE_BONE_RADIUS, 9, 9),
                         new THREE.MeshPhongMaterial({color: 0xFF0000})
                     )},
-                    open : {writeable: true, value: false},
-                    lasso : {writeable: true, value: false}
+                    state : {
+                        open : {writeable: true, value: false},
+                        lasso : {writeable: true, value: false}
+                    }
                 }, 
                 {
                     ID : {wirteable: false, value : "SHOULDER_RIGHT"},
@@ -294,8 +307,10 @@ let playerFactory = (function() {
                         new THREE.SphereGeometry(BASE_BONE_RADIUS, 9, 9),
                         new THREE.MeshPhongMaterial({color: 0xFF0000})
                     )},
-                    open : {writeable: true, value: false},
-                    lasso : {writeable: true, value: false}
+                    state : {
+                        open : {writeable: true, value: false},
+                        lasso : {writeable: true, value: false}
+                    }
                 }, 
                 {
                     ID : {wirteable: false, value : "HIP_LEFT"},
@@ -362,36 +377,37 @@ let playerFactory = (function() {
                 }, 
                 {
                     ID : {wirteable: false, value : "HAND_TIP_LEFT"},
-                    mesh: {wirteable: true, value :  new THREE.Mesh(
-                        new THREE.SphereGeometry(BASE_BONE_RADIUS, 9, 9),
-                        new THREE.MeshPhongMaterial({color: 0xFF0000})
-                    )}
+                    // mesh: {wirteable: true, value :  new THREE.Mesh(
+                    //     new THREE.SphereGeometry(BASE_BONE_RADIUS, 9, 9),
+                    //     new THREE.MeshPhongMaterial({color: 0xFF0000})
+                    // )}
+                    mesh: {writeable: true, value : new THREE.Object3D()}
                 }, 
                 {
                     ID : {wirteable: false, value : "THUMB_LEFT"},
                     mesh: {wirteable: true, value :  new THREE.Mesh(
-                        new THREE.SphereGeometry(BASE_BONE_RADIUS, 9, 9),
+                        new THREE.SphereGeometry(BASE_BONE_RADIUS / 2, 9, 9),
                         new THREE.MeshPhongMaterial({color: 0xFF0000})
                     )}
                 }, 
                 {
                     ID : {wirteable: false, value : "HAND_TIP_RIGHT"},
-                    mesh: {wirteable: true, value :  new THREE.Mesh(
-                        new THREE.SphereGeometry(BASE_BONE_RADIUS, 9, 9),
-                        new THREE.MeshPhongMaterial({color: 0xFF0000})
-                    )}
+                    // mesh: {wirteable: true, value :  new THREE.Mesh(
+                    //     new THREE.SphereGeometry(BASE_BONE_RADIUS, 9, 9),
+                    //     new THREE.MeshPhongMaterial({color: 0xFF0000})
+                    // )}
+                    mesh: {writeable: true, value : new THREE.Object3D()}
                 }, 
                 {
                     ID : {wirteable: false, value : "THUMB_RIGHT"},
                     mesh: {wirteable: true, value :  new THREE.Mesh(
-                        new THREE.SphereGeometry(BASE_BONE_RADIUS, 9, 9),
+                        new THREE.SphereGeometry(BASE_BONE_RADIUS / 2, 9, 9),
                         new THREE.MeshPhongMaterial({color: 0xFF0000})
                     )}
                 }
             ]},
             numPreviousPositions : {writeable: false, value : 5},
-            previousPositions : {writeable: true, value : []},
-            colliders : {writable: true, value : []}
+            previousPositions : {writeable: true, value : []}
         });
 
         player.initPlayer();
