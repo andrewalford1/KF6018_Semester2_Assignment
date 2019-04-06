@@ -22,7 +22,6 @@ class Terrain extends ENGINE.OBJECTS.ClassicObject {
         //Scale and position the dart
         TERRAIN.model.scale.set(30.5, 20.5, 30.5);
         TERRAIN.model.position.y = -4;
-        TERRAIN.model.receiveShadow = true;
         this.addObjectToGroup(TERRAIN.model);
         
         //[once] Boolean to check if the first frame of animation is being 

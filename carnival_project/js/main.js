@@ -8,7 +8,7 @@ let camera = new THREE.PerspectiveCamera(
 );
 camera.position.set(0, 25, 20);
 
-let engine = engineFactory(camera, true);
+let engine = engineFactory(camera, false);
 
 //[games] Holds all of our games.
 let games = {
