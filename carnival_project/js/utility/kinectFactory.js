@@ -30,6 +30,18 @@ let kinectFactory = (function() {
                 if(player.rightHandTouchingHead()) {
                     console.log('right hand touching head');
                 }
+
+                if(player.armsSpread()) {
+                    console.log('T-Pose');
+                }
+
+                if(player.leftHandAboveShoulder()) {
+                    console.log('Left hand above shoulder');
+                }
+
+                if(player.rightHandAboveShoulder()) {
+                    console.log('Right hand above shoulder');
+                }
             });
         }
     };

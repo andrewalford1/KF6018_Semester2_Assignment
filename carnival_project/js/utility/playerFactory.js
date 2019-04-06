@@ -57,6 +57,36 @@ let playerFactory = (function() {
             return distance < 1;
         },
         armsSpread : function() {
+            let leftHandPos = new THREE.Vector3();
+            leftHandPos.copy(this.joints[this.jointIndexes.HAND_LEFT].mesh.value.position);
+            let rightHandPos = new THREE.Vector3();
+            rightHandPos.copy(this.joints[this.jointIndexes.HAND_RIGHT].mesh.value.position);
+            let spineShoulderPos = new THREE.Vector3();
+            spineShoulderPos.copy(this.joints[this.jointIndexes.SPINE_SHOULDER].mesh.value.position);
+            
+            leftHandPos.multiplyScalar(5);
+            rightHandPos.multiplyScalar(5);
+            spineShoulderPos.multiplyScalar(5);
+
+            //Check hands are on the same level.
+            let handsAligned_y = (leftHandPos.y - rightHandPos.y).toFixed(2);
+            -handsAligned_y > 0 ? -handsAligned_y : handsAligned_y;
+            //If the hands are not aligned, the player cannot be in a t-pose.
+            if(handsAligned_y > 1) { return false; }
+
+            //Check if the left arm is aligned with the spine shoulder.
+            //(Note: We only need to do this with one arm 
+            //as we already know if both arms are aligned).
+            let leftHandAlignedWithShoulder_y = (spineShoulderPos.y - leftHandPos.y).toFixed(2);
+            -leftHandAlignedWithShoulder_y > 0 ? -leftHandAlignedWithShoulder_y : leftHandAlignedWithShoulder_y;
+            let leftHandAlignedWithShoulder_z = (spineShoulderPos.z - leftHandPos.z).toFixed(2);
+            -leftHandAlignedWithShoulder_z > 0 ? -leftHandAlignedWithShoulder_z : leftHandAlignedWithShoulder_z;
+
+            return (
+                (handsAligned_y < 1) && 
+                (leftHandAlignedWithShoulder_y < 1) && 
+                (leftHandAlignedWithShoulder_z < 1)
+            );
 
         },
         leftHandTouchingHead : function() {
@@ -86,10 +116,20 @@ let playerFactory = (function() {
             return distance < 1;
         },
         leftHandAboveShoulder : function() {
+            let leftHandPos = new THREE.Vector3();
+            leftHandPos.copy(this.joints[this.jointIndexes.HAND_LEFT].mesh.value.position);
+            let leftShoulderPos = new THREE.Vector3();
+            leftShoulderPos.copy(this.joints[this.jointIndexes.SHOULDER_LEFT].mesh.value.position);
 
+            return leftHandPos.y > leftShoulderPos.y;
         },
         rightHandAboveShoulder : function() {
+            let rightHandPos = new THREE.Vector3();
+            rightHandPos.copy(this.joints[this.jointIndexes.HAND_RIGHT].mesh.value.position);
+            let rightShoulderPos = new THREE.Vector3();
+            rightShoulderPos.copy(this.joints[this.jointIndexes.SHOULDER_RIGHT].mesh.value.position);
 
+            return rightHandPos.y > rightShoulderPos.y;
         },
         leftHandAboveHead : function() {
             let leftHandPos = new THREE.Vector3();
@@ -107,20 +147,18 @@ let playerFactory = (function() {
 
             return rightHandPos.y > headPos.y;
         },
-        standingOnLeftLeg : function() {
-
-        },
-        standingOnRightLeg : function() {
-
-        },
         dabbing : function() {
 
         },
-        isAbove : function(yCoordinate) {
-
-        },
         isUpsideDown : function() {
+            let headPos = new THREE.Vector3();
+            headPos.copy(this.joints[this.jointIndexes.HEAD].mesh.value.position);
+            let leftFootPos = new THREE.Vector3();
+            leftFootPos.copy(this.joints[this.jointIndexes.FOOT_LEFT].mesh.value.position);
+            let rightFootPos = new THREE.Vector3();
+            rightFootPos.copy(this.joints[this.jointIndexes.FOOT_RIGHT].mesh.value.position);
 
+            return (headPos.y < leftFootPos.y) && (headPos.y < rightFootPos.y)
         },
         addCollider : function(jointIndex, visible = true) {
             let collision = collisionFactory(
