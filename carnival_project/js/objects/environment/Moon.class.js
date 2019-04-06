@@ -16,39 +16,36 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
         //Construct the superclass.
         super(position);
 
-        //ADD LIGHTING... (I have not figured out a good way to do lighting yet).
         //let exmoonLight = new THREE.HemisphereLight(0x375D9C, 0x444444, 4);//0xFFFFFF, 0x444444
-        //let moonLight = new THREE.HemisphereLight(0xFFFFFF, 0xFFFFFF, 1);//0xFFFFFF, 0x444444
-        //moonLight.position.set(0.0, 20.0, 0.0);
-        //moonLight.castShadow = true;
-        //this.addObjectToGroup(moonLight);
-        /** 
-        let exmoonLight = new THREE.HemisphereLight(0x375D9C, 0x444444, 4);//0xFFFFFF, 0x444444
-        let moonLight = new THREE.PointLight(0xFFFFFF, 1, 100);//0xFFFFFF, 0x444444
-        moonLight.position.set(600.0, 100, 300.0);
-        moonLight.castShadow = true;
-        let pointerLightHelper = new THREE.PointLightHelper(moonLight,50);
-        this.addObjectToGroup(moonLight);
-        this.addObjectToGroup(pointerLightHelper);
-        this.addObjectToGroup(exmoonLight);
-*/
+        //let moonAmbientLight = new THREE.AmbientLight(0x4F8AD9, 0.1);//0xFFFFFF, 0x444444
+        //moonLight.position.set(-200.0, 200, 200.0);
+        //moonAmbientLight.castShadow = true;
+        //this.addObjectToGroup(moonAmbientLight);
+
+        //ADD LIGHTING... 
+        //DirectionalLight for the environment light
         let renderer = new THREE.WebGLRenderer();
         renderer.shadowMap.enabled = true;
         renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
-        let moonLight = new THREE.DirectionalLight( 0x4F8AD9, 1.8);
-        moonLight.position.set(-400.0, 900, 200.0);
+        let moonLight = new THREE.DirectionalLight( 0x4F8AD9, 0.7);
+        moonLight.position.set(400.0, 700, -200.0);
         moonLight.castShadow = true;
-        this.addObjectToGroup( moonLight );
-        
         moonLight.shadow.mapSize.width = 1024;  
         moonLight.shadow.mapSize.height = 1024;
         moonLight.shadow.camera.near = 500;    
         moonLight.shadow.camera.far = 1000;     
         moonLight.shadow.camera.fov = 30;
+        this.addObjectToGroup( moonLight );
 
-        let helper = new THREE.CameraHelper( moonLight.shadow.camera );
-        this.addObjectToGroup( helper );
+        //let helper = new THREE.CameraHelper( moonLight.shadow.camera );
+        //this.addObjectToGroup( helper );
+
+        //PointLight to light up the MOON.model
+        let lightUpTheMoon = new THREE.PointLight(0x4F8AD9, 2, 10000, 1);
+        lightUpTheMoon.position.set(-500, 270, -100);
+        lightUpTheMoon.castShadow = true;
+        this.addObjectToGroup(lightUpTheMoon);
 
         //Add the Moon model.
         const MOON = ENGINE.ObjectLoader().loadModel(
@@ -94,7 +91,7 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
                                 meshes.forEach(mesh => {
                                     //let originalColour = mesh.material.color;
                                     mesh.material = new THREE.MeshPhysicalMaterial({
-                                        color: 0x637697,
+                                        color: 0xffffff,//0x637697
                                         roughness: 0.8,
                                         metalness: 0.5,
                                         reflectivity: 0.5

@@ -36,43 +36,7 @@ class WackCover extends ENGINE.OBJECTS.ClassicObject
          */
         this.update = function(frameTime)
         {
-            ///Still have to work on this
-            if(once) {
-                once = false;
-                let scene = WACKCOVER.model.children[0];
-                //Make the Terrain be able to receive and cast shadows 
-                //from the other models in the environment.
-                //Search though the object tree and change the material of every mesh.
-                if(scene) {
-                    let object = scene.children[0];
-                    if(object) {
-                        let secondObject = object.children[0];
-                        if(secondObject){
-                            let thirdObject = secondObject.children[0];
-                            if(thirdObject){
-                                let forthObject = thirdObject.children[0];
-                                if(forthObject){
-                                    let parent = forthObject.children[0];
-                                    if(parent){
-                                        let parentObject = parent.children[0];
-                                        if(parentObject){
-                                            let secondParentObject = parentObject.children[0];
-                                            if(secondParentObject){
-                                                let meshes = secondParentObject.children;
-                                                //Change the material of every mesh.
-                                                meshes.forEach(mesh => {
-                                                    mesh.castShadow = true;
-                                                    mesh.receiveShadow = true;
-                                                });
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }//end of if(once)
+           //The WackCover is not updated.
         }
     }
 

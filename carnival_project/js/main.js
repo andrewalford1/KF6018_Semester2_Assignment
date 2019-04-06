@@ -25,17 +25,18 @@ engine.addObjects(MODELS, [
     new Floor(),
     new Helicopter(),
     new HotAirBalloon(new THREE.Vector3(0, 250, 0)),
-    new Moon(new THREE.Vector3(-600, 280, -400)),
+    new Moon(new THREE.Vector3(-600, 280, -200)),
     new MoreTents(),
     new Terrain(),
-    //new StreetLamp(),
+    new StreetLamp(),
     new WackCover(),
     //Games
     games.darts,
     new Football(),
     new Goal(new THREE.Vector3(25, 0, 0)),
     games.strengthOMetre,
-    games.whackAMole
+    games.whackAMole,
+    new Cans(new THREE.Vector3(0, 150, 0))
 ]);
 
 let player = playerFactory(null, engine.scene);
