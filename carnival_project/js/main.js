@@ -36,6 +36,7 @@ engine.addObjects(MODELS, [
     new Goal(new THREE.Vector3(25, 0, 0)),
     games.strengthOMetre,
     games.whackAMole
+    new Cans(new THREE.Vector3(0, 150, 0)),
 ]);
 
 let player = playerFactory(null, engine.scene);//camera,engine.scene
