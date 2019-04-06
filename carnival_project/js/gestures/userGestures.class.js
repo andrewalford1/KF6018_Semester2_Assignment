@@ -123,11 +123,6 @@ class UserGestures {
             return false
         }//end of the leftHandCollideRightHand class
 
-        this.update = function() {
-            if(player.handsTogether()) {
-                // console.log('hands together');
-            };
-            
-        }
+        this.update = function() { }
     }//End of constructor.
 }

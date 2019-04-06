@@ -11,7 +11,6 @@ let playerFactory = (function() {
                     this.previousPositions[i].push([]);
                 }
             }
-            console.log(this);
         },
         addToScene : function(scene) {
             if(scene) {
@@ -61,16 +60,52 @@ let playerFactory = (function() {
 
         },
         leftHandTouchingHead : function() {
+            let leftHandPos = new THREE.Vector3();
+            leftHandPos.copy(this.joints[this.jointIndexes.HAND_LEFT].mesh.value.position);
+            let headPos = new THREE.Vector3();
+            headPos.copy(this.joints[this.jointIndexes.HEAD].mesh.value.position);
 
+            leftHandPos.multiplyScalar(5);
+            headPos.multiplyScalar(5);
+
+            let distance = leftHandPos.distanceTo(headPos).toFixed(2);
+
+            return distance < 1;
         },
         rightHandTouchingHead : function() {
+            let rightHandPos = new THREE.Vector3();
+            rightHandPos.copy(this.joints[this.jointIndexes.HAND_RIGHT].mesh.value.position);
+            let headPos = new THREE.Vector3();
+            headPos.copy(this.joints[this.jointIndexes.HEAD].mesh.value.position);
+
+            rightHandPos.multiplyScalar(5);
+            headPos.multiplyScalar(5);
+
+            let distance = rightHandPos.distanceTo(headPos).toFixed(2);
+
+            return distance < 1;
+        },
+        leftHandAboveShoulder : function() {
+
+        },
+        rightHandAboveShoulder : function() {
 
         },
         leftHandAboveHead : function() {
+            let leftHandPos = new THREE.Vector3();
+            leftHandPos.copy(this.joints[this.jointIndexes.HAND_LEFT].mesh.value.position);
+            let headPos = new THREE.Vector3();
+            headPos.copy(this.joints[this.jointIndexes.HEAD].mesh.value.position);
 
+            return leftHandPos.y > headPos.y;
         },
-        rightHandsAboveHead : function() {
+        rightHandAboveHead : function() {
+            let rightHandPos = new THREE.Vector3();
+            rightHandPos.copy(this.joints[this.jointIndexes.HAND_RIGHT].mesh.value.position);
+            let headPos = new THREE.Vector3();
+            headPos.copy(this.joints[this.jointIndexes.HEAD].mesh.value.position);
 
+            return rightHandPos.y > headPos.y;
         },
         standingOnLeftLeg : function() {
 

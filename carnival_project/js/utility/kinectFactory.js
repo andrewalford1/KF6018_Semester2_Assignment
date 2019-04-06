@@ -10,6 +10,26 @@ let kinectFactory = (function() {
             console.log(this.instance);
             this.instance.startTrackedBodies(function(skeleton) {
                 player.update(skeleton);
+
+                if(player.handsTogether()) {
+                    console.log('hands together');
+                };
+
+                if(player.leftHandAboveHead()) {
+                    console.log('left hand Above head');
+                }
+
+                if(player.rightHandAboveHead()) {
+                    console.log('right hand above head');
+                }
+
+                if(player.leftHandTouchingHead()) {
+                    console.log('left hand touching head');
+                }
+
+                if(player.rightHandTouchingHead()) {
+                    console.log('right hand touching head');
+                }
             });
         }
     };

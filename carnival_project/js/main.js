@@ -38,7 +38,7 @@ engine.addObjects(MODELS, [
     games.whackAMole
 ]);
 
-let player = playerFactory(camera, engine.scene);
+let player = playerFactory(null, engine.scene);
 let guestures = new UserGestures(player);
 
 //Allocate the player to the games.
