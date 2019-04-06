@@ -76,11 +76,11 @@ let playerFactory = (function() {
         isUpsideDown : function() {
 
         },
-        addCollider : function(jointIndex) {
+        addCollider : function(jointIndex, visible = true) {
             let collision = collisionFactory(
                 this.joints[jointIndex].mesh.value,
                 null,
-                true,
+                visible,
                 0x00FFFF
             );
             this.joints[jointIndex].collider = collision;
@@ -397,8 +397,10 @@ let playerFactory = (function() {
         player.initPlayer();
         player.attachCamera(camera);
         player.addToScene(scene);
-        player.addCollider(player.jointIndexes.HAND_LEFT);
-        player.addCollider(player.jointIndexes.HAND_RIGHT);
+        player.addCollider(player.jointIndexes.HAND_LEFT, true);
+        player.addCollider(player.jointIndexes.HAND_RIGHT, true);
+        player.addCollider(player.jointIndexes.FOOT_LEFT, true);
+        player.addCollider(player.jointIndexes.FOOT_RIGHT, true);
 
         return player;
     }
