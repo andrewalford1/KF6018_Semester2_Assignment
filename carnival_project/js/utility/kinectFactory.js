@@ -11,6 +11,10 @@ let kinectFactory = (function() {
             this.instance.startTrackedBodies(function(skeleton) {
                 player.update(skeleton);
 
+                if(player.geustures) {
+                    player.geustures.update();
+                }
+
                 if(player.handsTogether()) {
                     console.log('hands together');
                 };

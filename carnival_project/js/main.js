@@ -1,5 +1,6 @@
 "use strict"
 
+//[camera] Films the scene.
 let camera = new THREE.PerspectiveCamera(
     75,
     window.innerWidth / window.innerHeight,
@@ -8,6 +9,7 @@ let camera = new THREE.PerspectiveCamera(
 );
 camera.position.set(0, 25, 20);
 
+//[engine] Manages the scene.
 let engine = engineFactory(camera, false);
 
 //[games] Holds all of our games.
@@ -39,14 +41,12 @@ engine.addObjects(MODELS, [
     new Cans(new THREE.Vector3(0, 150, 0))
 ]);
 
-let player = playerFactory(null, engine.scene);
-let guestures = new UserGestures(player);
-
-//Allocate the player to the games.
+//[player] tracks the user playing the game.
+let player = playerFactory(camera, engine.scene);
 games.whackAMole.allocatePlayer(player);
 
 //Run the animation loop.
-function animate() { engine.driver.update(); guestures.update();}
+function animate() { engine.driver.update(); }
 animate();
 
 //Kinect code.

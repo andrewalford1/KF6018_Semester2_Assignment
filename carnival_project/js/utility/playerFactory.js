@@ -482,7 +482,7 @@ let playerFactory = (function() {
             numPreviousPositions : {writeable: false, value : 5},
             previousPositions : {writeable: true, value : []}
         });
-
+        
         player.initPlayer();
         player.attachCamera(camera);
         player.addToScene(scene);
@@ -490,6 +490,8 @@ let playerFactory = (function() {
         player.addCollider(player.jointIndexes.HAND_RIGHT, true);
         player.addCollider(player.jointIndexes.FOOT_LEFT, true);
         player.addCollider(player.jointIndexes.FOOT_RIGHT, true);
+
+        player.geustures = new UserGeustures(player);
 
         return player;
     }

@@ -3,9 +3,9 @@
  * @extends ENGINE.OBJECTS.ClassicObject
  * @author  Ana-Sabina Irimia
  * @date    30/03/2019
- * @version 2.0 - 06/04/2019
+ * @version 2.1 - 12/04/2019
  */
-class UserGestures { 
+class UserGeustures { 
     
     /**
      * Sets up User Guestures.
