@@ -147,9 +147,6 @@ let playerFactory = (function() {
 
             return rightHandPos.y > headPos.y;
         },
-        dabbing : function() {
-
-        },
         isUpsideDown : function() {
             let headPos = new THREE.Vector3();
             headPos.copy(this.joints[this.jointIndexes.HEAD].mesh.value.position);

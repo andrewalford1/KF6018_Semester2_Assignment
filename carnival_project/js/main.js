@@ -42,7 +42,7 @@ engine.addObjects(MODELS, [
 ]);
 
 //[player] tracks the user playing the game.
-let player = playerFactory(camera, engine.scene);
+let player = playerFactory(null, engine.scene);
 games.whackAMole.allocatePlayer(player);
 
 //Run the animation loop.
