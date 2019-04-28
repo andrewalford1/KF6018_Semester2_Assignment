@@ -42,8 +42,16 @@ engine.addObjects(MODELS, [
 ]);
 
 //[player] tracks the user playing the game.
-let player = playerFactory(null, engine.scene);
-games.whackAMole.allocatePlayer(player);
+
+let players = [
+    playerFactory(engine.camera, engine.scene, new THREE.Color(0x84B1AA), 0),
+    playerFactory(null, engine.scene, new THREE.Color(0xFFD700), 1),
+    playerFactory(null, engine.scene, new THREE.Color(0xB94F74), 2),
+    playerFactory(null, engine.scene, new THREE.Color(0xC7AFD0), 3),
+    playerFactory(null, engine.scene, new THREE.Color(0x74F016), 4),
+    playerFactory(null, engine.scene, new THREE.Color(0x1ACEC5), 5)
+];
+games.whackAMole.allocatePlayer(players[0]);
 
 //Run the animation loop.
 function animate() { engine.driver.update(); }
