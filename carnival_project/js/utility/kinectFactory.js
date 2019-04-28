@@ -5,15 +5,26 @@ let kinectFactory = (function() {
         establishConnection: function() {
             this.instance.makeConnection();
         },
-        startTrackedBodies: function(player) {
-            //Start tracking the player.
-            console.log(this.instance);
-            this.instance.startTrackedBodies(function(skeleton) {
-                player.update(skeleton);
+        startTrackedBodies: function(players) {
 
-                if(player.geustures) {
-                    player.geustures.update();
-                }
+            console.log(this.instance);
+
+            //Start tracking the player.
+            this.instance.startTrackedBodies(function(skeleton) {
+
+                //console.log(`Body: ${skeleton.bodyIndex}, \t Tracking ID: ${skeleton.trackingId}`);
+
+                players.forEach(player => {
+
+                    if(player.ID == skeleton.bodyIndex) {
+                        
+                        player.update(skeleton);
+    
+                        if(player.geustures) {
+                            player.geustures.update();
+                        }
+                    }
+                });
             });
         }
     };
@@ -21,7 +32,8 @@ let kinectFactory = (function() {
     return function(IP) {
         let kinect = Object.create(kinectPrototype, {
             IP : {writeable: false, value: IP},
-            instance : {writeable: false, value: new Kinectron(IP)}
+            instance : {writeable: false, value: new Kinectron(IP)},
+            playersTracked : {writeable: 0, value: []}
         });
         kinect.establishConnection();
         return kinect;

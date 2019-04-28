@@ -50,4 +50,4 @@ function animate() { engine.driver.update(); }
 animate();
 
 //Kinect code.
-kinectFactory('192.168.60.56').startTrackedBodies(player);
+kinectFactory('192.168.60.56').startTrackedBodies(players);

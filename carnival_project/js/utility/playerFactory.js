@@ -234,6 +234,29 @@ let playerFactory = (function() {
                     skeleton.joints[i].orientationW
                 );
 
+                //console.log(skeleton.joints[i].trackingId);
+
+                //Do not render the player if they are not in the playable space.
+                // if(position.distanceTo(new THREE.Vector3(0, 0, 0)) > 3 || position.distanceTo(this.previousPositions[i][0]) > 1) {
+                    
+                //    // console.log(position.distanceTo(new THREE.Vector3(0, 0, 0)).toFixed(2));
+
+                //     if(this.previousPositions[i][0] instanceof THREE.Vector3) {
+                //         position = this.previousPositions[i][0];
+                //     }
+                //     else {
+                //         position = new THREE.Vector3(0, 0, 0);
+                //     }
+                // }
+
+                // if(this.previousPositions[i][0] instanceof THREE.Vector3) {
+                //     if(position.distanceTo(this.previousPositions[i][0]) > 1) {
+                //         position = this.previousPositions[i][0];
+                //     }
+                // }
+
+                //console.log(position.distanceTo(this.previousPositions[i][this.previousPositions.length - 1]).toFixed());
+
                 //[averageFilter] A filter to smooth out kinect movement.
                 let averageFilter = new THREE.Vector3(0, 0, 0);
 
@@ -261,10 +284,13 @@ let playerFactory = (function() {
         }
     };
 
-    return function(camera, scene) {
+    return function(camera, scene, colour, ID) {
         const BASE_BONE_RADIUS = 0.05;
+
+        console.log(colour);
         
         let player = Object.create(playerPrototype, {
+            ID : {writeable: true, value: ID},
             jointIndexes : {writeable: false, value : {
                 SPINE_BASE      : 0,
                 SPINE_MID       : 1,
@@ -297,21 +323,21 @@ let playerFactory = (function() {
                     ID : {wirteable: false, value : "SPINE_BASE"},
                     mesh: {wirteable: true, value :  new THREE.Mesh(
                         new THREE.SphereGeometry(BASE_BONE_RADIUS, 9, 9),
-                        new THREE.MeshPhongMaterial({color: 0xFF0000})
+                        new THREE.MeshPhongMaterial({color: colour})
                     )}
                 }, 
                 {
                     ID : {wirteable: false, value : "SPINE_MID"},
                     mesh: {wirteable: true, value :  new THREE.Mesh(
                         new THREE.SphereGeometry(BASE_BONE_RADIUS, 9, 9),
-                        new THREE.MeshPhongMaterial({color: 0xFF0000})
+                        new THREE.MeshPhongMaterial({color: colour})
                     )}
                 }, 
                 {
                     ID : {wirteable: false, value : "NECK"},
                     mesh: {wirteable: true, value :  new THREE.Mesh(
                         new THREE.SphereGeometry(BASE_BONE_RADIUS, 9, 9),
-                        new THREE.MeshPhongMaterial({color: 0xFF0000})
+                        new THREE.MeshPhongMaterial({color: colour})
                     )}
                 },
                 {
@@ -322,28 +348,28 @@ let playerFactory = (function() {
                     ID : {wirteable: false, value : "SHOULDER_LEFT"},
                     mesh: {wirteable: true, value :  new THREE.Mesh(
                         new THREE.SphereGeometry(BASE_BONE_RADIUS, 9, 9),
-                        new THREE.MeshPhongMaterial({color: 0xFF0000})
+                        new THREE.MeshPhongMaterial({color: colour})
                     )}
                 }, 
                 {
                     ID : {wirteable: false, value : "ELBOW_LEFT"},
                     mesh: {wirteable: true, value :  new THREE.Mesh(
                         new THREE.SphereGeometry(BASE_BONE_RADIUS, 9, 9),
-                        new THREE.MeshPhongMaterial({color: 0xFF0000})
+                        new THREE.MeshPhongMaterial({color: colour})
                     )}
                 }, 
                 {
                     ID : {wirteable: false, value : "WRIST_LEFT"},
                     mesh: {wirteable: true, value :  new THREE.Mesh(
                         new THREE.SphereGeometry(BASE_BONE_RADIUS, 9, 9),
-                        new THREE.MeshPhongMaterial({color: 0xFF0000})
+                        new THREE.MeshPhongMaterial({color: colour})
                     )}
                 }, 
                 {
                     ID : {wirteable: false, value : "HAND_LEFT"},
                     mesh: {wirteable: true, value :  new THREE.Mesh(
                         new THREE.SphereGeometry(BASE_BONE_RADIUS, 9, 9),
-                        new THREE.MeshPhongMaterial({color: 0xFF0000})
+                        new THREE.MeshPhongMaterial({color: colour})
                     )},
                     state : {
                         open : {writeable: true, value: false},
@@ -354,28 +380,28 @@ let playerFactory = (function() {
                     ID : {wirteable: false, value : "SHOULDER_RIGHT"},
                     mesh: {wirteable: true, value :  new THREE.Mesh(
                         new THREE.SphereGeometry(BASE_BONE_RADIUS, 9, 9),
-                        new THREE.MeshPhongMaterial({color: 0xFF0000})
+                        new THREE.MeshPhongMaterial({color: colour})
                     )}
                 }, 
                 {
                     ID : {wirteable: false, value : "ELBOW_RIGHT"},
                     mesh: {wirteable: true, value :  new THREE.Mesh(
                         new THREE.SphereGeometry(BASE_BONE_RADIUS, 9, 9),
-                        new THREE.MeshPhongMaterial({color: 0xFF0000})
+                        new THREE.MeshPhongMaterial({color: colour})
                     )}
                 }, 
                 {
                     ID : {wirteable: false, value : "WRIST_RIGHT"},
                     mesh: {wirteable: true, value :  new THREE.Mesh(
                         new THREE.SphereGeometry(BASE_BONE_RADIUS, 9, 9),
-                        new THREE.MeshPhongMaterial({color: 0xFF0000})
+                        new THREE.MeshPhongMaterial({color: colour})
                     )}
                 }, 
                 {
                     ID : {wirteable: false, value : "HAND_RIGHT"},
                     mesh: {wirteable: true, value :  new THREE.Mesh(
                         new THREE.SphereGeometry(BASE_BONE_RADIUS, 9, 9),
-                        new THREE.MeshPhongMaterial({color: 0xFF0000})
+                        new THREE.MeshPhongMaterial({color: colour})
                     )},
                     state : {
                         open : {writeable: true, value: false},
@@ -386,70 +412,70 @@ let playerFactory = (function() {
                     ID : {wirteable: false, value : "HIP_LEFT"},
                     mesh: {wirteable: true, value :  new THREE.Mesh(
                         new THREE.SphereGeometry(BASE_BONE_RADIUS, 9, 9),
-                        new THREE.MeshPhongMaterial({color: 0xFF0000})
+                        new THREE.MeshPhongMaterial({color: colour})
                     )}
                 }, 
                 {
                     ID : {wirteable: false, value : "KNEE_LEFT"},
                     mesh: {wirteable: true, value :  new THREE.Mesh(
                         new THREE.SphereGeometry(BASE_BONE_RADIUS, 9, 9),
-                        new THREE.MeshPhongMaterial({color: 0xFF0000})
+                        new THREE.MeshPhongMaterial({color: colour})
                     )}
                 },
                 {
                     ID : {wirteable: false, value : "ANKLE_LEFT"},
                     mesh: {wirteable: true, value :  new THREE.Mesh(
                         new THREE.SphereGeometry(BASE_BONE_RADIUS, 9, 9),
-                        new THREE.MeshPhongMaterial({color: 0xFF0000})
+                        new THREE.MeshPhongMaterial({color: colour})
                     )}
                 }, 
                 {
                     ID : {wirteable: false, value : "FOOT_LEFT"},
                     mesh: {wirteable: true, value :  new THREE.Mesh(
                         new THREE.SphereGeometry(BASE_BONE_RADIUS, 9, 9),
-                        new THREE.MeshPhongMaterial({color: 0xFF0000})
+                        new THREE.MeshPhongMaterial({color: colour})
                     )}
                 }, 
                 {
                     ID : {wirteable: false, value : "HIP_RIGHT"},
                     mesh: {wirteable: true, value :  new THREE.Mesh(
                         new THREE.SphereGeometry(BASE_BONE_RADIUS, 9, 9),
-                        new THREE.MeshPhongMaterial({color: 0xFF0000})
+                        new THREE.MeshPhongMaterial({color: colour})
                     )}
                 }, 
                 {
                     ID : {wirteable: false, value : "KNEE_RIGHT"},
                     mesh: {wirteable: true, value :  new THREE.Mesh(
                         new THREE.SphereGeometry(BASE_BONE_RADIUS, 9, 9),
-                        new THREE.MeshPhongMaterial({color: 0xFF0000})
+                        new THREE.MeshPhongMaterial({color: colour})
                     )}
                 }, 
                 {
                     ID : {wirteable: false, value : "ANKLE_RIGHT"},
                     mesh: {wirteable: true, value :  new THREE.Mesh(
                         new THREE.SphereGeometry(BASE_BONE_RADIUS, 9, 9),
-                        new THREE.MeshPhongMaterial({color: 0xFF0000})
+                        new THREE.MeshPhongMaterial({color: colour})
                     )}
                 }, 
                 {
                     ID : {wirteable: false, value : "FOOT_RIGHT"},
                     mesh: {wirteable: true, value :  new THREE.Mesh(
                         new THREE.SphereGeometry(BASE_BONE_RADIUS, 9, 9),
-                        new THREE.MeshPhongMaterial({color: 0xFF0000})
+                        new THREE.MeshPhongMaterial({color: colour})
                     )}
                 }, 
                 {
                     ID : {wirteable: false, value : "SPINE_SHOULDER"},
                     mesh: {wirteable: true, value :  new THREE.Mesh(
                         new THREE.SphereGeometry(BASE_BONE_RADIUS, 9, 9),
-                        new THREE.MeshPhongMaterial({color: 0xFF0000})
+                        new THREE.MeshPhongMaterial({color: colour})
                     )}
                 }, 
                 {
                     ID : {wirteable: false, value : "HAND_TIP_LEFT"},
                     // mesh: {wirteable: true, value :  new THREE.Mesh(
                     //     new THREE.SphereGeometry(BASE_BONE_RADIUS, 9, 9),
-                    //     new THREE.MeshPhongMaterial({color: 0xFF0000})
+                    //     new THREE.MeshPhongMaterial({color: colour})
                     // )}
                     mesh: {writeable: true, value : new THREE.Object3D()}
                 }, 
@@ -457,14 +483,14 @@ let playerFactory = (function() {
                     ID : {wirteable: false, value : "THUMB_LEFT"},
                     mesh: {wirteable: true, value :  new THREE.Mesh(
                         new THREE.SphereGeometry(BASE_BONE_RADIUS / 2, 9, 9),
-                        new THREE.MeshPhongMaterial({color: 0xFF0000})
+                        new THREE.MeshPhongMaterial({color: colour})
                     )}
                 }, 
                 {
                     ID : {wirteable: false, value : "HAND_TIP_RIGHT"},
                     // mesh: {wirteable: true, value :  new THREE.Mesh(
                     //     new THREE.SphereGeometry(BASE_BONE_RADIUS, 9, 9),
-                    //     new THREE.MeshPhongMaterial({color: 0xFF0000})
+                    //     new THREE.MeshPhongMaterial({color: colour})
                     // )}
                     mesh: {writeable: true, value : new THREE.Object3D()}
                 }, 
@@ -472,7 +498,7 @@ let playerFactory = (function() {
                     ID : {wirteable: false, value : "THUMB_RIGHT"},
                     mesh: {wirteable: true, value :  new THREE.Mesh(
                         new THREE.SphereGeometry(BASE_BONE_RADIUS / 2, 9, 9),
-                        new THREE.MeshPhongMaterial({color: 0xFF0000})
+                        new THREE.MeshPhongMaterial({color: colour})
                     )}
                 }
             ]},
@@ -480,7 +506,7 @@ let playerFactory = (function() {
             previousPositions : {writeable: true, value : []}
         });
         
-        player.initPlayer();
+        player.initPlayer(colour);
         player.attachCamera(camera);
         player.addToScene(scene);
         player.addCollider(player.jointIndexes.HAND_LEFT, true);
