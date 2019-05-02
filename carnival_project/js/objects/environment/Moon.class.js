@@ -28,6 +28,8 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
         renderer.shadowMap.enabled = true;
         renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
+
+
         let moonLight = new THREE.DirectionalLight( 0x4F8AD9, 0.7);
         moonLight.position.set(400.0, 700, -200.0);
         moonLight.castShadow = true;
@@ -57,6 +59,11 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
         MOON.model.scale.multiplyScalar(20);
         MOON.model.position.copy(position);
         this.addObjectToGroup(MOON.model);
+/*
+        this.allocatedPlayer() = function(){
+            let m_player = player;
+        }
+        */
         
         this.RotateMoon = function(){
              MOON.model.rotation.y += 0.005;
@@ -70,6 +77,10 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
         this.update = function(frameTime)
         {
             this.RotateMoon();
+            if(player.usergesture(MoonIsMooning)){
+                MOON.model.rotation.y += 0.005;
+
+            }
             //Execute this code once on the first frame of animation.
             if(once)
             {

@@ -18,8 +18,6 @@ class UserGeustures {
         //geustures are being tracked.
         let m_player = player;
 
-        //let m_moon = new Moon();
-
         //[m_positions] Holds information about the
         //player's current and previous positions.
         let m_positions = [];

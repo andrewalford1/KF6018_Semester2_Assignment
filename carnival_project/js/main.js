@@ -16,7 +16,8 @@ let engine = engineFactory(camera, false);
 let games = {
     darts : new DartsGame(),
     whackAMole : new WhackAMole(new THREE.Vector3(100, 0, 0)),
-    strengthOMetre : new StrengthOMetre()
+    strengthOMetre : new StrengthOMetre(),
+    //moon: new Moon()
 };
 
 //Add all objects to the scene.
@@ -52,6 +53,7 @@ let players = [
     playerFactory(null, engine.scene, new THREE.Color(0x1ACEC5), 5)
 ];
 games.whackAMole.allocatePlayer(players[0]);
+//games.moon.allocatePlayer(players[0]);
 
 //Run the animation loop.
 function animate() { engine.driver.update(); }
