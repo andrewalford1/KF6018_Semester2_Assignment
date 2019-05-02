@@ -71,6 +71,14 @@ class UserGeustures {
 
             return stageOne && stageTwo;
         }
+
+        this.MoonIsMooning = function(){
+
+            //The player has both hands on the head.
+            let stageOne = m_positions[0].leftHandTouchingHead && m_positions[0].rightHandTouchingHead;
+            
+            return stageOne; 
+        }
         
         /**
          * Updates the players geustures.
