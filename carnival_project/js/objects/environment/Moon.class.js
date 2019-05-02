@@ -77,10 +77,12 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
         this.update = function(frameTime)
         {
             this.RotateMoon();
+            /**
             if(player.usergesture(MoonIsMooning)){
                 MOON.model.rotation.y += 0.005;
 
             }
+            */
             //Execute this code once on the first frame of animation.
             if(once)
             {
