@@ -21,7 +21,7 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
         //moonLight.position.set(-200.0, 200, 200.0);
         //moonAmbientLight.castShadow = true;
         //this.addObjectToGroup(moonAmbientLight);
-
+        let once = true;
         //ADD LIGHTING... 
         //DirectionalLight for the environment light
         let renderer = new THREE.WebGLRenderer();
@@ -58,8 +58,9 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
         MOON.model.position.copy(position);
         this.addObjectToGroup(MOON.model);
         
-
-        let once = true;
+        this.RotateMoon = function(){
+             MOON.model.rotation.y += 0.005;
+         }
 
         /**
          * Updates the Moon. (Overridden from the superclass).
@@ -68,7 +69,7 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
          */
         this.update = function(frameTime)
         {
-            MOON.model.rotation.y += 0.005;
+            this.RotateMoon();
             //Execute this code once on the first frame of animation.
             if(once)
             {
@@ -104,8 +105,8 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
                 }
             }
         }//end of update()
-    }
-}
+    }//end of constructor
+}//end of Moon class
 
 /**
 let meshes = object.children;
