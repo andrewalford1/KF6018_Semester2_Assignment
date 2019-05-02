@@ -103,7 +103,7 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
                     }
                 }
             }
-        }
+        }//end of update()
     }
 }
 

@@ -44,7 +44,7 @@ class UserGeustures {
                 leftHandAboveHead: m_player.leftHandAboveHead(),
                 rightHandAboveHead: m_player.rightHandAboveHead(),
                 leftHandTouchingHead: m_player.leftHandTouchingHead(),
-                rightHandAboveHead: m_player.rightHandTouchingHead(),
+                rightHandTouchingHead: m_player.rightHandTouchingHead(),
                 armsSpread: m_player.armsSpread(),
                 leftHandAboveShoulder: m_player.leftHandAboveShoulder(),
                 rightHandAboveShoulder: m_player.rightHandAboveShoulder(),
@@ -72,13 +72,16 @@ class UserGeustures {
             return stageOne && stageTwo;
         }
 
-        this.MoonIsMooning = function(){
+        this.MoonIsMooning = function(){      
 
             //The player has both hands on the head.
-            let stageOne = m_positions[0].leftHandTouchingHead && m_positions[0].rightHandTouchingHead;
-            
-            return stageOne; 
+            let stageOne = m_positions[0].leftHandTouchingHead &&
+                          m_positions[0].rightHandTouchingHead;
+
+            return stageOne ; 
         }
+
+
         
         /**
          * Updates the players geustures.
@@ -89,6 +92,9 @@ class UserGeustures {
 
             if(this.IsSmashingHammer()) {
                 console.log(`Hammer Smash!`);
+            }
+            else if(this.MoonIsMooning()){
+                console.log(`Oh my Gluten!!`);
             }
         }
 
