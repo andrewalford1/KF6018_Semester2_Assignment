@@ -8,7 +8,7 @@
 class Moon extends ENGINE.OBJECTS.ClassicObject
 {
     /**
-     * Constructor for the tent.
+     * Constructor for the moon.
      * @param {THREE.Vector3} position - Where the Moon is located.
      */
     constructor(position)
@@ -108,16 +108,3 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
     }//end of constructor
 }//end of Moon class
 
-/**
-let meshes = object.children;
-//Change the material of every mesh.
-                        meshes.forEach(mesh => {
-                            let originalColour = mesh.material.color;
-                            mesh.material = new THREE.MeshPhysicalMaterial({
-                                color: originalColour,
-                                roughness: 0.8,
-                                metalness: 0.6,
-                                reflectivity: 0.5
-                            });
-                        });
-                        */
