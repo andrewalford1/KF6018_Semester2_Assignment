@@ -57,10 +57,11 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject {
             new THREE.PlaneGeometry(15, 11, 1), 
             new THREE.MeshBasicMaterial({ 
                 map: ENGINE.TextureLoader().loadTexture('whackAMole/mole.jpg'), 
-                side: THREE.FrontSide 
+                side: THREE.BackSide 
             })
         );
         tableBack.position.set(0, 9.8, -9.55);
+        tableBack.rotation.x = 180 * (Math.PI / 180);
         tableBack.castShadow = true;
         tableBack.receiveShadow = true;
 
