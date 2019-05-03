@@ -1,5 +1,23 @@
-"use strict"
+"use strict";
 
+//[parameters] Retrieves parameters from the projects URL.
+let parameters = (function () {
+
+    //[url] The project's URL
+    let url = new URL(window.location.href);
+
+    //[playerIndex] The main player.
+    let playerIndex = parseInt(url.searchParams.get('playerIndex'), 10);
+
+    //[IP] The kinectron IP address.
+    let IP = url.searchParams.get('ip');
+
+    return {
+        playerIndex: playerIndex || 0,
+        IP: IP || '192.168.60.56'
+    };
+})();
+  
 //[camera] Films the scene.
 let camera = new THREE.PerspectiveCamera(
     75,
@@ -44,7 +62,6 @@ engine.addObjects(MODELS, [
 ]);
 
 //[player] tracks the user playing the game.
-
 let players = [
     playerFactory(engine.camera, engine.scene, new THREE.Color(0x84B1AA), 0),
     playerFactory(null, engine.scene, new THREE.Color(0xFFD700), 1),
@@ -53,12 +70,12 @@ let players = [
     playerFactory(null, engine.scene, new THREE.Color(0x74F016), 4),
     playerFactory(null, engine.scene, new THREE.Color(0x1ACEC5), 5)
 ];
-games.whackAMole.allocatePlayer(players[0]);
-moon.allocatePlayer(players[0]);
+games.whackAMole.allocatePlayer(players[parameters.playerIndex]);
+moon.allocatePlayer(players[parameters.playerIndex]);
 
 //Run the animation loop.
 function animate() { engine.driver.update(); }
 animate();
 
 //Kinect code.
-kinectFactory('192.168.60.56').startTrackedBodies(players);
+kinectFactory(parameters.IP).startTrackedBodies(players);
