@@ -3,7 +3,7 @@
  * @extends ENGINE.OBJECTS.ClassicObject
  * @author Ana-Sabina Irimia
  * @date 30/03/2019
- * @version 5.0 - 30/03/2019
+ * @version 5.1 - 03/05/2019
  */
 class Moon extends ENGINE.OBJECTS.ClassicObject
 {
@@ -16,19 +16,20 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
         //Construct the superclass.
         super(position);
 
+        //[m_player] The player who controls the moon.
+        let m_player = null;
+
         //let exmoonLight = new THREE.HemisphereLight(0x375D9C, 0x444444, 4);//0xFFFFFF, 0x444444
         //let moonAmbientLight = new THREE.AmbientLight(0x4F8AD9, 0.1);//0xFFFFFF, 0x444444
         //moonLight.position.set(-200.0, 200, 200.0);
         //moonAmbientLight.castShadow = true;
         //this.addObjectToGroup(moonAmbientLight);
-        let once = true;
+        let firstTime = true;
         //ADD LIGHTING... 
         //DirectionalLight for the environment light
         let renderer = new THREE.WebGLRenderer();
         renderer.shadowMap.enabled = true;
         renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-
-
 
         let moonLight = new THREE.DirectionalLight( 0x4F8AD9, 0.7);
         moonLight.position.set(400.0, 700, -200.0);
@@ -59,34 +60,20 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
         MOON.model.scale.multiplyScalar(20);
         MOON.model.position.copy(position);
         this.addObjectToGroup(MOON.model);
-/*
-        this.allocatedPlayer() = function(){
-            let m_player = player;
+
+        this.allocatePlayer = function(player) {
+            m_player = player;
         }
-        */
         
         this.RotateMoon = function(){
              MOON.model.rotation.y += 0.005;
-         }
+        }
 
-        /**
-         * Updates the Moon. (Overridden from the superclass).
-         * @param {number} frameTime - The time taken to compute the
-         *                             previous frame of animation.
-         */
-        this.update = function(frameTime)
-        {
-            this.RotateMoon();
-            /**
-            if(player.usergesture(MoonIsMooning)){
-                MOON.model.rotation.y += 0.005;
-
-            }
-            */
+        this.Initialise = function() {
             //Execute this code once on the first frame of animation.
-            if(once)
+            if(firstTime)
             {
-                once = false;
+                firstTime = false;
                 let scene = MOON.model.children[0];
 
                 //Search though the object tree and 
@@ -117,7 +104,26 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
                     }
                 }
             }
-        }//end of update()
+        }
+
+        /**
+         * Updates the Moon. (Overridden from the superclass).
+         * @param {number} frameTime - The time taken to compute the
+         *                             previous frame of animation.
+         */
+        this.update = function(frameTime)
+        {
+            this.Initialise();
+
+            this.RotateMoon();
+
+            if(m_player.geustures.MoonIsMooning()) {
+                MOON.model.rotation.y += 0.005;
+            }
+
+        }//end of update
+
     }//end of constructor
+
 }//end of Moon class
 

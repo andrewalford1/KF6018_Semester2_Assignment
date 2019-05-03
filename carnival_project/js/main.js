@@ -17,8 +17,9 @@ let games = {
     darts : new DartsGame(),
     whackAMole : new WhackAMole(new THREE.Vector3(100, 0, 0)),
     strengthOMetre : new StrengthOMetre(),
-    //moon: new Moon()
 };
+
+let moon = new Moon(new THREE.Vector3(-600, 280, -200));
 
 //Add all objects to the scene.
 engine.addObjects(MODELS, [
@@ -28,7 +29,7 @@ engine.addObjects(MODELS, [
     new Floor(),
     new Helicopter(),
     new HotAirBalloon(new THREE.Vector3(0, 250, 0)),
-    new Moon(new THREE.Vector3(-600, 280, -200)),
+    moon,
     new MoreTents(),
     new Terrain(),
     new StreetLamp(),
@@ -53,7 +54,7 @@ let players = [
     playerFactory(null, engine.scene, new THREE.Color(0x1ACEC5), 5)
 ];
 games.whackAMole.allocatePlayer(players[0]);
-//games.moon.allocatePlayer(players[0]);
+moon.allocatePlayer(players[0]);
 
 //Run the animation loop.
 function animate() { engine.driver.update(); }
