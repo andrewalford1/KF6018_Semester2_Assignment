@@ -78,16 +78,10 @@ class UserGeustures {
                     m_positions[0].rightHandTouchingHead; 
         }
 
-<<<<<<< HEAD
         this.rotateRight = function() {
             return m_positions[0].rightHandAboveHead && !m_positions[0].rightHandState.open &&
             !m_positions[0].leftHandAboveShoulder; 
         }
-=======
-            //The player has both hands on the head.
-            let stageOne = m_positions[0].leftHandTouchingHead &&
-                           m_positions[0].rightHandTouchingHead;
->>>>>>> f5eca526d17708f9ecf2139ef59ec7d01090ed1b
 
         this.rotateLeft = function() {
             return m_positions[0].leftHandAboveHead && !m_positions[0].leftHandState.open &&
@@ -122,11 +116,7 @@ class UserGeustures {
             else if(this.MoonIsMooning()) {
                 console.log(`Oh my Gluten!!`);
             }
-<<<<<<< HEAD
             if (this.Salute()) {
-=======
-            else if (this.Salute()){
->>>>>>> f5eca526d17708f9ecf2139ef59ec7d01090ed1b
                 console.log(`Heil Hydra!`);
             }
 
