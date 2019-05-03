@@ -81,7 +81,20 @@ class UserGeustures {
             return stageOne ; 
         }
 
+        this.BigClap = function(){
 
+        }
+        this.Salute = function(){
+
+            let stageOne = !(m_positions[1].leftHandAboveShoulder) && 
+                           !(m_positions[1].rightHandAboveShoulder);
+            
+            //The playerhas their left hand on the right sholder and the right hand on the left sholder
+            let stageTwo = m_positions[0].rightHandOnLeftShoulder &&
+                           m_positions[0].leftHandOnRightShoulder;
+
+            return stageOne && stageTwo; 
+        }
         
         /**
          * Updates the players geustures.
@@ -95,6 +108,9 @@ class UserGeustures {
             }
             else if(this.MoonIsMooning()){
                 console.log(`Oh my Gluten!!`);
+            }
+            if (this.Salute()){
+                console.log(`Heil Hydra!`);
             }
         }
 

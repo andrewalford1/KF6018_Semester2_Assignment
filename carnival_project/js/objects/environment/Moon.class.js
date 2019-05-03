@@ -8,7 +8,7 @@
 class Moon extends ENGINE.OBJECTS.ClassicObject
 {
     /**
-     * Constructor for the tent.
+     * Constructor for the moon.
      * @param {THREE.Vector3} position - Where the Moon is located.
      */
     constructor(position)
@@ -21,12 +21,14 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
         //moonLight.position.set(-200.0, 200, 200.0);
         //moonAmbientLight.castShadow = true;
         //this.addObjectToGroup(moonAmbientLight);
-
+        let once = true;
         //ADD LIGHTING... 
         //DirectionalLight for the environment light
         let renderer = new THREE.WebGLRenderer();
         renderer.shadowMap.enabled = true;
         renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+
 
         let moonLight = new THREE.DirectionalLight( 0x4F8AD9, 0.7);
         moonLight.position.set(400.0, 700, -200.0);
@@ -57,9 +59,15 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
         MOON.model.scale.multiplyScalar(20);
         MOON.model.position.copy(position);
         this.addObjectToGroup(MOON.model);
+/*
+        this.allocatedPlayer() = function(){
+            let m_player = player;
+        }
+        */
         
-
-        let once = true;
+        this.RotateMoon = function(){
+             MOON.model.rotation.y += 0.005;
+         }
 
         /**
          * Updates the Moon. (Overridden from the superclass).
@@ -68,7 +76,13 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
          */
         this.update = function(frameTime)
         {
-            MOON.model.rotation.y += 0.005;
+            this.RotateMoon();
+            /**
+            if(player.usergesture(MoonIsMooning)){
+                MOON.model.rotation.y += 0.005;
+
+            }
+            */
             //Execute this code once on the first frame of animation.
             if(once)
             {
@@ -104,19 +118,6 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
                 }
             }
         }//end of update()
-    }
-}
+    }//end of constructor
+}//end of Moon class
 
-/**
-let meshes = object.children;
-//Change the material of every mesh.
-                        meshes.forEach(mesh => {
-                            let originalColour = mesh.material.color;
-                            mesh.material = new THREE.MeshPhysicalMaterial({
-                                color: originalColour,
-                                roughness: 0.8,
-                                metalness: 0.6,
-                                reflectivity: 0.5
-                            });
-                        });
-                        */

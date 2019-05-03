@@ -123,6 +123,14 @@ let playerFactory = (function() {
 
             return leftHandPos.y > leftShoulderPos.y;
         },
+        leftHandOnRightShoulder : function() {
+            let leftHandPos = new THREE.Vector3();
+            leftHandPos.copy(this.joints[this.jointIndexes.HAND_LEFT].mesh.value.position);
+            let rightShoulderPos = new THREE.Vector3();
+            rightShoulderPos.copy(this.joints[this.jointIndexes.SHOULDER_RIGHT].mesh.value.position);;
+
+            return leftHandPos.y == rightShoulderPos.y;
+        },
         rightHandAboveShoulder : function() {
             let rightHandPos = new THREE.Vector3();
             rightHandPos.copy(this.joints[this.jointIndexes.HAND_RIGHT].mesh.value.position);
@@ -130,6 +138,14 @@ let playerFactory = (function() {
             rightShoulderPos.copy(this.joints[this.jointIndexes.SHOULDER_RIGHT].mesh.value.position);
 
             return rightHandPos.y > rightShoulderPos.y;
+        },
+        rightHandOnLeftShoulder : function() {
+            let rightHandPos = new THREE.Vector3();
+            rightHandPos.copy(this.joints[this.jointIndexes.HAND_RIGHT].mesh.value.position);
+            let leftShoulderPos = new THREE.Vector3();
+            leftShoulderPos.copy(this.joints[this.jointIndexes.SHOULDER_LEFT].mesh.value.position);
+
+            return rightHandPos.y == leftShoulderPos.y;
         },
         leftHandAboveHead : function() {
             let leftHandPos = new THREE.Vector3();
