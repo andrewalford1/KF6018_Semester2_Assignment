@@ -165,9 +165,10 @@ let playerFactory = (function() {
                 0x00FFFF
             );
             this.joints[jointIndex].collider = collision;
-            console.log(this.joints[jointIndex]);
         },
         update : function(skeleton) {
+
+            let active = true;
             
             this.joints[this.jointIndexes.HAND_LEFT].state.open = false;
             this.joints[this.jointIndexes.HAND_RIGHT].state.open = false;
@@ -234,28 +235,17 @@ let playerFactory = (function() {
                     skeleton.joints[i].orientationW
                 );
 
-                //console.log(skeleton.joints[i].trackingId);
+                if(position.distanceTo(new THREE.Vector3(0, 0, 0)) > 3) {
+                    // console.log(`Player: ${this.ID} is ${position.distanceTo(new THREE.Vector3(0, 0, 0))} meters away from the camera.`);
 
-                //Do not render the player if they are not in the playable space.
-                // if(position.distanceTo(new THREE.Vector3(0, 0, 0)) > 3 || position.distanceTo(this.previousPositions[i][0]) > 1) {
-                    
-                //    // console.log(position.distanceTo(new THREE.Vector3(0, 0, 0)).toFixed(2));
+                    if(this.previousPositions[i][0] instanceof THREE.Vector3) {
+                        position.clone(this.previousPositions[i][0]);
+                    } else {
+                        position.set(0, 0, 0);
+                    }
 
-                //     if(this.previousPositions[i][0] instanceof THREE.Vector3) {
-                //         position = this.previousPositions[i][0];
-                //     }
-                //     else {
-                //         position = new THREE.Vector3(0, 0, 0);
-                //     }
-                // }
-
-                // if(this.previousPositions[i][0] instanceof THREE.Vector3) {
-                //     if(position.distanceTo(this.previousPositions[i][0]) > 1) {
-                //         position = this.previousPositions[i][0];
-                //     }
-                // }
-
-                //console.log(position.distanceTo(this.previousPositions[i][this.previousPositions.length - 1]).toFixed());
+                    active = false;
+                }
 
                 //[averageFilter] A filter to smooth out kinect movement.
                 let averageFilter = new THREE.Vector3(0, 0, 0);
@@ -280,14 +270,17 @@ let playerFactory = (function() {
                 if(!(this.joints[i].collider === undefined)) {
                     this.joints[i].collider.update();
                 }
+
+                //Make the joints visible/invisible if the player is active.
+                this.joints.forEach(joint => { joint.mesh.value.visible = active; });
             }
         }
     };
 
     return function(camera, scene, colour, ID) {
-        const BASE_BONE_RADIUS = 0.05;
 
-        console.log(colour);
+
+        const BASE_BONE_RADIUS = 0.05;
         
         let player = Object.create(playerPrototype, {
             ID : {writeable: true, value: ID},
@@ -342,7 +335,10 @@ let playerFactory = (function() {
                 },
                 {
                     ID : {wirteable: false, value : "HEAD"},
-                    mesh: {wirteable: true, value :  new THREE.Object3D()}
+                    mesh: {wirteable: true, value :  new THREE.Mesh(
+                        new THREE.SphereGeometry(BASE_BONE_RADIUS, 9, 9),
+                        new THREE.MeshPhongMaterial({color: colour})
+                    )}
                 }, 
                 {
                     ID : {wirteable: false, value : "SHOULDER_LEFT"},
@@ -513,9 +509,10 @@ let playerFactory = (function() {
         player.addCollider(player.jointIndexes.HAND_RIGHT, true);
         player.addCollider(player.jointIndexes.FOOT_LEFT, true);
         player.addCollider(player.jointIndexes.FOOT_RIGHT, true);
-
+        
         player.geustures = new UserGeustures(player);
-
+        player.joints.forEach(joint => { joint.mesh.value.visible = false; });
+        
         return player;
     }
 })();
