@@ -76,7 +76,7 @@ class UserGeustures {
 
             //The player has both hands on the head.
             let stageOne = m_positions[0].leftHandTouchingHead &&
-                          m_positions[0].rightHandTouchingHead;
+                           m_positions[0].rightHandTouchingHead;
 
             return stageOne ; 
         }
@@ -85,13 +85,11 @@ class UserGeustures {
 
         }
         this.Salute = function(){
-
-            let stageOne = !(m_positions[1].leftHandAboveShoulder) && 
-                           !(m_positions[1].rightHandAboveShoulder);
-            
+            let stageTwo = m_positions[1].leftHandAboveShoulder && 
+                           m_positions[1].rightHandAboveShoulder
             //The playerhas their left hand on the right sholder and the right hand on the left sholder
-            let stageTwo = m_positions[0].rightHandOnLeftShoulder &&
-                           m_positions[0].leftHandOnRightShoulder;
+            let stageOne = m_positions[0].leftHandTouchingLeftSholder &&
+                           m_positions[0].rightHandTouchingRightSholder;
 
             return stageOne && stageTwo; 
         }
@@ -109,7 +107,7 @@ class UserGeustures {
             else if(this.MoonIsMooning()){
                 console.log(`Oh my Gluten!!`);
             }
-            if (this.Salute()){
+            else if (this.Salute()){
                 console.log(`Heil Hydra!`);
             }
         }

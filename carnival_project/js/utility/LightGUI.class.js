@@ -10,48 +10,24 @@ class LightGUI extends ENGINE.OBJECTS.ClassicObject {
 
         super();
 
-        const GUI = new dat.GUI({ load: JSON });
+        let GUI = new dat.GUI({ load: this.rememberDefaultJSON, preset: 'Mushrooms' });
         let skyColor = 0x4F8AD9;
         let groundColor = 0x444444;
-        let intensity = 1;
+        let intensity = 0;
 
         let hemiLight = new THREE.HemisphereLight(skyColor, groundColor, intensity);
-        /**
-        let light = {
 
-            "SkyColor": 0x4F8AD9,
-            "GroundColor": 0x444444,
-            "Intensity": 2
-        }
-        //-----------------------------------
-        
-        let hemiLight = new THREE.HemisphereLight(skyColor, groundColor, intensity);
-        this.addObjectToGroup(hemiLight);
-        //-----------------------------------*/
         let params = {
-
             SkyColor: hemiLight.color.getHex(),
             GroundColor: hemiLight.groundColor.getHex(),
             Intensity: hemiLight.intensity
         }
 
-/**
-        this.paramGUI = function(){
-            
-            this.SkyColor = "#4F8AD9";
-            this.GroundColor = "#444444";
-            this.Intensity = 0;   
-        }
-        */
-
         this.displayGUI = function(){
-            //let params = new this.paramGUI();
             let colorFolder = GUI.addFolder('Light Colors');
-
+            GUI.remember(params);
             colorFolder.addColor(params, 'SkyColor').onChange(function(value){
                 hemiLight.color.setHex(value);
-                console.log(value);
-                console.log(hemiLight.color);
             });
 
             colorFolder.addColor(params, 'GroundColor').onChange(function(value){
@@ -60,19 +36,44 @@ class LightGUI extends ENGINE.OBJECTS.ClassicObject {
             GUI.add(params, 'Intensity',-1,4).onChange(function(value){
                 hemiLight.intensity= value;
             });
-            colorFolder.open();
-            GUI.open();
-            GUI.remember(params);
+            colorFolder.close();
+            GUI.close();
+            //GUI.remember(params);
         }//end displayGUI()
+
         this.displayGUI();
-        
-         this.renderLight = function(){
-            hemiLight.color.getHex() = params.SkyColor;
-            hemiLight.groundColor.getHex() = params.GroundColor;
-            hemiLight.intensity = params.Intensity;
+
+        this.rememberDefaultJSON = function(){
+             return{
+                "preset": "Default",
+                "remembered": {
+                        "Default":{
+                              "0":{
+                                   "SkyColor": 5212889,
+                                   "GroundColor": 4473924,
+                                   "Intensity": 0
+                              } 
+                        },
+                        "Mushrooms":{
+                              "0":{
+                                   "SkyColor": 2166775,
+                                   "GroundColor": 982550,
+                                   "Intensity": 3
+                              } 
+                        },
+                        "closed": false,
+                        "folders": {
+                            "Light Colors": {
+                              "preset": "Default",
+                              "closed": false,
+                              "folders": {}
+                            }
+                         }
+                }
+             };
         }
 
-        //
+        //Adds the HemisphereLight to the scene
         this.addObjectToGroup(hemiLight);
         /**
          * Updates the GUI.
@@ -80,7 +81,7 @@ class LightGUI extends ENGINE.OBJECTS.ClassicObject {
          *                             previous frame of animation.
          */
          this.update = function(frametime){
-            
+             
          }//end update()
 
     }//end constructor()
