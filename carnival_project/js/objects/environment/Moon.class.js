@@ -19,12 +19,12 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
         //[m_player] The player who controls the moon.
         let m_player = null;
 
-        let exmoonLight = new THREE.HemisphereLight(0x4F8AD9, 0x444444, 2);//0xFFFFFF, 0x444444
+        //let exmoonLight = new THREE.HemisphereLight(0x4F8AD9, 0x444444, 2);//0xFFFFFF, 0x444444
         //let moonAmbientLight = new THREE.AmbientLight(0x4F8AD9, 0.1);//0xFFFFFF, 0x444444
         //moonLight.position.set(-200.0, 200, 200.0);
         //moonAmbientLight.castShadow = true;
         //this.addObjectToGroup(moonAmbientLight);
-        this.addObjectToGroup(exmoonLight);
+        //this.addObjectToGroup(exmoonLight);
         let firstTime = true;
         //ADD LIGHTING... 
         //DirectionalLight for the environment light

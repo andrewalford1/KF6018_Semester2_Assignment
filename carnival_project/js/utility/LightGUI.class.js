@@ -11,6 +11,11 @@ class LightGUI extends ENGINE.OBJECTS.ClassicObject {
         super();
 
         const GUI = new dat.GUI({ load: JSON });
+        let skyColor = 0x4F8AD9;
+        let groundColor = 0x444444;
+        let intensity = 1;
+
+        let hemiLight = new THREE.HemisphereLight(skyColor, groundColor, intensity);
         /**
         let light = {
 
@@ -22,42 +27,60 @@ class LightGUI extends ENGINE.OBJECTS.ClassicObject {
         
         let hemiLight = new THREE.HemisphereLight(skyColor, groundColor, intensity);
         this.addObjectToGroup(hemiLight);
-        //-----------------------------------
+        //-----------------------------------*/
         let params = {
 
-            SkyColor: Object.keys( light )[ 0 ],
-            GroundColor: Object.keys( light )[ 1 ],
-            Intensity: Object.keys( light )[ 2 ]
+            SkyColor: hemiLight.color.getHex(),
+            GroundColor: hemiLight.groundColor.getHex(),
+            Intensity: hemiLight.intensity
         }
-*/
+
+/**
         this.paramGUI = function(){
             
             this.SkyColor = "#4F8AD9";
             this.GroundColor = "#444444";
-            this.Intensity = 2;   
+            this.Intensity = 0;   
         }
-    
-        let colorFolder = GUI.addFolder('Light Colors');
+        */
 
         this.displayGUI = function(){
-            let params = new this.paramGUI();
-            colorFolder.addColor(params, 'SkyColor');
-            colorFolder.addColor(params, 'GroundColor');
-            GUI.add(params, 'Intensity',-1,4);
+            //let params = new this.paramGUI();
+            let colorFolder = GUI.addFolder('Light Colors');
+
+            colorFolder.addColor(params, 'SkyColor').onChange(function(value){
+                hemiLight.color.setHex(value);
+                console.log(value);
+                console.log(hemiLight.color);
+            });
+
+            colorFolder.addColor(params, 'GroundColor').onChange(function(value){
+                hemiLight.groundColor.setHex(value);
+            });
+            GUI.add(params, 'Intensity',-1,4).onChange(function(value){
+                hemiLight.intensity= value;
+            });
             colorFolder.open();
             GUI.open();
-
-            //GUI.remember(params);
-
+            GUI.remember(params);
         }//end displayGUI()
         this.displayGUI();
+        
+         this.renderLight = function(){
+            hemiLight.color.getHex() = params.SkyColor;
+            hemiLight.groundColor.getHex() = params.GroundColor;
+            hemiLight.intensity = params.Intensity;
+        }
+
+        //
+        this.addObjectToGroup(hemiLight);
         /**
          * Updates the GUI.
          * @param {number} frameTime - The time taken to compute the
          *                             previous frame of animation.
          */
          this.update = function(frametime){
-            //this.displayGUI();
+            
          }//end update()
 
     }//end constructor()
