@@ -11,20 +11,21 @@ let kinectFactory = (function() {
 
             //Start tracking the player.
             this.instance.startTrackedBodies(function(skeleton) {
-
-                //console.log(`Body: ${skeleton.bodyIndex}, \t Tracking ID: ${skeleton.trackingId}`);
-
-                players.forEach(player => {
-
-                    if(player.ID == skeleton.bodyIndex) {
-                        
-                        player.update(skeleton);
+                if(ENGINE.isLoaded()) {
+                    //console.log(`Body: ${skeleton.bodyIndex}, \t Tracking ID: ${skeleton.trackingId}`);
+                    
+                    players.forEach(player => {
     
-                        if(player.geustures) {
-                            player.geustures.update();
+                        if(player.ID == skeleton.bodyIndex) {
+                            
+                            player.update(skeleton);
+        
+                            if(player.geustures) {
+                                player.geustures.update();
+                            }
                         }
-                    }
-                });
+                    });
+                }
             });
         }
     };

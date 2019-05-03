@@ -1,9 +1,9 @@
 /**
  * A class representing the users's geustures.
  * @extends ENGINE.OBJECTS.ClassicObject
- * @author  Ana-Sabina Irimia
+ * @author  Ana-Sabina Irimia & Andrew Alford
  * @date    30/03/2019
- * @version 2.1 - 12/04/2019
+ * @version 2.2 - 03/05/2019
  */
 class UserGeustures { 
     
@@ -72,18 +72,27 @@ class UserGeustures {
             return stageOne && stageTwo;
         }
 
-        this.MoonIsMooning = function(){      
-
-            //The player has both hands on the head.
-            let stageOne = m_positions[0].leftHandTouchingHead &&
-                          m_positions[0].rightHandTouchingHead;
-
-            return stageOne ; 
+        this.MoonIsMooning = function() {      
+            //Both hands are touching the player's head.
+            return  m_positions[0].leftHandTouchingHead &&
+                    m_positions[0].rightHandTouchingHead; 
         }
+
+        this.rotateRight = function() {
+            return m_positions[0].rightHandAboveHead && !m_positions[0].rightHandState.open &&
+            !m_positions[0].leftHandAboveShoulder; 
+        }
+
+        this.rotateLeft = function() {
+            return m_positions[0].leftHandAboveHead && !m_positions[0].leftHandState.open &&
+            !m_positions[0].rightHandAboveShoulder;
+        }
+
 
         this.BigClap = function(){
 
         }
+
         this.Salute = function(){
 
             let stageOne = !(m_positions[1].leftHandAboveShoulder) && 
@@ -106,11 +115,18 @@ class UserGeustures {
             if(this.IsSmashingHammer()) {
                 console.log(`Hammer Smash!`);
             }
-            else if(this.MoonIsMooning()){
+            else if(this.MoonIsMooning()) {
                 console.log(`Oh my Gluten!!`);
             }
-            if (this.Salute()){
+            if (this.Salute()) {
                 console.log(`Heil Hydra!`);
+            }
+
+            if(this.rotateLeft()) {
+                console.log('Rotate Left');
+            }
+            if(this.rotateRight()) {
+                console.log('Rotate Right');
             }
         }
 

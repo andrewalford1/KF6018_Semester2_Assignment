@@ -348,7 +348,6 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject {
         this.allocatePlayer = function(player) {
             m_player.leftHand = player.joints[player.jointIndexes.HAND_LEFT].collider;
             m_player.rightHand = player.joints[player.jointIndexes.HAND_RIGHT].collider;
-            console.table(m_player);
         }
 
         this.updateMolePosition = function(){
