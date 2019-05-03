@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 //[camera] Films the scene.
 let camera = new THREE.PerspectiveCamera(
@@ -40,7 +40,8 @@ engine.addObjects(MODELS, [
     new Goal(new THREE.Vector3(25, 0, 0)),
     games.strengthOMetre,
     games.whackAMole,
-    new Cans(new THREE.Vector3(0, 150, 0))
+    new Cans(new THREE.Vector3(0, 150, 0)),
+    new LightGUI()
 ]);
 
 //[player] tracks the user playing the game.

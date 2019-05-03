@@ -8,40 +8,56 @@ class LightGUI extends ENGINE.OBJECTS.ClassicObject {
 
     constructor() {
 
-        const GUI = new dat.GUI();
-        let streetLumps = {
+        super();
 
-            "Street Lamp 1": 0,
-            "Street Lamp 2": 1,
-            "Street Lamp 3": 2,
-            "Street Lamp 4": 3,
-            "Street Lamp 5": 4,
-            "Street Lamp 6": 5,
-            "Street Lamp 7": 6,
-            "Street Lamp 8": 7,
+        const GUI = new dat.GUI({ load: JSON });
+        /**
+        let light = {
+
+            "SkyColor": 0x4F8AD9,
+            "GroundColor": 0x444444,
+            "Intensity": 2
         }
-
+        //-----------------------------------
+        
+        let hemiLight = new THREE.HemisphereLight(skyColor, groundColor, intensity);
+        this.addObjectToGroup(hemiLight);
+        //-----------------------------------
         let params = {
 
-            streetLamp: Object.keys( streetLumps )[ 0 ],
-            exposure: 0.68 
+            SkyColor: Object.keys( light )[ 0 ],
+            GroundColor: Object.keys( light )[ 1 ],
+            Intensity: Object.keys( light )[ 2 ]
         }
+*/
+        this.paramGUI = function(){
+            
+            this.SkyColor = "#4F8AD9";
+            this.GroundColor = "#444444";
+            this.Intensity = 2;   
+        }
+    
+        let colorFolder = GUI.addFolder('Light Colors');
 
         this.displayGUI = function(){
-            
-            GUI.add(params, 'Street lamp', Object.keys( streetLumps ) );
-            GUI.add(params, 'Exposure',0,1);
+            let params = new this.paramGUI();
+            colorFolder.addColor(params, 'SkyColor');
+            colorFolder.addColor(params, 'GroundColor');
+            GUI.add(params, 'Intensity',-1,4);
+            colorFolder.open();
             GUI.open();
 
-        }//end displayGUI()
+            //GUI.remember(params);
 
+        }//end displayGUI()
+        this.displayGUI();
         /**
          * Updates the GUI.
          * @param {number} frameTime - The time taken to compute the
          *                             previous frame of animation.
          */
          this.update = function(frametime){
-
+            //this.displayGUI();
          }//end update()
 
     }//end constructor()
