@@ -3,7 +3,7 @@
  * @extends ENGINE.OBJECTS.ClassicObject
  * @author  Zoe Irwin
  * @date    23/02/2019
- * @version 1.1 - 07/04/2019
+ * @version 1.2 - 03/05/2019
  */
 class DartsGame extends ENGINE.OBJECTS.ClassicObject {
     /**
@@ -18,8 +18,7 @@ class DartsGame extends ENGINE.OBJECTS.ClassicObject {
         let Base2 = new THREE.MeshBasicMaterial({ 
             map: ENGINE.TextureLoader().loadTexture( 'dartsGame/stripes.jpeg' ) 
         });
-        
-        //let Base2= new THREE.MeshPhongMaterial( { color: 0x000000 } );
+    
         let Base = new THREE.Mesh(Base1, Base2);
            
         //[ tabletop].
@@ -33,14 +32,12 @@ class DartsGame extends ENGINE.OBJECTS.ClassicObject {
         let backPane1 = new THREE.PlaneGeometry( 35, 18 );
         let backPane2= new THREE.MeshBasicMaterial({ 
             map: ENGINE.TextureLoader().loadTexture( 'dartsGame/sign.jpg' ),
-            side: THREE.BackSide,
+            side: THREE.FrontSide,
             flatShading: THREE.FlatShading
         });
-        //let backPane2 = new THREE.MeshPhongMaterial( { color: 0xffffff } );
         let backPane = new THREE.Mesh(backPane1, backPane2);
         backPane.position.z = -4.8;
         backPane.position.y = 15;
-        backPane.rotation.x = 180 * (Math.PI / 180);
 
         //backBorder
         let backBorder1 = new THREE.BoxGeometry( 38, 30, 0.5 );
