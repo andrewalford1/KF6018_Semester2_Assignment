@@ -19,18 +19,13 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
         //[m_player] The player who controls the moon.
         let m_player = null;
 
-        //let exmoonLight = new THREE.HemisphereLight(0x375D9C, 0x444444, 4);//0xFFFFFF, 0x444444
-        //let moonAmbientLight = new THREE.AmbientLight(0x4F8AD9, 0.1);//0xFFFFFF, 0x444444
-        //moonLight.position.set(-200.0, 200, 200.0);
-        //moonAmbientLight.castShadow = true;
-        //this.addObjectToGroup(moonAmbientLight);
         let firstTime = true;
         //ADD LIGHTING... 
-        //DirectionalLight for the environment light
+
         let renderer = new THREE.WebGLRenderer();
         renderer.shadowMap.enabled = true;
         renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-
+        //DirectionalLight for the environment light
         let moonLight = new THREE.DirectionalLight( 0x4F8AD9, 0.7);
         moonLight.position.set(400.0, 700, -200.0);
         moonLight.castShadow = true;
@@ -114,11 +109,16 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
         this.update = function(frameTime)
         {
             this.Initialise();
-
+            //Makes the moon spin
             this.RotateMoon();
 
             if(m_player.geustures.MoonIsMooning()) {
-                MOON.model.rotation.y += 0.005;
+                //Moon will moon the player
+                MOON.model.rotation.y == 0.3;
+            }
+            else if(!(m_player.geustures.MoonIsMooning())){
+                //Moon will face the player
+                MOON.model.rotation.y == 0.3;
             }
 
         }//end of update

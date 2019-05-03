@@ -102,6 +102,32 @@ let playerFactory = (function() {
 
             return distance < 1;
         },
+        leftHandTouchingRightSholder : function() {
+            let leftHandPos = new THREE.Vector3();
+            leftHandPos.copy(this.joints[this.jointIndexes.HAND_LEFT].mesh.value.position);
+            let rightShoulderPos = new THREE.Vector3();
+            rightShoulderPos.copy(this.joints[this.jointIndexes.SHOULDER_RIGHT].mesh.value.position);
+
+            leftHandPos.multiplyScalar(5);
+            rightShoulderPos.multiplyScalar(5);
+
+            let distance = leftHandPos.distanceTo(rightShoulderPos).toFixed(2);
+
+            return distance < 1;
+        },
+        leftHandTouchingLeftSholder : function() {
+            let leftHandPos = new THREE.Vector3();
+            leftHandPos.copy(this.joints[this.jointIndexes.HAND_LEFT].mesh.value.position);
+            let leftShoulderPos = new THREE.Vector3();
+            leftShoulderPos.copy(this.joints[this.jointIndexes.SHOULDER_LEFT].mesh.value.position);
+
+            leftHandPos.multiplyScalar(5);
+            leftShoulderPos.multiplyScalar(5);
+
+            let distance = leftHandPos.distanceTo(leftShoulderPos).toFixed(2);
+
+            return distance < 1;
+        },
         rightHandTouchingHead : function() {
             let rightHandPos = new THREE.Vector3();
             rightHandPos.copy(this.joints[this.jointIndexes.HAND_RIGHT].mesh.value.position);
@@ -112,6 +138,32 @@ let playerFactory = (function() {
             headPos.multiplyScalar(5);
 
             let distance = rightHandPos.distanceTo(headPos).toFixed(2);
+
+            return distance < 1;
+        },
+        rightHandTouchingLeftSholder : function() {
+            let rightHandPos = new THREE.Vector3();
+            rightHandPos.copy(this.joints[this.jointIndexes.HAND_RIGHT].mesh.value.position);
+            let leftShoulderPos = new THREE.Vector3();
+            leftShoulderPos.copy(this.joints[this.jointIndexes.SHOULDER_LEFT].mesh.value.position);
+
+            rightHandPos.multiplyScalar(5);
+            leftShoulderPos.multiplyScalar(5);
+
+            let distance = rightHandPos.distanceTo(leftShoulderPos).toFixed(2);
+
+            return distance < 1;
+        },
+        rightHandTouchingRightSholder : function() {
+            let rightHandPos = new THREE.Vector3();
+            rightHandPos.copy(this.joints[this.jointIndexes.HAND_RIGHT].mesh.value.position);
+            let rightShoulderPos = new THREE.Vector3();
+            rightShoulderPos.copy(this.joints[this.jointIndexes.SHOULDER_RIGHT].mesh.value.position);
+
+            rightHandPos.multiplyScalar(5);
+            rightShoulderPos.multiplyScalar(5);
+
+            let distance = rightHandPos.distanceTo(rightShoulderPos).toFixed(2);
 
             return distance < 1;
         },
@@ -127,7 +179,7 @@ let playerFactory = (function() {
             let leftHandPos = new THREE.Vector3();
             leftHandPos.copy(this.joints[this.jointIndexes.HAND_LEFT].mesh.value.position);
             let rightShoulderPos = new THREE.Vector3();
-            rightShoulderPos.copy(this.joints[this.jointIndexes.SHOULDER_RIGHT].mesh.value.position);;
+            rightShoulderPos.copy(this.joints[this.jointIndexes.SHOULDER_RIGHT].mesh.value.position);
 
             return leftHandPos.y == rightShoulderPos.y;
         },
