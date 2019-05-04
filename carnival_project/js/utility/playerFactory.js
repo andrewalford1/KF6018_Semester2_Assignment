@@ -167,6 +167,19 @@ let playerFactory = (function() {
 
             return distance < 1;
         },
+        rightHandPointing : function() {
+            let rightHandPos = new THREE.Vector3();
+            rightHandPos.copy(this.joints[this.jointIndexes.HAND_RIGHT].mesh.value.position);
+            let rightShoulderPos = new THREE.Vector3();
+            rightShoulderPos.copy(this.joints[this.jointIndexes.SHOULDER_RIGHT].mesh.value.position);
+
+            rightHandPos.multiplyScalar(5);
+            rightShoulderPos.multiplyScalar(5);
+
+            let distance = rightHandPos.distanceTo(rightShoulderPos).toFixed(2);
+
+            return distance < 1;
+        },
         leftHandAboveShoulder : function() {
             let leftHandPos = new THREE.Vector3();
             leftHandPos.copy(this.joints[this.jointIndexes.HAND_LEFT].mesh.value.position);

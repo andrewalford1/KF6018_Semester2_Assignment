@@ -114,12 +114,19 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
 
             if(m_player.geustures.MoonIsMooning()) {
                 //Moon will moon the player
-                MOON.model.rotation.set(-0.1, -2.2, -0.1);
+                MOON.model.rotation.set(-0.1, -2.0, -0.1);
             }
-            else if(!(m_player.geustures.MoonIsMooning())){
-                //Moon will face the player
-                MOON.model.rotation.set(0.6, 0.8, -0.4);
+           else{
+                 this.RotateMoon();
             }
+//             if(!m_player.geustures.MoonIsMooning()){
+//                 //Moon will face the player
+//                 //MOON.model.rotation.set(0.6, 0.9, -0.4);
+//                 MOON.model.rotation.x = 0;
+//                 MOON.model.rotation.y += 0.005;
+//                 MOON.model.rotation.z = 0;
+//                 //this.RotateMoon();
+//             }
 
         }//end of update
 

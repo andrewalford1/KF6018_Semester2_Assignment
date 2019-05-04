@@ -89,13 +89,18 @@ class UserGeustures {
         }
 
 
-        this.BigClap = function(){
-
+        this.PointAtTheMoon = function(){
+                //The hand has o be above the sholders , pointing, and a leg has to be behind
+                let stageTwo = m_positions[1].leftHandAboveShoulder && 
+                           m_positions[1].rightHandAboveShoulder
+            //The playerhas their left hand on the right sholder and the right hand on the left sholder
+            let stageOne = m_positions[0].leftHandTouchingLeftSholder &&
+                           m_positions[0].rightHandTouchingRightSholder;
         }
 
         this.Salute = function(){
-            let stageTwo = m_positions[1].leftHandAboveShoulder && 
-                           m_positions[1].rightHandAboveShoulder
+            let stageTwo = !m_positions[1].leftHandAboveShoulder && 
+                           !m_positions[1].rightHandAboveShoulder
             //The playerhas their left hand on the right sholder and the right hand on the left sholder
             let stageOne = m_positions[0].leftHandTouchingLeftSholder &&
                            m_positions[0].rightHandTouchingRightSholder;

@@ -19,7 +19,7 @@ class Mole extends ENGINE.OBJECTS.ClassicObject
         const DARK_BLUE = 0x180E44;
         //const LIGHT_BROWN = 0xB46E3A;
         const LIGHT_SKIN_COLOR = 0xF5C8AA;
-        const HIT_COLOUR = 0xFF0000;
+        const HIT_COLOUR = 0xAB0000;
 
         //Varible that calculates the window frames
         let iFrame = 0;
@@ -179,6 +179,7 @@ class Mole extends ENGINE.OBJECTS.ClassicObject
             collider.update();
             if(collider.collided) {
                 moleHeadMesh.material.color.setHex(HIT_COLOUR);
+                moleBodyPartsGroup.position.y = -1.3;
             } else {
                 moleBodyMesh.material.color.setHex(DARK_BLUE);
             }
@@ -201,7 +202,7 @@ class Mole extends ENGINE.OBJECTS.ClassicObject
         this.molePosition = function(){
                 let randomTime = Math.round(Math.random()*(1000 + 200) + 200);
                 moleBodyPartsGroup.position.y = Math.sin(iFrame/10 - randomTime) * 1.2 -1.3;
-                if(moleBodyPartsGroup.position.y >= 1.3)
+                if(moleBodyPartsGroup.position.y >= 1.2)
                 {
                         return true;
                 }
