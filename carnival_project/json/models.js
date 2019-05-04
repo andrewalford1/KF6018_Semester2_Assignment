@@ -37,6 +37,6 @@ let MODELS = `{
     }, { 
         "fileName"      :   "smallTent", 
         "extension"     :   "glb", 
-        "position"      :   [ 580, 0, -630 ]
+        "position"      :   [ 580, 40, -630 ]
     }]
 }`;
