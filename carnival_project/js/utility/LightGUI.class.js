@@ -10,7 +10,24 @@ class LightGUI extends ENGINE.OBJECTS.ClassicObject {
 
         super();
 
-        let GUI = new dat.GUI({ load: this.rememberDefaultJSON, preset: 'Mushrooms' });
+        let GUI = new dat.GUI({ load: {"preset": "Default",
+                "remembered": {
+                        "Default":{
+                              "0":{
+                                   "SkyColor": 5212889,
+                                   "GroundColor": 4473924,
+                                   "Intensity": 0
+                              } 
+                        },
+                        "Mushrooms":{
+                              "0":{
+                                   "SkyColor": 21667756,
+                                   "GroundColor": 982550,
+                                   "Intensity": 3
+                              } 
+                        },
+                        
+                }}});
         let skyColor = 0x4F8AD9;
         let groundColor = 0x444444;
         let intensity = 0;
@@ -22,10 +39,11 @@ class LightGUI extends ENGINE.OBJECTS.ClassicObject {
             GroundColor: hemiLight.groundColor.getHex(),
             Intensity: hemiLight.intensity
         }
-
+        
         this.displayGUI = function(){
+
             let colorFolder = GUI.addFolder('Light Colors');
-            GUI.remember(params);
+            
             colorFolder.addColor(params, 'SkyColor').onChange(function(value){
                 hemiLight.color.setHex(value);
             });
@@ -38,40 +56,9 @@ class LightGUI extends ENGINE.OBJECTS.ClassicObject {
             });
             colorFolder.close();
             GUI.close();
-            //GUI.remember(params);
         }//end displayGUI()
 
         this.displayGUI();
-
-        this.rememberDefaultJSON = function(){
-             return{
-                "preset": "Default",
-                "remembered": {
-                        "Default":{
-                              "0":{
-                                   "SkyColor": 5212889,
-                                   "GroundColor": 4473924,
-                                   "Intensity": 0
-                              } 
-                        },
-                        "Mushrooms":{
-                              "0":{
-                                   "SkyColor": 2166775,
-                                   "GroundColor": 982550,
-                                   "Intensity": 3
-                              } 
-                        },
-                        "closed": false,
-                        "folders": {
-                            "Light Colors": {
-                              "preset": "Default",
-                              "closed": false,
-                              "folders": {}
-                            }
-                         }
-                }
-             };
-        }
 
         //Adds the HemisphereLight to the scene
         this.addObjectToGroup(hemiLight);
