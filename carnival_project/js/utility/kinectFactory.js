@@ -9,16 +9,20 @@ let kinectFactory = (function() {
 
             console.log(this.instance);
 
-            //Start tracking the player.
-            this.instance.startTrackedBodies(function(skeleton) {
+            this.instance.startBodies(function(trackingData) {
+                
                 if(ENGINE.isLoaded()) {
-                    //console.log(`Body: ${skeleton.bodyIndex}, \t Tracking ID: ${skeleton.trackingId}`);
+                    console.log(trackingData);
                     
-                    players.forEach(player => {
-                        if(player.ID == skeleton.bodyIndex) {                        
-                            player.update(skeleton);
-                        }
-                    });
+                    // console.log(`Body: ${skeleton.bodyIndex}, \t Tracking ID: ${skeleton.trackingId}`);
+
+                    trackingData.bodies.forEach(skeleton => {
+                        players.forEach(player => {
+                            if(player.ID == skeleton.bodyIndex) {                        
+                                player.update(skeleton);
+                            }
+                        });
+                    })
                 }
             });
         }

@@ -10,6 +10,13 @@ let MODELS = `{
         "extension"     :   "glb", 
         "position"      :   [ -4, 0, -30 ],
         "scale"         :   3
+    },{ 
+        "fileName"      :   "carousel", 
+        "extension"     :   "glb", 
+        "position"      :   [ 220, 0, -40 ],
+        "scale"         :   0.01,
+        "animated"      :   true,
+        "animationSpeed":   2000
     }, { 
         "fileName"      :   "bear", 
         "extension"     :   "glb", 
