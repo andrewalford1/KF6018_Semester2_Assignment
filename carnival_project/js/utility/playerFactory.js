@@ -235,120 +235,131 @@ let playerFactory = (function() {
             this.joints[jointIndex].collider = collision;
         },
         update : function(skeleton) {
-
-            let active = true;
             
-            this.joints[this.jointIndexes.HAND_LEFT].state.open = false;
-            this.joints[this.jointIndexes.HAND_RIGHT].state.open = false;
-            this.joints[this.jointIndexes.HAND_LEFT].state.lasso = false;
-            this.joints[this.jointIndexes.HAND_RIGHT].state.lasso = false;
+            let inRange = true;
 
-            switch(skeleton.leftHandState) {
-                case(0 | 1) : break;
-                case(2) : 
-                    this.joints[this.jointIndexes.HAND_LEFT].state.open = true;
-                    break;
-                case(4) :
-                    this.joints[this.jointIndexes.HAND_LEFT].state.lasso = true;
-                    break;
-            }
-
-            switch(skeleton.rightHandState) {
-                case(0 | 1) : break;
-                case(2) : 
-                    this.joints[this.jointIndexes.HAND_RIGHT].state.open = true;
-                    break;
-                case(4) :
-                    this.joints[this.jointIndexes.HAND_RIGHT].state.lasso = true;
-                    break;
-            }
-
-            if(this.joints[this.jointIndexes.HAND_LEFT].state.open) {
-                this.joints[this.jointIndexes.HAND_LEFT].mesh.value
-                .material.color.setHex(0x00FF00);
-            } 
-            else {
-                this.joints[this.jointIndexes.HAND_LEFT].mesh.value
-                .material.color.setHex(0xFF0000);
-            }
-            if(this.joints[this.jointIndexes.HAND_RIGHT].state.open) {
-                this.joints[this.jointIndexes.HAND_RIGHT].mesh.value
-                .material.color.setHex(0x00FF00);
-            } 
-            else {
-                this.joints[this.jointIndexes.HAND_RIGHT].mesh.value
-                .material.color.setHex(0xFF0000);
-            }
-
-            if(this.joints[this.jointIndexes.HAND_LEFT].state.lasso) {
-                this.joints[this.jointIndexes.HAND_LEFT].mesh.value
-                .material.color.setHex(0x0000FF);
-            }
-
-            if(this.joints[this.jointIndexes.HAND_RIGHT].state.lasso) {
-                this.joints[this.jointIndexes.HAND_RIGHT].mesh.value
-                .material.color.setHex(0x0000FF);
-            }
-
-            for(let i = 0; i < skeleton.joints.length; i++) {
-                let position = new THREE.Vector3(
-                    skeleton.joints[i].cameraX,
-                    skeleton.joints[i].cameraY,
-                    skeleton.joints[i].cameraZ
-                );
-                let orientation = new THREE.Quaternion(
-                    skeleton.joints[i].orientationX,
-                    skeleton.joints[i].orientationY,
-                    skeleton.joints[i].orientationZ,
-                    skeleton.joints[i].orientationW
-                );
-
-                if(position.distanceTo(new THREE.Vector3(0, 0, 0)) > 3) {
-                    // console.log(`Player: ${this.ID} is ${position.distanceTo(new THREE.Vector3(0, 0, 0))} meters away from the camera.`);
-
-                    if(this.previousPositions[i][0] instanceof THREE.Vector3) {
-                        position.clone(this.previousPositions[i][0]);
-                    } else {
-                        position.set(0, 0, 0);
+            if(skeleton.tracked) {
+                this.joints[this.jointIndexes.HAND_LEFT].state.open = false;
+                this.joints[this.jointIndexes.HAND_RIGHT].state.open = false;
+                this.joints[this.jointIndexes.HAND_LEFT].state.lasso = false;
+                this.joints[this.jointIndexes.HAND_RIGHT].state.lasso = false;
+    
+                switch(skeleton.leftHandState) {
+                    case(0 | 1) : break;
+                    case(2) : 
+                        this.joints[this.jointIndexes.HAND_LEFT].state.open = true;
+                        break;
+                    case(4) :
+                        this.joints[this.jointIndexes.HAND_LEFT].state.lasso = true;
+                        break;
+                }
+    
+                switch(skeleton.rightHandState) {
+                    case(0 | 1) : break;
+                    case(2) : 
+                        this.joints[this.jointIndexes.HAND_RIGHT].state.open = true;
+                        break;
+                    case(4) :
+                        this.joints[this.jointIndexes.HAND_RIGHT].state.lasso = true;
+                        break;
+                }
+    
+                if(this.joints[this.jointIndexes.HAND_LEFT].state.open) {
+                    this.joints[this.jointIndexes.HAND_LEFT].mesh.value
+                    .material.color.setHex(0x00FF00);
+                } 
+                else {
+                    this.joints[this.jointIndexes.HAND_LEFT].mesh.value
+                    .material.color.setHex(0xFF0000);
+                }
+                if(this.joints[this.jointIndexes.HAND_RIGHT].state.open) {
+                    this.joints[this.jointIndexes.HAND_RIGHT].mesh.value
+                    .material.color.setHex(0x00FF00);
+                } 
+                else {
+                    this.joints[this.jointIndexes.HAND_RIGHT].mesh.value
+                    .material.color.setHex(0xFF0000);
+                }
+    
+                if(this.joints[this.jointIndexes.HAND_LEFT].state.lasso) {
+                    this.joints[this.jointIndexes.HAND_LEFT].mesh.value
+                    .material.color.setHex(0x0000FF);
+                }
+    
+                if(this.joints[this.jointIndexes.HAND_RIGHT].state.lasso) {
+                    this.joints[this.jointIndexes.HAND_RIGHT].mesh.value
+                    .material.color.setHex(0x0000FF);
+                }
+    
+                for(let i = 0; i < skeleton.joints.length; i++) {
+                    let position = new THREE.Vector3(
+                        skeleton.joints[i].cameraX,
+                        skeleton.joints[i].cameraY,
+                        skeleton.joints[i].cameraZ
+                    );
+                    let orientation = new THREE.Quaternion(
+                        skeleton.joints[i].orientationX,
+                        skeleton.joints[i].orientationY,
+                        skeleton.joints[i].orientationZ,
+                        skeleton.joints[i].orientationW
+                    );
+    
+                    if(position.distanceTo(new THREE.Vector3(0, 0, 0)) > 3) {
+                        // console.log(`Player: ${this.ID} is ${position.distanceTo(new THREE.Vector3(0, 0, 0))} meters away from the camera.`);
+    
+                        if(this.previousPositions[i][0] instanceof THREE.Vector3) {
+                            position.clone(this.previousPositions[i][0]);
+                        } else {
+                            position.set(0, 0, 0);
+                        }
+                        inRange = false;
                     }
-
-                    active = false;
+    
+                    //[averageFilter] A filter to smooth out kinect movement.
+                    let averageFilter = new THREE.Vector3(0, 0, 0);
+    
+                    //Update previous positions.
+                    this.previousPositions[i].unshift(position);
+                    this.previousPositions[i].pop();
+                    this.previousPositions[i].forEach(pos => {
+                            averageFilter.add(pos);
+                    });
+                    averageFilter.divideScalar(
+                            this.previousPositions[i].length
+                    );
+    
+                    //Update the joint's position & rotation.
+                    this.joints[i].mesh.value.position.copy(averageFilter);
+                    this.joints[i].mesh.value.rotation.setFromQuaternion(
+                        orientation
+                    );
+    
+                    //Update the joints collider (if it has one).
+                    if(!(this.joints[i].collider === undefined)) {
+                        this.joints[i].collider.update();
+                    }
+    
                 }
-
-                //[averageFilter] A filter to smooth out kinect movement.
-                let averageFilter = new THREE.Vector3(0, 0, 0);
-
-                //Update previous positions.
-                this.previousPositions[i].unshift(position);
-                this.previousPositions[i].pop();
-                this.previousPositions[i].forEach(pos => {
-                     averageFilter.add(pos);
-                });
-                averageFilter.divideScalar(
-                     this.previousPositions[i].length
-                );
-
-                //Update the joint's position & rotation.
-                this.joints[i].mesh.value.position.copy(averageFilter);
-                this.joints[i].mesh.value.rotation.setFromQuaternion(
-                    orientation
-                );
-
-                //Update the joints collider (if it has one).
-                if(!(this.joints[i].collider === undefined)) {
-                    this.joints[i].collider.update();
-                }
-
             }
+
+            //If all previous positions are equal than the player is probably not active.
+            let spinePositions = [...this.previousPositions[this.jointIndexes.SPINE_BASE]];
+            let idle = spinePositions.every(value => (
+                value instanceof THREE.Vector3 &&
+                value.distanceTo(spinePositions[0]) < 0.005
+            ));
+
+            console.log(`Player ${this.ID} is idle:\t${idle}`);
+
+            let renderPlayer = skeleton.tracked && inRange && !idle;
 
             //Update the players geustures.
-            if(active && !(this.geustures === undefined)) {
-                console.log('updating geustures');
+            if(renderPlayer && !(this.geustures === undefined)) {
                 this.geustures.update();
             }
 
             //Make the joints visible/invisible if the player is active.
-            this.joints.forEach(joint => { joint.mesh.value.visible = active; });
+            this.joints.forEach(joint => { joint.mesh.value.visible = renderPlayer; });
         }
     };
 
@@ -573,7 +584,7 @@ let playerFactory = (function() {
                     )}
                 }
             ]},
-            numPreviousPositions : {writeable: false, value : 5},
+            numPreviousPositions : {writeable: false, value : 25},
             previousPositions : {writeable: true, value : []}
         });
         
