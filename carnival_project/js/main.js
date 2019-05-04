@@ -64,13 +64,14 @@ engine.addObjects(MODELS, [
 
 //[player] tracks the user playing the game.
 let players = [
-    playerFactory(engine.camera, engine.scene, new THREE.Color(0x84B1AA), 0),
-    playerFactory(null, engine.scene, new THREE.Color(0xFFD700), 1),
-    playerFactory(null, engine.scene, new THREE.Color(0xB94F74), 2),
-    playerFactory(null, engine.scene, new THREE.Color(0xC7AFD0), 3),
-    playerFactory(null, engine.scene, new THREE.Color(0x74F016), 4),
-    playerFactory(null, engine.scene, new THREE.Color(0x1ACEC5), 5)
+    playerFactory(engine.camera, engine.scene, new THREE.Color(0xDD0000), 0),
+    playerFactory(null, engine.scene, new THREE.Color(0x00DD00), 1),
+    playerFactory(null, engine.scene, new THREE.Color(0x0000DD), 2),
+    playerFactory(null, engine.scene, new THREE.Color(0xDDDD00), 3),
+    playerFactory(null, engine.scene, new THREE.Color(0x00DDDD), 4),
+    playerFactory(null, engine.scene, new THREE.Color(0xDD00DD), 5)
 ];
+
 games.whackAMole.allocatePlayer(players[parameters.playerIndex]);
 moon.allocatePlayer(players[parameters.playerIndex]);
 

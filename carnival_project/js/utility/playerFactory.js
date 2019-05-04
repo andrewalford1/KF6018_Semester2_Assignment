@@ -339,9 +339,16 @@ let playerFactory = (function() {
                     this.joints[i].collider.update();
                 }
 
-                //Make the joints visible/invisible if the player is active.
-                this.joints.forEach(joint => { joint.mesh.value.visible = active; });
             }
+
+            //Update the players geustures.
+            if(active && !(this.geustures === undefined)) {
+                console.log('updating geustures');
+                this.geustures.update();
+            }
+
+            //Make the joints visible/invisible if the player is active.
+            this.joints.forEach(joint => { joint.mesh.value.visible = active; });
         }
     };
 

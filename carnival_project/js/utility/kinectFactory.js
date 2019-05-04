@@ -15,14 +15,8 @@ let kinectFactory = (function() {
                     //console.log(`Body: ${skeleton.bodyIndex}, \t Tracking ID: ${skeleton.trackingId}`);
                     
                     players.forEach(player => {
-    
-                        if(player.ID == skeleton.bodyIndex) {
-                            
+                        if(player.ID == skeleton.bodyIndex) {                        
                             player.update(skeleton);
-        
-                            if(player.geustures) {
-                                player.geustures.update();
-                            }
                         }
                     });
                 }
