@@ -45,6 +45,8 @@ engine.addObjects(MODELS, [
     new Fireworks(),
     new BalloonCover(),
     new Floor(),
+    new MrBeep(),
+    new MrBeepLatitude(),
     new Helicopter(),
     new HotAirBalloon(new THREE.Vector3(0, 250, 0)),
     moon,
