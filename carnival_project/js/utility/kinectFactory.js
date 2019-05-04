@@ -27,8 +27,7 @@ let kinectFactory = (function() {
     return function(IP) {
         let kinect = Object.create(kinectPrototype, {
             IP : {writeable: false, value: IP},
-            instance : {writeable: false, value: new Kinectron(IP)},
-            playersTracked : {writeable: 0, value: []}
+            instance : {writeable: false, value: new Kinectron(IP)}
         });
         kinect.establishConnection();
         return kinect;
