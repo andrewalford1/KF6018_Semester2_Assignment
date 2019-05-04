@@ -104,18 +104,12 @@ class UserGeustures {
         }
         
         this.HandsInAir = function() {
-        //The player has their hand above their shoulders
+        //The player has their hands above their shoulders
             let stageOne = 
-                m_positions[1].leftHandAboveShoulder && 
-                m_positions[1].rightHandAboveShoulder;
+                m_positions[0].leftHandAboveShoulder && 
+                m_positions[0].rightHandAboveShoulder;
 
-            //The player has their hand below their shoulders.
-            let stageTwo = 
-                !(m_positions[0].leftHandAboveShoulder && 
-                    m_positions[0].rightHandAboveShoulder 
-            );
-
-            return stageOne && stageTwo;
+            return stageOne;
         }
         
         /**
