@@ -26,7 +26,7 @@ class Fireworks extends ENGINE.OBJECTS.ClassicObject {
         // Create the particles
         for (let i = 0; i < iNumber; i++) {
             meshArray.push(new THREE.Mesh(
-                new THREE.SphereGeometry(0.5, 6, 6), 
+                new THREE.SphereGeometry(1.3, 6, 6), 
                 new THREE.MeshPhongMaterial({
                     color: Math.random() * 0xffffff, 
                     opacity: 0.3
