@@ -24,7 +24,14 @@ let MODELS = `{
         "rotation"      :   [ 0, 315, 0 ],
         "animated"      :   true,
         "animationSpeed":   2000
-    }, { 
+    },
+{ 
+        "fileName"      :   "jack", 
+        "extension"     :   "glb", 
+        "position"      :   [ -30, 0, -570 ],
+        "scale"         :   2,
+        "rotation"      :   [ 90, 0, 0 ]
+    },{ 
         "fileName"      :   "balloonArch", 
         "extension"     :   "glb", 
         "position"      :   [ 45, 0, -100 ],
