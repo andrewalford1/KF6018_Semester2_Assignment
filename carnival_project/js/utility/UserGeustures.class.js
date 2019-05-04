@@ -103,6 +103,21 @@ class UserGeustures {
             return stageOne && stageTwo; 
         }
         
+        this.HandsInAir = function() {
+        //The player has their hand above their shoulders
+            let stageOne = 
+                m_positions[1].leftHandAboveShoulder && 
+                m_positions[1].rightHandAboveShoulder;
+
+            //The player has their hand below their shoulders.
+            let stageTwo = 
+                !(m_positions[0].leftHandAboveShoulder && 
+                    m_positions[0].rightHandAboveShoulder 
+            );
+
+            return stageOne && stageTwo;
+        }
+        
         /**
          * Updates the players geustures.
          */
@@ -125,6 +140,9 @@ class UserGeustures {
             }
             if(this.rotateRight()) {
                 console.log('Rotate Right');
+            }
+            if(this.HandsInAir()) {
+                console.log(`Hands in the Air!`)
             }
         }
 
