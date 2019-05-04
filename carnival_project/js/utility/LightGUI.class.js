@@ -9,59 +9,52 @@ class LightGUI extends ENGINE.OBJECTS.ClassicObject {
     constructor() {
 
         super();
-
-        let GUI = new dat.GUI({ load: {"preset": "Default",
-                "remembered": {
-                        "Default":{
-                              "0":{
-                                   "SkyColor": 5212889,
-                                   "GroundColor": 4473924,
-                                   "Intensity": 0
-                              } 
-                        },
-                        "Mushrooms":{
-                              "0":{
-                                   "SkyColor": 21667756,
-                                   "GroundColor": 982550,
-                                   "Intensity": 3
-                              } 
-                        },
-                        
-                }}});
+        //Values of the HemisphereLight
         let skyColor = 0x4F8AD9;
         let groundColor = 0x444444;
         let intensity = 0;
-
+        //Creates the HemisphereLight
         let hemiLight = new THREE.HemisphereLight(skyColor, groundColor, intensity);
-
+        //Saves the values of the HemisphereLight
         let params = {
             SkyColor: hemiLight.color.getHex(),
             GroundColor: hemiLight.groundColor.getHex(),
             Intensity: hemiLight.intensity
         }
-        
+        //Creates the GUI
         this.displayGUI = function(){
-
+            //Creates a new GUI variable
+            let GUI = new dat.GUI();
+            //GUI.remember(params);
+            //Creates a folder called Light Colors for the GUI
             let colorFolder = GUI.addFolder('Light Colors');
-            
+            //Adds the first color to the folder
+            //Lets the player change the color of the sky
             colorFolder.addColor(params, 'SkyColor').onChange(function(value){
                 hemiLight.color.setHex(value);
             });
-
+            //Adds the second color to the folder
+            //Lets the player change the color of the ground 
             colorFolder.addColor(params, 'GroundColor').onChange(function(value){
                 hemiLight.groundColor.setHex(value);
             });
+            //Adds the intensity of the light to the GUI
+            //Lets the player change the intensity of the light
             GUI.add(params, 'Intensity',-1,4).onChange(function(value){
                 hemiLight.intensity= value;
             });
+            //Closes the folder when the window is loaded
             colorFolder.close();
+            //Closes the GUI when the window is loaded
             GUI.close();
         }//end displayGUI()
 
+        //Cals the displayGUI() function
         this.displayGUI();
 
         //Adds the HemisphereLight to the scene
         this.addObjectToGroup(hemiLight);
+        
         /**
          * Updates the GUI.
          * @param {number} frameTime - The time taken to compute the
