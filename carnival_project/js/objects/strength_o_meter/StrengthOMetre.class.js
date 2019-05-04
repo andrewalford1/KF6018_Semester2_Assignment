@@ -15,6 +15,12 @@
           //Construct the superclass.
           super(position);
 
+          //Tracks the user playing the game.
+        let m_player = {
+            leftHand  : null,
+            rightHand : null
+            
+        };
            //[ Base].
             let Base1= new THREE.BoxGeometry(15, 1, 25);
             //let Base2= new THREE.MeshPhongMaterial( { color: 0x000000 } );
@@ -65,7 +71,7 @@
             hitAreaThird.castShadow = true;
             hitAreaThird.receiveShadow = true;
 
-            //[hitAreaThird].
+            //[hitArea].
             let hitArea1= new THREE.TorusBufferGeometry(0.2, 1, 20, 100);
             let hitArea2= new THREE.MeshPhongMaterial( { color: 0xFF0000 } );
             let hitArea = new THREE.Mesh(hitArea1, hitArea2);
@@ -148,9 +154,56 @@
            this.addObjectToGroup(blackLine);
            this.addObjectToGroup(nose);
            //Scale and position the game.
-           this.getInstance().scale.set(0.75, 0.75, 0.75);
-           this.getInstance().position.set(-17, 0, 0);
+           this.getInstance().scale.set(0.9, 0.9, 0.9);
+           this.getInstance().position.set(-20, 0, -20);
+ 
 
+            this.allocatePlayer = function(player) {
+            m_player.leftHand = player.joints[player.jointIndexes.HAND_LEFT].collider;
+            m_player.rightHand = player.joints[player.jointIndexes.HAND_RIGHT].collider;
+            console.table(m_player);
+                }
+       
+        //[collider] Tracks collision.
+        let collider = setUpCollider();
+
+        //Private Methods...
+
+        /**
+         * @returns a collider created from the hit area.
+         */
+        function setUpCollider()
+        {
+            return collisionFactory(
+                hitArea, 
+                new THREE.Matrix4().setPosition(
+                    new THREE.Vector3(0, -8, -7)
+                ), 
+                true,
+                0x0000FF
+            );
+        }
+
+        /**
+         * Updates all colliders.
+         */
+        function updateCollider()
+        {
+            collider.update();
+            if(collider.collided) {
+                hitArea.material.color.setHex(0xFFFFFF);
+            } else {
+                hitArea.material.color.setHex(0xFF0000);
+            }
+        }
+
+        /**
+         * @returns The hitArea collison box.
+         */
+        this.getCollider = function()
+        {
+            return collider;
+        }
 
           /**
            * Updates once every frame.
@@ -163,8 +216,13 @@
            */
            this.update = function(frameTime)
            {
-               let speed = frameTime / 5000;
-
+               if(m_player.leftHand && m_player.rightHand) {
+                    hitArea.getCollider().checkCollisions([
+                        m_player.leftHand,
+                        m_player.rightHand
+                    ]);
+                }
+                       updateCollider();
            }
       }
  }
