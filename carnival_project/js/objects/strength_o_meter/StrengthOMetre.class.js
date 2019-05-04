@@ -155,7 +155,9 @@
            this.addObjectToGroup(nose);
            //Scale and position the game.
            this.getInstance().scale.set(0.9, 0.9, 0.9);
-           this.getInstance().position.set(-20, 0, -20);
+           this.getInstance().position.set(-19, 0, -310);
+           this.getInstance().rotation.set(0, Math.PI/2, 0);
+
  
 
             this.allocatePlayer = function(player) {

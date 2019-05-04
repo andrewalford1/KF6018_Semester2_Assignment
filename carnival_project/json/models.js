@@ -2,8 +2,9 @@ let MODELS = `{
     "enviroment": [{
         "fileName"      :   "darts_obj", 
         "extension"     :   "glb", 
-        "position"      :   [ -40, 18, 0 ],
-        "scale"         :   0.02
+        "position"      :   [-18, 32, -327 ],
+        "scale"         :   0.04,
+       "rotation"      :   [ 0, 90, 0 ]
     }, { 
         "fileName"      :   "Welcome", 
         "extension"     :   "glb", 
@@ -23,7 +24,14 @@ let MODELS = `{
         "rotation"      :   [ 0, 315, 0 ],
         "animated"      :   true,
         "animationSpeed":   2000
-    }, { 
+    },
+{ 
+        "fileName"      :   "jack", 
+        "extension"     :   "glb", 
+        "position"      :   [ -30, 0, -570 ],
+        "scale"         :   2,
+        "rotation"      :   [ 90, 0, 0 ]
+    },{ 
         "fileName"      :   "balloonArch", 
         "extension"     :   "glb", 
         "position"      :   [ 45, 0, -100 ],
