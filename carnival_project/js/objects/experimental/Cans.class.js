@@ -168,7 +168,7 @@ var mat = new CANNON.Material();
 var boxShape = new CANNON.Box(new CANNON.Vec3(2.5,2.5,2.5));    // Step 1
 var boxBody = new CANNON.Body({mass: mass, material: mat}); // Step 2
 boxBody.addShape(boxShape);
-boxBody.position.set(14,80,4);
+boxBody.position.set(20,4,20);
 world.add(boxBody);                          // Step 3
 
 var boxBody2 = new CANNON.Body({mass: mass, material: mat}); // Step 2
