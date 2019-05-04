@@ -23,9 +23,9 @@ class MoreTents extends ENGINE.OBJECTS.ClassicObject
         );
         
         //Scale and position the MoreTents
-        MOORETENTS.model.scale.set(0.14, 0.14, 0.14);
-        MOORETENTS.model.rotation.set(0, Math.PI/ 2, 0);
-        MOORETENTS.model.position.set(-70, 0, 120);
+        MOORETENTS.model.scale.set(0.1, 0.1, 0.1);
+        MOORETENTS.model.rotation.set(0, 0.2, 0);
+        MOORETENTS.model.position.set(-240, 0, -350);
         MOORETENTS.model.castShadow = true;
         MOORETENTS.model.receiveShadow = true;
         this.addObjectToGroup(MOORETENTS.model);
