@@ -142,7 +142,7 @@ class UserGeustures {
                 console.log('Rotate Right');
             }
             if(this.HandsInAir()) {
-                console.log(`Hands in the Air!`)
+           //     console.log(`Hands in the Air!`)
             }
         }
 
