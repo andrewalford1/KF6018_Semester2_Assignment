@@ -153,7 +153,7 @@ class Mole extends ENGINE.OBJECTS.ClassicObject
 
         //[collider] Tracks collision.
         let collider = setUpCollider();
-
+        console.log(moleHeadMesh);
         //Private Methods...
 
         /**
@@ -169,6 +169,7 @@ class Mole extends ENGINE.OBJECTS.ClassicObject
                 true,
                 0x0000FF
             );
+            
         }
 
         /**

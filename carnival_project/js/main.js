@@ -82,8 +82,19 @@ games.whackAMole.allocatePlayer(players[parameters.playerIndex]);
 moon.allocatePlayer(players[parameters.playerIndex]);
 firework.allocatePlayer(players[parameters.playerIndex]);
 fireball.allocatePlayer(players[parameters.playerIndex]);
+
+let experimentalPlayer = experimentalPlayerFactory(`{
+"player": [{
+    "fileName"  :   "andrew", 
+    "extension" :   "glb", 
+    "position"  :   [ 0, 0, 0 ],
+    "scale"     :   7
+}]}`, engine, 0);
+
+console.log(experimentalPlayer);
+
 //Run the animation loop.
-function animate() { engine.driver.update(); }
+function animate() { engine.driver.update(); experimentalPlayer.update(engine.scene)}
 animate();
 
 //Kinect code.
