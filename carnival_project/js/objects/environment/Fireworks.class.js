@@ -15,12 +15,17 @@ class Fireworks extends ENGINE.OBJECTS.ClassicObject {
         //Construct the superclass.
         super(position);
 
+        //[m_player] The player who controls the moon.
+        let m_player = null;
+
+        this.allocatePlayer = function(player) {
+            m_player = player;
+        }
+
         // An array of particles
         let meshArray = [];
         let iNumber = 100;
-
         let posInititalArray = [];
-
         let dirArray = [];
 
         // Create the particles
@@ -48,16 +53,8 @@ class Fireworks extends ENGINE.OBJECTS.ClassicObject {
             this.addObjectToGroup(meshArray[i])
         };
         
-
-        let iFrame = 0;
-
-        /**
-         * Updates the Fireworks. (Overridden from the superclass).
-         * @param {number} frameTime - The time taken to compute the
-         *                             previous frame of animation.
-         */
-        this.update = function(frameTime) {
-            // Move the particles
+        this.ExplosionFireworks = function(){
+             // Move the particles
             for (let i=0; i<iNumber; i++) {
                 // Explosion
                 meshArray[i].position.add(dirArray[i]);
@@ -67,7 +64,25 @@ class Fireworks extends ENGINE.OBJECTS.ClassicObject {
             }    
             iFrame++;
         }
+
+        let iFrame = 0;
+        /**
+         * Updates the Fireworks. (Overridden from the superclass).
+         * @param {number} frameTime - The time taken to compute the
+         *                             previous frame of animation.
+         */
+        this.update = function(frameTime) 
+        {
+          //  console.log(m_player);
+          if(m_player.geustures.IsSmashingHammer()) 
+          {
+                //Fireworks
+                this.ExplosionFireworks();    
+          }
+
+        }
     }
 }
+
           
 

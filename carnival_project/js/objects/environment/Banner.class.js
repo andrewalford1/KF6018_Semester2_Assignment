@@ -27,7 +27,7 @@ class Banner extends ENGINE.OBJECTS.ClassicObject {
 		var videoImageContext = videoImage.getContext('2d');
 		// background color if no video present
 		videoImageContext.fillStyle = '#000000';
-		videoImageContext.fillRect(400, 0, videoImage.width, videoImage.height);
+		videoImageContext.fillRect(0, 0, videoImage.width, videoImage.height);
 		var videoTexture = new THREE.Texture(videoImage);
 		videoTexture.minFilter = THREE.LinearFilter;
 		videoTexture.magFilter = THREE.LinearFilter;
