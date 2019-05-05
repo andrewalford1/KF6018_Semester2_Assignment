@@ -247,6 +247,9 @@ let playerFactory = (function() {
             );
             this.joints[jointIndex].collider = collision;
         },
+        hide : function(visible) { 
+            this.joints.forEach(joint => { joint.mesh.value.visible = visible; });
+        },
         update : function(skeleton) {
             
             let inRange = true;
@@ -362,9 +365,9 @@ let playerFactory = (function() {
                 value.distanceTo(spinePositions[0]) < 0.005
             ));
 
-            console.log(`Player ${this.ID} is idle:\t${idle}`);
+            // console.log(`Player ${this.ID} is idle:\t${idle}`);
 
-            let renderPlayer = skeleton.tracked && inRange && !idle;
+            let renderPlayer = inRange;
 
             //Update the players geustures.
             if(renderPlayer && !(this.geustures === undefined)) {
@@ -376,13 +379,13 @@ let playerFactory = (function() {
         }
     };
 
-    return function(camera, scene, colour, ID) {
+    return function(camera, scene, colour, id) {
 
 
         const BASE_BONE_RADIUS = 0.05;
         
         let player = Object.create(playerPrototype, {
-            ID : {writeable: true, value: ID},
+            id : {writeable: true, value: id},
             jointIndexes : {writeable: false, value : {
                 SPINE_BASE      : 0,
                 SPINE_MID       : 1,
@@ -597,7 +600,7 @@ let playerFactory = (function() {
                     )}
                 }
             ]},
-            numPreviousPositions : {writeable: false, value : 25},
+            numPreviousPositions : {writeable: false, value : 15},
             previousPositions : {writeable: true, value : []}
         });
         

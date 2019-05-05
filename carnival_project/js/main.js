@@ -67,12 +67,12 @@ engine.addObjects(MODELS, [
 
 //[player] tracks the user playing the game.
 let players = [
-    playerFactory(engine.camera, engine.scene, new THREE.Color(0xDD0000), 0),
-    playerFactory(null, engine.scene, new THREE.Color(0x00DD00), 1),
-    playerFactory(null, engine.scene, new THREE.Color(0x0000DD), 2),
-    playerFactory(null, engine.scene, new THREE.Color(0xDDDD00), 3),
-    playerFactory(null, engine.scene, new THREE.Color(0x00DDDD), 4),
-    playerFactory(null, engine.scene, new THREE.Color(0xDD00DD), 5)
+    playerFactory(engine.camera, engine.scene, new THREE.Color(0xDD0000), 5),
+    playerFactory(null, engine.scene, new THREE.Color(0x00DD00), 4),
+    playerFactory(null, engine.scene, new THREE.Color(0x0000DD), 3),
+    playerFactory(null, engine.scene, new THREE.Color(0xDDDD00), 2),
+    playerFactory(null, engine.scene, new THREE.Color(0x00DDDD), 1),
+    playerFactory(null, engine.scene, new THREE.Color(0xDD00DD), 0)
 ];
 
 games.whackAMole.allocatePlayer(players[parameters.playerIndex]);
@@ -83,4 +83,7 @@ function animate() { engine.driver.update(); }
 animate();
 
 //Kinect code.
-kinectFactory(parameters.IP).startTrackedBodies(players);
+//kinectFactory(parameters.IP).startBodies(players);
+let kinect = kinectFactory(parameters.IP);
+kinect.startBodies(players);
+kinect.startTrackedBodies(players);
