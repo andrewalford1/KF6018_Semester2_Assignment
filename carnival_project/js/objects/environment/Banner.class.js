@@ -21,8 +21,8 @@ class Banner extends ENGINE.OBJECTS.ClassicObject {
 		video.load(); // must call after setting/changing source
 		video.play();
 		var videoImage = document.createElement('canvas');
-		videoImage.width = 1200;
-		videoImage.height = 550;
+		videoImage.width = 1280;
+		videoImage.height = 700;
 		videoImage.loop = true;
 		var videoImageContext = videoImage.getContext('2d');
 		// background color if no video present
