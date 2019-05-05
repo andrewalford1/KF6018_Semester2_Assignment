@@ -49,6 +49,26 @@ let MODELS = `{
         "extension"     :   "glb", 
         "position"      :   [ -220, 0, -180 ],
         "rotation"      :   [ 0, 90, 0 ]
+    },
+    { 
+        "fileName"      :   "roadBlock", 
+        "extension"     :   "glb", 
+        "position"      :   [ 35, 0, -520 ],
+        "scale"         :   0.2,
+        "rotation"      :   [ 90, 0, 0 ]
+    },
+    { 
+        "fileName"      :   "cannon", 
+        "extension"     :   "glb", 
+        "position"      :   [ 85, 12, -402.5 ],
+        "scale"         :   5,
+        "rotation"      :   [ 0, 90, 0 ]
+    },{ 
+        "fileName"      :   "roadChimney", 
+        "extension"     :   "glb", 
+        "position"      :   [ -10, 0, -520 ],
+        "scale"         :   0.2,
+        "rotation"      :   [ 90, 0, 0 ]
     }, { 
         "fileName"      :   "smallTent", 
         "extension"     :   "glb", 

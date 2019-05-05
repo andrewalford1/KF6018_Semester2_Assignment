@@ -78,6 +78,23 @@ class UserGeustures {
                     m_positions[0].rightHandTouchingHead; 
         }
 
+        this.MoonIsSpying = function(){
+                //The hands are colliding with each other
+                return m_positions[0].handsTogether;
+        }
+
+        this.KameHameHa = function(){
+                let stageTwo = m_positions[1].handsTogether &&
+                               m_positions[1].leftHandTouchingMidSpine &&
+                               m_positions[1].rightHandTouchingMidSpine;
+
+                let stageOne = m_positions[0].handsTogether &&
+                               !m_positions[0].leftHandTouchingMidSpine &&
+                               !m_positions[0].leftHandTouchingMidSpine;
+
+                return stageOne && stageTwo;
+        }
+
         this.rotateRight = function() {
             return m_positions[0].rightHandAboveHead && !m_positions[0].rightHandState.open &&
             !m_positions[0].leftHandAboveShoulder; 
@@ -127,13 +144,18 @@ class UserGeustures {
             if(this.IsSmashingHammer()) {
                 console.log(`Hammer Smash!`);
             }
-            else if(this.MoonIsMooning()) {
+            if(this.MoonIsSpying()){
+                console.log(`Stop Staring!`); 
+            }
+            else if (this.KameHameHa()){
+                console.log(`KAMMEEE HAAAMMEE HAAA!`);  
+            }
+            if(this.MoonIsMooning()) {
                 console.log(`Oh my Gluten!!`);
             }
             if (this.Salute()) {
                 console.log(`Heil Hydra!`);
             }
-
             if(this.rotateLeft()) {
                 console.log('Rotate Left');
             }

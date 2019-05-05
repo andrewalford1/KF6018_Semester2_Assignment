@@ -31,13 +31,14 @@ class StreetLamp extends ENGINE.OBJECTS.ClassicObject
                 StreetLamp[i].model.scale.set(0.3, 0.4, 0.4);
                 this.addObjectToGroup(StreetLamp[i].model);
                 //Point light for the street lamps
-                streetLight.push(new THREE.PointLight( 0xFFFBEF, 2.5, 130, 1));
-                //Adjusting the shadow casted by the spot light
+                streetLight.push(new THREE.PointLight( 0xFFFBEF, 3, 130, 1));
+                streetLight[i].castShadow = true;
+                //Adjusting the shadow casted by the point light
                 streetLight[i].shadow.mapSize.width = 1024;
                 streetLight[i].shadow.mapSize.height = 1024;
-                streetLight[i].shadow.camera.near = 20;
-                streetLight[i].shadow.camera.far = 4000;
-                streetLight[i].shadow.camera.fov = 30;
+                //streetLight[i].shadow.camera.near = 20;
+                //streetLight[i].shadow.camera.far = 4000;
+                //streetLight[i].shadow.camera.fov = 30;
                 this.addObjectToGroup( streetLight[i] );
         }
         
@@ -99,10 +100,10 @@ class StreetLamp extends ENGINE.OBJECTS.ClassicObject
          */
         this.update = function(frameTime)
         {
-  /**
+ /**
               if(once) {
                 once = false;
-                let scene = StreetLamp.children[0];
+                let scene = StreetLamp[0].children[0];
                 //Make the Terrain be able to receive and cast shadows 
                 //from the other models in the environment.
                 //Search though the object tree and change the material of every mesh.
@@ -119,7 +120,7 @@ class StreetLamp extends ENGINE.OBJECTS.ClassicObject
                     }
                 }
             }//end of if(once) 
-            */   
+ */              
         }//end of this.update
     }//end of constructor
 }//end of StreetLamp()

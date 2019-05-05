@@ -17,12 +17,12 @@ class Banner extends ENGINE.OBJECTS.ClassicObject {
 		 video.loop = true;
 		// video.id = 'video';
 		// video.type = ' video/ogg; codecs="theora, vorbis" ';
-		video.src = "js/zoesProposed/test.mp4";
+		video.src = "js/zoesProposed/test2.mp4";
 		video.load(); // must call after setting/changing source
 		video.play();
 		var videoImage = document.createElement('canvas');
-		videoImage.width = 480;
-		videoImage.height = 240;
+		videoImage.width = 1280;
+		videoImage.height = 610;
 		videoImage.loop = true;
 		var videoImageContext = videoImage.getContext('2d');
 		// background color if no video present
