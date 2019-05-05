@@ -118,10 +118,13 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
                 //Moon will moon the player
                 MOON.model.rotation.set(-0.1, -2.0, -0.1);
             }
-             if(m_player.geustures.MoonIsSpying()){
+            else if(m_player.geustures.MoonIsSpying()){
                  //Moon will face the player
                  MOON.model.rotation.set(0.6, 0.9, -0.4);
-                 //this.RotateMoon();
+                 
+             }
+             else{
+                 this.RotateMoon();
              }
 
         }//end of update
