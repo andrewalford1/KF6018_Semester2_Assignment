@@ -69,7 +69,7 @@ class Fireball extends ENGINE.OBJECTS.ClassicObject {
         }
         this.ShootFireball = function(){
              this.getInstance().position.x -= 5;
-             this.getInstance().position.z -= 0.1;
+             this.getInstance().position.z -= 0.6;
              if (this.getInstance().position.x < -120)
              {
                  this.Initialise();
