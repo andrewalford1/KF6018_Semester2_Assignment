@@ -38,20 +38,23 @@ let games = {
 };
 
 let moon = new Moon(new THREE.Vector3(-600, 280, -200));
-
+let firework = new Fireworks(new THREE.Vector3(-300, 250, -700));
+let fireball = new Fireball(new THREE.Vector3(85, 12, -402.5 ));
 //Add all objects to the scene.
 engine.addObjects(MODELS, [
     //Enviroment
-    new Fireworks(),
+    //new Fireworks(),
     new BalloonCover(),
     new Floor(),
     new MrBeep(),
     new MrBeepLatitude(),
     new Helicopter(),
     new Banner(),
+    //new Fireball(),
     new HotAirBalloon(new THREE.Vector3(0, 250, 0)),
-    moon,
+    moon,firework,fireball,
     new MoreTents(),
+    new Smoke(),
     new Terrain(),
     new StreetLamp(),
     new WackCover(),
@@ -77,7 +80,8 @@ let players = [
 
 games.whackAMole.allocatePlayer(players[parameters.playerIndex]);
 moon.allocatePlayer(players[parameters.playerIndex]);
-
+firework.allocatePlayer(players[parameters.playerIndex]);
+fireball.allocatePlayer(players[parameters.playerIndex]);
 //Run the animation loop.
 function animate() { engine.driver.update(); }
 animate();
