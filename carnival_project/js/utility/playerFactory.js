@@ -102,6 +102,19 @@ let playerFactory = (function() {
 
             return distance < 1;
         },
+        leftHandTouchingMidSpine : function() {
+            let leftHandPos = new THREE.Vector3();
+            leftHandPos.copy(this.joints[this.jointIndexes.HAND_LEFT].mesh.value.position);
+            let spineMidPos = new THREE.Vector3();
+            spineMidPos.copy(this.joints[this.jointIndexes.SPINE_MID].mesh.value.position);
+
+            leftHandPos.multiplyScalar(5);
+            spineMidPos.multiplyScalar(5);
+
+            let distance = leftHandPos.distanceTo(spineMidPos).toFixed(2);
+
+            return distance < 1.5;
+        },
         leftHandTouchingRightSholder : function() {
             let leftHandPos = new THREE.Vector3();
             leftHandPos.copy(this.joints[this.jointIndexes.HAND_LEFT].mesh.value.position);
@@ -140,6 +153,19 @@ let playerFactory = (function() {
             let distance = rightHandPos.distanceTo(headPos).toFixed(2);
 
             return distance < 1;
+        },
+        rightHandTouchingMidSpine : function() {
+            let rightHandPos = new THREE.Vector3();
+            rightHandPos.copy(this.joints[this.jointIndexes.HAND_RIGHT].mesh.value.position);
+            let spineMidPos = new THREE.Vector3();
+            spineMidPos.copy(this.joints[this.jointIndexes.SPINE_MID].mesh.value.position);
+
+            rightHandPos.multiplyScalar(5);
+            spineMidPos.multiplyScalar(5);
+
+            let distance = rightHandPos.distanceTo(spineMidPos).toFixed(2);
+
+            return distance < 1.5;
         },
         rightHandTouchingLeftSholder : function() {
             let rightHandPos = new THREE.Vector3();

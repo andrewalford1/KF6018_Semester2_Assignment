@@ -61,9 +61,9 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
         }
         
         this.RotateMoon = function(){
-             //MOON.model.rotation.x = 0;
-             MOON.model.rotation.y += 0.005;
-             //MOON.model.rotation.z = 0;
+             MOON.model.rotation.x = 0;
+             MOON.model.rotation.y += 0.003;
+             MOON.model.rotation.z = 0;
         }
 
         this.Initialise = function() {
@@ -118,17 +118,11 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
                 //Moon will moon the player
                 MOON.model.rotation.set(-0.1, -2.0, -0.1);
             }
-           else{
-                 this.RotateMoon();
-            }
-//             if(!m_player.geustures.MoonIsMooning()){
-//                 //Moon will face the player
-//                 //MOON.model.rotation.set(0.6, 0.9, -0.4);
-//                 MOON.model.rotation.x = 0;
-//                 MOON.model.rotation.y += 0.005;
-//                 MOON.model.rotation.z = 0;
-//                 //this.RotateMoon();
-//             }
+             if(m_player.geustures.MoonIsSpying()){
+                 //Moon will face the player
+                 MOON.model.rotation.set(0.6, 0.9, -0.4);
+                 //this.RotateMoon();
+             }
 
         }//end of update
 
