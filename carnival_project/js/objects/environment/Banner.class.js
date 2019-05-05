@@ -21,13 +21,13 @@ class Banner extends ENGINE.OBJECTS.ClassicObject {
 		video.load(); // must call after setting/changing source
 		video.play();
 		var videoImage = document.createElement('canvas');
-		videoImage.width = 480;
-		videoImage.height = 240;
+		videoImage.width = 1200;
+		videoImage.height = 550;
 		videoImage.loop = true;
 		var videoImageContext = videoImage.getContext('2d');
 		// background color if no video present
 		videoImageContext.fillStyle = '#000000';
-		videoImageContext.fillRect(0, 0, videoImage.width, videoImage.height);
+		videoImageContext.fillRect(400, 0, videoImage.width, videoImage.height);
 		var videoTexture = new THREE.Texture(videoImage);
 		videoTexture.minFilter = THREE.LinearFilter;
 		videoTexture.magFilter = THREE.LinearFilter;
