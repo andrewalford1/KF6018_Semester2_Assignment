@@ -52,10 +52,10 @@ class Fireball extends ENGINE.OBJECTS.ClassicObject {
 			side: THREE.DoubleSide
             })
         ));
-        this.getInstance().position.set(85, 12, -402.5 );
+        this.getInstance().position.set(85, 12, -402 );
 
         this.Initialise = function(){
-            this.getInstance().position.set(85, 12, -402.5 );
+            this.getInstance().position.set(85, 12, -402 );
         }
 
         this.videoFireball = function(){
@@ -69,6 +69,7 @@ class Fireball extends ENGINE.OBJECTS.ClassicObject {
         }
         this.ShootFireball = function(){
              this.getInstance().position.x -= 1;
+             this.getInstance().position.z -= 0.1;
              if (this.getInstance().position.x < -30)
              {
                  this.Initialise();

@@ -60,9 +60,9 @@ let MODELS = `{
     { 
         "fileName"      :   "cannon", 
         "extension"     :   "glb", 
-        "position"      :   [ 85, 12, -402.5 ],
+        "position"      :   [ 85, 12, -402 ],
         "scale"         :   5,
-        "rotation"      :   [ 0, 90, 0 ]
+        "rotation"      :   [ 0, 95, 0 ]
     },{ 
         "fileName"      :   "roadChimney", 
         "extension"     :   "glb", 

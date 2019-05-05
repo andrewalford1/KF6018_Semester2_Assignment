@@ -21,14 +21,13 @@ class WackCover extends ENGINE.OBJECTS.ClassicObject
             'wackCover',
             'glb'
         );
-        let once;
+        let once = true;
         
         //Scale and position the WackCover
         WACKCOVER.model.scale.set(12, 12, 12);
         WACKCOVER.model.rotation.set(0, Math.PI/ 2, 0);
         WACKCOVER.model.position.set(-20, 0, -220);
         this.addObjectToGroup(WACKCOVER.model);
-        console.log(WACKCOVER.model);
         /**
          * Updates the WackCover. (Overridden from the superclass).
          * @param {number} frameTime - The time taken to compute the
@@ -39,8 +38,8 @@ class WackCover extends ENGINE.OBJECTS.ClassicObject
            //The WackCover is not updated.
            if(once) {
                 once = false;
-                let scene = StreetLamp.children[0];
-                //Make the Terrain be able to receive and cast shadows 
+                let scene = WACKCOVER.model.children[0];
+                //Make the WACKCOVER receive and cast shadows 
                 //from the other models in the environment.
                 //Search though the object tree and change the material of every mesh.
                 if(scene) {
@@ -54,12 +53,12 @@ class WackCover extends ENGINE.OBJECTS.ClassicObject
                                 if(object4) {
                                     let object5 = object4.children[0];
                                     if(object5){
-                                        let mesh = object5.children;
-                                        //Change the material of every mesh.
-                                        
-                                            mesh.castShadow = true;
-                                            mesh.receiveShadow = true;
-                                       
+                                         let meshes = object5.children;
+                                         //Change the material of every mesh.
+                                         meshes.forEach(mesh => {
+                                         mesh.castShadow = true;
+                                         mesh.receiveShadow = true;
+                                         });
                                     }
                                 }
                              }
