@@ -61,7 +61,9 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
         }
         
         this.RotateMoon = function(){
+             //MOON.model.rotation.x = 0;
              MOON.model.rotation.y += 0.005;
+             //MOON.model.rotation.z = 0;
         }
 
         this.Initialise = function() {
