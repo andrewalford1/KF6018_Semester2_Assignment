@@ -147,16 +147,15 @@ class UserGeustures {
             if(this.MoonIsSpying()){
                 console.log(`Stop Staring!`); 
             }
+            else if (this.KameHameHa()){
+                console.log(`KAMMEEE HAAAMMEE HAAA!`);  
+            }
             if(this.MoonIsMooning()) {
                 console.log(`Oh my Gluten!!`);
             }
             if (this.Salute()) {
                 console.log(`Heil Hydra!`);
             }
-            if (this.KameHameHa()){
-                console.log(`KAMMEEE HAAAMMEE HAAA!`);  
-            }
-
             if(this.rotateLeft()) {
                 console.log('Rotate Left');
             }

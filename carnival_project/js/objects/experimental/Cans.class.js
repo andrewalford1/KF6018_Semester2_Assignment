@@ -23,133 +23,172 @@ var radius = 2, height = 2, segments = 5, rings = 30;
 // create a new mesh with sphere geometry -
 var box1 = new THREE.Mesh(
    new THREE.SphereGeometry(radius, rings,rings ),
-   new THREE.MeshLambertMaterial( {color: 0xffff00 	})
+   new THREE.MeshPhongMaterial( {color: 0xffff00 	})
    );
+box1.castShadow = true;
+box1.receiveShadow = true;
 this.addObjectToGroup(box1);
 
 // create a new mesh with sphere geometry -
 var box2 = new THREE.Mesh(
  new THREE.CylinderGeometry(radius,height, segments, rings),
-   new THREE.MeshLambertMaterial( {    map: ENGINE.TextureLoader().loadTexture( 'dartsGame/stripes.jpeg' ) 	})
+   new THREE.MeshPhongMaterial( {    map: ENGINE.TextureLoader().loadTexture( 'dartsGame/stripes.jpeg' ) 	})
    );
+box2.castShadow = true;
+box2.receiveShadow = true;
 this.addObjectToGroup(box2);
 
 // create a new mesh with sphere geometry -
 var box3 = new THREE.Mesh(
  new THREE.CylinderGeometry(radius,height, segments, rings),
-   new THREE.MeshLambertMaterial( {    color: 0xCC0000	})
+   new THREE.MeshPhongMaterial( {    color: 0xCC0000	})
    );
+box3.castShadow = true;
+box3.receiveShadow = true;
 this.addObjectToGroup(box3);
 
 // create a new mesh with sphere geometry -
 var box4 = new THREE.Mesh(
  new THREE.CylinderGeometry(radius,height, segments, rings),
-   new THREE.MeshLambertMaterial( {    color: 0xCC0000	})
+   new THREE.MeshPhongMaterial( {    color: 0xCC0000	})
    );
+box4.castShadow = true;
+box4.receiveShadow = true;
 this.addObjectToGroup(box4);
 
 // create a new mesh with sphere geometry -
 var box5 = new THREE.Mesh(
  new THREE.CylinderGeometry(radius,height, segments, rings),
-   new THREE.MeshLambertMaterial( {    map: ENGINE.TextureLoader().loadTexture( 'dartsGame/stripes.jpeg' ) 	})
+   new THREE.MeshPhongMaterial( {    map: ENGINE.TextureLoader().loadTexture( 'dartsGame/stripes.jpeg' ) 	})
    );
+box5.castShadow = true;
+box5.receiveShadow = true;
 this.addObjectToGroup(box5);
 
 // create a new mesh with sphere geometry -
 var box6 = new THREE.Mesh(
  new THREE.CylinderGeometry(radius,height, segments, rings),
-   new THREE.MeshLambertMaterial( {    color: 0xCC0000	})
+   new THREE.MeshPhongMaterial( {    color: 0xCC0000	})
    );
+box6.castShadow = true;
+box6.receiveShadow = true;
 this.addObjectToGroup(box6);
 
 // create a new mesh with sphere geometry -
 var box7 = new THREE.Mesh(
  new THREE.CylinderGeometry(radius,height, segments, rings),
-   new THREE.MeshLambertMaterial( {    map: ENGINE.TextureLoader().loadTexture( 'dartsGame/stripes.jpeg' ) 	})
+   new THREE.MeshPhongMaterial( {    map: ENGINE.TextureLoader().loadTexture( 'dartsGame/stripes.jpeg' ) 	})
    );
+box7.castShadow = true;
+box7.receiveShadow = true;
 this.addObjectToGroup(box7);
 
 // create a new mesh with sphere geometry -
 var box8 = new THREE.Mesh(
  new THREE.CylinderGeometry(radius,height, segments, rings),
-   new THREE.MeshLambertMaterial( {    color: 0xCC0000	})
+   new THREE.MeshPhongMaterial( {    color: 0xCC0000	})
    );
+box8.castShadow = true;
+box8.receiveShadow = true;
 this.addObjectToGroup(box8);
 
 // create a new mesh with sphere geometry -
 var box9 = new THREE.Mesh(
  new THREE.CylinderGeometry(radius,height, segments, rings),
-   new THREE.MeshLambertMaterial( {    color: 0xCC0000	})
+   new THREE.MeshPhongMaterial( {    color: 0xCC0000	})
    );
+box9.castShadow = true;
+box9.receiveShadow = true;
 this.addObjectToGroup(box9);
 
 // create a new mesh with sphere geometry -
 var box10 = new THREE.Mesh(
  new THREE.CylinderGeometry(radius,height, segments, rings),
-   new THREE.MeshLambertMaterial( {   map: ENGINE.TextureLoader().loadTexture( 'dartsGame/stripes.jpeg' ) 	})
+   new THREE.MeshPhongMaterial( {   map: ENGINE.TextureLoader().loadTexture( 'dartsGame/stripes.jpeg' ) 	})
    );
+box10.castShadow = true;
+box10.receiveShadow = true;
 this.addObjectToGroup(box10);
 
 // create a new mesh with sphere geometry -
 var box11 = new THREE.Mesh(
  new THREE.CylinderGeometry(radius,height, segments, rings),
-   new THREE.MeshLambertMaterial( {    color: 0xCC0000	})
+   new THREE.MeshPhongMaterial( {    color: 0xCC0000	})
    );
+box11.castShadow = true;
+box11.receiveShadow = true;
 this.addObjectToGroup(box11);
 
 // create a new mesh with sphere geometry -
 var box12 = new THREE.Mesh(
  new THREE.CylinderGeometry(radius,height, segments, rings),
-   new THREE.MeshLambertMaterial( {    map: ENGINE.TextureLoader().loadTexture( 'dartsGame/stripes.jpeg' ) 	})
+   new THREE.MeshPhongMaterial( {    map: ENGINE.TextureLoader().loadTexture( 'dartsGame/stripes.jpeg' ) 	})
    );
+box12.castShadow = true;
+box12.receiveShadow = true;
 this.addObjectToGroup(box12);
 
 // create a new mesh with sphere geometry -
 var box13 = new THREE.Mesh(
  new THREE.CylinderGeometry(radius,height, segments, rings),
-   new THREE.MeshLambertMaterial( {    color: 0xCC0000	})
+   new THREE.MeshPhongMaterial( {    color: 0xCC0000	})
    );
+box13.castShadow = true;
+box13.receiveShadow = true;
 this.addObjectToGroup(box13);
+
 // create a new mesh with sphere geometry -
 var box14 = new THREE.Mesh(
  new THREE.CylinderGeometry(radius,height, segments, rings),
-   new THREE.MeshLambertMaterial( {    color: 0xCC0000	})
+   new THREE.MeshPhongMaterial( {    color: 0xCC0000	})
    );
+box14.castShadow = true;
+box14.receiveShadow = true;
 this.addObjectToGroup(box14);
 
 // create a new mesh with sphere geometry -
 var box15 = new THREE.Mesh(
  new THREE.CylinderGeometry(radius,height, segments, rings),
-   new THREE.MeshLambertMaterial( {    color: 0xCC0000	})
+   new THREE.MeshPhongMaterial( {    color: 0xCC0000	})
    );
+box15.castShadow = true;
+box15.receiveShadow = true;
 this.addObjectToGroup(box15);
 
 // create a new mesh with sphere geometry -
 var box16 = new THREE.Mesh(
  new THREE.CylinderGeometry(radius,height, segments, rings),
-   new THREE.MeshLambertMaterial( {    color: 0xCC0000	})
+   new THREE.MeshPhongMaterial( {    color: 0xCC0000	})
    );
+box16.castShadow = true;
+box16.receiveShadow = true;
 this.addObjectToGroup(box16);
 
 // create a new mesh with sphere geometry -
 var box17 = new THREE.Mesh(
  new THREE.CylinderGeometry(radius,height, segments, rings),
-   new THREE.MeshLambertMaterial( {    map: ENGINE.TextureLoader().loadTexture( 'dartsGame/stripes.jpeg' ) 	})
+   new THREE.MeshPhongMaterial( {    map: ENGINE.TextureLoader().loadTexture( 'dartsGame/stripes.jpeg' ) 	})
    );
+box17.castShadow = true;
+box17.receiveShadow = true;
 this.addObjectToGroup(box17);
 
 // create a new mesh with sphere geometry -
 var box18 = new THREE.Mesh(
  new THREE.CylinderGeometry(radius,height, segments, rings),
-   new THREE.MeshLambertMaterial( {    color: 0xCC0000	})
+   new THREE.MeshPhongMaterial( {    color: 0xCC0000	})
    );
+box18.castShadow = true;
+box18.receiveShadow = true;
 this.addObjectToGroup(box18);
 
 // create a new mesh with sphere geometry -
 var box19 = new THREE.Mesh(
  new THREE.CylinderGeometry(radius,height, segments, rings),
-   new THREE.MeshLambertMaterial( {   map: ENGINE.TextureLoader().loadTexture( 'dartsGame/stripes.jpeg' ) 		})
+   new THREE.MeshPhongMaterial( {   map: ENGINE.TextureLoader().loadTexture( 'dartsGame/stripes.jpeg' ) 		})
    );
+box19.castShadow = true;
+box19.receiveShadow = true;
 this.addObjectToGroup(box19);
 
 // Cannon

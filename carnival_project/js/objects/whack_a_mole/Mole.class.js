@@ -146,8 +146,8 @@ class Mole extends ENGINE.OBJECTS.ClassicObject
         moleBodyPartsGroup.add(moleLeftPawGroup);
         moleBodyPartsGroup.add(moleRightPawGroup);
         //Make moleBodyPartsGroup be able to cast or receive shadows.
-        moleBodyPartsGroup.castShadow = true;
-        moleBodyPartsGroup.receiveShadow = true;
+        //moleBodyPartsGroup.castShadow = true;
+        //moleBodyPartsGroup.receiveShadow = true;
         //Add the sphere to the object group.
         this.addObjectToGroup(moleBodyPartsGroup);
 
@@ -201,7 +201,7 @@ class Mole extends ENGINE.OBJECTS.ClassicObject
          */
         this.molePosition = function(){
                 let randomTime = Math.round(Math.random()*(1000 + 200) + 200);
-                moleBodyPartsGroup.position.y = Math.sin(iFrame/10 - randomTime) * 1.2 -1.3;
+                moleBodyPartsGroup.position.y = Math.sin(iFrame/20 - randomTime) * 1.2 -1.3;
                 if(moleBodyPartsGroup.position.y >= 1.2)
                 {
                         return true;

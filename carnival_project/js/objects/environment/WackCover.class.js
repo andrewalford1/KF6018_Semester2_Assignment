@@ -28,7 +28,7 @@ class WackCover extends ENGINE.OBJECTS.ClassicObject
         WACKCOVER.model.rotation.set(0, Math.PI/ 2, 0);
         WACKCOVER.model.position.set(-20, 0, -220);
         this.addObjectToGroup(WACKCOVER.model);
-
+        console.log(WACKCOVER.model);
         /**
          * Updates the WackCover. (Overridden from the superclass).
          * @param {number} frameTime - The time taken to compute the
@@ -37,6 +37,36 @@ class WackCover extends ENGINE.OBJECTS.ClassicObject
         this.update = function(frameTime)
         {
            //The WackCover is not updated.
+           if(once) {
+                once = false;
+                let scene = StreetLamp.children[0];
+                //Make the Terrain be able to receive and cast shadows 
+                //from the other models in the environment.
+                //Search though the object tree and change the material of every mesh.
+                if(scene) {
+                    let object = scene.children[0];
+                    if(object) {
+                        let object2 = object.children[0];
+                        if(object2) {
+                            let object3 = object2.children[0];
+                            if(object3) {
+                                let object4 = object3.children[0];
+                                if(object4) {
+                                    let object5 = object4.children[0];
+                                    if(object5){
+                                        let mesh = object5.children;
+                                        //Change the material of every mesh.
+                                        
+                                            mesh.castShadow = true;
+                                            mesh.receiveShadow = true;
+                                       
+                                    }
+                                }
+                             }
+                        }
+                    }
+                }
+            }//end of if(once) 
         }
     }
 

@@ -23,18 +23,18 @@
         };
            //[ Base].
             let Base1= new THREE.BoxGeometry(15, 1, 25);
-            //let Base2= new THREE.MeshPhongMaterial( { color: 0x000000 } );
-            let grassTexture = new THREE.TextureLoader().load( 'res/textures/strengthOMetre/grass.jpg' );
-            let Base2= new THREE.MeshBasicMaterial( { map: grassTexture } );
+            let Base2= new THREE.MeshPhongMaterial( { color: 0xFF7133 } );
+            //let grassTexture = new THREE.TextureLoader().load( 'res/textures/strengthOMetre/grass.jpg' );
+            //let Base2= new THREE.MeshBasicMaterial( { map: grassTexture } );
             let Base = new THREE.Mesh(Base1, Base2);
             Base.castShadow = true;
             Base.receiveShadow = true;
 
             //[ BaseHitArea].
             let BaseHitArea1= new THREE.BoxGeometry(8, 4, 8);
-            //let BaseHitArea2= new THREE.MeshPhongMaterial( { color: 0x000000 } );
-            let woodTexture = new THREE.TextureLoader().load( 'res/textures/strengthOMetre/wood.jpg' );
-            let BaseHitArea2 = new THREE.MeshBasicMaterial( { map: woodTexture } );
+            let BaseHitArea2= new THREE.MeshPhongMaterial( { color: 0x7400B7 } );
+            //let woodTexture = new THREE.TextureLoader().load( 'res/textures/strengthOMetre/wood.jpg' );
+            //let BaseHitArea2 = new THREE.MeshBasicMaterial( { map: woodTexture } );
             let BaseHitArea = new THREE.Mesh(BaseHitArea1, BaseHitArea2);
             BaseHitArea.position.y = 2;
             BaseHitArea.position.z = 7;

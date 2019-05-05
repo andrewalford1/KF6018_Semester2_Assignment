@@ -33,7 +33,7 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
         moonLight.shadow.mapSize.height = 1024;
         moonLight.shadow.camera.near = 500;    
         moonLight.shadow.camera.far = 1000;     
-        moonLight.shadow.camera.fov = 30;
+        //moonLight.shadow.camera.fov = 30;
         this.addObjectToGroup( moonLight );
 
         //let helper = new THREE.CameraHelper( moonLight.shadow.camera );
@@ -62,7 +62,7 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
         
         this.RotateMoon = function(){
              MOON.model.rotation.x = 0;
-             MOON.model.rotation.y += 0.003;
+             MOON.model.rotation.y += 0.005;
              MOON.model.rotation.z = 0;
         }
 
