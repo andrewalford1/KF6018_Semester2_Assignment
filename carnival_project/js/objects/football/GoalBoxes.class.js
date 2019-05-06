@@ -1,11 +1,11 @@
 /**
- * Physics Cubes
+ * Physics Cubes for the goal
  * @extends ENGINE.OBJECTS.ClassicObject
  * @author Luke Rose
  * @date 1/05/2019
- * @version 1.0 - 21/02/2019
+ * @version 1.0 - 3/05/2019
  */
-class PhysicsCubes extends ENGINE.OBJECTS.ClassicObject
+class GoalBoxes extends ENGINE.OBJECTS.ClassicObject
 {
     /**
      * constructor for a Basic Character.
@@ -19,7 +19,7 @@ class PhysicsCubes extends ENGINE.OBJECTS.ClassicObject
         
         //Ball
         this.addObjectToGroup(new THREE.Mesh(
-            new THREE.SphereGeometry(3, 32, 32),
+            new THREE.BoxGeometry(5, 5, 5),
             new THREE.MeshPhongMaterial({
                 color: 0x0000FF
             })
@@ -28,16 +28,24 @@ class PhysicsCubes extends ENGINE.OBJECTS.ClassicObject
         //Left Boxes
             //Left Box 1
             //Define any physical properties the object may have.
-            let physicsProperties = new CANNON.Body({
-                mass: 40,
-                shape: new CANNON.Box(new CANNON.Vec3(3, 3, 3))
+            let leftBox1 = new CANNON.Body({
+                mass: 20,
+                shape: new CANNON.Box(new CANNON.Vec3(2.5, 2.5, 2.5))
             });
-            physicsProperties.position.copy(new THREE.Vector3(-5, 4, -130));
-            physicsProperties.angularVelocity.set(0, 0, 20);
+            leftBox1.position.copy(new THREE.Vector3(-70, 5, -130));
 
+            //Left Box 2
+            //Define any physical properties the object may have.
+            let leftBox2 = new CANNON.Body({
+                mass: 20,
+                shape: new CANNON.Box(new CANNON.Vec3(2.5, 2.5, 2.5))
+            });
+            leftBox2.position.copy(new THREE.Vector3(-70, 5, -135));
+        
 
         //add the physics objects
-        this.addPhysics(physicsProperties);
+        this.addPhysics(leftBox1);
+        this.addPhysics(leftBox2);
 
         this.update = function(frameTime)
         {

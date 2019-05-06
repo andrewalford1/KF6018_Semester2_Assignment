@@ -36,7 +36,7 @@ class GoalTarget extends ENGINE.OBJECTS.ClassicObject
         let box2 = new THREE.MeshPhongMaterial( { color: 0xffffff } );
         
 
-
+        /*
         //Left boxes
         let boxLeft = new THREE.Mesh(box1, box2);
         boxLeft.position.set(-95, 2.5, -180);
@@ -50,7 +50,7 @@ class GoalTarget extends ENGINE.OBJECTS.ClassicObject
         boxLeft4.position.set(-95, 7.5, -190.5);
         let boxLeft5 = new THREE.Mesh(box1, box2);
         boxLeft5.position.set(-95, 12.5, -187);
-
+        */
 
         //Right boxes
         let boxRight = new THREE.Mesh(box1, box2);
@@ -68,12 +68,14 @@ class GoalTarget extends ENGINE.OBJECTS.ClassicObject
 
         //Add object to group
         this.addObjectToGroup(targetRight);
+        /*
         this.addObjectToGroup(boxLeft);
         this.addObjectToGroup(boxLeft1);
         this.addObjectToGroup(boxLeft2);
         this.addObjectToGroup(boxLeft3);
         this.addObjectToGroup(boxLeft4);
         this.addObjectToGroup(boxLeft5);
+        */
 
         this.addObjectToGroup(boxRight);
         this.addObjectToGroup(boxRight1);

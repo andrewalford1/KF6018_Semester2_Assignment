@@ -18,7 +18,7 @@ class Floor extends ENGINE.OBJECTS.ClassicObject {
             mass: 0,
             shape: new CANNON.Box(new CANNON.Vec3(1000, 1, 1000))
         });
-        physicsProperties.position.copy(new THREE.Vector3(0, -17, 0));
+        physicsProperties.position.copy(new THREE.Vector3(-2, 0, -160));
         this.addPhysics(physicsProperties);
 
         /**

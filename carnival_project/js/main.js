@@ -64,6 +64,7 @@ engine.addObjects(MODELS, [
     new Fence(),
     new PhysicsCubes(),
     new GoalTarget(),
+    new GoalBoxes(),
     //new Goal(new THREE.Vector3(25, 0, 0)),
     games.strengthOMetre,
     games.whackAMole,
