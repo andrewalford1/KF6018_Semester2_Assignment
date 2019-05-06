@@ -61,6 +61,9 @@ engine.addObjects(MODELS, [
     //Games
     games.darts,
     new Football(),
+    new Fence(),
+    new PhysicsCubes(),
+    new GoalTarget(),
     //new Goal(new THREE.Vector3(25, 0, 0)),
     games.strengthOMetre,
     games.whackAMole,

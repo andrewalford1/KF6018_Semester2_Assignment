@@ -73,5 +73,11 @@ let MODELS = `{
         "fileName"      :   "smallTent", 
         "extension"     :   "glb", 
         "position"      :   [ 580, 40, -630 ]
+    }, { 
+        "fileName"      :   "footballGoal", 
+        "extension"     :   "gltf", 
+        "position"      :   [ -80, 0, -160],
+        "scale"         :   0.01,
+        "rotation"      :   [0, 180, 0]
     }]
 }`;
