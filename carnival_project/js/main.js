@@ -25,7 +25,7 @@ let camera = new THREE.PerspectiveCamera(
     0.1,
     2000
 );
-camera.position.set(0, 25, 20);
+camera.position.set(0, 20, 25);
 
 //[engine] Manages the scene.
 let engine = engineFactory(camera, false);
@@ -37,9 +37,9 @@ let games = {
     strengthOMetre : new StrengthOMetre(),
 };
 
-let moon = new Moon(new THREE.Vector3(-600, 280, -200));
-let firework = new Fireworks(new THREE.Vector3(-300, 250, -700));
-let fireball = new Fireball(new THREE.Vector3(85, 12, -402.5 ));
+//let moon = new Moon(new THREE.Vector3(-600, 280, -200));
+//let firework = new Fireworks(new THREE.Vector3(-300, 250, -700));
+//let fireball = new Fireball(new THREE.Vector3(85, 12, -402.5 ));
 //Add all objects to the scene.
 engine.addObjects(MODELS, [
     //Enviroment
@@ -50,9 +50,8 @@ engine.addObjects(MODELS, [
     new MrBeepLatitude(),
     new Helicopter(),
     new Banner(),
-    //new Fireball(),
     new HotAirBalloon(new THREE.Vector3(0, 250, 0)),
-    moon,firework,fireball,
+  //  moon,firework,fireball,
     new MoreTents(),
     new Smoke(),
     new Terrain(),
@@ -69,36 +68,27 @@ engine.addObjects(MODELS, [
 ]);
 
 //[player] tracks the user playing the game.
-let players = [
-    playerFactory(engine.camera, engine.scene, new THREE.Color(0xDD0000), 5),
-    playerFactory(null, engine.scene, new THREE.Color(0x00DD00), 4),
-    playerFactory(null, engine.scene, new THREE.Color(0x0000DD), 3),
-    playerFactory(null, engine.scene, new THREE.Color(0xDDDD00), 2),
-    playerFactory(null, engine.scene, new THREE.Color(0x00DDDD), 1),
-    playerFactory(null, engine.scene, new THREE.Color(0xDD00DD), 0)
-];
+// let players = [
+//     playerFactory(engine.camera, engine.scene, new THREE.Color(0xDD0000), 5),
+//     playerFactory(null, engine.scene, new THREE.Color(0x00DD00), 4),
+//     playerFactory(null, engine.scene, new THREE.Color(0x0000DD), 3),
+//     playerFactory(null, engine.scene, new THREE.Color(0xDDDD00), 2),
+//     playerFactory(null, engine.scene, new THREE.Color(0x00DDDD), 1),
+//     playerFactory(null, engine.scene, new THREE.Color(0xDD00DD), 0)
+// ];
 
-games.whackAMole.allocatePlayer(players[parameters.playerIndex]);
-moon.allocatePlayer(players[parameters.playerIndex]);
-firework.allocatePlayer(players[parameters.playerIndex]);
-fireball.allocatePlayer(players[parameters.playerIndex]);
+// games.whackAMole.allocatePlayer(players[parameters.playerIndex]);
+// moon.allocatePlayer(players[parameters.playerIndex]);
+// firework.allocatePlayer(players[parameters.playerIndex]);
+// fireball.allocatePlayer(players[parameters.playerIndex]);
 
-let experimentalPlayer = experimentalPlayerFactory(`{
-"player": [{
-    "fileName"  :   "andrew", 
-    "extension" :   "glb", 
-    "position"  :   [ 0, 0, 0 ],
-    "scale"     :   7
-}]}`, engine, 0);
-
-console.log(experimentalPlayer);
+let experimentalPlayer = experimentalPlayerFactory(engine, 0);
 
 //Run the animation loop.
-function animate() { engine.driver.update(); experimentalPlayer.update(engine.scene)}
+function animate() { engine.driver.update();}
 animate();
 
 //Kinect code.
-//kinectFactory(parameters.IP).startBodies(players);
 let kinect = kinectFactory(parameters.IP);
-kinect.startBodies(players);
-kinect.startTrackedBodies(players);
+kinect.startBodies(experimentalPlayer);
+kinect.experimentalTracking(experimentalPlayer);
