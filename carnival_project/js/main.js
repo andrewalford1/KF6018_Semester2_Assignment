@@ -40,6 +40,7 @@ let games = {
 let moon = new Moon(new THREE.Vector3(-600, 280, -200));
 let firework = new Fireworks(new THREE.Vector3(-300, 250, -700));
 let fireball = new Fireball(new THREE.Vector3(85, 12, -402.5 ));
+let cans = new Cans(new THREE.Vector3(-50, 0, -265));
 //Add all objects to the scene.
 engine.addObjects(MODELS, [
     //Enviroment
@@ -52,7 +53,7 @@ engine.addObjects(MODELS, [
     new Banner(),
     //new Fireball(),
     new HotAirBalloon(new THREE.Vector3(0, 250, 0)),
-    moon,firework,fireball,
+    moon,firework,fireball,cans,
     new MoreTents(),
     new Smoke(),
     new Terrain(),
@@ -61,13 +62,10 @@ engine.addObjects(MODELS, [
     //Games
     games.darts,
     new Football(),
-    new Fence(),
-    new PhysicsCubes(),
-    new GoalTarget(),
     //new Goal(new THREE.Vector3(25, 0, 0)),
     games.strengthOMetre,
     games.whackAMole,
-    new Cans(new THREE.Vector3(0, 150, 0)),
+    //new Cans(new THREE.Vector3(0, 150, 0)),
     new LightGUI()
 ]);
 
@@ -82,11 +80,10 @@ let players = [
 ];
 
 games.whackAMole.allocatePlayer(players[parameters.playerIndex]);
-
 moon.allocatePlayer(players[parameters.playerIndex]);
-
 firework.allocatePlayer(players[parameters.playerIndex]);
 fireball.allocatePlayer(players[parameters.playerIndex]);
+cans.allocatePlayer(players[parameters.playerIndex]);
 
 let experimentalPlayer = experimentalPlayerFactory(`{
 "player": [{
