@@ -32,8 +32,7 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
         moonLight.shadow.mapSize.width = 1024;  
         moonLight.shadow.mapSize.height = 1024;
         moonLight.shadow.camera.near = 500;    
-        moonLight.shadow.camera.far = 1000;     
-        //moonLight.shadow.camera.fov = 30;
+        moonLight.shadow.camera.far = 1000; 
         this.addObjectToGroup( moonLight );
 
         //let helper = new THREE.CameraHelper( moonLight.shadow.camera );
