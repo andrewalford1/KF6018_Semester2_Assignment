@@ -79,8 +79,16 @@ class UserGeustures {
         }
 
         this.MoonIsSpying = function(){
+                //The hands are not colliding 
+                let stageFour = !m_positions[3].handsTogether;
                 //The hands are colliding with each other
-                return m_positions[0].handsTogether;
+                let stageThree = m_positions[2].handsTogether;
+                //The hands are not colliding 
+                let stageTwo = !m_positions[1].handsTogether;
+                //The hands are colliding with each other
+                let stageOne = m_positions[0].handsTogether;
+                //return statements
+                return stageOne;
         }
 
         this.KameHameHa = function(){
@@ -147,9 +155,9 @@ class UserGeustures {
             if(this.MoonIsSpying()){
                 console.log(`Stop Staring!`); 
             }
-            else if (this.KameHameHa()){
-                console.log(`KAMMEEE HAAAMMEE HAAA!`);  
-            }
+            //if (this.KameHameHa()){
+                //console.log(`KAMMEEE HAAAMMEE HAAA!`);  
+            //}
             if(this.MoonIsMooning()) {
                 console.log(`Oh my Gluten!!`);
             }
