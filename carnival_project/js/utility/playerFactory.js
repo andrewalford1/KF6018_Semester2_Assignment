@@ -56,6 +56,19 @@ let playerFactory = (function() {
 
             return distance < 1;
         },
+        feetTogether : function() {
+            let leftFootPos = new THREE.Vector3();
+            leftFootPos.copy(this.joints[this.jointIndexes.FOOT_LEFT].mesh.value.position);
+            let rightFootPos = new THREE.Vector3();
+            rightFootPos.copy(this.joints[this.jointIndexes.FOOT_RIGHT].mesh.value.position);
+
+            leftFootPos.multiplyScalar(5);
+            rightFootPos.multiplyScalar(5);
+
+            let distance = leftFootPos.distanceTo(rightFootPos).toFixed(2);
+
+            return distance < 1;
+        },
         armsSpread : function() {
             let leftHandPos = new THREE.Vector3();
             leftHandPos.copy(this.joints[this.jointIndexes.HAND_LEFT].mesh.value.position);
@@ -193,18 +206,31 @@ let playerFactory = (function() {
 
             return distance < 1;
         },
-        rightHandPointing : function() {
-            let rightHandPos = new THREE.Vector3();
-            rightHandPos.copy(this.joints[this.jointIndexes.HAND_RIGHT].mesh.value.position);
-            let rightShoulderPos = new THREE.Vector3();
-            rightShoulderPos.copy(this.joints[this.jointIndexes.SHOULDER_RIGHT].mesh.value.position);
+       rightFootTouchingLeftKnee : function() {
+            let rightFootPos = new THREE.Vector3();
+            rightFootPos.copy(this.joints[this.jointIndexes.FOOT_RIGHT].mesh.value.position);
+            let leftKneePos = new THREE.Vector3();
+            leftKneePos.copy(this.joints[this.jointIndexes.KNEE_LEFT].mesh.value.position);
 
-            rightHandPos.multiplyScalar(5);
-            rightShoulderPos.multiplyScalar(5);
+            rightFootPos.multiplyScalar(5);
+            leftKneePos.multiplyScalar(5);
 
-            let distance = rightHandPos.distanceTo(rightShoulderPos).toFixed(2);
+            let distance = rightFootPos.distanceTo(leftKneePos).toFixed(2);
 
-            return distance < 1;
+            return distance < 1.5;
+        },
+        leftFootTouchingRightKnee : function() {
+            let leftFootPos = new THREE.Vector3();
+            leftFootPos.copy(this.joints[this.jointIndexes.FOOT_LEFT].mesh.value.position);
+            let RightKneePos = new THREE.Vector3();
+            RightKneePos.copy(this.joints[this.jointIndexes.KNEE_RIGHT].mesh.value.position);
+
+            leftFootPos.multiplyScalar(5);
+            RightKneePos.multiplyScalar(5);
+
+            let distance = leftFootPos.distanceTo(RightKneePos).toFixed(2);
+
+            return distance < 1.5;
         },
         leftHandAboveShoulder : function() {
             let leftHandPos = new THREE.Vector3();

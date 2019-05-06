@@ -50,10 +50,9 @@ class StreetLamp extends ENGINE.OBJECTS.ClassicObject
 
         //Scale and position the STREETLAMP2
         StreetLamp[1].model.rotation.set(0, 0, 0);
-        StreetLamp[1].model.position.set(-10, 0, -200);
+        StreetLamp[1].model.position.set(-10, 0, -203);
         //Position of the street light for the street lamp 2
-        streetLight[1].position.set(-8, 57, -200);
-        
+        streetLight[1].position.set(-8, 57, -203);
         
         //Scale and position the STREETLAMP3
         StreetLamp[2].model.rotation.set(0,  1.5+ Math.PI/2, 0);
@@ -104,7 +103,7 @@ class StreetLamp extends ENGINE.OBJECTS.ClassicObject
                 once = false;
                 StreetLamp.forEach(Lamp => {
                 let scene = Lamp.model.children[0];
-                //Make the Terrain be able to receive and cast shadows 
+                //Make the Streer Lamp be able to receive and cast shadows 
                 //from the other models in the environment.
                 //Search though the object tree and change the material of every mesh.
                 if(scene) {
@@ -121,6 +120,7 @@ class StreetLamp extends ENGINE.OBJECTS.ClassicObject
                 }
                 });//each
             }//end of if(once) 
+            
         }//end of this.update
     }//end of constructor
 }//end of StreetLamp()

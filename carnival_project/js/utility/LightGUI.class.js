@@ -12,7 +12,7 @@ class LightGUI extends ENGINE.OBJECTS.ClassicObject {
         //Values of the HemisphereLight
         let skyColor = 0x4F8AD9;
         let groundColor = 0x444444;
-        let intensity = 0;
+        let intensity = 1;
         //Creates the HemisphereLight
         let hemiLight = new THREE.HemisphereLight(skyColor, groundColor, intensity);
         //Saves the values of the HemisphereLight

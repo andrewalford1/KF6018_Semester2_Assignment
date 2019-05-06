@@ -17,7 +17,7 @@ let parameters = (function () {
         IP: IP || '192.168.60.56'
     };
 })();
-  
+
 //[camera] Films the scene.
 let camera = new THREE.PerspectiveCamera(
     75,
@@ -37,9 +37,10 @@ let games = {
     strengthOMetre : new StrengthOMetre(),
 };
 
-//let moon = new Moon(new THREE.Vector3(-600, 280, -200));
-//let firework = new Fireworks(new THREE.Vector3(-300, 250, -700));
-//let fireball = new Fireball(new THREE.Vector3(85, 12, -402.5 ));
+let moon = new Moon(new THREE.Vector3(-600, 280, -200));
+let firework = new Fireworks(new THREE.Vector3(-300, 250, -700));
+let fireball = new Fireball(new THREE.Vector3(85, 12, -402.5 ));
+let cans = new Cans(new THREE.Vector3(-50, 0, -265));
 //Add all objects to the scene.
 engine.addObjects(MODELS, [
     //Enviroment
@@ -51,7 +52,7 @@ engine.addObjects(MODELS, [
     new Helicopter(),
     new Banner(),
     new HotAirBalloon(new THREE.Vector3(0, 250, 0)),
-  //  moon,firework,fireball,
+    moon,firework,fireball,cans,
     new MoreTents(),
     new Smoke(),
     new Terrain(),
@@ -60,10 +61,13 @@ engine.addObjects(MODELS, [
     //Games
     games.darts,
     new Football(),
+    new Fence(),
+    new GoalTarget(),
+    new PhysicsCubes(),
     //new Goal(new THREE.Vector3(25, 0, 0)),
     games.strengthOMetre,
     games.whackAMole,
-    new Cans(new THREE.Vector3(0, 150, 0)),
+    //new Cans(new THREE.Vector3(0, 150, 0)),
     new LightGUI()
 ]);
 
@@ -77,10 +81,11 @@ engine.addObjects(MODELS, [
 //     playerFactory(null, engine.scene, new THREE.Color(0xDD00DD), 0)
 // ];
 
-// games.whackAMole.allocatePlayer(players[parameters.playerIndex]);
-// moon.allocatePlayer(players[parameters.playerIndex]);
-// firework.allocatePlayer(players[parameters.playerIndex]);
-// fireball.allocatePlayer(players[parameters.playerIndex]);
+games.whackAMole.allocatePlayer(players[parameters.playerIndex]);
+moon.allocatePlayer(players[parameters.playerIndex]);
+firework.allocatePlayer(players[parameters.playerIndex]);
+fireball.allocatePlayer(players[parameters.playerIndex]);
+cans.allocatePlayer(players[parameters.playerIndex]);
 
 let experimentalPlayer = experimentalPlayerFactory(engine, 0);
 

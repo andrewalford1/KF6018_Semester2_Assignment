@@ -155,7 +155,7 @@
            this.addObjectToGroup(nose);
            //Scale and position the game.
            this.getInstance().scale.set(0.9, 0.9, 0.9);
-           this.getInstance().position.set(-19, 0, -310);
+           this.getInstance().position.set(-19, 0.15, -310);
            this.getInstance().rotation.set(0, Math.PI/2, 0);
 
  
