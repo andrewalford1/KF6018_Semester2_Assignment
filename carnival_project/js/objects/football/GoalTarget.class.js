@@ -25,6 +25,8 @@ class GoalTarget extends ENGINE.OBJECTS.ClassicObject
                 side: THREE.BackSide,
                 flatShading: THREE.FlatShading});
         let targetRight = new THREE.Mesh(targetRight1, targetRight2);
+        targetRight.castShadow = true;
+        targetRight.receiveShadow = true;
         targetRight.position.x = -95;
         targetRight.position.y = 20;
         targetRight.position.z = -213;
@@ -35,35 +37,67 @@ class GoalTarget extends ENGINE.OBJECTS.ClassicObject
         let box1 = new THREE.BoxGeometry(5, 5, 5);
         let box2 = new THREE.MeshPhongMaterial( { color: 0xffffff } );
         
-
-
         //Left boxes
         let boxLeft = new THREE.Mesh(box1, box2);
+        boxLeft.castShadow = true;
+        boxLeft.receiveShadow = true;
         boxLeft.position.set(-95, 2.5, -180);
+
         let boxLeft1 = new THREE.Mesh(box1, box2);
+        boxLeft1.castShadow = true;
+        boxLeft1.receiveShadow = true;
         boxLeft1.position.set(-95, 2.5, -187);
+
         let boxLeft2 = new THREE.Mesh(box1, box2);
+        boxLeft2.castShadow = true;
+        boxLeft2.receiveShadow = true;
         boxLeft2.position.set(-95, 2.5, -194);
+
         let boxLeft3 = new THREE.Mesh(box1, box2);
+        boxLeft3.castShadow = true;
+        boxLeft3.receiveShadow = true;
         boxLeft3.position.set(-95, 7.5, -183.5);
+
         let boxLeft4 = new THREE.Mesh(box1, box2);
+        boxLeft4.castShadow = true;
+        boxLeft4.receiveShadow = true;
         boxLeft4.position.set(-95, 7.5, -190.5);
+
         let boxLeft5 = new THREE.Mesh(box1, box2);
+        boxLeft5.castShadow = true;
+        boxLeft5.receiveShadow = true;
         boxLeft5.position.set(-95, 12.5, -187);
 
 
         //Right boxes
         let boxRight = new THREE.Mesh(box1, box2);
+        boxRight.castShadow = true;
+        boxRight.receiveShadow = true;
         boxRight.position.set(-95, 2.5, -230);
+
         let boxRight1 = new THREE.Mesh(box1, box2);
+        boxRight1.castShadow = true;
+        boxRight1.receiveShadow = true;
         boxRight1.position.set(-95, 2.5, -237);
+        
         let boxRight2 = new THREE.Mesh(box1, box2);
+        boxRight2.castShadow = true;
+        boxRight2.receiveShadow = true;
         boxRight2.position.set(-95, 2.5, -244);
+
         let boxRight3 = new THREE.Mesh(box1, box2);
+        boxRight3.castShadow = true;
+        boxRight3.receiveShadow = true;
         boxRight3.position.set(-95, 7.5, -233.5);
+
         let boxRight4 = new THREE.Mesh(box1, box2);
+        boxRight4.castShadow = true;
+        boxRight4.receiveShadow = true;
         boxRight4.position.set(-95, 7.5, -240.5);
+
         let boxRight5 = new THREE.Mesh(box1, box2);
+        boxRight5.castShadow = true;
+        boxRight5.receiveShadow = true;
         boxRight5.position.set(-95, 12.5, -237);
 
         //Add object to group
