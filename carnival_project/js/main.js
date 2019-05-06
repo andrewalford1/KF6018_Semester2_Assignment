@@ -81,11 +81,11 @@ engine.addObjects(MODELS, [
 //     playerFactory(null, engine.scene, new THREE.Color(0xDD00DD), 0)
 // ];
 
-games.whackAMole.allocatePlayer(players[parameters.playerIndex]);
-moon.allocatePlayer(players[parameters.playerIndex]);
-firework.allocatePlayer(players[parameters.playerIndex]);
-fireball.allocatePlayer(players[parameters.playerIndex]);
-cans.allocatePlayer(players[parameters.playerIndex]);
+// games.whackAMole.allocatePlayer(players[parameters.playerIndex]);
+// moon.allocatePlayer(players[parameters.playerIndex]);
+// firework.allocatePlayer(players[parameters.playerIndex]);
+// fireball.allocatePlayer(players[parameters.playerIndex]);
+// cans.allocatePlayer(players[parameters.playerIndex]);
 
 let experimentalPlayer = experimentalPlayerFactory(engine, 0);
 

@@ -47,7 +47,7 @@ let engineFactory = (function() {
                 writeable: false, 
                 value: ENGINE.CameraController(
                     camera,
-                    null
+                    new THREE.OrbitControls(camera)
                 )
             },
 

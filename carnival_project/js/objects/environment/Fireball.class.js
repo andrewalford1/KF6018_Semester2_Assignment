@@ -83,15 +83,18 @@ class Fireball extends ENGINE.OBJECTS.ClassicObject {
          */
         this.update = function(frameTime) 
         {
-        if(m_player.geustures.MoonIsMooning()) {
-                //Send FireBall
-                this.videoFireball(); 
-                this.ShootFireball();   
+            if(m_player && !(m_player.geustures === undefined)) {
+                if(m_player.geustures.MoonIsMooning()) {
+                    //Send FireBall
+                    this.videoFireball(); 
+                    this.ShootFireball();   
                 }
-               else{
-                   this.videoFireball(); 
-                   this.Initialise();
-               }
+                else {
+                    this.videoFireball(); 
+                    this.Initialise();
+                }
+            }
+
         }
     }
 }

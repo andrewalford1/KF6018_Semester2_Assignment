@@ -73,16 +73,15 @@ class Fireworks extends ENGINE.OBJECTS.ClassicObject {
          */
         this.update = function(frameTime) 
         {
-          //  console.log(m_player);
-              if(m_player.geustures.MoonIsMooning()) { 
-          {
-                //Fireworks
-                this.ExplosionFireworks();    
-          }
-
+            if(m_player && !(m_player.geustures === undefined)) {
+                //  console.log(m_player);
+                if(m_player.geustures.MoonIsMooning()) { 
+                      //Fireworks
+                      this.ExplosionFireworks();    
+                }
+            }
         }
     }
-}
 }
           
 

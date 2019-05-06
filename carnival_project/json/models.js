@@ -31,8 +31,7 @@ let MODELS = `{
         "rotation"      :   [ 0, 315, 0 ],
         "animated"      :   true,
         "animationSpeed":   2000
-    },
-{ 
+    }, { 
         "fileName"      :   "jack", 
         "extension"     :   "glb", 
         "position"      :   [ -30, 0, -570 ],
@@ -79,5 +78,37 @@ let MODELS = `{
         "position"      :   [ -80, 0, -160],
         "scale"         :   0.01,
         "rotation"      :   [0, 180, 0]
+    }, { 
+        "fileName"      :   "gestureBot_kick", 
+        "extension"     :   "glb", 
+        "position"      :   [ -95, 12.5, -237 ],
+        "rotation"      :   [ 0, 270, 0 ],
+        "scale"         :   0.1,
+        "animated"      :   true,
+        "animationSpeed":   2000
+    }, { 
+        "fileName"      :   "gestureBot_swingHit", 
+        "extension"     :   "glb", 
+        "position"      :   [ -19, 0.15, -310 ],
+        "rotation"      :   [ 0, 270, 0 ],
+        "scale"         :   0.1,
+        "animated"      :   true,
+        "animationSpeed":   2000
+    }, { 
+        "fileName"      :   "gestureBot_throw", 
+        "extension"     :   "glb", 
+        "position"      :   [ -50, 0, -265 ],
+        "rotation"      :   [ 0, 270, 0 ],
+        "scale"         :   0.1,
+        "animated"      :   true,
+        "animationSpeed":   2000
+    }, { 
+        "fileName"      :   "geustureBot_punch", 
+        "extension"     :   "glb", 
+        "position"      :   [ -14.5, 3.3, -220 ],
+        "rotation"      :   [ 0, 270, 0 ],
+        "scale"         :   0.1,
+        "animated"      :   true,
+        "animationSpeed":   2000
     }]
 }`;

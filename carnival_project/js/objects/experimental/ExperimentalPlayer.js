@@ -138,7 +138,8 @@ let experimentalPlayerFactory = (function() {
         });
 
         player.init(engine.scene);
-        player.addCamera(engine.CameraController.getInstance());
+        //engine.CameraController.getInstance()
+        player.addCamera(null);
         //player.geustures = new UserGeustures(player);
         return player;
     };

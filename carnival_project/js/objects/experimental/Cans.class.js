@@ -520,16 +520,16 @@ var postionChosen = null;
         
         
          
-                //Choose Position
-                  this.ChosePosition(); 
-              if(m_player.geustures.MoonIsMooning()) { 
-              this.Fire();
-               }
-              else{
-                  this.ChosePosition(); 
-              }
-  
-        }
-        
-        }
-    }
+            //Choose Position
+         this.ChosePosition(); 
+         if(m_player && !(m_player.geustures === undefined)) {
+            if(m_player.geustures.MoonIsMooning()) { 
+               this.Fire();
+            }
+            else {
+               this.ChosePosition(); 
+            }
+         }
+      }        
+   }
+}
