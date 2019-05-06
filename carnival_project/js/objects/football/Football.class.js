@@ -16,7 +16,8 @@ class Football extends ENGINE.OBJECTS.ClassicObject
         //Construct the superclass.
         super(position);
 
-        //Add the dart model.
+        /*
+        //Add the ball model.
         const FOOTBALL = ENGINE.ObjectLoader().loadModel(
             'football_obj',
             'glb'
@@ -24,9 +25,10 @@ class Football extends ENGINE.OBJECTS.ClassicObject
         //Scale and position the dart
         FOOTBALL.model.scale.set(0.005, 0.005, 0.005);
         FOOTBALL.model.rotation.set(0, 0, 0);
-        FOOTBALL.model.position.set(-10, 0, -140);
+        FOOTBALL.model.position.set(-0, 0, -165);
         this.addObjectToGroup(FOOTBALL.model);
-
+        */
+        
         /**
          * Updates the dart. (Overridden from the superclass).
          * @param {number} frameTime - The time taken to compute the
@@ -34,7 +36,7 @@ class Football extends ENGINE.OBJECTS.ClassicObject
          */
         this.update = function(frameTime)
         {
-            //Circus dart does not need to update.
+            //Does not need to update.
         }
     }
 }
