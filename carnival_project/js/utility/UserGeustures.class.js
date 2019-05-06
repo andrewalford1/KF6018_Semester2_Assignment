@@ -41,10 +41,13 @@ class UserGeustures {
                 leftHandState: m_player.getLeftHandState(),
                 rightHandState: m_player.getLeftHandState(),
                 handsTogether: m_player.handsTogether(),
+                feetTogether: m_player.feetTogether(),
                 leftHandAboveHead: m_player.leftHandAboveHead(),
                 rightHandAboveHead: m_player.rightHandAboveHead(),
                 leftHandTouchingHead: m_player.leftHandTouchingHead(),
                 rightHandTouchingHead: m_player.rightHandTouchingHead(),
+                rightFootTouchingLeftKnee: m_player.rightFootTouchingLeftKnee(),
+                leftFootTouchingRightKnee: m_player.leftFootTouchingRightKnee(),
                 armsSpread: m_player.armsSpread(),
                 leftHandAboveShoulder: m_player.leftHandAboveShoulder(),
                 rightHandAboveShoulder: m_player.rightHandAboveShoulder(),
@@ -78,17 +81,20 @@ class UserGeustures {
                     m_positions[0].rightHandTouchingHead; 
         }
 
+        this.RFootToLKnee = function() {      
+            //right foot touching left knee
+            return  m_positions[0].rightFootTouchingLeftKnee &&
+                    m_positions[0].rightFootTouchingLeftKnee; 
+        }
+        this.LFootToRKnee = function() {      
+            //right foot touching left knee
+            return  m_positions[0].leftFootTouchingRightKnee &&
+                    m_positions[0].leftFootTouchingRightKnee; 
+        }
+
         this.MoonIsSpying = function(){
-                //The hands are not colliding 
-                let stageFour = !m_positions[3].handsTogether;
                 //The hands are colliding with each other
-                let stageThree = m_positions[2].handsTogether;
-                //The hands are not colliding 
-                let stageTwo = !m_positions[1].handsTogether;
-                //The hands are colliding with each other
-                let stageOne = m_positions[0].handsTogether;
-                //return statements
-                return stageOne;
+                return m_positions[0].handsTogether;
         }
 
         this.KameHameHa = function(){
@@ -101,6 +107,11 @@ class UserGeustures {
                                !m_positions[0].leftHandTouchingMidSpine;
 
                 return stageOne && stageTwo;
+        }
+        this.FeetTogether = function(){
+                let stageOne = m_positions[0].feetTogether && m_positions[0].armsSpread;
+
+                return stageOne ;
         }
 
         this.rotateRight = function() {
@@ -137,7 +148,8 @@ class UserGeustures {
         //The player has their hands above their shoulders
             let stageOne = 
                 m_positions[0].leftHandAboveShoulder && 
-                m_positions[0].rightHandAboveShoulder;
+                m_positions[0].rightHandAboveShoulder
+                ;
 
             return stageOne;
         }
@@ -155,9 +167,9 @@ class UserGeustures {
             if(this.MoonIsSpying()){
                 console.log(`Stop Staring!`); 
             }
-            //if (this.KameHameHa()){
-                //console.log(`KAMMEEE HAAAMMEE HAAA!`);  
-            //}
+            else if (this.KameHameHa()){
+                console.log(`KAMMEEE HAAAMMEE HAAA!`);  
+            }
             if(this.MoonIsMooning()) {
                 console.log(`Oh my Gluten!!`);
             }
@@ -171,7 +183,16 @@ class UserGeustures {
                 console.log('Rotate Right');
             }
             if(this.HandsInAir()) {
-           //     console.log(`Hands in the Air!`)
+             //   console.log(`Hands in the Air!`)
+            }
+            if(this.RFootToLKnee()) {
+               console.log(`Right Foot Touching Left Knee!`)
+            }
+            if(this.LFootToRKnee()) {
+               console.log(`Left Foot Touching Right Knee!`)
+            }
+            if(this.FeetTogether()) {
+               console.log(`FeetTogether`)
             }
         }
 
