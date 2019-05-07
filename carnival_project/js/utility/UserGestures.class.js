@@ -1,21 +1,21 @@
 /**
- * A class representing the users's geustures.
+ * A class representing the users's gestures.
  * @extends ENGINE.OBJECTS.ClassicObject
  * @author  Ana-Sabina Irimia & Andrew Alford
  * @date    30/03/2019
  * @version 2.2 - 03/05/2019
  */
-class UserGeustures { 
+class UserGestures { 
     
     /**
-     * Sets up User Guestures.
-     * @param {playerFactory} player - The player who's guestures
+     * Sets up User gestures.
+     * @param {playerFactory} player - The player who's gestures
      *                                 are being tracked. 
      */
     constructor(player) {
 
         //[m_player] A reference to the player who's
-        //geustures are being tracked.
+        //gestures are being tracked.
         let m_player = player;
 
         //[m_positions] Holds information about the
@@ -153,11 +153,12 @@ class UserGeustures {
         }
         
         /**
-         * Updates the players geustures.
+         * Updates the players gestures.
          */
         this.update = function() { 
             m_positions.unshift(getPlayerPositions());
             m_positions.pop();
+            if(this.IsSmashingHammer()) {console.log('Its hammer time ya\'ll');}
         }
 
     }//End of constructor.
