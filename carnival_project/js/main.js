@@ -25,7 +25,7 @@ let camera = new THREE.PerspectiveCamera(
     0.1,
     2000
 );
-camera.position.set(0, 20, 25);
+camera.position.set(45, 11, -100);
 
 //[engine] Manages the scene.
 let engine = engineFactory(camera, false);

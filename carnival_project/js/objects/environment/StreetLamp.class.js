@@ -31,7 +31,7 @@ class StreetLamp extends ENGINE.OBJECTS.ClassicObject
                 StreetLamp[i].model.scale.set(0.3, 0.4, 0.4);
                 this.addObjectToGroup(StreetLamp[i].model);
                 //Point light for the street lamps
-                streetLight.push(new THREE.PointLight( 0xFFFBEF, 3, 130, 1));
+                streetLight.push(new THREE.PointLight( 0xFFFBEF, 1, 130, 1));
                 streetLight[i].castShadow = true;
                 //Adjusting the shadow casted by the point light
                 streetLight[i].shadow.mapSize.width = 1024;
