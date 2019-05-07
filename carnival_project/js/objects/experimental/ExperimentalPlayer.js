@@ -91,6 +91,13 @@ let experimentalPlayerFactory = (function() {
                 updateHandState(skeleton.leftHandState, this.bones.HAND_LEFT);
                 updateHandState(skeleton.rightHandState, this.bones.HAND_RIGHT);
                 movePlayer(this);
+
+                if(!(this.gestures === undefined)) {
+                    this.gestures.update();
+                }
+                else {
+                    console.log('no gestures');
+                }
             }
         }
     };
@@ -284,6 +291,8 @@ let experimentalPlayerFactory = (function() {
            model: {writable: true, value: null}
         });
         player.init(engine);
+        player.gestures = new UserGeustures(player);
+        console.log(player);
         return player;
     };
 })();
