@@ -132,12 +132,17 @@
 
             //[nose].
             let nose1= new THREE.TorusBufferGeometry(0.1, 0.6, 20, 100);
-            let nose2= new THREE.MeshPhongMaterial( { color: 0xFF0000 } );
-            let nose = new THREE.Mesh(nose1, nose2);
-            nose.position.y = 34.5;
-            nose.position.z = -4.8;
-            nose.castShadow = true;
-            nose.receiveShadow = true;
+            let nose2 = new THREE.MeshStandardMaterial( {
+					emissive: 0xff0000,
+					emissiveIntensity: 5,
+					color:  0xd10000,
+					opacity: 0.5
+				} );
+            let noseLight = new THREE.PointLight( 0xff0000, 1, 50);
+            noseLight.add(new THREE.Mesh(nose1, nose2));
+            noseLight.position.set(0, 34.5, -4.8);
+            noseLight.castShadow = true;
+            noseLight.receiveShadow = true;
 
 
           //Add to the object group.
@@ -152,7 +157,7 @@
            this.addObjectToGroup(score);
            this.addObjectToGroup(circleBack);
            this.addObjectToGroup(blackLine);
-           this.addObjectToGroup(nose);
+           this.addObjectToGroup(noseLight);
            //Scale and position the game.
            this.getInstance().scale.set(0.9, 0.9, 0.9);
            this.getInstance().position.set(-19, 0.15, -310);

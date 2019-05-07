@@ -26,7 +26,7 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
         renderer.shadowMap.enabled = true;
         renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         //DirectionalLight for the environment light
-        let moonLight = new THREE.DirectionalLight( 0x4F8AD9, 0.7);
+        let moonLight = new THREE.DirectionalLight( 0x2d5c9b, 1.5);//4F8AD9
         moonLight.position.set(400.0, 700, -200.0);
         moonLight.castShadow = true;
         moonLight.shadow.mapSize.width = 1024;  
