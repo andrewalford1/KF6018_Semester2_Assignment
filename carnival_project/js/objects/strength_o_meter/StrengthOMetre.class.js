@@ -138,7 +138,7 @@
 					color:  0xd10000,
 					opacity: 0.5
 				} );
-            let noseLight = new THREE.PointLight( 0xff0000, 1, 50);
+            let noseLight = new THREE.PointLight( 0xff0000, 1, 40);
             noseLight.add(new THREE.Mesh(nose1, nose2));
             noseLight.position.set(0, 34.5, -4.8);
             noseLight.castShadow = true;

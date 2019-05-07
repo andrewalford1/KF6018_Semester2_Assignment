@@ -103,13 +103,13 @@ engine.addObjects(MODELS, [
 // fireball.allocatePlayer(players[parameters.playerIndex]);
 // cans.allocatePlayer(players[parameters.playerIndex]);
 
-let experimentalPlayer = experimentalPlayerFactory(engine, 0);
+//let experimentalPlayer = experimentalPlayerFactory(engine, 0);
 
 //Run the animation loop.
 function animate() { engine.driver.update();}
 animate();
 
 //Kinect code.
-let kinect = kinectFactory(parameters.IP);
-kinect.startBodies(experimentalPlayer);
-kinect.experimentalTracking(experimentalPlayer);
+//let kinect = kinectFactory(parameters.IP);
+//kinect.startBodies(experimentalPlayer);
+//kinect.experimentalTracking(experimentalPlayer);
