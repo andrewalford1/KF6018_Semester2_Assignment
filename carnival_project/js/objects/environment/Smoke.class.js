@@ -40,7 +40,7 @@ class Smoke extends ENGINE.OBJECTS.ClassicObject {
         fireMeshArray[i].position.x = Math.random()*30.5 - 17.25;
         //fireMeshArray[i].position.z = Math.random()*3 - 10;
         this.addObjectToGroup(fireMeshArray[i]);
-        this.getInstance().position.set(37, 15, -523 );
+        this.getInstance().position.set(37, 15, -522 );
 
      }
         
