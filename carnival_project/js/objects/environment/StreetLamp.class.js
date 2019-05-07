@@ -53,10 +53,6 @@ class StreetLamp extends ENGINE.OBJECTS.ClassicObject
         streetLight[0].target.position.set( 98, 0, -65 );    
         streetLight[0].target.rotation.set( 98, 0, -65 );  
 
-        let pointL = new THREE.PointLight(0xffffff, 5, 200);
-        pointL.position.set( 90, 57, -65); 
-        pointL.castShadow=true; 
-        this.addObjectToGroup( pointL );
 
         //Scale and position the STREETLAMP2
         StreetLamp[1].model.rotation.set(0, 0, 0);
