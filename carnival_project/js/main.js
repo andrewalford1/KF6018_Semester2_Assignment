@@ -51,11 +51,13 @@ engine.addObjects(MODELS, [
     new MrBeepLatitude(),
     new Helicopter(),
     new Banner(),
+    new Duck(),
     new HotAirBalloon(new THREE.Vector3(0, 250, 0)),
     moon,firework,fireball,cans,
     new MoreTents(),
     new Smoke(),
     new Terrain(),
+    new WaterFountain(),
     new StreetLamp(),
     new WackCover(),
     //Games
@@ -88,14 +90,7 @@ engine.addObjects(MODELS, [
 ]);
 
 //[player] tracks the user playing the game.
-// let players = [
-//     playerFactory(engine.camera, engine.scene, new THREE.Color(0xDD0000), 5),
-//     playerFactory(null, engine.scene, new THREE.Color(0x00DD00), 4),
-//     playerFactory(null, engine.scene, new THREE.Color(0x0000DD), 3),
-//     playerFactory(null, engine.scene, new THREE.Color(0xDDDD00), 2),
-//     playerFactory(null, engine.scene, new THREE.Color(0x00DDDD), 1),
-//     playerFactory(null, engine.scene, new THREE.Color(0xDD00DD), 0)
-// ];
+let player = playerFactory(engine, 0);
 
 // games.whackAMole.allocatePlayer(players[parameters.playerIndex]);
 // moon.allocatePlayer(players[parameters.playerIndex]);
@@ -103,13 +98,11 @@ engine.addObjects(MODELS, [
 // fireball.allocatePlayer(players[parameters.playerIndex]);
 // cans.allocatePlayer(players[parameters.playerIndex]);
 
-//let experimentalPlayer = experimentalPlayerFactory(engine, 0);
-
 //Run the animation loop.
 function animate() { engine.driver.update();}
 animate();
 
 //Kinect code.
-//let kinect = kinectFactory(parameters.IP);
-//kinect.startBodies(experimentalPlayer);
-//kinect.experimentalTracking(experimentalPlayer);
+let kinect = kinectFactory(parameters.IP);
+kinect.startBodies(player);
+kinect.experimentalTracking(player);

@@ -6,8 +6,8 @@
  * @date    31/03/2019
  * @version 2.0 - 07/05/2019
  */
-let experimentalPlayerFactory = (function() {
-    let experimentalPlayerPrototype = {
+let playerFactory = (function() {
+    let PlayerPrototype = {
         //Initialises the player.
         init: function(engine) {
             getBones(this);
@@ -91,6 +91,13 @@ let experimentalPlayerFactory = (function() {
                 updateHandState(skeleton.leftHandState, this.bones.HAND_LEFT);
                 updateHandState(skeleton.rightHandState, this.bones.HAND_RIGHT);
                 movePlayer(this);
+
+                if(!(this.gestures === undefined)) {
+                    this.gestures.update();
+                }
+                else {
+                    console.log('no gestures');
+                }
             }
         }
     };
@@ -277,13 +284,15 @@ let experimentalPlayerFactory = (function() {
     }
 
     return function(engine, id) {
-        let player = Object.create(experimentalPlayerPrototype, {
+        let player = Object.create(PlayerPrototype, {
            id: {writable: false, value: id}, 
            loaded: {writable: true, value: false},
            recoredPositions: {writable: false, value: 5},
            model: {writable: true, value: null}
         });
         player.init(engine);
+        player.gestures = new UserGestures(player);
+        console.log(player);
         return player;
     };
 })();

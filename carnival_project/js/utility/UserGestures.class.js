@@ -1,21 +1,21 @@
 /**
- * A class representing the users's geustures.
+ * A class representing the users's gestures.
  * @extends ENGINE.OBJECTS.ClassicObject
  * @author  Ana-Sabina Irimia & Andrew Alford
  * @date    30/03/2019
  * @version 2.2 - 03/05/2019
  */
-class UserGeustures { 
+class UserGestures { 
     
     /**
-     * Sets up User Guestures.
-     * @param {playerFactory} player - The player who's guestures
+     * Sets up User gestures.
+     * @param {playerFactory} player - The player who's gestures
      *                                 are being tracked. 
      */
     constructor(player) {
 
         //[m_player] A reference to the player who's
-        //geustures are being tracked.
+        //gestures are being tracked.
         let m_player = player;
 
         //[m_positions] Holds information about the
@@ -50,8 +50,7 @@ class UserGeustures {
                 leftFootTouchingRightKnee: m_player.leftFootTouchingRightKnee(),
                 armsSpread: m_player.armsSpread(),
                 leftHandAboveShoulder: m_player.leftHandAboveShoulder(),
-                rightHandAboveShoulder: m_player.rightHandAboveShoulder(),
-                upsideDown: m_player.isUpsideDown()
+                rightHandAboveShoulder: m_player.rightHandAboveShoulder()
             };
         }
 
@@ -148,52 +147,18 @@ class UserGeustures {
         //The player has their hands above their shoulders
             let stageOne = 
                 m_positions[0].leftHandAboveShoulder && 
-                m_positions[0].rightHandAboveShoulder
-                ;
+                m_positions[0].rightHandAboveShoulder;
 
             return stageOne;
         }
         
         /**
-         * Updates the players geustures.
+         * Updates the players gestures.
          */
         this.update = function() { 
             m_positions.unshift(getPlayerPositions());
             m_positions.pop();
-
-            if(this.IsSmashingHammer()) {
-                console.log(`Hammer Smash!`);
-            }
-            if(this.MoonIsSpying()){
-                console.log(`Stop Staring!`); 
-            }
-            else if (this.KameHameHa()){
-                console.log(`KAMMEEE HAAAMMEE HAAA!`);  
-            }
-            if(this.MoonIsMooning()) {
-                console.log(`Oh my Gluten!!`);
-            }
-            if (this.Salute()) {
-                console.log(`Heil Hydra!`);
-            }
-            if(this.rotateLeft()) {
-                console.log('Rotate Left');
-            }
-            if(this.rotateRight()) {
-                console.log('Rotate Right');
-            }
-            if(this.HandsInAir()) {
-             //   console.log(`Hands in the Air!`)
-            }
-            if(this.RFootToLKnee()) {
-               console.log(`Right Foot Touching Left Knee!`)
-            }
-            if(this.LFootToRKnee()) {
-               console.log(`Left Foot Touching Right Knee!`)
-            }
-            if(this.FeetTogether()) {
-               console.log(`FeetTogether`)
-            }
+            if(this.IsSmashingHammer()) {console.log('Its hammer time ya\'ll');}
         }
 
     }//End of constructor.
