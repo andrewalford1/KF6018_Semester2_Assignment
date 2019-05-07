@@ -20,7 +20,9 @@ class LeftBox1 extends ENGINE.OBJECTS.ClassicObject
         this.addObjectToGroup(new THREE.Mesh(
             new THREE.BoxGeometry(5, 5, 5),
             new THREE.MeshPhongMaterial({
-                color: 0x0000FF
+                color: 0x0000FF,
+                castShadows: true,
+                receiveShadows: true
             })
         ));
 
@@ -31,7 +33,7 @@ class LeftBox1 extends ENGINE.OBJECTS.ClassicObject
                 mass: 20,
                 shape: new CANNON.Box(new CANNON.Vec3(2.5, 2.5, 2.5))
             });
-            physicsProperties.position.copy(new THREE.Vector3(-75, 5, -130));
+            physicsProperties.position.copy(new THREE.Vector3(-75, 5, -130));//-75, 5, -130
 
         //add the physics objects
         this.addPhysics(physicsProperties);

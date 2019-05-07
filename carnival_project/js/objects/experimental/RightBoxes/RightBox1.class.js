@@ -20,7 +20,9 @@ class RightBox1 extends ENGINE.OBJECTS.ClassicObject
         this.addObjectToGroup(new THREE.Mesh(
             new THREE.BoxGeometry(5, 5, 5),
             new THREE.MeshPhongMaterial({
-                color: 0x0000FF
+                color: 0x0000FF,
+                castShadows: true,
+                receiveShadows: true
             })
         ));
 
