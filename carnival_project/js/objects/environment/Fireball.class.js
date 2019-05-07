@@ -31,7 +31,19 @@ class Fireball extends ENGINE.OBJECTS.ClassicObject {
 		// video.type = ' video/ogg; codecs="theora, vorbis" ';
 		video.src = "js/zoesProposed/fire.mp4";
 		video.load(); // must call after setting/changing source
-		video.play();
+		  // Show loading animation.
+ 		var playPromise = video.play();
+
+  		if (playPromise !== undefined) {
+    		playPromise.then(_ => {
+      		// Automatic playback started!
+      		// Show playing UI.
+    		})
+    		.catch(error => {
+      		// Auto-play was prevented
+      		// Show paused UI.
+   		 });
+  		}
 		var videoImage = document.createElement('canvas');
 		videoImage.width = 1280;
 		videoImage.height = 610;
@@ -83,6 +95,7 @@ class Fireball extends ENGINE.OBJECTS.ClassicObject {
          */
         this.update = function(frameTime) 
         {
+		this.videoFireball(); 
             if(m_player && !(m_player.geustures === undefined)) {
                 if(m_player.geustures.MoonIsMooning()) {
                     //Send FireBall

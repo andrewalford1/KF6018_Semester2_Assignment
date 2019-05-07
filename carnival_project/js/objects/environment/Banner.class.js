@@ -7,9 +7,9 @@
  */
 class Banner extends ENGINE.OBJECTS.ClassicObject {
 	/**
-	 * constructor for the banner
+	 * constructor for a Basic Character.
 	 * @param {THREE.Vector3} initialPosition - The initial position of the
-	 *                                         banner.
+	 *                                          character.
 	 */
 	constructor(position) {
 		// create the video element
@@ -17,12 +17,25 @@ class Banner extends ENGINE.OBJECTS.ClassicObject {
 		 video.loop = true;
 		// video.id = 'video';
 		// video.type = ' video/ogg; codecs="theora, vorbis" ';
-		video.src = "js/zoesProposed/test2.mp4";
+		video.src = "js/zoesProposed/movie.mp4";
 		video.load(); // must call after setting/changing source
-		video.play();
+		//video.play();
+		// Show loading animation.
+  		var playPromise = video.play();
+
+  		if (playPromise !== undefined) {
+    		playPromise.then(_ => {
+      		// Automatic playback started!
+      		// Show playing UI.
+    		})
+    		.catch(error => {
+      		// Auto-play was prevented
+      		// Show paused UI.
+    		});
+  		}
 		var videoImage = document.createElement('canvas');
-		videoImage.width = 1280;
-		videoImage.height = 610;
+		videoImage.width = 1800;
+		videoImage.height = 850;
 		videoImage.loop = true;
 		var videoImageContext = videoImage.getContext('2d');
 		// background color if no video present
@@ -33,8 +46,7 @@ class Banner extends ENGINE.OBJECTS.ClassicObject {
 		videoTexture.magFilter = THREE.LinearFilter;
 		//Construct the superclass.
 		super(position);
-		
-		//construct a function for the wave of the banner
+
 		function wave(geometry, cycle, height, frmOffset) {
 			for (var i = 0; i < geometry.vertices.length; i++) {
 				const width = geometry.parameters.width / 2;
@@ -46,26 +58,23 @@ class Banner extends ENGINE.OBJECTS.ClassicObject {
 			geometry.verticesNeedUpdate = true;
 			geometry.computeVertexNormals();
 		}
-		//create the banner
-		var banner = new THREE.PlaneGeometry(7.5, 2, 7.5, 2);
-		// create the material
-		var material = new THREE.MeshBasicMaterial({
+		var rectGeom = new THREE.PlaneGeometry(7.5, 2, 7.5, 2);
+		// create the sphere's material
+		var sphereMaterial = new THREE.MeshBasicMaterial({
 			map: videoTexture,
 			overdraw: true,
 			side: THREE.DoubleSide
 		});
 		// create a new mesh with sphere geometry -
-		var bannerObj = new THREE.Mesh(banner, material);
+		var rect = new THREE.Mesh(rectGeom, sphereMaterial);
 		// add the sphere to the scene
-		this.addObjectToGroup(bannerObj);
-		//connect the wave to the banner
-		wave(banner, 0.75, 0.2);
-		//start and end of the banner movement
+		this.addObjectToGroup(rect);
+		wave(rectGeom, 0.75, 0.2);
 		var startX = -1000,
 			endX = 1000,
 			startY = 0,
 			endY = 0;
-		//define the curve
+
 		function interpolateCurve(u) {
 			if (u > 1) u = 1;
 			if (u < 0) u = 0;
@@ -144,12 +153,12 @@ class Banner extends ENGINE.OBJECTS.ClassicObject {
 			// prepare global tranformation of obj by the Frenet frame
 			var mat = new THREE.Matrix4();
 			mat.set(w.x, v.x, u.x, 0, w.y, v.y, u.y, 0, w.z, v.z, u.z, 0, 0, 0, 0, 1);
-			bannerObj.rotation.setFromRotationMatrix(mat);
+			rect.rotation.setFromRotationMatrix(mat);
 		}
-		//Scale and position the Banner
-		bannerObj.scale.set(10, 10, 10);
-		bannerObj.rotation.set(0, 0, 0);
-		bannerObj.position.set(-200, 400, -650);
+		//Scale and position the Helicopter
+		rect.scale.set(10, 10, 10);
+		rect.rotation.set(0, 0, 0);
+		rect.position.set(-200, 400, -650);
 		var iFrame = 0;
 		var ratio = 20;
 		this.update = function(frameTime) {
@@ -168,18 +177,17 @@ class Banner extends ENGINE.OBJECTS.ClassicObject {
 			if (u > 1) {
 				iFrame = 0;
 			}
-			// update bannerObj orientation
+			// update rect orientation
 			let vec = getFrenetFrame(getUbyArcLen(u));
-			updateRotbyFrenetFrame(bannerObj, vec[0], vec[1], vec[2]);
-			// update bannerObj position 
+			updateRotbyFrenetFrame(rect, vec[0], vec[1], vec[2]);
+			// update rect position 
 			var pos = interpolateCurve(getUbyArcLen(u));
-			bannerObj.position.x = pos[0] + 5;
-			bannerObj.position.y = pos[1] + 180;
+			rect.position.x = pos[0] + 5;
+			rect.position.y = pos[1] + 180;
 			iFrame++;
-			//create the wave of the banner
-			var frmOffset = iFrame % (banner.parameters.width * ratio);
-			if (bannerObj != null) {
-				wave(banner, 1,2, frmOffset / ratio);
+			var frmOffset = iFrame % (rectGeom.parameters.width * ratio);
+			if (rect != null) {
+				wave(rectGeom, 1,2, frmOffset / ratio);
 			}
 		}
 	}

@@ -2,7 +2,7 @@ let MODELS = `{
     "enviroment": [{
         "fileName"      :   "darts_obj", 
         "extension"     :   "glb", 
-        "position"      :   [-18, 32, -327 ],
+        "position"      :   [-18, 30, -327 ],
         "scale"         :   0.04,
        "rotation"      :   [ 0, 90, 0 ]
     }, { 
@@ -81,7 +81,23 @@ let MODELS = `{
     }, { 
         "fileName"      :   "gestureBot_kick", 
         "extension"     :   "glb", 
-        "position"      :   [ -95, 12.5, -237 ],
+        "position"      :   [ 0, 0, -135 ],
+        "rotation"      :   [ 0, 270, 0 ],
+        "scale"         :   0.1,
+        "animated"      :   true,
+        "animationSpeed":   2000
+    }, {
+        "fileName"      :   "geustureBot_punch", 
+        "extension"     :   "glb", 
+        "position"      :   [ -3, 0, -210 ],
+        "rotation"      :   [ 0, 270, 0 ],
+        "scale"         :   0.1,
+        "animated"      :   true,
+        "animationSpeed":   2000
+    }, {
+        "fileName"      :   "gestureBot_throw", 
+        "extension"     :   "glb", 
+        "position"      :   [ -25, 0, -245 ],
         "rotation"      :   [ 0, 270, 0 ],
         "scale"         :   0.1,
         "animated"      :   true,
@@ -89,23 +105,7 @@ let MODELS = `{
     }, { 
         "fileName"      :   "gestureBot_swingHit", 
         "extension"     :   "glb", 
-        "position"      :   [ -19, 0.15, -310 ],
-        "rotation"      :   [ 0, 270, 0 ],
-        "scale"         :   0.1,
-        "animated"      :   true,
-        "animationSpeed":   2000
-    }, { 
-        "fileName"      :   "gestureBot_throw", 
-        "extension"     :   "glb", 
-        "position"      :   [ -50, 0, -265 ],
-        "rotation"      :   [ 0, 270, 0 ],
-        "scale"         :   0.1,
-        "animated"      :   true,
-        "animationSpeed":   2000
-    }, { 
-        "fileName"      :   "geustureBot_punch", 
-        "extension"     :   "glb", 
-        "position"      :   [ -14.5, 3.3, -220 ],
+        "position"      :   [ -15, 0, -290 ],
         "rotation"      :   [ 0, 270, 0 ],
         "scale"         :   0.1,
         "animated"      :   true,

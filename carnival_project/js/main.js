@@ -64,6 +64,22 @@ engine.addObjects(MODELS, [
     new Fence(),
     new GoalTarget(),
     new PhysicsCubes(),
+    new GoalBoxes(),
+    //Boxes for Football
+        //Left
+        new LeftBox1(),
+        new LeftBox2(),
+        new LeftBox3(),
+        new LeftBox4(),
+        new LeftBox5(),
+        new LeftBox6(),
+        //Right
+        new RightBox1(),
+        new RightBox2(),
+        new RightBox3(),
+        new RightBox4(),
+        new RightBox5(),
+        new RightBox6(),
     //new Goal(new THREE.Vector3(25, 0, 0)),
     games.strengthOMetre,
     games.whackAMole,
