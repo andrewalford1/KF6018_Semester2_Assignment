@@ -58,28 +58,14 @@ engine.addObjects(MODELS, [
     new Terrain(),
     new StreetLamp(),
     new WackCover(),
+    new WaterFountain(),
     //Games
     games.darts,
     new Football(),
     new Fence(),
     new GoalTarget(),
     new PhysicsCubes(),
-    new GoalBoxes(),
-    //Boxes for Football
-        //Left
-        new LeftBox1(),
-        new LeftBox2(),
-        new LeftBox3(),
-        new LeftBox4(),
-        new LeftBox5(),
-        new LeftBox6(),
-        //Right
-        new RightBox1(),
-        new RightBox2(),
-        new RightBox3(),
-        new RightBox4(),
-        new RightBox5(),
-        new RightBox6(),
+    new Duck(),
     //new Goal(new THREE.Vector3(25, 0, 0)),
     games.strengthOMetre,
     games.whackAMole,
@@ -88,7 +74,14 @@ engine.addObjects(MODELS, [
 ]);
 
 //[player] tracks the user playing the game.
-let player = playerFactory(engine, 0);
+// let players = [
+//     playerFactory(engine.camera, engine.scene, new THREE.Color(0xDD0000), 5),
+//     playerFactory(null, engine.scene, new THREE.Color(0x00DD00), 4),
+//     playerFactory(null, engine.scene, new THREE.Color(0x0000DD), 3),
+//     playerFactory(null, engine.scene, new THREE.Color(0xDDDD00), 2),
+//     playerFactory(null, engine.scene, new THREE.Color(0x00DDDD), 1),
+//     playerFactory(null, engine.scene, new THREE.Color(0xDD00DD), 0)
+// ];
 
 // games.whackAMole.allocatePlayer(players[parameters.playerIndex]);
 // moon.allocatePlayer(players[parameters.playerIndex]);
@@ -96,11 +89,13 @@ let player = playerFactory(engine, 0);
 // fireball.allocatePlayer(players[parameters.playerIndex]);
 // cans.allocatePlayer(players[parameters.playerIndex]);
 
+let experimentalPlayer = experimentalPlayerFactory(engine, 0);
+
 //Run the animation loop.
 function animate() { engine.driver.update();}
 animate();
 
 //Kinect code.
 let kinect = kinectFactory(parameters.IP);
-kinect.startBodies(player);
-kinect.experimentalTracking(player);
+kinect.startBodies(experimentalPlayer);
+kinect.experimentalTracking(experimentalPlayer);
