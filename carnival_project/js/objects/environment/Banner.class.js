@@ -34,8 +34,8 @@ class Banner extends ENGINE.OBJECTS.ClassicObject {
     		});
   		}
 		var videoImage = document.createElement('canvas');
-		videoImage.width = 1280;
-		videoImage.height = 610;
+		videoImage.width = 1800;
+		videoImage.height = 850;
 		videoImage.loop = true;
 		var videoImageContext = videoImage.getContext('2d');
 		// background color if no video present

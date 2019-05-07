@@ -2,7 +2,7 @@ let MODELS = `{
     "enviroment": [{
         "fileName"      :   "darts_obj", 
         "extension"     :   "glb", 
-        "position"      :   [-18, 32, -327 ],
+        "position"      :   [-18, 30, -327 ],
         "scale"         :   0.04,
        "rotation"      :   [ 0, 90, 0 ]
     }, { 
