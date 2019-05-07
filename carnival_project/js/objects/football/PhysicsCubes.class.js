@@ -17,16 +17,29 @@ class PhysicsCubes extends ENGINE.OBJECTS.ClassicObject
          //Construct the superclass.
         super(position);
         
-        //Define any physical properties the object may have.
-        let physicsProperties = new CANNON.Body({
-            mass: 42,
-            shape: new CANNON.Sphere(new CANNON.Vec3(42, 42, 42))
-        });
+        //Ball
+        this.addObjectToGroup(new THREE.Mesh(
+            new THREE.SphereGeometry(3, 32, 32),
+            new THREE.MeshPhongMaterial({
+                color: 0x0000FF
+            })
+        ));
 
-        physicsProperties.position.copy(new THREE.Vector3(0, 70, 0));
-        
+        //Left Boxes
+            //Left Box 1
+            //Define any physical properties the object may have.
+            let physicsProperties = new CANNON.Body({
+                mass: 800,
+                shape: new CANNON.Box(new CANNON.Vec3(3, 3, 3))
+            });
+            physicsProperties.position.copy(new THREE.Vector3(-5, 4, -177));
+            physicsProperties.angularVelocity.set(0, 0, 25);
+            physicsProperties.angularDamping = 0.1;
+
+
+        //add the physics objects
         this.addPhysics(physicsProperties);
-        
+
         this.update = function(frameTime)
         {
             //Fence does not need to update.
