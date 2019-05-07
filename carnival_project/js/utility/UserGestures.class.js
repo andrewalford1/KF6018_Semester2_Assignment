@@ -156,9 +156,11 @@ class UserGestures {
          * Updates the players gestures.
          */
         this.update = function() { 
-            m_positions.unshift(getPlayerPositions());
-            m_positions.pop();
-            if(this.IsSmashingHammer()) {console.log('Its hammer time ya\'ll');}
+            if(ENGINE.isLoaded()) {
+                m_positions.unshift(getPlayerPositions());
+                m_positions.pop();
+                if(this.IsSmashingHammer()) {console.log('Its hammer time ya\'ll');}
+            }
         }
 
     }//End of constructor.

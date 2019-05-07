@@ -130,20 +130,37 @@ let playerFactory = (function() {
     function armsSpreadLocal(player) {
         let leftHandPos = new THREE.Vector3();
         leftHandPos.copy(player.bones.HAND_LEFT.mesh.position);
+        let leftElbowPos = new THREE.Vector3();
+        leftElbowPos.copy(player.bones.ELBOW_LEFT.mesh.position);
         let rightHandPos = new THREE.Vector3();
         rightHandPos.copy(player.bones.HAND_RIGHT.mesh.position);
+        let rightElbowPos = new THREE.Vector3();
+        rightElbowPos.copy(player.bones.ELBOW_RIGHT.mesh.position);
         let spineShoulderPos = new THREE.Vector3();
         spineShoulderPos.copy(player.bones.SPINE_SHOULDER.mesh.position);
         
         leftHandPos.multiplyScalar(5);
         rightHandPos.multiplyScalar(5);
+        leftElbowPos.multiplyScalar(5);
         spineShoulderPos.multiplyScalar(5);
 
         //Check hands are on the same level.
         let handsAligned_y = (leftHandPos.y - rightHandPos.y).toFixed(2);
         -handsAligned_y > 0 ? -handsAligned_y : handsAligned_y;
         //If the hands are not aligned, the player cannot be in a t-pose.
-        if(handsAligned_y > 1) { return false; }
+        if(handsAligned_y > 1 || handsAligned_y < 0) { return false; }
+
+        //Check if the left arm is aligned with the left elbow.
+        let leftHandAlignedWithLeftElbow_y = (leftElbowPos.y - leftHandPos.y).toFixed(2);
+        -leftHandAlignedWithLeftElbow_y > 0 ? -leftHandAlignedWithLeftElbow_y : leftHandAlignedWithLeftElbow_y;
+        let leftHandAlignedWithLeftElbow_z = (leftElbowPos.z - leftHandPos.z).toFixed(2);
+        -leftHandAlignedWithLeftElbow_z > 0 ? -leftHandAlignedWithLeftElbow_z : leftHandAlignedWithLeftElbow_z;
+
+        //Check if the right arm is aligned with the right elbow.
+        let rightHandAlignedWithRightElbow_y = (rightElbowPos.y - rightHandPos.y).toFixed(2);
+        -rightHandAlignedWithRightElbow_y > 0 ? -rightHandAlignedWithRightElbow_y : rightHandAlignedWithRightElbow_y;
+        let rightHandAlignedWithRightElbow_z = (rightElbowPos.z - rightHandPos.z).toFixed(2);
+        -rightHandAlignedWithRightElbow_z > 0 ? -rightHandAlignedWithRightElbow_z : rightHandAlignedWithRightElbow_z;
 
         //Check if the left arm is aligned with the spine shoulder.
         //(Note: We only need to do this with one arm 
@@ -155,6 +172,10 @@ let playerFactory = (function() {
 
         return (
             (handsAligned_y < 1) && 
+            (leftHandAlignedWithLeftElbow_y < 1) &&
+            (leftHandAlignedWithLeftElbow_z < 1) &&
+            (rightHandAlignedWithRightElbow_y < 1) &&
+            (rightHandAlignedWithRightElbow_z < 1) &&
             (leftHandAlignedWithShoulder_y < 1) && 
             (leftHandAlignedWithShoulder_z < 1)
         );
@@ -183,10 +204,10 @@ let playerFactory = (function() {
             player.object.position.add(direction.multiplyScalar(-1));                   
         }
         if(rotateRight(player)) {
-            player.object.rotation.y += 0.05;
+            player.object.rotation.y += 0.01;
         }
         if(rotateLeft(player)) {
-            player.object.rotation.y -= 0.05;
+            player.object.rotation.y -= 0.01;
         }
     }
 
