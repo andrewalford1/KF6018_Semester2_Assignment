@@ -210,7 +210,7 @@ let playerFactory = (function() {
 
             let direction = new THREE.Vector3( 0, 0, 1 );
             direction.applyMatrix4(matrix);
-            player.object.position.add(direction.multiplyScalar(-1));                   
+            player.object.position.add((direction.multiplyScalar(-1)).divideScalar(2));                   
         }
         if(rotateRight(player)) {
             player.object.rotation.y += 0.01;
