@@ -96,8 +96,8 @@ class Fireball extends ENGINE.OBJECTS.ClassicObject {
         this.update = function(frameTime) 
         {
 		this.videoFireball(); 
-            if(m_player && !(m_player.geustures === undefined)) {
-                if(m_player.geustures.MoonIsMooning()) {
+            if(m_player && !(m_player.gestures === undefined)) {
+                if(m_player.gestures.MoonIsMooning()) {
                     //Send FireBall
                     this.videoFireball(); 
                     this.ShootFireball();   

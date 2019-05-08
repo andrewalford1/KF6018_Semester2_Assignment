@@ -83,11 +83,9 @@ engine.addObjects(MODELS, [
         new RightBox4(),
         new RightBox5(),
         new RightBox6(),
-    //new Goal(new THREE.Vector3(25, 0, 0)),
-    games.strengthOMetre,
-    games.whackAMole,
-    //new Cans(new THREE.Vector3(0, 150, 0)),
-    new LightGUI()
+        games.strengthOMetre,
+        games.whackAMole,
+        new LightGUI()
 ]);
 
 //[player] tracks the user playing the game.
@@ -95,10 +93,10 @@ let player = playerFactory(engine, 0);
 
 games.whackAMole.allocatePlayer(player);
 games.strengthOMetre.allocatePlayer(player);
-// moon.allocatePlayer(players[parameters.playerIndex]);
-// firework.allocatePlayer(players[parameters.playerIndex]);
-// fireball.allocatePlayer(players[parameters.playerIndex]);
-// cans.allocatePlayer(players[parameters.playerIndex]);
+moon.allocatePlayer(player);
+firework.allocatePlayer(player);
+fireball.allocatePlayer(player);
+cans.allocatePlayer(player);
 
 //Run the animation loop.
 function animate() { engine.driver.update();}

@@ -115,13 +115,13 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
             //m_player.forEach(player=>{
                     //add if statements
             //});
-            if(m_player && !(m_player.geustures === undefined)) {
-                if(m_player.geustures.MoonIsMooning()) {
+            if(m_player && !(m_player.gestures === undefined)) {
+                if(m_player.gestures.MoonIsMooning()) {
                     //Moon will moon the player
                     MOON.model.rotation.set(-0.1, -2.0, -0.1);
                     //console.log("Moon is mooning");
                 }
-                else if(m_player.geustures.MoonIsSpying()){
+                else if(m_player.gestures.MoonIsSpying()){
                      //Moon will face the player
                      MOON.model.rotation.set(0.6, 0.9, -0.4);
                      //console.log("Moon is spying");

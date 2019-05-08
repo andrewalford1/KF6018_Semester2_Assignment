@@ -522,8 +522,8 @@ var postionChosen = null;
          
             //Choose Position
          this.ChosePosition(); 
-         if(m_player && !(m_player.geustures === undefined)) {
-            if(m_player.geustures.MoonIsMooning()) { 
+         if(m_player && !(m_player.gestures === undefined)) {
+            if(m_player.gestures.MoonIsMooning()) { 
                this.Fire();
             }
             else {

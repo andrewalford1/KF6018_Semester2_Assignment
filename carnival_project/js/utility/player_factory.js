@@ -153,6 +153,15 @@ let playerFactory = (function() {
         leftElbowPos.multiplyScalar(5);
         spineShoulderPos.multiplyScalar(5);
 
+        //The players hands must be spread apart.
+        if(jointsTouching(player.bones.HAND_LEFT, player.bones.HAND_RIGHT)) {
+            return false;
+        } else if(jointsTouching(player.bones.HAND_LEFT, player.bones.HEAD)) {
+            return false;
+        } else if(jointsTouching(player.bones.HAND_RIGHT, player.bones.HEAD)) {
+            return false;
+        } 
+
         //Check hands are on the same level.
         let handsAligned_y = (leftHandPos.y - rightHandPos.y).toFixed(2);
         -handsAligned_y > 0 ? -handsAligned_y : handsAligned_y;
