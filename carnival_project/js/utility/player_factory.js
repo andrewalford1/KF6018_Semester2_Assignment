@@ -60,6 +60,9 @@ let playerFactory = (function() {
         leftFootTouchingRightKnee: function() {
             return jointsTouching(this.bones.FOOT_LEFT, this.bones.KNEE_RIGHT);
         },
+        leftHandAboveSpineBase: function() {
+            return jointAboveOtherJoint(this.bones.HAND_LEFT, this.bones.SPINE_BASE);
+        },
         leftHandAboveShoulder: function() {
             return jointAboveOtherJoint(this.bones.HAND_LEFT, this.bones.SHOULDER_LEFT);
         },
@@ -81,6 +84,9 @@ let playerFactory = (function() {
         rightFootTouchingLeftKnee: function() {
             return jointsTouching(this.bones.FOOT_RIGHT, this.bones.KNEE_LEFT);
         },
+        rightHandAboveSpineBase: function() {
+            return jointAboveOtherJoint(this.bones.HAND_RIGHT, this.bones.SPINE_BASE);
+        },
         rightHandAboveShoulder: function() {
             return jointAboveOtherJoint(this.bones.HAND_RIGHT, this.bones.SHOULDER_RIGHT);
         },
@@ -89,6 +95,12 @@ let playerFactory = (function() {
         },
         armsSpread: function() {
             armsSpreadLocal(this);
+        },
+        rightHandTouchingRightKnee: function() {
+            return jointsTouching(this.bones.HAND_RIGHT, this.bones.KNEE_RIGHT);
+        },
+        leftHandTouchingLeftKnee: function() {
+            return jointsTouching(this.bones.HAND_LEFT, this.bones.KNEE_LEFT);
         },
         //Updates the player with the skeleton tracked from the kinect.
         update: function(skeleton) {

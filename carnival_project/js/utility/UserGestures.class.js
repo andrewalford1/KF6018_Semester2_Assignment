@@ -49,6 +49,8 @@ class UserGestures {
                 rightFootTouchingLeftKnee: m_player.rightFootTouchingLeftKnee(),
                 leftFootTouchingRightKnee: m_player.leftFootTouchingRightKnee(),
                 armsSpread: m_player.armsSpread(),
+                rightHandTouchingRightKnee: m_player.rightHandTouchingRightKnee(),
+                leftHandTouchingLeftKnee: m_player.leftHandTouchingLeftKnee(),
                 leftHandAboveShoulder: m_player.leftHandAboveShoulder(),
                 rightHandAboveShoulder: m_player.rightHandAboveShoulder()
             };
@@ -107,10 +109,20 @@ class UserGestures {
 
                 return stageOne && stageTwo;
         }
+        this.Pray = function(){
+                let stageOne = (m_positions[0].leftFootTouchingRightKnee &&
+                               m_positions[0].handsTogether) &&
+                               (m_positions[0].rightHandAboveSpineBase &&
+                               m_positions[0].leftHandAboveSpineBase);
+                return stageOne;
+        }
         this.FeetTogether = function(){
                 let stageOne = m_positions[0].feetTogether && m_positions[0].armsSpread;
 
                 return stageOne ;
+        }
+          this.handsOnKnees = function() {
+            return m_positions[0].leftHandTouchingLeftKnee && m_positions[0].rightHandTouchingRightKnee
         }
 
         this.rotateRight = function() {
@@ -160,6 +172,8 @@ class UserGestures {
                 m_positions.unshift(getPlayerPositions());
                 m_positions.pop();
                 if(this.IsSmashingHammer()) {console.log('Its hammer time ya\'ll');}
+                if(this.Pray()){console.log('Shhhhhhhh, the prayer is in session.');}
+                if(this.handsOnKnees()) {console.log('Hands on your knees');}
             }
         }
 
