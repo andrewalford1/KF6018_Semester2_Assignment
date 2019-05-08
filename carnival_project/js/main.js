@@ -41,6 +41,7 @@ let moon = new Moon(new THREE.Vector3(-600, 280, -200));
 let firework = new Fireworks(new THREE.Vector3(-300, 250, -700));
 let fireball = new Fireball(new THREE.Vector3(85, 12, -402.5 ));
 let cans = new Cans(new THREE.Vector3(-50, 0, -265));
+
 //Add all objects to the scene.
 engine.addObjects(MODELS, [
     //Enviroment
@@ -92,7 +93,8 @@ engine.addObjects(MODELS, [
 //[player] tracks the user playing the game.
 let player = playerFactory(engine, 0);
 
-// games.whackAMole.allocatePlayer(players[parameters.playerIndex]);
+games.whackAMole.allocatePlayer(player);
+games.strengthOMetre.allocatePlayer(player);
 // moon.allocatePlayer(players[parameters.playerIndex]);
 // firework.allocatePlayer(players[parameters.playerIndex]);
 // fireball.allocatePlayer(players[parameters.playerIndex]);
