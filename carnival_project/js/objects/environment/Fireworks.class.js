@@ -75,7 +75,7 @@ class Fireworks extends ENGINE.OBJECTS.ClassicObject {
         {
             if(m_player && !(m_player.gestures === undefined)) {
                 //  console.log(m_player);
-                if(m_player.gestures.MoonIsMooning()) { 
+                if(m_player.gestures.RFootToLKnee()) { 
                       //Fireworks
                       this.ExplosionFireworks();    
                 }
