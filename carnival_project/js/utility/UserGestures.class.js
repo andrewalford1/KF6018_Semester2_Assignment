@@ -49,6 +49,8 @@ class UserGestures {
                 rightFootTouchingLeftKnee: m_player.rightFootTouchingLeftKnee(),
                 leftFootTouchingRightKnee: m_player.leftFootTouchingRightKnee(),
                 armsSpread: m_player.armsSpread(),
+                rightHandTouchingRightKnee: m_player.rightHandTouchingRightKnee(),
+                leftHandTouchingLeftKnee: m_player.leftHandTouchingLeftKnee(),
                 leftHandAboveShoulder: m_player.leftHandAboveShoulder(),
                 rightHandAboveShoulder: m_player.rightHandAboveShoulder()
             };
@@ -119,6 +121,9 @@ class UserGestures {
 
                 return stageOne ;
         }
+          this.handsOnKnees = function() {
+            return m_positions[0].leftHandTouchingLeftKnee && m_positions[0].rightHandTouchingRightKnee
+        }
 
         this.rotateRight = function() {
             return m_positions[0].rightHandAboveHead && !m_positions[0].rightHandState.open &&
@@ -168,6 +173,7 @@ class UserGestures {
                 m_positions.pop();
                 if(this.IsSmashingHammer()) {console.log('Its hammer time ya\'ll');}
                 if(this.Pray()){console.log('Shhhhhhhh, the prayer is in session.');}
+                if(this.handsOnKnees()) {console.log('Hands on your knees');}
             }
         }
 
