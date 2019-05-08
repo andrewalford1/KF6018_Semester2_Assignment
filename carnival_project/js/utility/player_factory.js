@@ -87,7 +87,6 @@ let playerFactory = (function() {
             if(ENGINE.isLoaded() && this.loaded) {
                 Object.values(this.bones).forEach((bone, i) => {
                     updatePositionAndRotation(skeleton.joints[i], bone, this.recoredPositions);
-                    console.log(`Velocity of bone ${i}:\t${bone.velocity}`);
                 });
                 updateHandState(skeleton.leftHandState, this.bones.HAND_LEFT);
                 updateHandState(skeleton.rightHandState, this.bones.HAND_RIGHT);
@@ -95,9 +94,6 @@ let playerFactory = (function() {
 
                 if(!(this.gestures === undefined)) {
                     this.gestures.update();
-                }
-                else {
-                    console.log('no gestures');
                 }
             }
         }
@@ -127,6 +123,7 @@ let playerFactory = (function() {
 
         return jointApos.y > jointBpos.y;
     }
+    
     //Checks if the players arms are spread.
     function armsSpreadLocal(player) {
         let leftHandPos = new THREE.Vector3();
@@ -244,12 +241,18 @@ let playerFactory = (function() {
         );
 
         let averageFilter = new THREE.Vector3();
+        let averageVelocity = 0;
         bone.previousPosistions.unshift(position);
         bone.previousPosistions.pop();
-        bone.previousPosistions.forEach(position => {
+        bone.previousPosistions.forEach((position, i) => {
             averageFilter.add(position);
+            if(i > 0) {
+                averageVelocity += position.distanceTo(bone.previousPosistions[i - 1]);
+            }
         });
         averageFilter.divideScalar(recoredPositions);
+        bone.velocity = ((averageVelocity / recoredPositions) * 10);
+        bone.velocity = Number(bone.velocity.toFixed(2));
 
         bone.mesh.position.copy(averageFilter);
         bone.mesh.rotation.setFromQuaternion(orientation);
@@ -314,7 +317,6 @@ let playerFactory = (function() {
         });
         player.init(engine);
         player.gestures = new UserGestures(player);
-        console.log(player);
         return player;
     };
 })();

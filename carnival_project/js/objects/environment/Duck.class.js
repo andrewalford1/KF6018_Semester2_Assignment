@@ -13,7 +13,6 @@ class Duck extends ENGINE.OBJECTS.ClassicObject
      */
     constructor(position)
     {
-        console.log('constructing duck');
         //Construct the superclass.
         super(position);
 
