@@ -51,9 +51,12 @@ class WaterFountain extends ENGINE.OBJECTS.ClassicObject
         //been updated.
         let updateCount = 0;
         
-        this.Rise = function(){
+   
             
-            //Initialise the object on the fist frame.
+
+        this.update = function(frameTime)
+{
+                    //Initialise the object on the fist frame.
             if(onStart)
             {
 
@@ -77,16 +80,6 @@ class WaterFountain extends ENGINE.OBJECTS.ClassicObject
                 mixer.update(frameTime / 2000);
             }
 
-        }
-        this.update = function(frameTime)
-{
-        if(m_player && !(m_player.gestures === undefined)) {
-                if(m_player.gestures.LFootToRKnee()) {
-                    //Send FireBall
-                    this.Rise(); 
-                }
-
     }
     }
-}
 }
