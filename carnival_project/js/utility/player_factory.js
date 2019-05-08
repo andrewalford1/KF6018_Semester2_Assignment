@@ -87,6 +87,7 @@ let playerFactory = (function() {
             if(ENGINE.isLoaded() && this.loaded) {
                 Object.values(this.bones).forEach((bone, i) => {
                     updatePositionAndRotation(skeleton.joints[i], bone, this.recoredPositions);
+                    console.log(`Velocity of bone ${i}:\t${bone.velocity}`);
                 });
                 updateHandState(skeleton.leftHandState, this.bones.HAND_LEFT);
                 updateHandState(skeleton.rightHandState, this.bones.HAND_RIGHT);
@@ -276,31 +277,31 @@ let playerFactory = (function() {
         }
 
         player.bones = {
-            SPINE_BASE:     { mesh: bone.clone(), previousPosistions: [...previousPositions] },
-            SPINE_MID:      { mesh: bone.clone(), previousPosistions: [...previousPositions] },
-            NECK:           { mesh: bone.clone(), previousPosistions: [...previousPositions] },
-            HEAD:           { mesh: bone.clone(), previousPosistions: [...previousPositions] },
-            SHOULDER_LEFT:  { mesh: bone.clone(), previousPosistions: [...previousPositions] },
-            ELBOW_LEFT:     { mesh: bone.clone(), previousPosistions: [...previousPositions] },
-            WRIST_LEFT:     { mesh: bone.clone(), previousPosistions: [...previousPositions] },
-            HAND_LEFT:      { mesh: leftHand, previousPosistions: [...previousPositions], state: {open: false, lasso: false} },
-            SHOULDER_RIGHT: { mesh: bone.clone(), previousPosistions: [...previousPositions] },
-            ELBOW_RIGHT:    { mesh: bone.clone(), previousPosistions: [...previousPositions] },
-            WRIST_RIGHT:    { mesh: bone.clone(), previousPosistions: [...previousPositions] },
-            HAND_RIGHT:     { mesh: rightHand, previousPosistions: [...previousPositions], state: {open: false, lasso: false} },
-            HIP_LEFT:       { mesh: bone.clone(), previousPosistions: [...previousPositions] },
-            KNEE_LEFT:      { mesh: bone.clone(), previousPosistions: [...previousPositions] },
-            ANKLE_LEFT:     { mesh: bone.clone(), previousPosistions: [...previousPositions] },
-            FOOT_LEFT:      { mesh: bone.clone(), previousPosistions: [...previousPositions] },
-            HIP_RIGHT:      { mesh: bone.clone(), previousPosistions: [...previousPositions] },
-            KNEE_RIGHT:     { mesh: bone.clone(), previousPosistions: [...previousPositions] },
-            ANKLE_RIGHT:    { mesh: bone.clone(), previousPosistions: [...previousPositions] },
-            FOOT_RIGHT:     { mesh: bone.clone(), previousPosistions: [...previousPositions] },
-            SPINE_SHOULDER: { mesh: bone.clone(), previousPosistions: [...previousPositions] },
-            HAND_TIP_LEFT:  { mesh: new THREE.Object3D(), previousPosistions: [...previousPositions] },
-            THUMB_LEFT:     { mesh: new THREE.Object3D(), previousPosistions: [...previousPositions] },
-            HAND_TIP_RIGHT: { mesh: new THREE.Object3D(), previousPosistions: [...previousPositions] },
-            THUMB_RIGHT:    { mesh: new THREE.Object3D(), previousPosistions: [...previousPositions] }
+            SPINE_BASE:     { mesh: bone.clone(),   velocity: 0, previousPosistions: [...previousPositions] },
+            SPINE_MID:      { mesh: bone.clone(),   velocity: 0, previousPosistions: [...previousPositions] },
+            NECK:           { mesh: bone.clone(),   velocity: 0, previousPosistions: [...previousPositions] },
+            HEAD:           { mesh: bone.clone(),   velocity: 0, previousPosistions: [...previousPositions] },
+            SHOULDER_LEFT:  { mesh: bone.clone(),   velocity: 0, previousPosistions: [...previousPositions] },
+            ELBOW_LEFT:     { mesh: bone.clone(),   velocity: 0, previousPosistions: [...previousPositions] },
+            WRIST_LEFT:     { mesh: bone.clone(),   velocity: 0, previousPosistions: [...previousPositions] },
+            HAND_LEFT:      { mesh: leftHand,       velocity: 0, previousPosistions: [...previousPositions], state: {open: false, lasso: false} },
+            SHOULDER_RIGHT: { mesh: bone.clone(),   velocity: 0, previousPosistions: [...previousPositions] },
+            ELBOW_RIGHT:    { mesh: bone.clone(),   velocity: 0, previousPosistions: [...previousPositions] },
+            WRIST_RIGHT:    { mesh: bone.clone(),   velocity: 0, previousPosistions: [...previousPositions] },
+            HAND_RIGHT:     { mesh: rightHand,      velocity: 0, previousPosistions: [...previousPositions], state: {open: false, lasso: false} },
+            HIP_LEFT:       { mesh: bone.clone(),   velocity: 0, previousPosistions: [...previousPositions] },
+            KNEE_LEFT:      { mesh: bone.clone(),   velocity: 0, previousPosistions: [...previousPositions] },
+            ANKLE_LEFT:     { mesh: bone.clone(),   velocity: 0, previousPosistions: [...previousPositions] },
+            FOOT_LEFT:      { mesh: bone.clone(),   velocity: 0, previousPosistions: [...previousPositions] },
+            HIP_RIGHT:      { mesh: bone.clone(),   velocity: 0, previousPosistions: [...previousPositions] },
+            KNEE_RIGHT:     { mesh: bone.clone(),   velocity: 0, previousPosistions: [...previousPositions] },
+            ANKLE_RIGHT:    { mesh: bone.clone(),   velocity: 0, previousPosistions: [...previousPositions] },
+            FOOT_RIGHT:     { mesh: bone.clone(),   velocity: 0, previousPosistions: [...previousPositions] },
+            SPINE_SHOULDER: { mesh: bone.clone(),   velocity: 0, previousPosistions: [...previousPositions] },
+            HAND_TIP_LEFT:  { mesh: new THREE.Object3D(), velocity: 0, previousPosistions: [...previousPositions] },
+            THUMB_LEFT:     { mesh: new THREE.Object3D(), velocity: 0, previousPosistions: [...previousPositions] },
+            HAND_TIP_RIGHT: { mesh: new THREE.Object3D(), velocity: 0, previousPosistions: [...previousPositions] },
+            THUMB_RIGHT:    { mesh: new THREE.Object3D(), velocity: 0, previousPosistions: [...previousPositions] }
         }
     }
 
