@@ -25,6 +25,14 @@ let playerFactory = (function() {
             }
             this.loaded = true;
         },
+        addCollider(bone, visible = false) {
+            bone.collider = collisionFactory(
+                bone.mesh,
+                null,
+                visible,
+                0x00FFFF
+            );
+        },
         getLeftHandState: function() {
             return this.bones.HAND_LEFT.state;
         },
@@ -87,6 +95,9 @@ let playerFactory = (function() {
             if(ENGINE.isLoaded() && this.loaded) {
                 Object.values(this.bones).forEach((bone, i) => {
                     updatePositionAndRotation(skeleton.joints[i], bone, this.recoredPositions);
+                    if(!(bone.collider === undefined)) {
+                        bone.collider.update();
+                    }
                 });
                 updateHandState(skeleton.leftHandState, this.bones.HAND_LEFT);
                 updateHandState(skeleton.rightHandState, this.bones.HAND_RIGHT);
@@ -317,6 +328,10 @@ let playerFactory = (function() {
         });
         player.init(engine);
         player.gestures = new UserGestures(player);
+        player.addCollider(player.bones.HAND_LEFT, true);
+        player.addCollider(player.bones.HAND_RIGHT, true);
+        player.addCollider(player.bones.FOOT_LEFT, true);
+        player.addCollider(player.bones.FOOT_RIGHT, true);
         return player;
     };
 })();

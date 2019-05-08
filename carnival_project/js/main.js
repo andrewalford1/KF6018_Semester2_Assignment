@@ -93,7 +93,8 @@ engine.addObjects(MODELS, [
 //[player] tracks the user playing the game.
 let player = playerFactory(engine, 0);
 
-// games.whackAMole.allocatePlayer(players[parameters.playerIndex]);
+games.whackAMole.allocatePlayer(player);
+games.strengthOMetre.allocatePlayer(player);
 // moon.allocatePlayer(players[parameters.playerIndex]);
 // firework.allocatePlayer(players[parameters.playerIndex]);
 // fireball.allocatePlayer(players[parameters.playerIndex]);

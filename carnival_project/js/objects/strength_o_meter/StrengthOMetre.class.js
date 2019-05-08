@@ -166,11 +166,10 @@
 
  
 
-            this.allocatePlayer = function(player) {
-            m_player.leftHand = player.joints[player.jointIndexes.HAND_LEFT].collider;
-            m_player.rightHand = player.joints[player.jointIndexes.HAND_RIGHT].collider;
-            console.table(m_player);
-                }
+        this.allocatePlayer = function(player) {
+            m_player.leftHand = player.bones.HAND_LEFT.collider;
+            m_player.rightHand = player.bones.HAND_RIGHT.collider;
+        }
        
         //[collider] Tracks collision.
         let collider = setUpCollider();
@@ -227,12 +226,12 @@
            this.update = function(frameTime)
            {
                if(m_player.leftHand && m_player.rightHand) {
-                    hitArea.getCollider().checkCollisions([
+                    collider.checkCollisions([
                         m_player.leftHand,
                         m_player.rightHand
                     ]);
                 }
-                       updateCollider();
+                updateCollider();
            }
       }
  }
