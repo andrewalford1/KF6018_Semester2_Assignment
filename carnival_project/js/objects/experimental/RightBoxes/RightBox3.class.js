@@ -17,14 +17,13 @@ class RightBox3 extends ENGINE.OBJECTS.ClassicObject
          //Construct the superclass.
         super(position);
         
-        this.addObjectToGroup(new THREE.Mesh(
-            new THREE.BoxGeometry(5, 5, 5),
-            new THREE.MeshPhongMaterial({
-                color: 0x0000FF,
-                castShadows: true,
-                receiveShadows: true
-            })
-        ));
+        let Box = new THREE.Mesh(new THREE.BoxGeometry(5, 5, 5),
+                                 new THREE.MeshBasicMaterial({
+                                     color: 0x0000FF
+                                 }));
+         Box.castShadows = true;
+         Box.receiveShadows = true;
+         this.addObjectToGroup(Box);
 
         //Left Boxes
             //Left Box 1
