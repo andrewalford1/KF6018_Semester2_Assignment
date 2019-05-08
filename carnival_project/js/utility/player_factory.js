@@ -211,33 +211,57 @@ let playerFactory = (function() {
         );
     }
 
-    //Rotates the player right.
-    function rotateRight(player) {
-        return jointAboveOtherJoint(player.bones.HAND_RIGHT, player.bones.HEAD) &&
-        !jointAboveOtherJoint(player.bones.HAND_LEFT, player.bones.HEAD);
+    //Checks if the player should move forward.
+    function moveFoward(player) {
+        return jointsTouching(player.bones.HAND_LEFT, player.bones.SHOULDER_LEFT)
+        && jointsTouching(player.bones.HAND_RIGHT, player.bones.SHOULDER_RIGHT);
     }
 
-    //Rotates the player left.
+    //Checks if the player should move backward.
+    function moveBackward(player) {
+        return jointsTouching(player.bones.HAND_LEFT, player.bones.HIP_LEFT)
+        && jointsTouching(player.bones.HAND_RIGHT, player.bones.HIP_RIGHT);
+    }
+
+    //Checks if the player shoud rotate to the right.
+    function rotateRight(player) {
+        // return jointAboveOtherJoint(player.bones.HAND_RIGHT, player.bones.HEAD) &&
+        // !jointAboveOtherJoint(player.bones.HAND_LEFT, player.bones.HEAD);
+        return !jointsTouching(player.bones.HAND_LEFT, player.bones.SHOULDER_LEFT)
+        && jointsTouching(player.bones.HAND_RIGHT, player.bones.SHOULDER_RIGHT);
+    }
+
+    //Checks if the player should rotate to the left.
     function rotateLeft(player) {
-        return !jointAboveOtherJoint(player.bones.HAND_RIGHT, player.bones.HEAD) &&
-        jointAboveOtherJoint(player.bones.HAND_LEFT, player.bones.HEAD);
+        // return !jointAboveOtherJoint(player.bones.HAND_RIGHT, player.bones.HEAD) &&
+        // jointAboveOtherJoint(player.bones.HAND_LEFT, player.bones.HEAD);
+        return jointsTouching(player.bones.HAND_LEFT, player.bones.SHOULDER_LEFT)
+        && !jointsTouching(player.bones.HAND_RIGHT, player.bones.SHOULDER_RIGHT);
     }
 
     //Moves the player if they should be moved.
     function movePlayer(player) {
-        if(armsSpreadLocal(player)) {
+        let forward = moveFoward(player);
+        let backward = moveBackward(player);
+
+        if(forward || backward) {
             let matrix = new THREE.Matrix4();
             matrix.extractRotation( player.object.matrix );
 
             let direction = new THREE.Vector3( 0, 0, 1 );
             direction.applyMatrix4(matrix);
-            player.object.position.add((direction.multiplyScalar(-1)).divideScalar(2));                   
+            if(forward) {
+                player.object.position.add((direction.multiplyScalar(-1)).divideScalar(2));                   
+            }
+            if(backward) {
+                player.object.position.add((direction).divideScalar(2));
+            }
         }
         if(rotateRight(player)) {
-            player.object.rotation.y += 0.01;
+            player.object.rotation.y -= 0.01;
         }
         if(rotateLeft(player)) {
-            player.object.rotation.y -= 0.01;
+            player.object.rotation.y += 0.01;
         }
     }
 

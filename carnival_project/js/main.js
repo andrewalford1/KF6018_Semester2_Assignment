@@ -6,19 +6,15 @@ let parameters = (function () {
     //[url] The project's URL
     let url = new URL(window.location.href);
 
+    //[useKinect] If 'true' the kinect will be used.
     let useKinect = Boolean(parseInt(url.searchParams.get('useKinect'), 10));
-
     console.log(`use kinect:\t${useKinect}`);
-
-    //[playerIndex] The main player.
-    let playerIndex = parseInt(url.searchParams.get('playerIndex'), 10);
 
     //[IP] The kinectron IP address.
     let IP = url.searchParams.get('ip');
 
     return {
         useKinect: useKinect || false,
-        playerIndex: playerIndex || 0,
         IP: IP || '192.168.60.56'
     };
 })();
@@ -35,7 +31,7 @@ let controls = null;
 if(!parameters.useKinect) { controls = new THREE.OrbitControls(camera); }
 
 //[engine] Manages the scene.
-let engine = engineFactory(camera, controls, false);
+let engine = engineFactory(camera, controls, true);
 
 //[games] Holds all of our games.
 let games = {
@@ -44,55 +40,57 @@ let games = {
     strengthOMetre : new StrengthOMetre(),
 };
 
-let moon = new Moon(new THREE.Vector3(-600, 280, -200));
-let firework = new Fireworks(new THREE.Vector3(-300, 250, -700));
-let fireball = new Fireball(new THREE.Vector3(85, 12, -402.5 ));
-let cans = new Cans(new THREE.Vector3(-50, 0, -265));
+let gestureControlledObjects = {
+    moon: new Moon(new THREE.Vector3(-600, 280, -200)),
+    firework: new Fireworks(new THREE.Vector3(-300, 250, -700)),
+    fireball: new Fireball(new THREE.Vector3(85, 12, -402.5 )),
+    cans: new Cans(new THREE.Vector3(-50, 0, -265)),
+}
 
 //Add all objects to the scene.
 engine.addObjects(MODELS, [
-    //Enviroment
-    //new Fireworks(),
     new BalloonCover(),
-    new Floor(),
-    new MrBeep(),
-    new MrBeepLatitude(),
-    new Helicopter(),
     new Banner(),
     new Duck(),
-    new HotAirBalloon(new THREE.Vector3(0, 250, 0)),
-    moon,firework,fireball,cans,
-    new MoreTents(),
-    new Smoke(),
-    new Terrain(),
-    new WaterFountain(),
-    new StreetLamp(),
-    new WackCover(),
-    //Games
-    games.darts,
-    new Football(),
     new Fence(),
-    new GoalTarget(),
-    new PhysicsCubes(),
+    new Floor(),
+    new Football(),
     new GoalBoxes(),
+    new GoalTarget(),
+    games.darts,
+    games.strengthOMetre,
+    games.whackAMole,
+    gestureControlledObjects.cans,
+    gestureControlledObjects.fireball,
+    gestureControlledObjects.firework,
+    gestureControlledObjects.moon,
+    new Helicopter(),
+    new HotAirBalloon(new THREE.Vector3(0, 250, 0)),
+    new MrBeep(),
+    new MrBeepLatitude(),
+    new MoreTents(),
+    new PhysicsCubes(),
+    new Smoke(),
+    new StreetLamp(),
+    new Terrain(),
+    new WackCover(),
+    new WaterFountain(),
     //Boxes for Football
-        //Left
-        new LeftBox1(),
-        new LeftBox2(),
-        new LeftBox3(),
-        new LeftBox4(),
-        new LeftBox5(),
-        new LeftBox6(),
-        //Right
-        new RightBox1(),
-        new RightBox2(),
-        new RightBox3(),
-        new RightBox4(),
-        new RightBox5(),
-        new RightBox6(),
-        games.strengthOMetre,
-        games.whackAMole,
-        new LightGUI()
+    //Left
+    new LeftBox1(),
+    new LeftBox2(),
+    new LeftBox3(),
+    new LeftBox4(),
+    new LeftBox5(),
+    new LeftBox6(),
+    //Right
+    new RightBox1(),
+    new RightBox2(),
+    new RightBox3(),
+    new RightBox4(),
+    new RightBox5(),
+    new RightBox6(),
+    new LightGUI()
 ]);
 
 //[player] tracks the user playing the game.
@@ -103,10 +101,10 @@ if(parameters.useKinect) {
     
     games.whackAMole.allocatePlayer(player);
     games.strengthOMetre.allocatePlayer(player);
-    moon.allocatePlayer(player);
-    firework.allocatePlayer(player);
-    fireball.allocatePlayer(player);
-    cans.allocatePlayer(player);
+    gestureControlledObjects.moon.allocatePlayer(player);
+    gestureControlledObjects.firework.allocatePlayer(player);
+    gestureControlledObjects.fireball.allocatePlayer(player);
+    gestureControlledObjects.cans.allocatePlayer(player);
 }
 
 //Run the animation loop.
@@ -117,5 +115,5 @@ if(parameters.useKinect) {
     //Kinect code.
     let kinect = kinectFactory(parameters.IP);
     kinect.startBodies(player);
-    kinect.experimentalTracking(player);
+    kinect.startTrackedBodies(player);
 }

@@ -5,18 +5,20 @@ let kinectFactory = (function() {
         establishConnection: function() {
             this.instance.makeConnection();
         },
-        experimentalTracking: function(player) {
+        startTrackedBodies: function(player) {
             this.instance.startTrackedBodies(function(skeleton) {
-                let bodyPos = new THREE.Vector3(
-                    skeleton.joints[0].cameraX,
-                    skeleton.joints[0].cameraY,
-                    skeleton.joints[0].cameraZ                    
-                );
-
-                let inRange = bodyPos.distanceTo(new THREE.Vector3(0, 0, 0)) < 2.5;                 
-
-                if(ENGINE.isLoaded() && skeleton.tracked && inRange) {
-                    player.update(skeleton);
+                if(ENGINE.isLoaded) {
+                    let bodyPos = new THREE.Vector3(
+                        skeleton.joints[0].cameraX,
+                        skeleton.joints[0].cameraY,
+                        skeleton.joints[0].cameraZ                    
+                    );
+    
+                    let inRange = bodyPos.distanceTo(new THREE.Vector3(0, 0, 0)) < 2.5;                 
+    
+                    if(skeleton.tracked && inRange) {
+                        player.update(skeleton);
+                    }
                 }
             });
         },
