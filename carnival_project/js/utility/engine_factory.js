@@ -35,7 +35,7 @@ let engineFactory = (function() {
         }
     };
 
-    return function(camera, debugMode) {
+    return function(camera, controls = null, debugMode = false) {
         let engine = Object.create(enginePrototype, {
             
             scene : {
@@ -46,8 +46,8 @@ let engineFactory = (function() {
             CameraController : {
                 writeable: false, 
                 value: ENGINE.CameraController(
-                    camera//,
-                    //new THREE.OrbitControls(camera)
+                    camera,
+                    controls
                 )
             },
 

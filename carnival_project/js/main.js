@@ -6,6 +6,10 @@ let parameters = (function () {
     //[url] The project's URL
     let url = new URL(window.location.href);
 
+    let useKinect = Boolean(parseInt(url.searchParams.get('useKinect'), 10));
+
+    console.log(`use kinect:\t${useKinect}`);
+
     //[playerIndex] The main player.
     let playerIndex = parseInt(url.searchParams.get('playerIndex'), 10);
 
@@ -13,6 +17,7 @@ let parameters = (function () {
     let IP = url.searchParams.get('ip');
 
     return {
+        useKinect: useKinect || false,
         playerIndex: playerIndex || 0,
         IP: IP || '192.168.60.56'
     };
@@ -26,9 +31,11 @@ let camera = new THREE.PerspectiveCamera(
     2000
 );
 camera.position.set(0, 20, 25);
+let controls = null;
+if(!parameters.useKinect) { controls = new THREE.OrbitControls(camera); }
 
 //[engine] Manages the scene.
-let engine = engineFactory(camera, false);
+let engine = engineFactory(camera, controls, false);
 
 //[games] Holds all of our games.
 let games = {
@@ -83,28 +90,32 @@ engine.addObjects(MODELS, [
         new RightBox4(),
         new RightBox5(),
         new RightBox6(),
-    //new Goal(new THREE.Vector3(25, 0, 0)),
-    games.strengthOMetre,
-    games.whackAMole,
-    //new Cans(new THREE.Vector3(0, 150, 0)),
-    new LightGUI()
+        games.strengthOMetre,
+        games.whackAMole,
+        new LightGUI()
 ]);
 
 //[player] tracks the user playing the game.
-let player = playerFactory(engine, 0);
+let player = null;
 
-games.whackAMole.allocatePlayer(player);
-games.strengthOMetre.allocatePlayer(player);
-// moon.allocatePlayer(players[parameters.playerIndex]);
-// firework.allocatePlayer(players[parameters.playerIndex]);
-// fireball.allocatePlayer(players[parameters.playerIndex]);
-// cans.allocatePlayer(players[parameters.playerIndex]);
+if(parameters.useKinect) {
+    player = playerFactory(engine, 0);
+    
+    games.whackAMole.allocatePlayer(player);
+    games.strengthOMetre.allocatePlayer(player);
+    moon.allocatePlayer(player);
+    firework.allocatePlayer(player);
+    fireball.allocatePlayer(player);
+    cans.allocatePlayer(player);
+}
 
 //Run the animation loop.
 function animate() { engine.driver.update();}
 animate();
 
-//Kinect code.
-let kinect = kinectFactory(parameters.IP);
-kinect.startBodies(player);
-kinect.experimentalTracking(player);
+if(parameters.useKinect) {
+    //Kinect code.
+    let kinect = kinectFactory(parameters.IP);
+    kinect.startBodies(player);
+    kinect.experimentalTracking(player);
+}

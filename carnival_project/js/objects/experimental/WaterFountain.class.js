@@ -16,6 +16,13 @@ class WaterFountain extends ENGINE.OBJECTS.ClassicObject
         //Construct the superclass.
         super(position);
 
+        //[m_player] The player who controls the cannon.
+        let m_player = null;
+        
+        this.allocatePlayer = function(player) {
+            m_player = player;
+        }
+
         //Add the Helicopter model.
         const WATERFOUNTAIN = ENGINE.ObjectLoader().loadModel(
             'waterfountain',
@@ -43,11 +50,13 @@ class WaterFountain extends ENGINE.OBJECTS.ClassicObject
         //[updateCount] Counts how many times this class has
         //been updated.
         let updateCount = 0;
+        
+   
+            
 
         this.update = function(frameTime)
 {
-
-            //Initialise the object on the fist frame.
+                    //Initialise the object on the fist frame.
             if(onStart)
             {
 

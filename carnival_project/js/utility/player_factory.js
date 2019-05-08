@@ -96,6 +96,12 @@ let playerFactory = (function() {
         armsSpread: function() {
             armsSpreadLocal(this);
         },
+        rightHandTouchingRightKnee: function() {
+            return jointsTouching(this.bones.HAND_RIGHT, this.bones.KNEE_RIGHT);
+        },
+        leftHandTouchingLeftKnee: function() {
+            return jointsTouching(this.bones.HAND_LEFT, this.bones.KNEE_LEFT);
+        },
         //Updates the player with the skeleton tracked from the kinect.
         update: function(skeleton) {
             if(ENGINE.isLoaded() && this.loaded) {
@@ -158,6 +164,15 @@ let playerFactory = (function() {
         rightHandPos.multiplyScalar(5);
         leftElbowPos.multiplyScalar(5);
         spineShoulderPos.multiplyScalar(5);
+
+        //The players hands must be spread apart.
+        if(jointsTouching(player.bones.HAND_LEFT, player.bones.HAND_RIGHT)) {
+            return false;
+        } else if(jointsTouching(player.bones.HAND_LEFT, player.bones.HEAD)) {
+            return false;
+        } else if(jointsTouching(player.bones.HAND_RIGHT, player.bones.HEAD)) {
+            return false;
+        } 
 
         //Check hands are on the same level.
         let handsAligned_y = (leftHandPos.y - rightHandPos.y).toFixed(2);
