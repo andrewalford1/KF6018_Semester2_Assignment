@@ -131,6 +131,7 @@
 
 
             //[nose].
+            let intensity = 0;
             let nose1= new THREE.TorusBufferGeometry(0.1, 0.6, 20, 100);
             let nose2 = new THREE.MeshStandardMaterial( {
 					emissive: 0xff0000,
@@ -138,7 +139,7 @@
 					color:  0xd10000,
 					opacity: 0.5
 				} );
-            let noseLight = new THREE.PointLight( 0xff0000, 1, 40);
+            let noseLight = new THREE.PointLight( 0xff0000, intensity, 40);
             noseLight.add(new THREE.Mesh(nose1, nose2));
             noseLight.position.set(0, 34.5, -4.8);
             noseLight.castShadow = true;
@@ -199,8 +200,10 @@
             collider.update();
             if(collider.collided) {
                 hitArea.material.color.setHex(0xFFFFFF);
+                intensity = 1;
             } else {
                 hitArea.material.color.setHex(0xFF0000);
+                intensity = 0;
             }
         }
 
