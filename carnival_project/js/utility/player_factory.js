@@ -96,6 +96,12 @@ let playerFactory = (function() {
         armsSpread: function() {
             armsSpreadLocal(this);
         },
+        rightHandTouchingRightKnee: function() {
+            return jointsTouching(this.bones.HAND_RIGHT, this.bones.KNEE_RIGHT);
+        },
+        leftHandTouchingLeftKnee: function() {
+            return jointsTouching(this.bones.HAND_LEFT, this.bones.KNEE_LEFT);
+        },
         //Updates the player with the skeleton tracked from the kinect.
         update: function(skeleton) {
             if(ENGINE.isLoaded() && this.loaded) {
