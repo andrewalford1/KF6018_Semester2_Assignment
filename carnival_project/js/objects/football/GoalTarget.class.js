@@ -21,18 +21,27 @@ class GoalTarget extends ENGINE.OBJECTS.ClassicObject
         //Right goal target
         let targetRight1 = new THREE.CylinderGeometry( 8, 8, 1, 32 );
         let targetRight2= new THREE.MeshBasicMaterial({ 
-                map: ENGINE.TextureLoader().loadTexture( 'Targets/bullseye.jpeg' ),
+                map: ENGINE.TextureLoader().loadTexture( 'Targets/bullseye.jpg' ),
                 side: THREE.BackSide,
                 flatShading: THREE.FlatShading});
         let targetRight = new THREE.Mesh(targetRight1, targetRight2);
         targetRight.castShadow = true;
         targetRight.receiveShadow = true;
-        targetRight.position.x = -95;
-        targetRight.position.y = 20;
-        targetRight.position.z = -213;
         targetRight.rotation.z = Math.PI/2;
 
-        
+        //Target Physics
+            //Define any physical properties the object may have.
+            let physicsProperties = new CANNON.Body({
+                mass: 0,
+                shape: new CANNON.Box(new CANNON.Vec3(3, 3, 0.1))
+            });
+            physicsProperties.position.copy(new THREE.Vector3(-75, 15, -160));
+            physicsProperties.angularVelocity.set(0, 0, 25);
+            physicsProperties.angularDamping = 0.1;
+
+
+        //add the physics objects
+        this.addPhysics(physicsProperties);
         
         //Add object to group
         this.addObjectToGroup(targetRight);
