@@ -27,12 +27,21 @@ class GoalTarget extends ENGINE.OBJECTS.ClassicObject
         let targetRight = new THREE.Mesh(targetRight1, targetRight2);
         targetRight.castShadow = true;
         targetRight.receiveShadow = true;
-        targetRight.position.x = -95;
-        targetRight.position.y = 20;
-        targetRight.position.z = -213;
         targetRight.rotation.z = Math.PI/2;
 
-        
+        //Target Physics
+            //Define any physical properties the object may have.
+            let physicsProperties = new CANNON.Body({
+                mass: 0,
+                shape: new CANNON.Box(new CANNON.Vec3(3, 3, 0.1))
+            });
+            physicsProperties.position.copy(new THREE.Vector3(-75, 15, -160));
+            physicsProperties.angularVelocity.set(0, 0, 25);
+            physicsProperties.angularDamping = 0.1;
+
+
+        //add the physics objects
+        this.addPhysics(physicsProperties);
         
         //Add object to group
         this.addObjectToGroup(targetRight);
