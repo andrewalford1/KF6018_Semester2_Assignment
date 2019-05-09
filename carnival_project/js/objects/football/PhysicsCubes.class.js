@@ -29,11 +29,12 @@ class PhysicsCubes extends ENGINE.OBJECTS.ClassicObject
             //Left Box 1
             //Define any physical properties the object may have.
             let physicsProperties = new CANNON.Body({
-                mass: 40,
+                mass: 800,
                 shape: new CANNON.Box(new CANNON.Vec3(3, 3, 3))
             });
             physicsProperties.position.copy(new THREE.Vector3(-5, 4, -130));
-            physicsProperties.angularVelocity.set(0, 0, 20);
+            physicsProperties.angularVelocity.set(0, 0, 25);
+            physicsProperties.angularDamping = 0.1;
 
 
         //add the physics objects
