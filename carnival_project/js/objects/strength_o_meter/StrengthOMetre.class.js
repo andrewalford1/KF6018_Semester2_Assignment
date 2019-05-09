@@ -130,19 +130,11 @@
             circleBack.receiveShadow = true;
 
             //[nose].
-            let intensity = 0;
+            let intensity = 1;
             let nose1= new THREE.TorusBufferGeometry(0.1, 0.6, 20, 100);
-            let nose2 = new THREE.MeshStandardMaterial( {
-					emissive: 0xff0000,
-					emissiveIntensity: 5,
-					color:  0xd10000,
-					opacity: 0.5
-				} );
-            let noseLight = new THREE.PointLight( 0xff0000, intensity, 40);
-            noseLight.add(new THREE.Mesh(nose1, nose2));
-            noseLight.position.set(0, 34.5, -4.8);
-            noseLight.castShadow = true;
-            noseLight.receiveShadow = true;
+            let nose2 = new THREE.MeshStandardMaterial( {color:  0xCA0000} );
+            let nose = new THREE.Mesh(nose1, nose2)
+            nose.position.set(0, 34.5, -4.8);
          
 
 
@@ -158,7 +150,7 @@
            this.addObjectToGroup(score);
            this.addObjectToGroup(circleBack);
            this.addObjectToGroup(blackLine);
-           this.addObjectToGroup(noseLight);
+           this.addObjectToGroup(nose);
            //Scale and position the game.
            this.getInstance().scale.set(0.9, 0.9, 0.9);
            this.getInstance().position.set(-19, 0.15, -310);
@@ -169,6 +161,7 @@
         this.allocatePlayer = function(player) {
             m_player.leftHand = player.bones.HAND_LEFT.collider;
             m_player.rightHand = player.bones.HAND_RIGHT.collider;
+            
         }
        
         //[collider] Tracks collision.
@@ -199,10 +192,10 @@
             collider.update();
             if(collider.collided) {
                 hitArea.material.color.setHex(0xFFFFFF);
-                intensity = 1;
+                nose.material.color.setHex(0xFF0000);
             } else {
                 hitArea.material.color.setHex(0xFF0000);
-                intensity = 0;
+                nose.material.color.setHex(0xCA0000);
             }
         }
 
