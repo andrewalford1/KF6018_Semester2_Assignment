@@ -18,7 +18,7 @@ class LeftBox3 extends ENGINE.OBJECTS.ClassicObject
         super(position);
         
         let Box = new THREE.Mesh(new THREE.BoxGeometry(5, 5, 5),
-                                 new THREE.MeshBasicMaterial({
+                                 new THREE.MeshStandardMaterial({
                                      color: 0x0000FF
                                  }));
          Box.castShadows = true;
