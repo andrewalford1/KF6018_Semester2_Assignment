@@ -45,6 +45,7 @@ let gestureControlledObjects = {
     firework: new Fireworks(new THREE.Vector3(-300, 250, -700)),
     fireball: new Fireball(new THREE.Vector3(85, 12, -402.5 )),
     cans: new Cans(new THREE.Vector3(-50, 0, -265)),
+    whale: new Whale(new THREE.Vector3(0, 0, 0)),
     footballs: {
             leftBall:  new PhysicsCubes2(),
             middleBall: new PhysicsCubes3(),
@@ -72,6 +73,7 @@ engine.addObjects(MODELS, [
     gestureControlledObjects.footballs.middleBall,
     gestureControlledObjects.footballs.rightBall,
     gestureControlledObjects.moon,
+    gestureControlledObjects.whale,
     new Helicopter(),
     new HotAirBalloon(new THREE.Vector3(0, 250, 0)),
     new MrBeep(),
@@ -118,6 +120,7 @@ if(parameters.useKinect) {
     gestureControlledObjects.footballs.rightBall.allocatePlayer(player);
     gestureControlledObjects.footballs.middleBall.allocatePlayer(player);
     gestureControlledObjects.footballs.leftBall.allocatePlayer(player);
+    gestureControlledObjects.whale.leftBall.allocatePlayer(player);
 }
 
 //Run the animation loop.
