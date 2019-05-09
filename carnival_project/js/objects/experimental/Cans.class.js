@@ -17,6 +17,13 @@ class Cans extends ENGINE.OBJECTS.ClassicObject
         //Construct the superclass.
         super(initialPosition);
 
+        //[m_player] The player who controls the cannon.
+        let m_player = null;
+        
+        this.allocatePlayer = function(player) {
+            m_player = player;
+        }
+
 // set up the sphere vars
 var radius = 2, height = 2, segments = 5, rings = 30;
 
@@ -207,7 +214,7 @@ var mat = new CANNON.Material();
 var boxShape = new CANNON.Box(new CANNON.Vec3(2.5,2.5,2.5));    // Step 1
 var boxBody = new CANNON.Body({mass: mass, material: mat}); // Step 2
 boxBody.addShape(boxShape);
-boxBody.position.set(20,4,20);
+boxBody.position.set(24,4,50);
 world.add(boxBody);                          // Step 3
 
 var boxBody2 = new CANNON.Body({mass: mass, material: mat}); // Step 2
@@ -312,10 +319,42 @@ var mat_mat = new CANNON.ContactMaterial(mat, mat, { friction: 0.5, restitution:
 world.addContactMaterial(mat_mat);
 
 
-this.getInstance().position.set(-20, 0, -265);
+this.getInstance().position.set(-50, 0, -265);
 this.getInstance().rotation.set(0, Math.PI/ 2, 0);
 this.getInstance().scale.set(0.6, 0.8, 1);
 
+
+var postionChosen = null;
+       this.Initialise = function(){
+            boxBody.position.set(32,4,50);
+        }
+
+        this.ChosePosition = function(){   
+            boxBody.position.x -= 0.5;
+                if (boxBody.position.x > 32)
+                {
+                    this.Initialise();
+                   postionChosen = boxBody.position.x 
+
+
+                }
+               else if (boxBody.position.x < -20)
+                {
+                    this.Initialise();
+                    postionChosen = boxBody.position.x 
+                }
+        }
+
+            this.Fire = function()
+            {  
+                postionChosen = boxBody.position.x 
+                boxBody.position.z -= 1;
+                if (boxBody.position.z < -50)
+                {
+                    this.Initialise();
+
+                }
+            }
 
 
         /**
@@ -327,7 +366,7 @@ this.getInstance().scale.set(0.6, 0.8, 1);
          var timeStep = 1.0 / 60.0;   // seconds
         this.update = function(frameTime) { 
            world.step(timeStep);
-    box1.position.x = boxBody.position.x;
+   box1.position.x = boxBody.position.x;
    box1.position.y = boxBody.position.y;
    box1.position.z = boxBody.position.z;
    box1.quaternion.x = boxBody.quaternion.x;
@@ -478,9 +517,19 @@ this.getInstance().scale.set(0.6, 0.8, 1);
    box19.quaternion.y = boxBody19.quaternion.y;
    box19.quaternion.z = boxBody19.quaternion.z;
    box19.quaternion.w = boxBody19.quaternion.w;
-
-
-        }
         
-    }
+        
+         
+            //Choose Position
+         this.ChosePosition(); 
+         if(m_player && !(m_player.gestures === undefined)) {
+            if(m_player.gestures.MoonIsMooning()) { 
+               this.Fire();
+            }
+            else {
+               this.ChosePosition(); 
+            }
+         }
+      }        
+   }
 }

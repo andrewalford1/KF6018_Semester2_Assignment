@@ -337,7 +337,7 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject {
 
         //Scale and position the game.
         this.getInstance().scale.set(0.75, 0.75, 0.75);
-        this.getInstance().position.set(-14.5, 5, -220);
+        this.getInstance().position.set(-14.5, 3.3, -220);
         this.getInstance().rotation.set(0, Math.PI/2, 0);
 
         //Public Methods...
@@ -347,8 +347,8 @@ class WhackAMole extends ENGINE.OBJECTS.ClassicObject {
          * @param {Player} player - Who is playing the game?
          */
         this.allocatePlayer = function(player) {
-            m_player.leftHand = player.joints[player.jointIndexes.HAND_LEFT].collider;
-            m_player.rightHand = player.joints[player.jointIndexes.HAND_RIGHT].collider;
+            m_player.leftHand = player.bones.HAND_LEFT.collider;
+            m_player.rightHand = player.bones.HAND_RIGHT.collider;
         }
 
         this.updateMolePosition = function(){

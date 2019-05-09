@@ -18,9 +18,13 @@
           //Tracks the user playing the game.
         let m_player = {
             leftHand  : null,
-            rightHand : null
+            rightHand : null,
+            leftHandVelocity: null,
+            rightHandVelocity : null
             
         };
+        let collideVel = false;
+        
            //[ Base].
             let Base1= new THREE.BoxGeometry(15, 1, 25);
             let Base2= new THREE.MeshPhongMaterial( { color: 0xFF7133 } );
@@ -129,15 +133,13 @@
             circleBack.castShadow = true;
             circleBack.receiveShadow = true;
 
-
             //[nose].
+            let intensity = 1;
             let nose1= new THREE.TorusBufferGeometry(0.1, 0.6, 20, 100);
-            let nose2= new THREE.MeshPhongMaterial( { color: 0xFF0000 } );
-            let nose = new THREE.Mesh(nose1, nose2);
-            nose.position.y = 34.5;
-            nose.position.z = -4.8;
-            nose.castShadow = true;
-            nose.receiveShadow = true;
+            let nose2 = new THREE.MeshStandardMaterial( {color:  0xCA0000} );
+            let nose = new THREE.Mesh(nose1, nose2)
+            nose.position.set(0, 34.5, -4.8);
+         
 
 
           //Add to the object group.
@@ -155,16 +157,17 @@
            this.addObjectToGroup(nose);
            //Scale and position the game.
            this.getInstance().scale.set(0.9, 0.9, 0.9);
-           this.getInstance().position.set(-19, 0, -310);
+           this.getInstance().position.set(-19, 0.15, -310);
            this.getInstance().rotation.set(0, Math.PI/2, 0);
 
  
 
-            this.allocatePlayer = function(player) {
-            m_player.leftHand = player.joints[player.jointIndexes.HAND_LEFT].collider;
-            m_player.rightHand = player.joints[player.jointIndexes.HAND_RIGHT].collider;
-            console.table(m_player);
-                }
+        this.allocatePlayer = function(player) {
+            m_player.leftHand = player.bones.HAND_LEFT.collider;
+            m_player.rightHand = player.bones.HAND_RIGHT.collider;
+            m_player.leftHandVelocity = player.bones.HAND_LEFT.velocity;
+            m_player.rightHandVelocity = player.bones.HAND_RIGHT.velocity;
+        }
        
         //[collider] Tracks collision.
         let collider = setUpCollider();
@@ -194,8 +197,12 @@
             collider.update();
             if(collider.collided) {
                 hitArea.material.color.setHex(0xFFFFFF);
+                nose.material.color.setHex(0xFF0000);
+                collideVel = true; 
             } else {
                 hitArea.material.color.setHex(0xFF0000);
+                nose.material.color.setHex(0xCA0000);
+                collideVel = false;
             }
         }
 
@@ -219,12 +226,16 @@
            this.update = function(frameTime)
            {
                if(m_player.leftHand && m_player.rightHand) {
-                    hitArea.getCollider().checkCollisions([
+                    collider.checkCollisions([
                         m_player.leftHand,
                         m_player.rightHand
                     ]);
                 }
-                       updateCollider();
+                updateCollider();
+
+                if(collideVel){
+                    score.position.y += m_player.leftHandVelocity;    
+                }
            }
       }
  }

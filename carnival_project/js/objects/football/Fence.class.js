@@ -2,7 +2,7 @@
  * Football goal
  * for scale objects in our world
  * @extends ENGINE.OBJECTS.ClassicObject
- * @author Luke Rose
+ * @author Luke Rose 
  * @date 15/03/2019
  * @version 1.0 - 21/02/2019
  */
@@ -17,172 +17,118 @@ class Fence extends ENGINE.OBJECTS.ClassicObject
     {
          //Construct the superclass.
         super(position);
+
+        let numberOfFences = 14;
+        let Fence = [];
+        let once = true;
+
+        for(let i=0; i<numberOfFences; i++){
+                //Add the Fence model.
+                Fence.push(ENGINE.ObjectLoader().loadModel(
+                              'Fence',
+                              'gltf'
+                           ));
+                Fence[i].model.scale.set(0.1, 0.1, 0.1);
+                Fence[i].model.castShadow = true;
+                Fence[i].model.receiveShadow = true;
+                this.addObjectToGroup(Fence[i].model);
+        }
         
-        //Left Fences
-            //Add the Fence model.
-                const FENCE = ENGINE.ObjectLoader().loadModel(
-                    'Fence',
-                    'gltf'
-                );
-                //Scale and position the Fence
-                FENCE.model.scale.set(0.1, 0.1, 0.1);
-                FENCE.model.rotation.set(0, 0, 0);
-                FENCE.model.position.set(-5, 0, -120);
-                this.addObjectToGroup(FENCE.model);
+                //Left Fences
+                //Add the position and the rotation of the fence 1
+                Fence[0].model.position.set(-5, 0, -120);
+                Fence[0].model.rotation.set(0, 0, 0);
 
-            //Add the Fence model.
-                const FENCE2 = ENGINE.ObjectLoader().loadModel(
-                    'Fence',
-                    'gltf'
-                );
-                //Scale and position the Fence
-                FENCE2.model.scale.set(0.1, 0.1, 0.1);
-                FENCE2.model.rotation.set(0, 0, 0);
-                FENCE2.model.position.set(-25, 0, -120);
-                this.addObjectToGroup(FENCE2.model);
+                //Add the position and the rotation of the fence 2
+                Fence[1].model.position.set(-25, 0, -120);
+                Fence[1].model.rotation.set(0, 0, 0);
 
-            //Add the Fence model.
-                const FENCE3 = ENGINE.ObjectLoader().loadModel(
-                    'Fence',
-                    'gltf'
-                );
-                //Scale and position the Fence
-                FENCE3.model.scale.set(0.1, 0.1, 0.1);
-                FENCE3.model.rotation.set(0, 0, 0);
-                FENCE3.model.position.set(-45, 0, -120);
-                this.addObjectToGroup(FENCE3.model);
+                //Add the position and the rotation of the fence 3
+                Fence[2].model.position.set(-45, 0, -120);
+                Fence[2].model.rotation.set(0, 0, 0);
 
-            //Add the dart model.
-                const FENCE4 = ENGINE.ObjectLoader().loadModel(
-                    'Fence',
-                    'gltf'
-                );
 
-                //Scale and position the Fence
-                FENCE4.model.scale.set(0.1, 0.1, 0.1);
-                FENCE4.model.rotation.set(0, 0, 0);
-                FENCE4.model.position.set(-65, 0, -120);
-                this.addObjectToGroup(FENCE4.model);
+                //Add the position and the rotation of the fence 4
+                Fence[3].model.position.set(-65, 0, -120);
+                Fence[3].model.rotation.set(0, 0, 0);
 
-            //Add the Fence model.
-                const FENCE5 = ENGINE.ObjectLoader().loadModel(
-                    'Fence',
-                    'gltf'
-                );
 
-                //Scale and position the Fence
-                FENCE5.model.scale.set(0.1, 0.1, 0.1);
-                FENCE5.model.rotation.set(0, 0, 0);
-                FENCE5.model.position.set(-85, 0, -120);
-                this.addObjectToGroup(FENCE5.model);
+                //Add the position and the rotation of the fence 5
+                Fence[4].model.position.set(-85, 0, -120);
+                Fence[4].model.rotation.set(0, 0, 0);
         
-        //Right Fences
-            //Add the Fence model.
-                    const FENCEr = ENGINE.ObjectLoader().loadModel(
-                        'Fence',
-                        'gltf'
-                    );
-                    //Scale and position the Fence
-                    FENCEr.model.scale.set(0.1, 0.1, 0.1);
-                    FENCEr.model.rotation.set(0, 0, 0);
-                    FENCEr.model.position.set(-5, 0, -200);
-                    this.addObjectToGroup(FENCEr.model);
+                //Right Fences
 
-                //Add the Fence model.
-                    const FENCE2r = ENGINE.ObjectLoader().loadModel(
-                        'Fence',
-                        'gltf'
-                    );
-                    //Scale and position the Fence
-                    FENCE2r.model.scale.set(0.1, 0.1, 0.1);
-                    FENCE2r.model.rotation.set(0, 0, 0);
-                    FENCE2r.model.position.set(-25, 0, -200);
-                    this.addObjectToGroup(FENCE2r.model);
+                //Add the position and the rotation of the fence 6
+                Fence[5].model.position.set(-5, 0, -200);
+                Fence[5].model.rotation.set(0, 0, 0);
 
-                //Add the Fence model.
-                    const FENCE3r = ENGINE.ObjectLoader().loadModel(
-                        'Fence',
-                        'gltf'
-                    );
-                    //Scale and position the Fence
-                    FENCE3r.model.scale.set(0.1, 0.1, 0.1);
-                    FENCE3r.model.rotation.set(0, 0, 0);
-                    FENCE3r.model.position.set(-45, 0, -200);
-                    this.addObjectToGroup(FENCE3r.model);
 
-                //Add the dart model.
-                    const FENCE4r = ENGINE.ObjectLoader().loadModel(
-                        'Fence',
-                        'gltf'
-                    );
+                //Add the position and the rotation of the fence 7 
+                Fence[6].model.position.set(-25, 0, -200);
+                Fence[6].model.rotation.set(0, 0, 0);
 
-                    //Scale and position the Fence
-                    FENCE4r.model.scale.set(0.1, 0.1, 0.1);
-                    FENCE4r.model.rotation.set(0, 0, 0);
-                    FENCE4r.model.position.set(-65, 0, -200);
-                    this.addObjectToGroup(FENCE4r.model);
+                //Add the position and the rotation of the fence 8
+                Fence[7].model.position.set(-45, 0, -200);
+                Fence[7].model.rotation.set(0, 0, 0);
 
-                //Add the Fence model.
-                    const FENCE5r = ENGINE.ObjectLoader().loadModel(
-                        'Fence',
-                        'gltf'
-                    );
+                //Add the position and the rotation of the fence 9
+                Fence[8].model.position.set(-65, 0, -200);
+                Fence[8].model.rotation.set(0, 0, 0);
 
-                    //Scale and position the Fence
-                    FENCE5r.model.scale.set(0.1, 0.1, 0.1);
-                    FENCE5r.model.rotation.set(0, 0, 0);
-                    FENCE5r.model.position.set(-85, 0, -200);
-                    this.addObjectToGroup(FENCE5r.model);
+                //Add the position and the rotation of the fence 10
+                Fence[9].model.position.set(-85, 0, -200)
+                Fence[9].model.rotation.set(0, 0, 0);
         
-        //Back Fences
-            //Add the Fence model.
-                    const FENCEb = ENGINE.ObjectLoader().loadModel(
-                        'Fence',
-                        'gltf'
-                    );
-                    //Scale and position the Fence
-                    FENCEb.model.scale.set(0.1, 0.1, 0.1);
-                    FENCEb.model.rotation.y = Math.PI/2;
-                    FENCEb.model.position.set(-95, 0, -130);
-                    this.addObjectToGroup(FENCEb.model);
+                //Back Fences
 
-                //Add the Fence model.
-                    const FENCE2b = ENGINE.ObjectLoader().loadModel(
-                        'Fence',
-                        'gltf'
-                    );
-                    //Scale and position the Fence
-                    FENCE2b.model.scale.set(0.1, 0.1, 0.1);
-                    FENCE2b.model.rotation.y = Math.PI/2;
-                    FENCE2b.model.position.set(-95, 0, -150);
-                    this.addObjectToGroup(FENCE2b.model);
+                //Add the position and the rotation of the fence 11
+                Fence[10].model.position.set(-95, 0, -130);
+                Fence[10].model.rotation.y = Math.PI/2;
 
-                //Add the Fence model.
-                    const FENCE3b = ENGINE.ObjectLoader().loadModel(
-                        'Fence',
-                        'gltf'
-                    );
-                    //Scale and position the Fence
-                    FENCE3b.model.scale.set(0.1, 0.1, 0.1);
-                    FENCE3b.model.rotation.y = Math.PI/2;
-                    FENCE3b.model.position.set(-95, 0, -170);
-                    this.addObjectToGroup(FENCE3b.model);
+                //Add the position and the rotation of the fence 12
+                Fence[11].model.position.set(-95, 0, -150);
+                Fence[11].model.rotation.y = Math.PI/2;
 
-                //Add the dart model.
-                    const FENCE4b = ENGINE.ObjectLoader().loadModel(
-                        'Fence',
-                        'gltf'
-                    );
+                //Add the position and the rotation of the fence 13
+                Fence[12].model.position.set(-95, 0, -170);
+                Fence[12].model.rotation.y = Math.PI/2;
 
-                    //Scale and position the Fence
-                    FENCE4b.model.scale.set(0.1, 0.1, 0.1);
-                    FENCE4b.model.rotation.y = Math.PI/2;
-                    FENCE4b.model.position.set(-95, 0, -190);
-                    this.addObjectToGroup(FENCE4b.model);
+                //Add the position and the rotation of the fence 14
+                Fence[13].model.position.set(-95, 0, -190);
+                Fence[13].model.rotation.y = Math.PI/2;
+
+
         
         this.update = function(frameTime)
         {
-            //Fence does not need to update.
+            //Add shadows to the Fence.model
+            if(once) {
+                once = false;
+                Fence.forEach(fence => {
+                let scene = fence.model.children[0];
+                //Make the Fence be able to receive and cast shadows 
+                //from the other models in the environment.
+                //Search though the object tree and change the material of every mesh.
+                if(scene) {
+                    let object = scene.children[0];
+                    if(object) {
+                        let object2 = object.children[0];
+                        if(object2){
+                              let object3 = object2.children[0];  
+                              if(object3){
+                                   let meshes = object3.children;
+                                    //Change the material of every mesh.
+                                    meshes.forEach(mesh => {
+                                        mesh.castShadow = true;
+                                        mesh.receiveShadow = true;
+                                    });
+                              }
+                        }
+                    }
+                }
+                });//each
+            }//end of if(once) 
         }
     }
 

@@ -45,40 +45,7 @@ class GoalBoxes extends ENGINE.OBJECTS.ClassicObject
         boxLeft4.position.set(-50, 3, -12.5);
         let boxLeft5 = new THREE.Mesh(box1, box2);
         boxLeft5.position.set(-50, 8, -9);
-
-        //Left Boxes
-            //Left Box 1
-            //Define any physical properties the object may have.
-            let leftBox1 = new CANNON.Body({
-                mass: 20,
-                shape: new CANNON.Box(new CANNON.Vec3(2, 2, 2))
-            });
-            leftBox1.position.copy(new THREE.Vector3(-30, 5, -130));
-
-            //Define any physical properties the object may have.
-            let leftBox2 = new CANNON.Body({
-                mass: 20,
-                shape: new CANNON.Box(new CANNON.Vec3(2, 2, 2))
-            });
-            leftBox2.position.copy(new THREE.Vector3(-30, 5, -140));
-
-        //add the physics objects
-        this.addPhysics(leftBox1);
-        this.addPhysics(leftBox2);
-
-        this.addObjectToGroup(BOX);
-        this.addObjectToGroup(BOX2);
-
-        this.addObjectToGroup(boxLeft);
-        this.addObjectToGroup(boxLeft1);
-        this.addObjectToGroup(boxLeft2);
-        this.addObjectToGroup(boxLeft3);
-        this.addObjectToGroup(boxLeft4);
-        this.addObjectToGroup(boxLeft5);
-
-        this.getInstance().scale.set(0.75, 0.75, 0.75);
-        this.getInstance().position.set(0, 0, 0);
-
+ 
         this.update = function(frameTime)
         {
             //Fence does not need to update.

@@ -9,7 +9,7 @@ class Helicopter extends ENGINE.OBJECTS.ClassicObject
 {
     /**
      * Constructor for the Helicopter.
-     * @param {THREE.Vector3} position - Where the tent is located.
+     * @param {THREE.Vector3} position - Where the helicopter is located.
      */
     constructor(position)
     {
@@ -22,9 +22,10 @@ class Helicopter extends ENGINE.OBJECTS.ClassicObject
             'glb'
         );
 
+//positions for the starting and ending of helicopter
 var startX = -1000, endX = 1000, startY = 0, endY = 0;
 
-
+	//create the curve
 	function interpolateCurve(u) {
 		if (u > 1)	u = 1;
 		if (u < 0)	u = 0;
@@ -121,7 +122,7 @@ var startX = -1000, endX = 1000, startY = 0, endY = 0;
 	}
 			
 	function updateRotbyFrenetFrame(abc, w, v, u) {
-		// update orientation of obj		
+		// update orientation of the helicopter		
 		// prepare global tranformation of obj by the Frenet frame
 		var mat = new THREE.Matrix4();
 		mat.set( w.x, v.x, u.x, 0, w.y, v.y, u.y, 0, w.z, v.z, u.z, 0, 0, 0, 0, 1 );
@@ -151,7 +152,7 @@ var startX = -1000, endX = 1000, startY = 0, endY = 0;
         this.update = function(frameTime)
 {
 	var steps = 1000;
-    var u = updateCount/steps;
+	var u = updateCount/steps;
 	if (u > 1) {
        updateCount= 0;
     }

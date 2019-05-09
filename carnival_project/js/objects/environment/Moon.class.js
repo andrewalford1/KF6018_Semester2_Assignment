@@ -26,14 +26,13 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
         renderer.shadowMap.enabled = true;
         renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         //DirectionalLight for the environment light
-        let moonLight = new THREE.DirectionalLight( 0x4F8AD9, 0.7);
+        let moonLight = new THREE.DirectionalLight( 0x2d5c9b, 1.5);//4F8AD9
         moonLight.position.set(400.0, 700, -200.0);
         moonLight.castShadow = true;
         moonLight.shadow.mapSize.width = 1024;  
         moonLight.shadow.mapSize.height = 1024;
         moonLight.shadow.camera.near = 500;    
-        moonLight.shadow.camera.far = 1000;     
-        //moonLight.shadow.camera.fov = 30;
+        moonLight.shadow.camera.far = 1000; 
         this.addObjectToGroup( moonLight );
 
         //let helper = new THREE.CameraHelper( moonLight.shadow.camera );
@@ -113,19 +112,23 @@ class Moon extends ENGINE.OBJECTS.ClassicObject
             this.Initialise();
             //Makes the moon spin
             this.RotateMoon();
-
-            if(m_player.geustures.MoonIsMooning()) {
-                //Moon will moon the player
-                MOON.model.rotation.set(-0.1, -2.0, -0.1);
+            //m_player.forEach(player=>{
+                    //add if statements
+            //});
+            if(m_player && !(m_player.gestures === undefined)) {
+                if(m_player.gestures.MoonIsMooning()) {
+                    //Moon will moon the player
+                    MOON.model.rotation.set(-0.1, -2.0, -0.1);
+                    //console.log("Moon is mooning");
+                }
+                else if(m_player.gestures.MoonIsSpying()){
+                     //Moon will face the player
+                     MOON.model.rotation.set(0.6, 0.9, -0.4);
+                     //console.log("Moon is spying");
+                     
+                 }
             }
-            else if(m_player.geustures.MoonIsSpying()){
-                 //Moon will face the player
-                 MOON.model.rotation.set(0.6, 0.9, -0.4);
-                 
-             }
-             else{
-                 this.RotateMoon();
-             }
+             //console.log("Moon rotates");
 
         }//end of update
 

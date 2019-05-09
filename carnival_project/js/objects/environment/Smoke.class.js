@@ -33,14 +33,14 @@ class Smoke extends ENGINE.OBJECTS.ClassicObject {
     for (var i=0; i<iNumber; i++)
     {
         geoArray.push(new THREE.SphereGeometry(Math.random() - 0.1, 6, 6));
-        matArray.push(new THREE.MeshPhongMaterial( {color: 0xffffff, transparent: true, opacity: 0.1 * Math.random() + 0.1} ));
+        matArray.push(new THREE.MeshPhongMaterial( {color: 0xffffff, opacity: 0.1 * Math.random() + 0.1} ));
         fireMeshArray.push(new THREE.Mesh(geoArray[i], matArray) );
         fireMeshArray[i].position.y = Math.random()*15 - 11;
        
         fireMeshArray[i].position.x = Math.random()*30.5 - 17.25;
         //fireMeshArray[i].position.z = Math.random()*3 - 10;
         this.addObjectToGroup(fireMeshArray[i]);
-        this.getInstance().position.set(37, 15, -523 );
+        this.getInstance().position.set(37, 15, -522 );
 
      }
         

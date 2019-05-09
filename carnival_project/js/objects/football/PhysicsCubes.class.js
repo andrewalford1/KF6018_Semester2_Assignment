@@ -32,7 +32,8 @@ class PhysicsCubes extends ENGINE.OBJECTS.ClassicObject
                 mass: 800,
                 shape: new CANNON.Box(new CANNON.Vec3(3, 3, 3))
             });
-            physicsProperties.position.copy(new THREE.Vector3(-5, 4, -130));
+
+            physicsProperties.position.copy(new THREE.Vector3(-5, 4, -177));
             physicsProperties.angularVelocity.set(0, 0, 25);
             physicsProperties.angularDamping = 0.1;
 
