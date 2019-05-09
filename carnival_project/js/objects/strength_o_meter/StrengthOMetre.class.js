@@ -129,7 +129,6 @@
             circleBack.castShadow = true;
             circleBack.receiveShadow = true;
 
-
             //[nose].
             let intensity = 0;
             let nose1= new THREE.TorusBufferGeometry(0.1, 0.6, 20, 100);
@@ -144,6 +143,7 @@
             noseLight.position.set(0, 34.5, -4.8);
             noseLight.castShadow = true;
             noseLight.receiveShadow = true;
+         
 
 
           //Add to the object group.

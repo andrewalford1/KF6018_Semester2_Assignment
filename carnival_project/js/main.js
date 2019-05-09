@@ -31,7 +31,7 @@ let controls = null;
 if(!parameters.useKinect) { controls = new THREE.OrbitControls(camera); }
 
 //[engine] Manages the scene.
-let engine = engineFactory(camera, controls, true);
+let engine = engineFactory(camera, controls, false);
 
 //[games] Holds all of our games.
 let games = {
