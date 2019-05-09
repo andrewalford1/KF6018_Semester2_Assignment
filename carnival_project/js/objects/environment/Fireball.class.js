@@ -27,7 +27,6 @@ class Fireball extends ENGINE.OBJECTS.ClassicObject {
             // create the video element
 		var video = document.createElement('video');
 		 video.loop = true;
-	   	 //video.autoplay = true;
 		// video.id = 'video';
 		// video.type = ' video/ogg; codecs="theora, vorbis" ';
 		video.src = "js/zoesProposed/fire.mp4";
@@ -61,9 +60,8 @@ class Fireball extends ENGINE.OBJECTS.ClassicObject {
             new THREE.SphereGeometry(3, 10, 10),
             new THREE.MeshPhongMaterial({
                 map: videoTexture,
-		    	overdraw: true,
+               overdraw: true,
 			side: THREE.DoubleSide
-		    
             })
         ));
         this.getInstance().position.set(85, 12, -402 );
