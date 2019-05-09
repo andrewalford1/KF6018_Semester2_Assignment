@@ -56,6 +56,7 @@ engine.addObjects(MODELS, [
     new Floor(),
     new Football(),
     new GoalBoxes(),
+    new Whale(),
     new GoalTarget(),
     games.darts,
     games.strengthOMetre,
