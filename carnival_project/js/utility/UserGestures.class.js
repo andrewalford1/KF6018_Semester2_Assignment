@@ -110,11 +110,8 @@ class UserGestures {
                 return stageOne && stageTwo;
         }
         this.Pray = function(){
-                let stageOne = (m_positions[0].leftFootTouchingRightKnee &&
-                               m_positions[0].handsTogether) &&
-                               (m_positions[0].rightHandAboveSpineBase ||
-                               m_positions[0].leftHandAboveSpineBase);
-                return stageOne;
+                return m_positions[0].leftFootTouchingRightKnee &&
+                       m_positions[0].handsTogether;
         }
         this.FeetTogether = function(){
                 let stageOne = m_positions[0].feetTogether && m_positions[0].armsSpread;
