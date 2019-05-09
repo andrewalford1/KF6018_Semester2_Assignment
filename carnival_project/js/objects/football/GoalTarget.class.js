@@ -21,7 +21,7 @@ class GoalTarget extends ENGINE.OBJECTS.ClassicObject
         //Right goal target
         let targetRight1 = new THREE.CylinderGeometry( 8, 8, 1, 32 );
         let targetRight2= new THREE.MeshBasicMaterial({ 
-                map: ENGINE.TextureLoader().loadTexture( 'Targets/bullseye.jpeg' ),
+                map: ENGINE.TextureLoader().loadTexture( 'Targets/bullseye.jpg' ),
                 side: THREE.BackSide,
                 flatShading: THREE.FlatShading});
         let targetRight = new THREE.Mesh(targetRight1, targetRight2);
