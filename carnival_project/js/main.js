@@ -47,6 +47,8 @@ let gestureControlledObjects = {
     cans: new Cans(new THREE.Vector3(-50, 0, -265)),
 }
 
+let scorePin = new ScorePin();
+
 //Add all objects to the scene.
 engine.addObjects(MODELS, [
     new BalloonCover(),
@@ -60,6 +62,12 @@ engine.addObjects(MODELS, [
     new GoalTarget(),
     games.darts,
     games.strengthOMetre,
+    new LeftWall(),
+    new RightWall(),
+    //new FrontWall(),
+    new BackWall(),
+    new TopWall(),
+    new BottomWall(),
     games.whackAMole,
     gestureControlledObjects.cans,
     gestureControlledObjects.fireball,
@@ -76,6 +84,7 @@ engine.addObjects(MODELS, [
     new BackPhysicsWall(),
     new LeftPhysicsWall(),
     new RightPhysicsWall(),
+    scorePin,
     new Smoke(),
     new StreetLamp(),
     new Terrain(),
@@ -107,6 +116,7 @@ if(parameters.useKinect) {
     
     games.whackAMole.allocatePlayer(player);
     games.strengthOMetre.allocatePlayer(player);
+    //games.strengthOMetre.allocateScorePin(scorePin);
     gestureControlledObjects.moon.allocatePlayer(player);
     gestureControlledObjects.firework.allocatePlayer(player);
     gestureControlledObjects.fireball.allocatePlayer(player);
