@@ -63,6 +63,7 @@ $scripts = '
 <script src="js/objects/football/GoalTarget.class.js">            </script>
 <script src="js/objects/football/Fence.class.js">                 </script>
 <script src="js/objects/football/PhysicsCubes.class.js">          </script>
+<script src="js/objects/football/GoalBoxes.class.js">             </script>
 <!--Objects: Strength-o-Meter Game---------------------------------------->
 <script src="js/objects/strength_o_meter/StrengthOMetre.class.js"></script>
 <!--Objects: Whack-a-mole Game-------------------------------------------->

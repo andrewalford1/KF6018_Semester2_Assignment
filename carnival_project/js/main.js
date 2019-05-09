@@ -45,6 +45,12 @@ let gestureControlledObjects = {
     firework: new Fireworks(new THREE.Vector3(-300, 250, -700)),
     fireball: new Fireball(new THREE.Vector3(85, 12, -402.5 )),
     cans: new Cans(new THREE.Vector3(-50, 0, -265)),
+    whale: new Whale(new THREE.Vector3(0, 0, 0)),
+    footballs: {
+            leftBall:  new PhysicsCubes2(),
+            middleBall: new PhysicsCubes3(),
+            rightBall: new PhysicsCubes(),
+    }
 }
 
 let scorePin = new ScorePin();
@@ -58,7 +64,6 @@ engine.addObjects(MODELS, [
     new Floor(),
     new Football(),
     new GoalBoxes(),
-    new Whale(),
     new GoalTarget(),
     games.darts,
     games.strengthOMetre,
@@ -72,15 +77,16 @@ engine.addObjects(MODELS, [
     gestureControlledObjects.cans,
     gestureControlledObjects.fireball,
     gestureControlledObjects.firework,
+    gestureControlledObjects.footballs.leftBall,
+    gestureControlledObjects.footballs.middleBall,
+    gestureControlledObjects.footballs.rightBall,
     gestureControlledObjects.moon,
+    gestureControlledObjects.whale,
     new Helicopter(),
     new HotAirBalloon(new THREE.Vector3(0, 250, 0)),
     new MrBeep(),
     new MrBeepLatitude(),
     new MoreTents(),
-    new PhysicsCubes(),
-    new PhysicsCubes2(),
-    new PhysicsCubes3(),
     new BackPhysicsWall(),
     new LeftPhysicsWall(),
     new RightPhysicsWall(),
@@ -121,6 +127,10 @@ if(parameters.useKinect) {
     gestureControlledObjects.firework.allocatePlayer(player);
     gestureControlledObjects.fireball.allocatePlayer(player);
     gestureControlledObjects.cans.allocatePlayer(player);
+    gestureControlledObjects.footballs.rightBall.allocatePlayer(player);
+    gestureControlledObjects.footballs.middleBall.allocatePlayer(player);
+    gestureControlledObjects.footballs.leftBall.allocatePlayer(player);
+    gestureControlledObjects.whale.allocatePlayer(player);
 }
 
 //Run the animation loop.

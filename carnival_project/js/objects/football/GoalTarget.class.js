@@ -39,7 +39,6 @@ class GoalTarget extends ENGINE.OBJECTS.ClassicObject
             physicsProperties.angularVelocity.set(0, 0, 25);
             physicsProperties.angularDamping = 0.1;
 
-
         //add the physics objects
         this.addPhysics(physicsProperties);
         
