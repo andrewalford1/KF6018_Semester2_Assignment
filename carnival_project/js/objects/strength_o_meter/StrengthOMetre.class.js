@@ -18,9 +18,13 @@
           //Tracks the user playing the game.
         let m_player = {
             leftHand  : null,
-            rightHand : null
+            rightHand : null,
+            leftHandVelocity: null,
+            rightHandVelocity : null
             
         };
+        let collideVel = false;
+        
            //[ Base].
             let Base1= new THREE.BoxGeometry(15, 1, 25);
             let Base2= new THREE.MeshPhongMaterial( { color: 0xFF7133 } );
@@ -161,7 +165,8 @@
         this.allocatePlayer = function(player) {
             m_player.leftHand = player.bones.HAND_LEFT.collider;
             m_player.rightHand = player.bones.HAND_RIGHT.collider;
-            
+            m_player.leftHandVelocity = player.bones.HAND_LEFT.velocity;
+            m_player.rightHandVelocity = player.bones.HAND_RIGHT.velocity;
         }
        
         //[collider] Tracks collision.
@@ -193,9 +198,11 @@
             if(collider.collided) {
                 hitArea.material.color.setHex(0xFFFFFF);
                 nose.material.color.setHex(0xFF0000);
+                collideVel = true; 
             } else {
                 hitArea.material.color.setHex(0xFF0000);
                 nose.material.color.setHex(0xCA0000);
+                collideVel = false;
             }
         }
 
@@ -225,6 +232,10 @@
                     ]);
                 }
                 updateCollider();
+
+                if(collideVel){
+                    score.position.y += m_player.leftHandVelocity;    
+                }
            }
       }
  }
