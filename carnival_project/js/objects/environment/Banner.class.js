@@ -63,6 +63,7 @@ class Banner extends ENGINE.OBJECTS.ClassicObject {
 		// create the sphere's material
 		var sphereMaterial = new THREE.MeshBasicMaterial({
 			map: videoTexture,
+			overdraw: true,
 			side: THREE.DoubleSide
 		});
 		// create a new mesh with sphere geometry -
