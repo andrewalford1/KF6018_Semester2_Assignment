@@ -15,7 +15,7 @@ class Banner extends ENGINE.OBJECTS.ClassicObject {
 		// create the video element
 		var video = document.createElement('video');
 		 video.loop = true;
-		video.autoplay = true;
+		//video.autoplay = true;
 		// video.id = 'video';
 		// video.type = ' video/ogg; codecs="theora, vorbis" ';
 		video.src = "js/zoesProposed/movie.mp4";
