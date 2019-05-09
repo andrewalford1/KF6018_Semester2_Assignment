@@ -70,6 +70,8 @@ engine.addObjects(MODELS, [
     new MrBeepLatitude(),
     new MoreTents(),
     new PhysicsCubes(),
+    new PhysicsCubes2(),
+    new PhysicsCubes3(),
     new Smoke(),
     new StreetLamp(),
     new Terrain(),
