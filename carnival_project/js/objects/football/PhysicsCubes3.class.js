@@ -23,6 +23,7 @@ class PhysicsCubes3 extends ENGINE.OBJECTS.ClassicObject
             rightFoot : null
             
         };
+        let iFrame = 0;
 
         //Ball
         let Ball = new THREE.Mesh(
@@ -41,7 +42,7 @@ class PhysicsCubes3 extends ENGINE.OBJECTS.ClassicObject
             //Define any physical properties the object may have.
             let physicsProperties = new CANNON.Body({
                 mass: 800,
-                shape: new CANNON.Box(new CANNON.Vec3(3, 3, 3))
+                shape: new CANNON.Box(new CANNON.Vec3(1.5, 1.5, 1.5))
             });
             physicsProperties.position.copy(new THREE.Vector3(-5, 4, -160));
 
@@ -109,7 +110,11 @@ class PhysicsCubes3 extends ENGINE.OBJECTS.ClassicObject
                         m_player.rightFoot
                     ]);
                 }
-            updateCollider();
+            
+            if(iFrame > 100){
+                updateCollider();
+            }
+            iFrame++;
         }
     }
 

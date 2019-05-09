@@ -14,7 +14,7 @@ let parameters = (function () {
     let IP = url.searchParams.get('ip');
 
     return {
-        useKinect: useKinect || false,
+        useKinect: useKinect || true,
         IP: IP || '192.168.60.56'
     };
 })();

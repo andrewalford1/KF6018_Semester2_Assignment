@@ -16,12 +16,14 @@ class PhysicsCubes extends ENGINE.OBJECTS.ClassicObject
     {
          //Construct the superclass.
         super(position);
+
         //Tracks the user playing the game.
         let m_player = {
             leftFoot  : null,
             rightFoot : null
             
         };
+        let iFrame = 0;
 
         //Ball
         let Ball = new THREE.Mesh(
@@ -40,9 +42,9 @@ class PhysicsCubes extends ENGINE.OBJECTS.ClassicObject
             //Define any physical properties the object may have.
             let physicsProperties = new CANNON.Body({
                 mass: 800,
-                shape: new CANNON.Box(new CANNON.Vec3(3, 3, 3))
+                shape: new CANNON.Box(new CANNON.Vec3(1.5, 1.5, 1.5))
             });
-            physicsProperties.position.copy(new THREE.Vector3(-5, 4, -177));
+            physicsProperties.position.copy(new THREE.Vector3(-5, 4, -180));
 
 
         //add the physics objects
@@ -82,14 +84,14 @@ class PhysicsCubes extends ENGINE.OBJECTS.ClassicObject
          */
         function updateCollider()
         {
-            collider.update();
-            if(collider.collided) {
-                Ball.material.color.setHex(0xFF0000);
-                physicsProperties.angularVelocity.set(0, 0, 25);
-                physicsProperties.angularDamping = 0.1;
-            } else {
-                Ball.material.color.setHex(0x0000FF);
-            }
+                collider.update();
+                if(collider.collided) {
+                    Ball.material.color.setHex(0xFF0000);
+                    physicsProperties.angularVelocity.set(0, 0, 25);
+                    physicsProperties.angularDamping = 0.1;
+                } else {
+                    Ball.material.color.setHex(0x0000FF);
+                } 
         }
 
         /**
@@ -108,7 +110,10 @@ class PhysicsCubes extends ENGINE.OBJECTS.ClassicObject
                         m_player.rightFoot
                     ]);
                 }
-            updateCollider();
+            if(iFrame > 100){
+                updateCollider();
+            }
+            iFrame++;
         }
     }
 
