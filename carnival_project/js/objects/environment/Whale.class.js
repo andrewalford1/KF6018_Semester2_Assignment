@@ -174,21 +174,22 @@ var startX = -250, endX = -240, startY = 0, endY = 0;
         let updateCount = 0;
 
         this.update = function(frameTime){
-    //  if(m_player && !(m_player.gestures === undefined)) 
-   //   {
-     //        if(m_player.gestures.handsOnKnees()) 
-      //  {
+     if(m_player && !(m_player.gestures === undefined)) 
+     {
+             if(m_player.gestures.handsOnKnees()) 
+      {
                     //this calls the whale function so it  jumps out of the pond
                  this.WhaleJump(); 
-         //}
-       //       else
-       //      {
+       }
+              else
+         {
                  //this callls the iniialise function to position the whale when not jumping
-           //      this.Initialise(); 
-      //  }
+               this.Initialise(); 
+        }
 
 
    }
     
+}
 }
 }
