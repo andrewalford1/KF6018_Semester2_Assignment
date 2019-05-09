@@ -61,7 +61,6 @@ class Fireball extends ENGINE.OBJECTS.ClassicObject {
             new THREE.SphereGeometry(3, 10, 10),
             new THREE.MeshPhongMaterial({
                 map: videoTexture,
-               overdraw: true,
 			side: THREE.DoubleSide
             })
         ));
