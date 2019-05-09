@@ -120,7 +120,7 @@ if(parameters.useKinect) {
     gestureControlledObjects.footballs.rightBall.allocatePlayer(player);
     gestureControlledObjects.footballs.middleBall.allocatePlayer(player);
     gestureControlledObjects.footballs.leftBall.allocatePlayer(player);
-    gestureControlledObjects.whale.leftBall.allocatePlayer(player);
+    gestureControlledObjects.whale.allocatePlayer(player);
 }
 
 //Run the animation loop.
