@@ -97,7 +97,7 @@ engine.addObjects(MODELS, [
 let player = null;
 
 if(parameters.useKinect) {
-    player = playerFactory(engine, 0);
+    player = playerFactory(engine);
     
     games.whackAMole.allocatePlayer(player);
     games.strengthOMetre.allocatePlayer(player);

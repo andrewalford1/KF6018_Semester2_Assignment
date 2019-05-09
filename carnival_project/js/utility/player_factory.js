@@ -364,9 +364,9 @@ let playerFactory = (function() {
         }
     }
 
-    return function(engine, id) {
+    return function(engine) {
         let player = Object.create(PlayerPrototype, {
-           id: {writable: false, value: id}, 
+           id: {writable: false, value: null}, 
            loaded: {writable: true, value: false},
            recoredPositions: {writable: false, value: 5},
            model: {writable: true, value: null}

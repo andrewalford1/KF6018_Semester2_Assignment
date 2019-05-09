@@ -6,6 +6,7 @@ let kinectFactory = (function() {
             this.instance.makeConnection();
         },
         startTrackedBodies: function(player) {
+            let init = true;
             this.instance.startTrackedBodies(function(skeleton) {
                 if(ENGINE.isLoaded) {
                     let bodyPos = new THREE.Vector3(
@@ -15,10 +16,18 @@ let kinectFactory = (function() {
                     );
     
                     let inRange = bodyPos.distanceTo(new THREE.Vector3(0, 0, 0)) < 2.5;                 
-    
-                    if(skeleton.tracked && inRange) {
-                        player.update(skeleton);
+
+                    if(init) {
+                        if(skeleton.tracked && inRange) {
+                            player.ID = skeleton.bodyIndex;
+                            init = false;                        
+                        }
+                    } else {
+                        if(skeleton.tracked && inRange && (player.ID == skeleton.bodyIndex)) {
+                            player.update(skeleton);
+                        }
                     }
+    
                 }
             });
         },
