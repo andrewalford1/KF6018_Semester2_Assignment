@@ -14,7 +14,7 @@ let parameters = (function () {
     let IP = url.searchParams.get('ip');
 
     return {
-        useKinect: useKinect || false,
+        useKinect: useKinect || true,
         IP: IP || '192.168.60.56'
     };
 })();
@@ -53,6 +53,8 @@ let gestureControlledObjects = {
     }
 }
 
+let scorePin = new ScorePin();
+
 //Add all objects to the scene.
 engine.addObjects(MODELS, [
     new BalloonCover(),
@@ -65,6 +67,12 @@ engine.addObjects(MODELS, [
     new GoalTarget(),
     games.darts,
     games.strengthOMetre,
+    new LeftWall(),
+    new RightWall(),
+    //new FrontWall(),
+    new BackWall(),
+    new TopWall(),
+    new BottomWall(),
     games.whackAMole,
     gestureControlledObjects.cans,
     gestureControlledObjects.fireball,
@@ -82,6 +90,7 @@ engine.addObjects(MODELS, [
     new BackPhysicsWall(),
     new LeftPhysicsWall(),
     new RightPhysicsWall(),
+    scorePin,
     new Smoke(),
     new StreetLamp(),
     new Terrain(),
@@ -113,6 +122,7 @@ if(parameters.useKinect) {
     
     games.whackAMole.allocatePlayer(player);
     games.strengthOMetre.allocatePlayer(player);
+    //games.strengthOMetre.allocateScorePin(scorePin);
     gestureControlledObjects.moon.allocatePlayer(player);
     gestureControlledObjects.firework.allocatePlayer(player);
     gestureControlledObjects.fireball.allocatePlayer(player);

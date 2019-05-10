@@ -23,8 +23,11 @@
             rightHandVelocity : null
             
         };
+
+        let m_scorePin = null;
+
         let collideVel = false;
-        
+
            //[ Base].
             let Base1= new THREE.BoxGeometry(15, 1, 25);
             let Base2= new THREE.MeshPhongMaterial( { color: 0xFF7133 } );
@@ -196,6 +199,9 @@
         {
             collider.update();
             if(collider.collided) {
+                    if(scorePin != null){
+                            scorePin.activate();
+                    }
                 hitArea.material.color.setHex(0xFFFFFF);
                 nose.material.color.setHex(0xFF0000);
                 collideVel = true; 
@@ -204,6 +210,11 @@
                 nose.material.color.setHex(0xCA0000);
                 collideVel = false;
             }
+        }
+        
+        function AllocateScorePin(scorePin)
+        {
+                m_scorePin = scorePin;
         }
 
         /**
