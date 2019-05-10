@@ -207,7 +207,6 @@
                 collideVel = true; 
             } else {
                 hitArea.material.color.setHex(0xFF0000);
-                nose.material.color.setHex(0xCA0000);
                 collideVel = false;
             }
         }
