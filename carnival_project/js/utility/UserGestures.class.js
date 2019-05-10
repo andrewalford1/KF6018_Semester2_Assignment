@@ -119,19 +119,8 @@ class UserGestures {
                 return stageOne ;
         }
           this.handsOnKnees = function() {
-            return m_positions[0].leftHandTouchingLeftKnee && m_positions[0].rightHandTouchingRightKnee
+            return m_positions[0].leftHandTouchingLeftKnee && m_positions[0].rightHandTouchingRightKnee;
         }
-
-        this.rotateRight = function() {
-            return m_positions[0].rightHandAboveHead && !m_positions[0].rightHandState.open &&
-            !m_positions[0].leftHandAboveShoulder; 
-        }
-
-        this.rotateLeft = function() {
-            return m_positions[0].leftHandAboveHead && !m_positions[0].leftHandState.open &&
-            !m_positions[0].rightHandAboveShoulder;
-        }
-
 
         this.PointAtTheMoon = function(){
                 //The hand has o be above the sholders , pointing, and a leg has to be behind
