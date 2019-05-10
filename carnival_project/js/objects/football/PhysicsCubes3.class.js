@@ -23,7 +23,6 @@ class PhysicsCubes3 extends ENGINE.OBJECTS.ClassicObject
             rightFoot : null
             
         };
-        let iFrame = 0;
 
         //Ball
         let Ball = new THREE.Mesh(
@@ -110,11 +109,9 @@ class PhysicsCubes3 extends ENGINE.OBJECTS.ClassicObject
                         m_player.rightFoot
                     ]);
                 }
-            
-            if(iFrame > 100){
+            if(ENGINE.isLoaded()) {
                 updateCollider();
             }
-            iFrame++;
         }
     }
 

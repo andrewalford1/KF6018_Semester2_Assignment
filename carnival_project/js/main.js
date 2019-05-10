@@ -122,7 +122,7 @@ if(parameters.useKinect) {
     
     games.whackAMole.allocatePlayer(player);
     games.strengthOMetre.allocatePlayer(player);
-    //games.strengthOMetre.allocateScorePin(scorePin);
+    games.strengthOMetre.allocateScorePin(scorePin);
     gestureControlledObjects.moon.allocatePlayer(player);
     gestureControlledObjects.firework.allocatePlayer(player);
     gestureControlledObjects.fireball.allocatePlayer(player);

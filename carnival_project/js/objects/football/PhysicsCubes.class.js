@@ -109,11 +109,10 @@ class PhysicsCubes extends ENGINE.OBJECTS.ClassicObject
                         m_player.leftFoot,
                         m_player.rightFoot
                     ]);
-                }
-            if(iFrame > 100){
+            }
+            if(ENGINE.isLoaded()) {
                 updateCollider();
             }
-            iFrame++;
         }
     }
 

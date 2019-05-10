@@ -212,8 +212,7 @@
             }
         }
         
-        function AllocateScorePin(scorePin)
-        {
+        this.allocateScorePin = function(scorePin) {
                 m_scorePin = scorePin;
         }
 
@@ -242,7 +241,9 @@
                         m_player.rightHand
                     ]);
                 }
-                updateCollider();
+                if(ENGINE.isLoaded()) {
+                    updateCollider();
+                }
 
                 if(collideVel){
                     score.position.y += m_player.leftHandVelocity;    

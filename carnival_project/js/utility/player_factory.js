@@ -373,10 +373,10 @@ let playerFactory = (function() {
         });
         player.init(engine);
         player.gestures = new UserGestures(player);
-        player.addCollider(player.bones.HAND_LEFT, true);
-        player.addCollider(player.bones.HAND_RIGHT, true);
-        player.addCollider(player.bones.FOOT_LEFT, true);
-        player.addCollider(player.bones.FOOT_RIGHT, true);
+        player.addCollider(player.bones.HAND_LEFT);
+        player.addCollider(player.bones.HAND_RIGHT);
+        player.addCollider(player.bones.FOOT_LEFT);
+        player.addCollider(player.bones.FOOT_RIGHT);
         return player;
     };
 })();
